@@ -33,6 +33,7 @@ TEST_CASE("Peaks tests")
     b.y = 20;
     REQUIRE(a != b);
     b.type = types::PeakType::eLow;
+    REQUIRE(a == b);
     REQUIRE(a + b == types::Peak{20, 40, types::PeakType::eLow});
     a += b;
     REQUIRE(a == types::Peak{20, 40, types::PeakType::eLow});
