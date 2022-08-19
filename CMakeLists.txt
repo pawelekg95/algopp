@@ -1,13 +1,12 @@
 cmake_minimum_required(VERSION 3.22)
 project(algopp)
 
+include(cmake/Catch2.cmake)
 include(cmake/toolchain.cmake)
 
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
-
-add_subdirectory(external)
 
 add_compile_options(-Wall -Wextra -Wpedantic -Werror $<$<COMPILE_LANGUAGE:CXX>:-std=c++17>)
 
