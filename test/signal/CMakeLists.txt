@@ -7,4 +7,4 @@ add_executable(${EXECUTABLE_NAME}
         )
 
 target_link_libraries(${EXECUTABLE_NAME}
-        PRIVATE algopp::signal algopp::types Catch2::Catch2WithMain)
+        PRIVATE calgopp::signal calgopp::types Catch2::Catch2WithMain test-utils)

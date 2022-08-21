@@ -1,6 +1,6 @@
-#include "algopp/types/Peak.h"
+#include "calgopp/types/Peak.h"
 
-namespace algopp::types {
+namespace calgopp::types {
 
 bool operator==(const Peak& lhs, const Peak& rhs)
 {
@@ -22,4 +22,4 @@ bool operator!=(const Peak&& lhs, const Peak&& rhs)
     return !(lhs == rhs);
 }
 
-}
+} // namespace calgopp::types

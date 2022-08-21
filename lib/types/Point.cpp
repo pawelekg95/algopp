@@ -1,6 +1,6 @@
-#include "algopp/types/Point.h"
+#include "calgopp/types/Point.h"
 
-namespace algopp::types {
+namespace calgopp::types {
 
 Point& Point::operator+=(const Point& other)
 {
@@ -46,4 +46,4 @@ Point operator-(const Point& lhs, const Point& rhs)
     return {lhs.x - rhs.x, lhs.y - rhs.y};
 }
 
-}
+} // namespace calgopp::types

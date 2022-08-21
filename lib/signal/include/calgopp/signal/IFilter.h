@@ -1,9 +1,9 @@
 #ifndef IFILTER_H
 #define IFILTER_H
 
-#include "algopp/signal/Signal.h"
+#include "calgopp/signal/Signal.h"
 
-namespace algopp::signal {
+namespace calgopp::signal {
 
 class IFilter
 {
@@ -13,6 +13,6 @@ public:
     virtaul Signal filter(const Signal& signal) = 0;
 };
 
-}
+} // namespace calgopp::signal
 
 #endif /* IFILTER_H */
