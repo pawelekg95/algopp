@@ -1,5 +1,4 @@
-#ifndef SIGNAL_H
-#define SIGNAL_H
+#pragma once
 
 #include "calgopp/types/Point.h"
 #include "calgopp/types/Peak.h"
@@ -27,5 +26,3 @@ private:
 };
 
 } // namespace calgopp::signal
-
-#endif /* SIGNAL_H */

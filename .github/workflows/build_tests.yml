@@ -1,0 +1,20 @@
+name: Build tests
+runs:
+  using: 'docker'
+  image: 'calgopp_arm64'
+on: [push]
+jobs:
+  Build_calgopp_tests:
+    runs-on: self-hosted
+    needs: Build-calgopp-docker-image
+    steps:
+      - uses: actions/checkout@v3
+      - run: cd ${{ github.workspace }}
+      - run: mkdir cmake-build
+      - run: cd cmake-build
+      - run: cmake --preset signal_tests
+      - run: make
+      - uses: actions/upload-artifact@v3
+        with:
+          name: calgopp_tests
+          path: ./bin/tests

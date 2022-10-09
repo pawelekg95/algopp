@@ -7,7 +7,6 @@
 #include "calgopp/types/Point.h"
 
 #include "test/utils/helpers.h"
-#include "test/utils/Chart.h"
 
 #include <vector>
 #include <utility>
@@ -59,167 +58,150 @@ TEST_CASE("Peaks tests")
     REQUIRE(a == calgopp::types::Peak{0, 0, calgopp::types::PeakType::eLow});
 }
 
-TEST_CASE("Signal tests")
-{
-    auto setPeaksType = [](std::vector<calgopp::types::Peak>& peaks, calgopp::types::PeakType type) {
-        for (auto& peak : peaks)
-        {
-            peak.type = type;
-        }
-    };
-    std::vector<calgopp::types::Peak> inputPeaks;
-    std::vector<calgopp::types::Peak> detectedPeaks;
-    std::vector<calgopp::types::Peak> expectedPeaks;
-    std::vector<long double> values;
-    std::vector<long double> indexes;
-    calgopp::types::PeakType type{};
-    std::uint32_t distance = 1;
-    auto height = std::numeric_limits<double>::min();
-    std::vector<calgopp::types::Point> rawDataset;
-    SECTION("Small dataset")
-    {
-        inputPeaks = cSmallDataset;
-        SECTION("Highs")
-        {
-            type = calgopp::types::PeakType::eHigh;
-            setPeaksType(inputPeaks, type);
-            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
-            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
-            SECTION("Distance - 5")
-            {
-                distance = 5;
-                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-            }
-            SECTION("Distance - 10")
-            {
-                distance = 10;
-                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-            }
-        }
-        SECTION("Lows")
-        {
-            type = calgopp::types::PeakType::eLow;
-            setPeaksType(inputPeaks, type);
-            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
-            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
-            SECTION("Distance - 5")
-            {
-                distance = 5;
-                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-            }
-            SECTION("Distance - 10")
-            {
-                distance = 10;
-                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-            }
-        }
-    }
-
-    SECTION("Medium dataset")
-    {
-        inputPeaks = cMediumDataset;
-        SECTION("Highs")
-        {
-            type = calgopp::types::PeakType::eHigh;
-            setPeaksType(inputPeaks, type);
-            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
-            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
-            SECTION("Distance - 5")
-            {
-                distance = 5;
-                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-            }
-            SECTION("Distance - 10")
-            {
-                distance = 10;
-                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-            }
-        }
-        SECTION("Lows")
-        {
-            type = calgopp::types::PeakType::eLow;
-            setPeaksType(inputPeaks, type);
-            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
-            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
-            SECTION("Distance - 5")
-            {
-                distance = 5;
-                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-            }
-            SECTION("Distance - 10")
-            {
-                distance = 10;
-                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-            }
-        }
-    }
-
-    SECTION("Big dataset")
-    {
-        inputPeaks = cBigDataset;
-        SECTION("Highs")
-        {
-            type = calgopp::types::PeakType::eHigh;
-            setPeaksType(inputPeaks, type);
-            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
-            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
-            SECTION("Distance - 5")
-            {
-                distance = 5;
-                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-            }
-            SECTION("Distance - 10")
-            {
-                distance = 10;
-                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-            }
-        }
-        SECTION("Lows")
-        {
-            type = calgopp::types::PeakType::eLow;
-            setPeaksType(inputPeaks, type);
-            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
-            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
-            SECTION("Distance - 5")
-            {
-                distance = 5;
-                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-            }
-            SECTION("Distance - 10")
-            {
-                distance = 10;
-                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-            }
-        }
-    }
-    calgopp::signal::Signal signal(values, indexes);
-    std::string typeString = type == calgopp::types::PeakType::eLow ? "lows" : "highs";
-    INFO("Type: " + typeString);
-    INFO("Distance: " << distance);
-    INFO("Height: " << height);
-
-    test::Chart chart(signal.points());
-    chart.show();
-
-    //    std::cout << "dataset size: " << values.size() << std::endl;
-    //	for (const auto& elem : signal.points())
-    //	{
-    //		std::cout << elem.x << ' ' << elem.y << ' ';
-    //	}
-    //	std::cout << std::endl;
-    detectedPeaks = signal.peaks(type, distance, height);
-    //    for (const auto& peak : expectedPeaks)
-    //    {
-    //    	std::cout << peak.x << ' ' << peak.y << std::endl;
-    //    }
-    //    for (const auto& peak : detectedPeaks)
-    //    {
-    //    	std::cout << peak.x << ' ' << peak.y << std::endl;
-    //    }
-    CHECK(expectedPeaks.size() == detectedPeaks.size());
-    for (std::uint32_t i = 0; i < detectedPeaks.size(); i++)
-    {
-        CHECK(expectedPeaks[i].x == detectedPeaks[i].x);
-        CHECK(expectedPeaks[i].y == detectedPeaks[i].y);
-    }
-}
+//TEST_CASE("Signal tests")
+//{
+//    auto setPeaksType = [](std::vector<calgopp::types::Peak>& peaks, calgopp::types::PeakType type) {
+//        for (auto& peak : peaks)
+//        {
+//            peak.type = type;
+//        }
+//    };
+//    std::vector<calgopp::types::Peak> inputPeaks;
+//    std::vector<calgopp::types::Peak> detectedPeaks;
+//    std::vector<calgopp::types::Peak> expectedPeaks;
+//    std::vector<long double> values;
+//    std::vector<long double> indexes;
+//    calgopp::types::PeakType type{};
+//    std::uint32_t distance = 1;
+//    auto height = std::numeric_limits<double>::min();
+//    std::vector<calgopp::types::Point> rawDataset;
+//    SECTION("Small dataset")
+//    {
+//        inputPeaks = cSmallDataset;
+//        SECTION("Highs")
+//        {
+//            type = calgopp::types::PeakType::eHigh;
+//            setPeaksType(inputPeaks, type);
+//            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
+//            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
+//            SECTION("Distance - 5")
+//            {
+//                distance = 5;
+//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
+//            }
+//            SECTION("Distance - 10")
+//            {
+//                distance = 10;
+//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
+//            }
+//        }
+//        SECTION("Lows")
+//        {
+//            type = calgopp::types::PeakType::eLow;
+//            setPeaksType(inputPeaks, type);
+//            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
+//            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
+//            SECTION("Distance - 5")
+//            {
+//                distance = 5;
+//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
+//            }
+//            SECTION("Distance - 10")
+//            {
+//                distance = 10;
+//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
+//            }
+//        }
+//    }
+//
+//    SECTION("Medium dataset")
+//    {
+//        inputPeaks = cMediumDataset;
+//        SECTION("Highs")
+//        {
+//            type = calgopp::types::PeakType::eHigh;
+//            setPeaksType(inputPeaks, type);
+//            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
+//            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
+//            SECTION("Distance - 5")
+//            {
+//                distance = 5;
+//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
+//            }
+//            SECTION("Distance - 10")
+//            {
+//                distance = 10;
+//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
+//            }
+//        }
+//        SECTION("Lows")
+//        {
+//            type = calgopp::types::PeakType::eLow;
+//            setPeaksType(inputPeaks, type);
+//            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
+//            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
+//            SECTION("Distance - 5")
+//            {
+//                distance = 5;
+//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
+//            }
+//            SECTION("Distance - 10")
+//            {
+//                distance = 10;
+//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
+//            }
+//        }
+//    }
+//
+//    SECTION("Big dataset")
+//    {
+//        inputPeaks = cBigDataset;
+//        SECTION("Highs")
+//        {
+//            type = calgopp::types::PeakType::eHigh;
+//            setPeaksType(inputPeaks, type);
+//            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
+//            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
+//            SECTION("Distance - 5")
+//            {
+//                distance = 5;
+//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
+//            }
+//            SECTION("Distance - 10")
+//            {
+//                distance = 10;
+//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
+//            }
+//        }
+//        SECTION("Lows")
+//        {
+//            type = calgopp::types::PeakType::eLow;
+//            setPeaksType(inputPeaks, type);
+//            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
+//            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
+//            SECTION("Distance - 5")
+//            {
+//                distance = 5;
+//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
+//            }
+//            SECTION("Distance - 10")
+//            {
+//                distance = 10;
+//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
+//            }
+//        }
+//    }
+//    calgopp::signal::Signal signal(values, indexes);
+//    std::string typeString = type == calgopp::types::PeakType::eLow ? "lows" : "highs";
+//    INFO("Type: " + typeString);
+//    INFO("Distance: " << distance);
+//    INFO("Height: " << height);
+//
+//    detectedPeaks = signal.peaks(type, distance, height);
+//    CHECK(expectedPeaks.size() == detectedPeaks.size());
+//    for (std::uint32_t i = 0; i < detectedPeaks.size(); i++)
+//    {
+//        CHECK(expectedPeaks[i].x == detectedPeaks[i].x);
+//        CHECK(expectedPeaks[i].y == detectedPeaks[i].y);
+//    }
+//}

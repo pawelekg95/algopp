@@ -1,5 +1,4 @@
-#ifndef PEAK_H
-#define PEAK_H
+#pragma once
 
 #include "calgopp/types/Point.h"
 
@@ -34,5 +33,3 @@ bool operator!=(const Peak& lhs, const Peak& rhs);
 bool operator!=(const Peak&& lhs, const Peak&& rhs);
 
 } // namespace calgopp::types
-
-#endif /* PEAK_H */

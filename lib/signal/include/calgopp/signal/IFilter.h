@@ -1,5 +1,4 @@
-#ifndef IFILTER_H
-#define IFILTER_H
+#pragma once
 
 #include "calgopp/signal/Signal.h"
 
@@ -14,5 +13,3 @@ public:
 };
 
 } // namespace calgopp::signal
-
-#endif /* IFILTER_H */
