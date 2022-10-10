@@ -4,6 +4,7 @@ on:
     workflows: [Build tests]
     types:
       - completed
+    push:
 
 jobs:
   Calgopp_test:
