@@ -1,16 +1,13 @@
 name: Test
 on:
   workflow_run:
-    workflows:
-      - Build
-    types:
-      - completed
-  push:
+    workflows: ["Build tests"]
+    types: [completed]
 
 jobs:
   Calgopp_test:
-    runs-on: self-hosted
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: self-hosted
     steps:
       - uses: dawidd6/action-download-artifact@v2
         with:
