@@ -10,7 +10,7 @@ jobs:
     uses: ./.github/workflows/quality_template.yml
     with:
       module_name: lib
-      linter: ./run-clang-format.py -r
+      linter: tools/run-clang-format.py -r
     secrets: inherit
 
   Clang-tidy:
