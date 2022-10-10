@@ -1,5 +1,9 @@
 name: Code quality template
-on: [push]
+on:
+  workflow_run:
+    workflows: [ "Build tests" ]
+    types: [ completed ]
+    [push]
 
 jobs:
   Clang-format:
@@ -21,6 +25,7 @@ jobs:
 
   Valgrind:
     runs-on: self-hosted
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     needs: Build_calgopp_tests
     steps:
       - uses: dawidd6/action-download-artifact@v2
