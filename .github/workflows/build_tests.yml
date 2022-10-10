@@ -1,7 +1,10 @@
 name: Build tests
-on: [push]
+on:
+  push:
+
 jobs:
   Build_calgopp_tests:
+    name: build
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3

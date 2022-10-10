@@ -7,6 +7,8 @@ on:
 jobs:
   Calgopp_test:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    name: test
     runs-on: self-hosted
     steps:
       - uses: dawidd6/action-download-artifact@v2
