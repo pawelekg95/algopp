@@ -1,7 +1,8 @@
 name: Test
 on:
   workflow_run:
-    workflows: [Build tests]
+    workflows:
+      - Build
     types:
       - completed
   push:
