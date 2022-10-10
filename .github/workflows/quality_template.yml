@@ -1,5 +1,5 @@
 name: Code quality template
-on:
+on: [push]
   workflow_call:
     inputs:
       module_name:

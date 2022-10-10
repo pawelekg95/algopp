@@ -1,5 +1,5 @@
 name: Test
-on:
+on: [push]
   workflow_run:
     workflows: [ "Build tests" ]
     types: [ completed ]
