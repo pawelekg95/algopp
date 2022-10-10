@@ -1,7 +1,4 @@
 name: Code quality template
-runs:
-  using: 'docker'
-  image: 'calgopp_arm64'
 on:
   workflow_call:
     inputs:
@@ -14,6 +11,9 @@ on:
 
 jobs:
   Linter:
+    runs:
+      using: 'docker'
+      image: 'calgopp_arm64'
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3

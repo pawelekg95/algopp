@@ -17,6 +17,9 @@ jobs:
     secrets: inherit
 
   Clang-tidy:
+    runs:
+      using: 'docker'
+      image: 'calgopp_arm64'
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3

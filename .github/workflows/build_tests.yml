@@ -1,10 +1,10 @@
 name: Build tests
-runs:
-  using: 'docker'
-  image: 'calgopp_arm64'
 on: [push]
 jobs:
   Build_calgopp_tests:
+    runs:
+      using: 'docker'
+      image: 'calgopp_arm64'
     runs-on: self-hosted
     needs: Build-calgopp-docker-image
     steps:
