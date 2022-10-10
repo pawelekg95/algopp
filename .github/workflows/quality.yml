@@ -1,8 +1,9 @@
 name: Code quality template
 on:
+  push
   workflow_run:
     workflows: [ "Build tests" ]
-    types: [ completed, push ]
+    types: [ completed ]
 
 jobs:
   Clang-format:
