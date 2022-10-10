@@ -2,7 +2,7 @@ name: Test
 on:
   workflow_run:
     workflows: ["Build tests"]
-    GITHUB_REF:
+    ref: ${{ GITHUB_REF }}
     types:
       - completed
 jobs:
