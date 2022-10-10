@@ -16,11 +16,12 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-      - run: cd ${{ github.workspace }}
-      - run: mkdir ./cmake-build
-      - run: cd ./cmake-build
-      - run: cmake .. --preset signal_tests
-      - run: python3 ../tools/run-clang-tidy.py
+      - run: |
+          cd ${{ github.workspace }}
+          mkdir ./cmake-build
+          cd ./cmake-build
+          cmake .. --preset signal_tests
+          python3 ../tools/run-clang-tidy.py
 
   Valgrind:
     runs-on: self-hosted
