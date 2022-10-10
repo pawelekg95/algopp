@@ -6,8 +6,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: cd ${{ github.workspace }}
-      - run: mkdir cmake-build
-      - run: cd cmake-build
+      - run: mkdir ./cmake-build
+      - run: cd ./cmake-build
       - run: cmake .. --preset signal_tests
       - run: make -j 2
       - uses: actions/upload-artifact@v3
