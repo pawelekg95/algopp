@@ -11,11 +11,9 @@ on:
 
 jobs:
   Linter:
-    runs:
-      using: 'docker'
-      image: 'calgopp_arm64'
     runs-on: self-hosted
     steps:
+      - uses: docker://calgopp_arm64
       - uses: actions/checkout@v3
       - run: cd ${{ github.workspace }}
       - run: ${{ inputs.linter }} ${{ inputs.module_name }}
