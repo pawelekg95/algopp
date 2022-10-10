@@ -9,7 +9,6 @@ jobs:
   Calgopp_test:
     runs-on: self-hosted
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    needs: Build_calgopp_tests
     steps:
       - uses: dawidd6/action-download-artifact@v2
         with:
