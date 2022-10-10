@@ -8,6 +8,7 @@ jobs:
       - run: cd ${{ github.workspace }}
       - run: mkdir ./cmake-build
       - run: cd ./cmake-build
+      - run: pwd
       - run: cmake .. --preset signal_tests
       - run: make -j 2
       - uses: actions/upload-artifact@v3
