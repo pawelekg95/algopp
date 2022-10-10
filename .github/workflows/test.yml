@@ -1,8 +1,8 @@
 name: Test
-on: [push]
+on:
   workflow_run:
     workflows: [ "Build tests" ]
-    types: [ completed ]
+    types: [ completed, push ]
 
 jobs:
   Calgopp_test:
