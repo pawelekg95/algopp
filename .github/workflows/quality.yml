@@ -3,7 +3,6 @@ on:
   workflow_run:
     workflows: [ "Build tests" ]
     types: [ completed ]
-    [push]
 
 jobs:
   Clang-format:
@@ -31,4 +30,4 @@ jobs:
       - uses: dawidd6/action-download-artifact@v2
         with:
           name: calgopp_tests
-      - run: valgrind ./calgopp_tests
+      - run: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ./calgopp_tests
