@@ -4,7 +4,6 @@ on:
     workflows: ["Build tests"]
     types:
       - completed
-
 jobs:
   Calgopp_test:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}

@@ -8,7 +8,6 @@ on:
       linter:
         required: true
         type: string
-
 jobs:
   Linter:
     runs-on: self-hosted
