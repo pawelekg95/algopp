@@ -1,0 +1,60 @@
+# Whole CI defined in a single file due to GitHub actions flaw:
+# - 'workflow_run' webhook is only triggered when workflow file is already on the default branch (main)
+
+name: Calgopp_CI
+on: [push]
+jobs:
+
+# Build stage
+  Build_calgopp_tests:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          cd ${{ github.workspace }}
+          mkdir ./cmake-build
+          cd ./cmake-build
+          cmake .. --preset signal_tests
+          make -j 2
+      - uses: actions/upload-artifact@v3
+        with:
+          name: calgopp_tests
+          path: ${{ github.workspace }}/cmake-build/bin/tests
+
+  Calgopp_test:
+    needs: Build_calgopp_tests
+    runs-on: self-hosted
+    steps:
+      - uses: dawidd6/action-download-artifact@v2
+        with:
+          name: calgopp_tests
+      - run: ./calgopp_tests
+
+  Clang-format:
+    needs: Calgopp_test
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          cd ${{ github.workspace }}
+          python3 ../tools/run-clang-format.py -r lib test
+  Clang-tidy:
+    needs: Calgopp_test
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          cd ${{ github.workspace }}
+          mkdir ./cmake-build
+          cd ./cmake-build
+          cmake .. --preset signal_tests
+          python3 ../tools/run-clang-tidy.py
+  Valgrind:
+    needs: Calgopp_test
+    runs-on: self-hosted
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: dawidd6/action-download-artifact@v2
+        with:
+          name: calgopp_tests
+      - run: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ./calgopp_tests
