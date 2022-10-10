@@ -5,13 +5,7 @@ jobs:
     runs-on: self-hosted
     needs: Build_calgopp_tests
     steps:
-      - uses: actions/checkout@v3
-      - run: cd ${{ github.workspace }}
-      - run: mkdir cmake-build
-      - run: cd cmake-build
-      - run: cmake --preset signal_tests
-      - run: make
-      - uses: actions/upload-artifact@v3
+      - uses: dawidd6/action-download-artifact@v2
         with:
           name: calgopp_tests
-          path: ./bin/tests
+      - run: ./calgopp_tests

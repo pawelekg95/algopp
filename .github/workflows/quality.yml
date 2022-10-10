@@ -9,13 +9,6 @@ jobs:
       linter: ./run-clang-format.py -r
     secrets: inherit
 
-  Dockerfiles_Hadolint:
-    uses: ./.github/workflows/quality_template.yml
-    with:
-      module_name: .github/*.dockerfile
-      linter: hadolint
-    secrets: inherit
-
   Clang-tidy:
     runs-on: self-hosted
     steps:
@@ -25,3 +18,12 @@ jobs:
       - run: cd cmake-build
       - run: cmake --preset signal_tests
       - run: ../tools/run-clang-tidy.py
+
+  Valgrind:
+    runs-on: self-hosted
+    needs: Build_calgopp_tests
+    steps:
+      - uses: dawidd6/action-download-artifact@v2
+        with:
+          name: calgopp_tests
+      - run: valgrind ./calgopp_tests
