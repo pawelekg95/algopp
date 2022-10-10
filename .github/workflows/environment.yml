@@ -1,8 +1,0 @@
-name: Prepare environment
-on: [push]
-jobs:
-  Build-calgopp-docker-image:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v3
-      - run: docker build -t calgopp_arm64 -f ${{ github.workspace }}/.github/calgopp_arm64.dockerfile .

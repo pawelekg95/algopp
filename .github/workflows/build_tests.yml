@@ -3,9 +3,7 @@ on: [push]
 jobs:
   Build_calgopp_tests:
     runs-on: self-hosted
-    needs: Build-calgopp-docker-image
     steps:
-      - uses: docker://calgopp_arm64
       - uses: actions/checkout@v3
       - run: cd ${{ github.workspace }}
       - run: mkdir cmake-build
