@@ -39,6 +39,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: calgopp_tests
+      - run: ls ${{ github.workspace }}/cmake-build/bin
       - run: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ${{ github.workspace }}/cmake-build/bin/tests
 
 # Quality stage
