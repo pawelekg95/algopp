@@ -13,14 +13,14 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           cd ${{ github.workspace }}
-          mkdir ./cmake-build
-          cd ./cmake-build
+          mkdir ./cmake-build{{ github.head_ref }}.${{ github.sha }}
+          cd ./cmake-build{{ github.head_ref }}.${{ github.sha }}
           cmake .. --preset signal_tests_gcc
           make -j 2
       - uses: actions/upload-artifact@v3
         with:
           name: calgopp_tests_${{ github.head_ref }}.${{ github.sha }}
-          path: ${{ github.workspace }}/cmake-build/bin/tests
+          path: ${{ github.workspace }}/cmake-build{{ github.head_ref }}.${{ github.sha }}/bin/tests
 
 # Test stage
   Calgopp_test:
@@ -30,15 +30,15 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: calgopp_tests_${{ github.head_ref }}.${{ github.sha }}
-      - run: ${{ github.workspace }}/cmake-build/bin/tests
+      - run: ${{ github.workspace }}/cmake-build{{ github.head_ref }}.${{ github.sha }}/bin/tests
   Valgrind:
-    needs: Calgopp_test
+    needs: Build_calgopp_tests
     runs-on: self-hosted
     steps:
       - uses: actions/download-artifact@v3
         with:
           name: calgopp_tests_${{ github.head_ref }}.${{ github.sha }}
-      - run: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ${{ github.workspace }}/cmake-build/bin/tests
+      - run: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ${{ github.workspace }}/cmake-build{{ github.head_ref }}.${{ github.sha }}/bin/tests
 
 # Quality stage
   Clang-format:
