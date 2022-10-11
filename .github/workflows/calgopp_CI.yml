@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           cd ${{ github.workspace }}
-          python3 ./tools/run-clang-format.py -r lib test
+          run-clang-format.py -r lib test
   Clang-tidy:
     needs: Build_calgopp_tests
     runs-on: self-hosted
@@ -48,4 +48,4 @@ jobs:
           mkdir ./cmake-build
           cd ./cmake-build
           cmake .. --preset signal_tests_clang
-          python3 ../tools/run-clang-tidy.py
+          run-clang-tidy
