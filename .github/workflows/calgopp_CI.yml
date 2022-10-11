@@ -30,7 +30,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: calgopp_tests
-      - run: ./calgopp_tests
+      - run: ${{ github.workspace }}/calgopp_tests
   Valgrind:
     needs: Calgopp_test
     runs-on: self-hosted
