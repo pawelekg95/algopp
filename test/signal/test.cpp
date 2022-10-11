@@ -58,7 +58,7 @@ TEST_CASE("Peaks tests")
     REQUIRE(a == calgopp::types::Peak{0, 0, calgopp::types::PeakType::eLow});
 }
 
-//TEST_CASE("Signal tests")
+// TEST_CASE("Signal tests")
 //{
 //    auto setPeaksType = [](std::vector<calgopp::types::Peak>& peaks, calgopp::types::PeakType type) {
 //        for (auto& peak : peaks)
