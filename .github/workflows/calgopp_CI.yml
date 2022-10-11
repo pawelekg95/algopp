@@ -30,6 +30,8 @@ jobs:
       - uses: dawidd6/action-download-artifact@v2
         with:
           workflow: calgopp_CI.yml
+          name: calgopp_tests
+          path: ${{ github.workspace }}/cmake-build/bin/tests
       - run: ./calgopp_tests
   Valgrind:
     needs: Calgopp_test
