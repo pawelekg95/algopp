@@ -33,6 +33,7 @@ jobs:
           name: calgopp_tests
           path: ${{ github.workspace }}/cmake-build/bin/tests
           commit: ${{ github.event.push.head.sha || github.sha }}
+          search_artifacts: true
       - run: ./calgopp_tests
   Valgrind:
     needs: Calgopp_test
