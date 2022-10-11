@@ -1,8 +1,9 @@
 # Whole CI defined in a single file due to GitHub actions flaw:
 # - 'workflow_run' webhook is only triggered when workflow file is already on the default branch (main)
+# which does not provide possibility to inspect CI changes on other branches before merging
 
 name: Calgopp_CI
-on: [push, pull_request]
+on: [push]
 jobs:
 
 # Build stage
@@ -26,6 +27,8 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.MY_TOKEN }}
       - run: ./calgopp_tests
 
   Clang-format:
