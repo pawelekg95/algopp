@@ -32,7 +32,7 @@ jobs:
           name: calgopp_tests_${{ github.head_ref }}.${{ github.sha }}
       - run: ${{ github.workspace }}/cmake-build/bin/tests
   Valgrind:
-    needs: Build_calgopp_tests
+    needs: Calgopp_test
     runs-on: self-hosted
     steps:
       - uses: actions/download-artifact@v3
