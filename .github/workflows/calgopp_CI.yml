@@ -19,7 +19,7 @@ jobs:
           make -j 2
       - uses: actions/upload-artifact@v3
         with:
-          name: calgopp_tests
+          name: calgopp_tests_"$GITHUB_SHA"
           path: ${{ github.workspace }}/cmake-build/bin/tests
 
 # Test stage
@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: calgopp_tests
+          name: calgopp_tests_"$GITHUB_SHA"
       - run: ${{ github.workspace }}/cmake-build/bin/tests
   Valgrind:
     needs: Build_calgopp_tests
@@ -37,7 +37,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: calgopp_tests
+          name: calgopp_tests_"$GITHUB_SHA"
       - run: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ${{ github.workspace }}/cmake-build/bin/tests
 
 # Quality stage

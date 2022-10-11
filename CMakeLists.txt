@@ -14,3 +14,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_subdirectory(lib)
 add_subdirectory(test/utils)
 add_subdirectory(${APP})
+
+message("C compiler: ${CMAKE_C_COMPILER}")
+message("CXX compiler: ${CMAKE_CXX_COMPILER}")
