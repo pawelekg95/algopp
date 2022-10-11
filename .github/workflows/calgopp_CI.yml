@@ -22,15 +22,24 @@ jobs:
           name: calgopp_tests
           path: ${{ github.workspace }}/cmake-build/bin/tests
 
+# Test stage
   Calgopp_test:
     needs: Build_calgopp_tests
     runs-on: self-hosted
     steps:
       - uses: dawidd6/action-download-artifact@v2
         with:
-          github_token: ${{ secrets.MY_TOKEN }}
+          workflow: calgopp_CI.yml
       - run: ./calgopp_tests
+  Valgrind:
+    needs: Calgopp_test
+    runs-on: self-hosted
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: dawidd6/action-download-artifact@v2
+      - run: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ./calgopp_tests
 
+# Quality stage
   Clang-format:
     needs: Calgopp_test
     runs-on: self-hosted
@@ -50,10 +59,3 @@ jobs:
           cd ./cmake-build
           cmake .. --preset signal_tests
           python3 ../tools/run-clang-tidy.py
-  Valgrind:
-    needs: Calgopp_test
-    runs-on: self-hosted
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    steps:
-      - uses: dawidd6/action-download-artifact@v2
-      - run: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ./calgopp_tests
