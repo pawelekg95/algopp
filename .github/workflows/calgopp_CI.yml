@@ -31,14 +31,16 @@ jobs:
         with:
           name: calgopp_tests
       - run: ls ${{ github.workspace }}
-      - run: ${{ github.workspace }}/cmake-build/bin/calgopp_tests
+      - run: ${{ github.workspace }}/cmake-build/bin/tests
   Valgrind:
     needs: Calgopp_test
     runs-on: self-hosted
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - uses: dawidd6/action-download-artifact@v2
-      - run: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ./calgopp_tests
+      - uses: actions/download-artifact@v3
+        with:
+          name: calgopp_tests
+      - run: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ${{ github.workspace }}/cmake-build/bin/tests
 
 # Quality stage
   Clang-format:
