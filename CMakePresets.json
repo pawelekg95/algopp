@@ -41,8 +41,12 @@
     },
 
     {
-      "name": "signal_tests",
-      "inherits": [ "Debug", "SIGNAL_TEST" ]
+      "name": "signal_tests_gcc",
+      "inherits": [ "Debug", "SIGNAL_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "signal_tests_clang",
+      "inherits": [ "Debug", "SIGNAL_TEST", "Linux_Clang" ]
     }
   ]
 }
