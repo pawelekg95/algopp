@@ -10,6 +10,7 @@ jobs:
   Build_tests:
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v3
       - run: |
           BUILD_DIR="/tmp/${{ github.job }}-${{ github.sha }}"
           mkdir "${BUILD_DIR}"
