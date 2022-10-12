@@ -56,5 +56,5 @@ jobs:
           cd ${{ github.workspace }}
           mkdir ./cmake-build
           cd ./cmake-build
-          cmake .. --preset signal_tests_clang
+          cmake .. --preset signal_tests_clang_debug
           run-clang-tidy
