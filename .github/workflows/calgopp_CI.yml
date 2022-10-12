@@ -6,25 +6,25 @@ jobs:
     uses: ./.github/workflows/build_tests_template.yml
     with:
       preset: signal_tests_gcc_debug
-      app: ${{ github.job }}
+      app: Build_signal_tests_gcc_debug
 
   Build_signal_tests_gcc_release:
     uses: ./.github/workflows/build_tests_template.yml
     with:
       preset: signal_tests_gcc_release
-      app: ${{ github.job }}
+      app: Build_signal_tests_gcc_release
 
   Build_signal_tests_clang_debug:
     uses: ./.github/workflows/build_tests_template.yml
     with:
       preset: signal_tests_clang_debug
-      app: ${{ github.job }}
+      app: Build_signal_tests_clang_debug
 
   Build_signal_tests_clang_release:
     uses: ./.github/workflows/build_tests_template.yml
     with:
       preset: signal_tests_clang_release
-      app: ${{ github.job }}
+      app: Build_signal_tests_clang_release
 
   # Test stage
   Calgopp_test:
