@@ -3,36 +3,26 @@ on: [push]
 jobs:
   # Build stage
   Build_signal_tests_gcc_debug:
-    runs-on: self-hosted
     uses: ./.github/workflows/build_tests_template.yml
-    steps:
-      - uses: Build_tests
-        with:
-          preset: signal_tests_gcc_debug
+    with:
+      preset: signal_tests_gcc_debug
 
   Build_signal_tests_gcc_release:
-    runs-on: self-hosted
     uses: ./.github/workflows/build_tests_template.yml
-    steps:
-      - uses: Build_tests
-        with:
-          preset: signal_tests_gcc_release
+    with:
+      preset: signal_tests_gcc_release
 
   Build_signal_tests_clang_debug:
     runs-on: self-hosted
     uses: ./.github/workflows/build_tests_template.yml
-    steps:
-      - uses: Build_tests
-        with:
-          preset: signal_tests_clang_debug
+    with:
+      preset: signal_tests_clang_debug
 
   Build_signal_tests_clang_release:
     runs-on: self-hosted
     uses: ./.github/workflows/build_tests_template.yml
-    steps:
-      - uses: Build_tests
-        with:
-          preset: signal_tests_clang_release
+    with:
+      preset: signal_tests_clang_release
 
   # Test stage
   Calgopp_test:
