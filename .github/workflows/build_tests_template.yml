@@ -5,6 +5,9 @@ on:
       preset:
         required: true
         type: string
+      app:
+        required: true
+        type: string
 
 jobs:
   Build_tests:
@@ -12,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          BUILD_DIR="/tmp/${{ github.job }}-${{ github.sha }}"
+          BUILD_DIR="/tmp/${{ inputs.app }}-${{ github.sha }}"
           mkdir "${BUILD_DIR}"
           cd "${BUILD_DIR}"
           cmake ${{ github.workspace }} --preset ${{ inputs.preset }}
