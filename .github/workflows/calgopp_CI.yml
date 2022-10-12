@@ -5,6 +5,7 @@ jobs:
   Build_signal_tests_gcc_debug:
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/build_tests_template.yml
         with:
           preset: signal_tests_gcc_debug
@@ -12,6 +13,7 @@ jobs:
   Build_signal_tests_gcc_release:
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/build_tests_template.yml
         with:
           preset: signal_tests_gcc_release
@@ -19,6 +21,7 @@ jobs:
   Build_signal_tests_clang_debug:
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/build_tests_template.yml
         with:
           preset: signal_tests_clang_debug
@@ -26,6 +29,7 @@ jobs:
   Build_signal_tests_clang_release:
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/build_tests_template.yml
         with:
           preset: signal_tests_clang_release
