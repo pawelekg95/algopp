@@ -37,7 +37,7 @@ jobs:
     steps:
       - run: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
   Valgrind:
-    needs: Build_calgopp_tests
+    needs: Build_signal_tests_gcc_debug
     runs-on: self-hosted
     steps:
       - run: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
