@@ -5,28 +5,28 @@ jobs:
   Build_signal_tests_gcc_debug:
     runs-on: self-hosted
     steps:
-      - uses: .github/workflows/build_tests.yml
+      - uses: ./.github/workflows/build_tests.yml
         with:
           preset: signal_tests_gcc_debug
 
   Build_signal_tests_gcc_release:
     runs-on: self-hosted
     steps:
-      - uses: .github/workflows/build_tests.yml
+      - uses: ./.github/workflows/build_tests.yml
         with:
           preset: signal_tests_gcc_release
 
   Build_signal_tests_clang_debug:
     runs-on: self-hosted
     steps:
-      - uses: .github/workflows/build_tests.yml
+      - uses: ./.github/workflows/build_tests.yml
         with:
           preset: signal_tests_clang_debug
 
   Build_signal_tests_clang_release:
     runs-on: self-hosted
     steps:
-      - uses: .github/workflows/build_tests.yml
+      - uses: ./.github/workflows/build_tests.yml
         with:
           preset: signal_tests_clang_release
 
