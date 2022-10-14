@@ -2,27 +2,6 @@ name: Run tests
 on: [push]
 
 jobs:
-  Test:
-    inputs:
-      test_app:
-        required: true
-        type: string
-      arguments:
-        required: false
-        type: string
-      pre_run:
-        required: false
-        type: string
-      post_run:
-        required: false
-        type: string
-    runs-on: self-hosted
-    steps:
-      - run: |
-          ${{ inputs.pre_run }}
-          ${{ inputs.test_app }} ${{ inputs.arguments }}
-          ${{ inputs.post_run }}
-
   Signal_test:
     steps:
       - uses: lewagon/wait-on-check-action@v1.0.0
@@ -31,13 +10,13 @@ jobs:
             check-name: 'Build_signal_tests_gcc_debug'
             repo-token: ${{ secrets.GITHUB_TOKEN }}
             wait-interval: 10
-      - uses: Test
+      - uses: .github/workflows/test_template.yml
         with:
           test_app: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
 
   Valgrind:
     needs: Signal_test
     steps:
-      - uses: Test
+      - uses: .github/workflows/test_template.yml
         with:
           test_app: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
