@@ -1,0 +1,60 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "Debug",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "Release",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+
+    {
+      "name": "Linux_GCC",
+      "hidden": true,
+      "cacheVariables": { "TOOLCHAIN": "gcc" }
+    },
+    {
+      "name": "Linux_Clang",
+      "hidden": true,
+      "cacheVariables": { "TOOLCHAIN": "clang" }
+    },
+
+    {
+      "name": "SIGNAL_TEST",
+      "hidden": true,
+      "cacheVariables": {
+        "APP": "test/signal"
+      }
+    },
+
+    {
+      "name": "signal_tests_gcc_debug",
+      "inherits": [ "Debug", "SIGNAL_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "signal_tests_clang_debug",
+      "inherits": [ "Debug", "SIGNAL_TEST", "Linux_Clang" ]
+    },
+    {
+      "name": "signal_tests_gcc_release",
+      "inherits": [ "Release", "SIGNAL_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "signal_tests_clang_release",
+      "inherits": [ "Release", "SIGNAL_TEST", "Linux_Clang" ]
+    }
+  ]
+}

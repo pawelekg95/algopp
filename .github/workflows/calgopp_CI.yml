@@ -1,0 +1,62 @@
+name: Build tests
+on: [push]
+jobs:
+  # Build stage
+  Build_signal_tests_gcc_debug:
+    uses: ./.github/workflows/build_tests_template.yml
+    with:
+      preset: signal_tests_gcc_debug
+      app: Build_signal_tests_gcc_debug
+
+  Build_signal_tests_gcc_release:
+    uses: ./.github/workflows/build_tests_template.yml
+    with:
+      preset: signal_tests_gcc_release
+      app: Build_signal_tests_gcc_release
+
+  Build_signal_tests_clang_debug:
+    uses: ./.github/workflows/build_tests_template.yml
+    with:
+      preset: signal_tests_clang_debug
+      app: Build_signal_tests_clang_debug
+
+  Build_signal_tests_clang_release:
+    uses: ./.github/workflows/build_tests_template.yml
+    with:
+      preset: signal_tests_clang_release
+      app: Build_signal_tests_clang_release
+
+  # Test stage
+  Calgopp_test:
+    needs: Build_signal_tests_gcc_debug
+    runs-on: self-hosted
+    steps:
+      - run: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
+
+  Valgrind:
+    needs: Build_signal_tests_gcc_debug
+    runs-on: self-hosted
+    steps:
+      - run: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
+
+  # Quality stage
+  Clang-format:
+    needs: Build_signal_tests_gcc_debug
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          cd ${{ github.workspace }}
+          run-clang-format.py -r lib test
+
+  Clang-tidy:
+    needs: Build_signal_tests_gcc_debug
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          cd ${{ github.workspace }}
+          mkdir ./cmake-build
+          cd ./cmake-build
+          cmake .. --preset signal_tests_clang_debug
+          run-clang-tidy
