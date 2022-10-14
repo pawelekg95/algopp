@@ -4,28 +4,28 @@ on: [push]
 jobs:
   Build_signal_tests_gcc_debug:
     name: Build_signal_tests_gcc_debug
-    uses: .github/workflows/build_tests_template.yml
+    uses: ./.github/workflows/build_tests_template.yml
     with:
       preset: signal_tests_gcc_debug
       app: Build_signal_tests_gcc_debug
 
   Build_signal_tests_gcc_release:
     name: Build_signal_tests_gcc_release
-    uses: .github/workflows/build_tests_template.yml
+    uses: ./.github/workflows/build_tests_template.yml
     with:
       preset: signal_tests_gcc_release
       app: Build_signal_tests_gcc_release
 
   Build_signal_tests_clang_debug:
     name: Build_signal_tests_clang_debug
-    uses: .github/workflows/build_tests_template.yml
+    uses: ./.github/workflows/build_tests_template.yml
     with:
       preset: signal_tests_clang_debug
       app: Build_signal_tests_clang_debug
 
   Build_signal_tests_clang_release:
     name: Build_signal_tests_clang_release
-    uses: .github/workflows/build_tests_template.yml
+    uses: ./.github/workflows/build_tests_template.yml
     with:
       preset: signal_tests_clang_release
       app: Build_signal_tests_clang_release
