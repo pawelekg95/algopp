@@ -22,32 +22,28 @@ jobs:
 
   Build_signal_tests_gcc_debug:
     name: Build_signal_tests_gcc_debug
-    steps:
-      - uses: Build_tests
-        with:
-          preset: signal_tests_gcc_debug
-          app: Build_signal_tests_gcc_debug
+    uses: Build_tests
+      with:
+        preset: signal_tests_gcc_debug
+        app: Build_signal_tests_gcc_debug
 
   Build_signal_tests_gcc_release:
     name: Build_signal_tests_gcc_release
-    steps:
-      - uses: Build_tests
-        with:
-          preset: signal_tests_gcc_release
-          app: Build_signal_tests_gcc_release
+    uses: Build_tests
+    with:
+      preset: signal_tests_gcc_release
+      app: Build_signal_tests_gcc_release
 
   Build_signal_tests_clang_debug:
     name: Build_signal_tests_clang_debug
-    steps:
-      - uses: Build_tests
-        with:
-          preset: signal_tests_clang_debug
-          app: Build_signal_tests_clang_debug
+    uses: Build_tests
+    with:
+      preset: signal_tests_clang_debug
+      app: Build_signal_tests_clang_debug
 
   Build_signal_tests_clang_release:
     name: Build_signal_tests_clang_release
-    steps:
-      - uses: Build_tests
-        with:
-          preset: signal_tests_clang_release
-          app: Build_signal_tests_clang_release
+    uses: Build_tests
+    with:
+      preset: signal_tests_clang_release
+      app: Build_signal_tests_clang_release
