@@ -3,6 +3,7 @@ on: [push]
 
 jobs:
   Signal_test:
+    runs-on: self-hosted
     steps:
       - uses: lewagon/wait-on-check-action@v1.0.0
         with:
@@ -16,7 +17,6 @@ jobs:
 
   Valgrind:
     needs: Signal_test
-    steps:
-      - uses: ./.github/workflows/test_template.yml
-        with:
-          test_app: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
+    uses: ./.github/workflows/test_template.yml
+    with:
+      test_app: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
