@@ -32,6 +32,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
+
   Valgrind:
     needs: Build_signal_tests_gcc_debug
     runs-on: self-hosted
@@ -47,6 +48,7 @@ jobs:
       - run: |
           cd ${{ github.workspace }}
           run-clang-format.py -r lib test
+
   Clang-tidy:
     needs: Build_signal_tests_gcc_debug
     runs-on: self-hosted
