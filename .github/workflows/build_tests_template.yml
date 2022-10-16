@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           BUILD_DIR="/tmp/${{ inputs.app }}-${{ github.sha }}"
+          rm -rf "${BUILD_DIR}"
           mkdir "${BUILD_DIR}"
           cd "${BUILD_DIR}"
           cmake ${{ github.workspace }} --preset ${{ inputs.preset }}
