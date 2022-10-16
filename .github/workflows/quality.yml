@@ -1,15 +1,15 @@
 name: Quality
-on: [push]
+on:
+  workflow_run:
+    workflows: [Build tests]
+    types:
+      - completed
+
 jobs:
   Clang-format:
     runs-on: self-hosted
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - uses: lewagon/wait-on-check-action@v1.0.0
-        with:
-          ref: ${{ github.ref }}
-          check-name: 'Build_signal_tests_gcc_debug'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
       - uses: actions/checkout@v3
       - run: |
           cd ${{ github.workspace }}
@@ -17,13 +17,8 @@ jobs:
 
   Clang-tidy:
     runs-on: self-hosted
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - uses: lewagon/wait-on-check-action@v1.0.0
-        with:
-          ref: ${{ github.ref }}
-          check-name: 'Build_signal_tests_gcc_debug'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
       - uses: actions/checkout@v3
       - run: |
           cd ${{ github.workspace }}
