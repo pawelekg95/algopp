@@ -40,6 +40,7 @@ jobs:
       test_app: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
 
   Valgrind:
+    name: Valgrind
     needs: Signal_test
     uses: ./.github/workflows/test.yml
     with:
@@ -60,3 +61,10 @@ jobs:
     with:
       pre_run: cd "${{ github.workspace }}"; rm -rf ./cmake-build; mkdir ./cmake-build; cd ./cmake-build; cmake .. --preset signal_tests_clang_debug
       linter: run-clang-tidy
+
+  # Cleanup /tmp dir
+  Clean-up:
+    needs: Valgrind
+    runs-on: self-hosted
+    steps:
+      - rm -rf /tmp/Build*
