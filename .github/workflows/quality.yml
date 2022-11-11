@@ -1,9 +1,10 @@
 name: Quality
 on:
   workflow_run:
-    workflows: [Build tests]
-    types:
-      - completed
+    workflows: ["Build tests"]
+    types: [completed]
+    branches:
+      - '**'
 
 jobs:
   Clang-format:
