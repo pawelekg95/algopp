@@ -67,4 +67,4 @@ jobs:
     needs: Valgrind
     runs-on: self-hosted
     steps:
-      - rm -rf /tmp/Build*
+      - run: rm -rf /tmp/Build*
