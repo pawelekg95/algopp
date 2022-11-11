@@ -5,28 +5,28 @@ jobs:
   # Build tests stage
   Build_signal_tests_gcc_debug:
     name: Build_signal_tests_gcc_debug
-    uses: .github/jobs/build_tests.yml
+    uses: ../jobs/build_tests.yml
     with:
       preset: signal_tests_gcc_debug
       app: Build_signal_tests_gcc_debug
 
   Build_signal_tests_gcc_release:
     name: Build_signal_tests_gcc_release
-    uses: .github/jobs/build_tests.yml
+    uses: ../jobs/build_tests.yml
     with:
       preset: signal_tests_gcc_release
       app: Build_signal_tests_gcc_release
 
   Build_signal_tests_clang_debug:
     name: Build_signal_tests_clang_debug
-    uses: .github/jobs/build_tests.yml
+    uses: ../jobs/build_tests.yml
     with:
       preset: signal_tests_clang_debug
       app: Build_signal_tests_clang_debug
 
   Build_signal_tests_clang_release:
     name: Build_signal_tests_clang_release
-    uses: .github/jobs/build_tests.yml
+    uses: ../jobs/build_tests.yml
     with:
       preset: signal_tests_clang_release
       app: Build_signal_tests_clang_release
@@ -35,20 +35,20 @@ jobs:
   Signal_test:
     name: Signal_test
     needs: Build_signal_tests_gcc_debug
-    uses: .github/jobs/test.yml
+    uses: ../jobs/test.yml
     with:
       test_app: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
 
   Valgrind:
     needs: Signal_test
-    uses: .github/jobs/test.yml
+    uses: ../jobs/test.yml
     with:
       test_app: valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
 
   # Quality
   Clang-format:
     needs: Build_signal_tests_gcc_debug
-    uses: .github/jobs/quality.yml
+    uses: ../jobs/quality.yml
     with:
       pre_run: cd ${{ github.workspace }}
       linter: run-clang-format.py
@@ -56,7 +56,7 @@ jobs:
 
   Clang-tidy:
     needs: Build_signal_tests_gcc_debug
-    uses: .github/jobs/quality.yml
+    uses: ../jobs/quality.yml
     with:
       pre_run: |
         cd ${{ github.workspace }}
