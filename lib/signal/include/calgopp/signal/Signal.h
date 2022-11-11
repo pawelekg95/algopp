@@ -3,10 +3,7 @@
 #include "calgopp/types/Point.h"
 #include "calgopp/types/Peak.h"
 
-#include <vector>
 #include <cstdint>
-#include <limits>
-#include <optional>
 
 namespace calgopp::signal {
 
