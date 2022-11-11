@@ -2,54 +2,60 @@
 
 #include "calgopp/types/Point.h"
 #include "calgopp/types/Peak.h"
+#include "Iterator.h"
 
 #include <stdint.h>
-#include <exception>
+#include <stdlib.h>
 
 namespace calgopp::signal {
-
-template <typename Container>
-Container indexes(const Container& container)
-{
-    Container token;
-    for (const auto& index : container)
-    {
-        token.push_back(index);
-    }
-    return token;
-}
 
 class Signal
 {
 public:
-    template <typename Container>
-    Signal(const Container& values, const Container& indexes)
+    Signal() = default;
+    Signal(const Signal& other);
+    Signal(Signal&& other) noexcept;
+
+    Signal& operator=(const Signal& other);
+    Signal& operator=(Signal&& other) noexcept;
+
+    template <typename InputType>
+    Signal(const InputType* values, std::size_t length)
+        : m_size(length)
     {
-        if (values.size() != indexes.size())
+        m_points = new types::Point[m_size]; // NOLINT cppcoreguidelines-owning-memory
+        for (uint32_t i = 0; i < m_size; i++)
         {
-            throw std::exception();
+            m_points[i] = {double(i), double(values[i])};
         }
-        for (std::uint32_t i = 0; i < values.size(); i++)
-        {
-            m_points.push_back({values[i], indexes[i]});
-        }
+        m_empty = m_size == 0;
+        m_begin = Iterator(&m_points[0]);
+        m_end = Iterator(&m_points[m_size - 1]);
     }
 
-    template <typename Container>
-    Signal(const Container& values)
-        : Signal(values, indexes<Container>(values))
-    {}
+    ~Signal() { delete[] m_points; }
 
-    Signal()
+    bool empty() const { return m_empty; }
 
-    std::vector<types::Peak> peaks(types::PeakType type = types::PeakType::eHigh,
-                                   long double distance = 0,
-                                   long double height = std::numeric_limits<long double>::min());
+    operator bool() const { return !empty(); }
 
-    std::vector<types::Point> points() { return m_points; }
+    types::Point& operator[](uint32_t index) { return m_points[index]; }
+
+    size_t size() { return m_size; }
+
+    Iterator begin() { return m_begin; }
+
+    Iterator end() { return m_end; }
+
+    //    std::vector<types::Peak> peaks(types::PeakType type = types::PeakType::eHigh,
+    //                                   long double height = std::numeric_limits<long double>::min());
 
 private:
-    types::Point** m_points{nullptr};
+    types::Point* m_points{nullptr};
+    uint32_t m_size{0};
+    bool m_empty{true};
+    Iterator m_begin;
+    Iterator m_end;
 };
 
 } // namespace calgopp::signal

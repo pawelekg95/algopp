@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 add_library(calgopp-signal EXCLUDE_FROM_ALL
+        Iterator.cpp
         Signal.cpp
         )
 

@@ -5,6 +5,7 @@
 #include "calgopp/signal/Signal.h"
 #include "calgopp/types/Peak.h"
 #include "calgopp/types/Point.h"
+#include "calgopp/signal/factory.h"
 
 #include "test/utils/helpers.h"
 
@@ -12,6 +13,39 @@
 #include <utility>
 #include <iostream>
 #include <tuple>
+#include <array>
+#include <list>
+#include <variant>
+#include <memory>
+
+using ContainerVariant = std::variant<std::vector<double>,
+                                      std::vector<int>,
+                                      std::vector<float>,
+                                      std::array<double, 1000>,
+                                      std::array<int, 1000>,
+                                      std::array<float, 1000>>;
+
+template <typename T>
+std::vector<T> vectorInput()
+{
+    std::vector<T> token(1000);
+    for (std::uint32_t i = 0; i < 1000; i++)
+    {
+        token[i] = 2 * i;
+    }
+    return token;
+}
+
+template <typename T>
+std::array<T, 1000> arrayInput()
+{
+    std::array<T, 1000> token{};
+    for (std::uint32_t i = 0; i < 1000; i++)
+    {
+        token[i] = 2 * i;
+    }
+    return token;
+}
 
 static std::vector<types::Peak> cSmallDataset = {{4, 60}, {8, 65}, {11, 53}, {15, 70}};
 static std::vector<types::Peak> cMediumDataset = {
@@ -56,6 +90,82 @@ TEST_CASE("Peaks tests")
     REQUIRE(a == calgopp::types::Peak{20, 40, calgopp::types::PeakType::eLow});
     a -= {20, 40};
     REQUIRE(a == calgopp::types::Peak{0, 0, calgopp::types::PeakType::eLow});
+}
+
+TEST_CASE("Signal creation from STL containers")
+{
+    ContainerVariant variant;
+
+    SECTION("Vector of doubles") { variant = vectorInput<double>(); }
+
+    SECTION("Vector of integers") { variant = vectorInput<int>(); }
+
+    SECTION("Vector of floats") { variant = vectorInput<float>(); }
+
+    SECTION("Array of doubles") { variant = arrayInput<double>(); }
+
+    SECTION("Array of integers") { variant = arrayInput<int>(); }
+
+    SECTION("Array of floats") { variant = arrayInput<float>(); }
+
+    std::cout << "Variant: " << variant.index() << std::endl;
+    auto signal = std::make_unique<calgopp::signal::Signal>();
+    REQUIRE(signal->empty());
+
+    switch (variant.index())
+    {
+        case 0:
+        {
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::vector<double>>(variant).data(), 1000);
+            break;
+        }
+        case 1:
+        {
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::vector<int>>(variant).data(), 1000);
+            break;
+        }
+        case 2:
+        {
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::vector<float>>(variant).data(), 1000);
+            break;
+        }
+
+        case 3:
+        {
+            signal =
+                std::make_unique<calgopp::signal::Signal>(std::get<std::array<double, 1000>>(variant).data(), 1000);
+            break;
+        }
+        case 4:
+        {
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<int, 1000>>(variant).data(), 1000);
+            break;
+        }
+        case 5:
+        {
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<float, 1000>>(variant).data(), 1000);
+            break;
+        }
+    }
+
+    REQUIRE(signal->size() == 1000);
+    REQUIRE(!signal->empty());
+
+    for (std::uint32_t i = 0; i < 1000; i++)
+    {
+        REQUIRE((*signal)[i].x == i);
+        REQUIRE((*signal)[i].y == 2 * i);
+        REQUIRE((*signal)[i] == calgopp::types::Point{double(i), double(2 * i)});
+    }
+
+    std::uint32_t i = 0;
+    for (const auto& point : *signal)
+    {
+        REQUIRE(point.x == i);
+        REQUIRE(point.y == 2 * i);
+        REQUIRE(point == calgopp::types::Point{double(i), double(2 * i)});
+        i++;
+    }
 }
 
 // TEST_CASE("Signal tests")
