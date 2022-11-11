@@ -20,6 +20,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: |
-          eval "${{ inputs.pre_run }}"
-          eval "${{ inputs.test_app }} ${{ inputs.arguments }}"
-          eval "${{ inputs.post_run }}"
+          ${{ inputs.pre_run }}
+          ${{ inputs.test_app }} ${{ inputs.arguments }}
+          ${{ inputs.post_run }}
