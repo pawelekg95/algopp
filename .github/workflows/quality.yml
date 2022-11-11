@@ -1,7 +1,7 @@
 name: Quality
 on:
   workflow_run:
-    workflows: ["Build tests"]
+    workflows: [Build_tests]
     types: [completed]
     branches:
       - '**'

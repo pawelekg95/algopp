@@ -1,4 +1,4 @@
-name: Build tests
+name: Build_tests
 on: [push]
 
 jobs:

@@ -1,4 +1,4 @@
-name: Run tests
+name: Run_tests
 on:
   workflow_call:
     inputs:
