@@ -21,6 +21,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          ${{ inputs.pre_run }}
-          ${{ inputs.linter }} ${{ inputs.arguments }}
-          ${{ inputs.post_run }}
+          eval "${{ inputs.pre_run }}"
+          eval "${{ inputs.linter }} ${{ inputs.arguments }}"
+          eval "${{ inputs.post_run }}"
