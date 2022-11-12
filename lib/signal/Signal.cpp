@@ -1,12 +1,35 @@
 #include "calgopp/signal/Signal.h"
 
+#include <stdexcept>
+
 namespace calgopp::signal {
+
+Signal::Signal()
+    : m_size(0)
+    , m_capacity(10)
+    , m_points(new types::Point[m_capacity])
+{}
+
+Signal::Signal(const types::Point* points, std::size_t size)
+    : m_size(size)
+    , m_capacity(m_size > 0 ? m_size * 2 : 10)
+{
+    m_points = new types::Point[m_capacity]; // NOLINT cppcoreguidelines-owning-memory
+    for (uint32_t i = 0; i < m_size; i++)
+    {
+        m_points[i] = points[i];
+    }
+    m_empty = m_size == 0;
+    m_begin = Iterator(m_points);
+    m_end = Iterator(&m_points[m_size]);
+}
 
 Signal::Signal(const Signal& other)
     : m_size(other.m_size)
+    , m_capacity(other.m_capacity)
     , m_empty(other.m_empty)
 {
-    m_points = new types::Point[m_size]; // NOLINT cppcoreguidelines-owning-memory
+    m_points = new types::Point[m_capacity]; // NOLINT cppcoreguidelines-owning-memory
     for (uint32_t i = 0; i < m_size; i++)
     {
         m_points[i] = other.m_points[i];
@@ -15,23 +38,27 @@ Signal::Signal(const Signal& other)
 }
 
 Signal::Signal(Signal&& other) noexcept
-    : m_points(other.m_points)
-    , m_size(other.m_size)
+    : m_size(other.m_size)
+    , m_capacity(other.m_capacity)
     , m_empty(other.m_empty)
+    , m_points(other.m_points)
 {
     other.m_points = nullptr;
     other.m_size = 0;
-    m_empty = true;
+    other.m_capacity = 0;
+    other.m_empty = true;
 }
 
 Signal& Signal::operator=(Signal&& other) noexcept
 {
     m_size = other.m_size;
+    m_capacity = other.m_capacity;
     m_empty = other.m_empty;
     m_points = other.m_points;
     other.m_points = nullptr;
     other.m_size = 0;
-    m_empty = true;
+    other.m_capacity = 0;
+    other.m_empty = true;
     return *this;
 }
 
@@ -43,12 +70,72 @@ Signal& Signal::operator=(const Signal& other)
     }
     m_size = other.m_size;
     m_empty = other.m_empty;
-    m_points = new types::Point[m_size]; // NOLINT cppcoreguidelines-owning-memory
+    m_capacity = other.m_capacity;
+    m_points = new types::Point[m_capacity]; // NOLINT cppcoreguidelines-owning-memory
     for (uint32_t i = 0; i < m_size; i++)
     {
         m_points[i] = other.m_points[i];
     }
     return *this;
+}
+
+void Signal::operator+=(const types::Point& point)
+{
+    append(point);
+}
+
+void Signal::operator--()
+{
+    remove(m_size - 1);
+}
+
+void Signal::operator+=(const Signal& signal)
+{
+    for (const auto& point : signal)
+    {
+        append(point);
+    }
+}
+
+void Signal::append(const types::Point& point)
+{
+    if (m_size >= m_capacity)
+    {
+        m_capacity = m_capacity * 2;
+        auto* tmp = new types::Point[m_capacity];
+        for (uint32_t i = 0; i < m_size; i++)
+        {
+            tmp[i] = m_points[i];
+        }
+        delete[] m_points;
+        m_points = tmp;
+    }
+    m_points[m_size] = point;
+    m_size++;
+    m_empty = m_size == 0;
+}
+
+void Signal::remove(uint32_t index)
+{
+    if (index >= m_size)
+    {
+        throw std::runtime_error("Index out of scope");
+    }
+    for (uint32_t i = index; i < m_size - 1; i++)
+    {
+        m_points[i] = m_points[i + 1];
+    }
+    m_size--;
+    m_empty = m_size == 0;
+}
+
+types::Point& Signal::operator[](uint32_t index)
+{
+    if (index >= m_size)
+    {
+        throw std::runtime_error("Index out of scope");
+    }
+    return m_points[index];
 }
 
 // std::vector<types::Peak> Signal::peaks(types::PeakType type, long double distance, long double height)

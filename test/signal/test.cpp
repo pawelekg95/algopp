@@ -5,7 +5,6 @@
 #include "calgopp/signal/Signal.h"
 #include "calgopp/types/Peak.h"
 #include "calgopp/types/Point.h"
-#include "calgopp/signal/factory.h"
 
 #include "test/utils/helpers.h"
 
@@ -24,6 +23,29 @@ using ContainerVariant = std::variant<std::vector<double>,
                                       std::array<double, 1000>,
                                       std::array<int, 1000>,
                                       std::array<float, 1000>>;
+
+template <typename InputType>
+class CStyleArrayVariant
+{
+public:
+    CStyleArrayVariant(std::uint32_t size)
+        : m_size(size)
+        , m_array(new InputType[m_size])
+    {
+        for (std::uint32_t i = 0; i < m_size; i++)
+        {
+            m_array[i] = 2 * i;
+        }
+    }
+
+    operator InputType*() const { return m_array; }
+
+    ~CStyleArrayVariant() { delete[] m_array; }
+
+private:
+    std::uint32_t m_size{};
+    InputType* m_array{nullptr};
+};
 
 template <typename T>
 std::vector<T> vectorInput()
@@ -45,6 +67,30 @@ std::array<T, 1000> arrayInput()
         token[i] = 2 * i;
     }
     return token;
+}
+
+void addPoints(calgopp::signal::Signal& signal, std::uint32_t amount, bool reset = false)
+{
+    static std::uint32_t last = 0;
+    if (reset)
+    {
+        last = 0;
+    }
+
+    for (std::uint32_t i = 0; i < amount; i++)
+    {
+        signal += types::Point{last + i, last + i + 10};
+    }
+    last += amount;
+}
+
+void removePoints(calgopp::signal::Signal& signal, std::uint32_t amount)
+{
+    while (amount > 0 && !signal.empty())
+    {
+        signal.remove(signal.size() - 1);
+        amount--;
+    }
 }
 
 static std::vector<types::Peak> cSmallDataset = {{4, 60}, {8, 65}, {11, 53}, {15, 70}};
@@ -108,7 +154,6 @@ TEST_CASE("Signal creation from STL containers")
 
     SECTION("Array of floats") { variant = arrayInput<float>(); }
 
-    std::cout << "Variant: " << variant.index() << std::endl;
     auto signal = std::make_unique<calgopp::signal::Signal>();
     REQUIRE(signal->empty());
 
@@ -116,34 +161,33 @@ TEST_CASE("Signal creation from STL containers")
     {
         case 0:
         {
-            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::vector<double>>(variant).data(), 1000);
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::vector<double>>(variant));
             break;
         }
         case 1:
         {
-            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::vector<int>>(variant).data(), 1000);
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::vector<int>>(variant));
             break;
         }
         case 2:
         {
-            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::vector<float>>(variant).data(), 1000);
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::vector<float>>(variant));
             break;
         }
 
         case 3:
         {
-            signal =
-                std::make_unique<calgopp::signal::Signal>(std::get<std::array<double, 1000>>(variant).data(), 1000);
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<double, 1000>>(variant));
             break;
         }
         case 4:
         {
-            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<int, 1000>>(variant).data(), 1000);
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<int, 1000>>(variant));
             break;
         }
         case 5:
         {
-            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<float, 1000>>(variant).data(), 1000);
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<float, 1000>>(variant));
             break;
         }
     }
@@ -155,7 +199,7 @@ TEST_CASE("Signal creation from STL containers")
     {
         REQUIRE((*signal)[i].x == i);
         REQUIRE((*signal)[i].y == 2 * i);
-        REQUIRE((*signal)[i] == calgopp::types::Point{double(i), double(2 * i)});
+        REQUIRE((*signal)[i] == calgopp::types::Point{i, 2 * i});
     }
 
     std::uint32_t i = 0;
@@ -163,8 +207,109 @@ TEST_CASE("Signal creation from STL containers")
     {
         REQUIRE(point.x == i);
         REQUIRE(point.y == 2 * i);
-        REQUIRE(point == calgopp::types::Point{double(i), double(2 * i)});
+        REQUIRE(point == calgopp::types::Point{i, 2 * i});
         i++;
+    }
+}
+
+TEST_CASE("Signal creation from C style arrays")
+{
+    auto signal = std::make_unique<calgopp::signal::Signal>();
+    REQUIRE(signal->empty());
+
+    SECTION("Integer array")
+    {
+        CStyleArrayVariant<int> cStyleArray(1000);
+        signal = std::make_unique<calgopp::signal::Signal>(static_cast<int*>(cStyleArray), 1000);
+    }
+
+    SECTION("Double array")
+    {
+        CStyleArrayVariant<double> cStyleArray(1000);
+        signal = std::make_unique<calgopp::signal::Signal>(static_cast<double*>(cStyleArray), 1000);
+    }
+
+    SECTION("Float array")
+    {
+        CStyleArrayVariant<float> cStyleArray(1000);
+        signal = std::make_unique<calgopp::signal::Signal>(static_cast<float*>(cStyleArray), 1000);
+    }
+
+    REQUIRE(signal->size() == 1000);
+    REQUIRE(!signal->empty());
+
+    for (std::uint32_t i = 0; i < 1000; i++)
+    {
+        REQUIRE((*signal)[i].x == i);
+        REQUIRE((*signal)[i].y == 2 * i);
+        REQUIRE((*signal)[i] == calgopp::types::Point{i, 2 * i});
+    }
+
+    std::uint32_t i = 0;
+    for (const auto& point : *signal)
+    {
+        REQUIRE(point.x == i);
+        REQUIRE(point.y == 2 * i);
+        REQUIRE(point == calgopp::types::Point{i, 2 * i});
+        i++;
+    }
+}
+
+TEST_CASE("Appending points")
+{
+    calgopp::signal::Signal signal;
+    REQUIRE(signal.empty());
+    REQUIRE(signal.capacity() == 10);
+
+    addPoints(signal, 1);
+    REQUIRE(!signal.empty());
+    REQUIRE(signal[0].x == 0);
+    REQUIRE(signal[0].y == 10);
+
+    addPoints(signal, 5);
+
+    REQUIRE(signal.size() == 6);
+    REQUIRE(signal.capacity() == 10);
+    REQUIRE(signal[3].x == 3);
+    REQUIRE(signal[3].y == 13);
+
+    addPoints(signal, 5);
+
+    REQUIRE(signal.size() == 11);
+    REQUIRE(signal.capacity() == 20);
+
+    addPoints(signal, 4000);
+
+    REQUIRE(signal.size() == 4011);
+    REQUIRE(signal[1200].x == 1200);
+    REQUIRE(signal[1200].y == 1210);
+}
+
+TEST_CASE("Erasing points")
+{
+    calgopp::signal::Signal signal;
+    REQUIRE(signal.empty());
+    REQUIRE(signal.capacity() == 10);
+
+    addPoints(signal, 4000, true);
+    REQUIRE(!signal.empty());
+    REQUIRE(signal.size() == 4000);
+    REQUIRE(signal[1200].x == 1200);
+    REQUIRE(signal[1200].y == 1210);
+
+    REQUIRE(signal[3999] == types::Point{3999, 4009});
+
+    removePoints(signal, 10);
+
+    REQUIRE(signal.size() == 3990);
+
+    try
+    {
+        signal[3999];
+    }
+    catch (std::exception& e)
+    {
+        REQUIRE(std::string(e.what()) == "Index out of scope");
     }
 }
 
