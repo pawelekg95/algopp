@@ -2,38 +2,92 @@
 
 #include "calgopp/types/Point.h"
 #include "calgopp/types/Peak.h"
+#include "calgopp/types/Container.h"
 
 #include <vector>
 #include <optional>
 #include <tuple>
+#include <variant>
+#include <array>
+#include <queue>
+#include <deque>
+#include <cstdint>
+#include <string>
 
 using namespace calgopp;
 
 namespace test {
 
-struct PeakToPeakInfo
+using ContainerVariant = std::variant<std::vector<double>,
+                                      std::vector<int>,
+                                      std::vector<float>,
+                                      std::array<double, 1000>,
+                                      std::array<int, 1000>,
+                                      std::array<float, 1000>>;
+
+template <typename InputType>
+class CStyleArrayVariant // NOLINT
 {
-    std::vector<types::Peak>::iterator lastPeak;
-    std::vector<types::Peak>::iterator currentPeak;
-    std::vector<types::Peak>::iterator nextPeak;
+public:
+    CStyleArrayVariant(std::uint32_t size)
+        : m_size(size)
+        , m_array(new InputType[m_size])
+    {
+        for (std::uint32_t i = 0; i < m_size; i++)
+        {
+            m_array[i] = 2 * i;
+        }
+    }
 
-    std::uint32_t beginIndex{};
-    std::uint32_t middleIndex{};
-    std::uint32_t endIndex{};
+    operator InputType*() const { return m_array; }
 
-    long double beginValue{};
-    long double endValue{};
-    long double middleValue{};
-    long double preMidStep{0.01};
-    long double postMidStep{0.01};
+    ~CStyleArrayVariant() { delete[] m_array; }
+
+private:
+    std::uint32_t m_size{};
+    InputType* m_array{nullptr};
 };
 
-void print(const PeakToPeakInfo& range);
+template <typename T>
+std::vector<T> vectorInput()
+{
+    std::vector<T> token(1000);
+    for (std::uint32_t i = 0; i < 1000; i++)
+    {
+        token[i] = 2 * i;
+    }
+    return token;
+}
 
-std::tuple<std::vector<long double>, std::vector<long double>> prepareDataset(std::vector<types::Peak> peaks,
-                                                                              std::uint32_t distance = 1);
+template <typename T>
+std::array<T, 1000> arrayInput()
+{
+    std::array<T, 1000> token{};
+    for (std::uint32_t i = 0; i < 1000; i++)
+    {
+        token[i] = 2 * i;
+    }
+    return token;
+}
 
-std::vector<types::Peak>
-calculateExpectedPeaks(const std::vector<types::Peak>& input, std::uint32_t distance, types::PeakType type);
+template <typename T>
+void addData(types::Container<T>& container, std::uint32_t amount)
+{
+    for (std::uint32_t i = 0; i < amount; i++)
+    {
+        container.append(2 * i);
+    }
+}
+
+int testDataset(const std::string& scriptPath,
+                const std::string& outputPath,
+                std::uint32_t size,
+                double height = 0,
+                double distance = 0,
+                types::PeakType type = types::PeakType::eHigh);
+
+std::vector<calgopp::types::Point> getRawDataset(const std::string& datasetPath);
+
+std::vector<calgopp::types::Peak> getPeaks(const std::string& datasetPath);
 
 } // namespace test

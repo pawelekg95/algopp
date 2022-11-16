@@ -41,6 +41,14 @@
     },
 
     {
+      "name": "TYPES_TEST",
+      "hidden": true,
+      "cacheVariables": {
+        "APP": "test/types"
+      }
+    },
+
+    {
       "name": "signal_tests_gcc_debug",
       "inherits": [ "Debug", "SIGNAL_TEST", "Linux_GCC" ]
     },
@@ -55,6 +63,22 @@
     {
       "name": "signal_tests_clang_release",
       "inherits": [ "Release", "SIGNAL_TEST", "Linux_Clang" ]
+    },
+    {
+      "name": "types_tests_gcc_debug",
+      "inherits": [ "Debug", "TYPES_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "types_tests_clang_debug",
+      "inherits": [ "Debug", "TYPES_TEST", "Linux_Clang" ]
+    },
+    {
+      "name": "types_tests_gcc_release",
+      "inherits": [ "Release", "TYPES_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "types_tests_clang_release",
+      "inherits": [ "Release", "TYPES_TEST", "Linux_Clang" ]
     }
   ]
 }

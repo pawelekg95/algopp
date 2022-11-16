@@ -16,58 +16,7 @@
 #include <list>
 #include <variant>
 #include <memory>
-
-using ContainerVariant = std::variant<std::vector<double>,
-                                      std::vector<int>,
-                                      std::vector<float>,
-                                      std::array<double, 1000>,
-                                      std::array<int, 1000>,
-                                      std::array<float, 1000>>;
-
-template <typename InputType>
-class CStyleArrayVariant
-{
-public:
-    CStyleArrayVariant(std::uint32_t size)
-        : m_size(size)
-        , m_array(new InputType[m_size])
-    {
-        for (std::uint32_t i = 0; i < m_size; i++)
-        {
-            m_array[i] = 2 * i;
-        }
-    }
-
-    operator InputType*() const { return m_array; }
-
-    ~CStyleArrayVariant() { delete[] m_array; }
-
-private:
-    std::uint32_t m_size{};
-    InputType* m_array{nullptr};
-};
-
-template <typename T>
-std::vector<T> vectorInput()
-{
-    std::vector<T> token(1000);
-    for (std::uint32_t i = 0; i < 1000; i++)
-    {
-        token[i] = 2 * i;
-    }
-    return token;
-}
-
-template <typename T>
-std::array<T, 1000> arrayInput()
-{
-    std::array<T, 1000> token{};
-    for (std::uint32_t i = 0; i < 1000; i++)
-    {
-        token[i] = 2 * i;
-    }
-    return token;
-}
+#include <cmath>
 
 void addPoints(calgopp::signal::Signal& signal, std::uint32_t amount, bool reset = false)
 {
@@ -92,21 +41,6 @@ void removePoints(calgopp::signal::Signal& signal, std::uint32_t amount)
         amount--;
     }
 }
-
-static std::vector<types::Peak> cSmallDataset = {{4, 60}, {8, 65}, {11, 53}, {15, 70}};
-static std::vector<types::Peak> cMediumDataset = {
-    {4, 60},    {8, 65},   {11, 53},  {15, 70},   {18, 71},  {23, 55},  {27, 44},   {31, 61},
-    {36, 67},   {40, 80},  {43, 78},  {47, 79},   {50, 56},  {57, 54},  {60, 47},   {68, 51},
-    {76, 45.5}, {80, 78},  {83, 81},  {88, 85},   {95, 92},  {99, 112}, {105, 102}, {110, 89},
-    {112, 95},  {128, 54}, {145, 13}, {221, 4.5}, {224, 15}, {228, 21}, {233, 25}};
-static std::vector<types::Peak> cBigDataset = {
-    {4, 60},    {8, 65},   {11, 53},  {15, 70},   {18, 71},   {23, 55},  {27, 44},  {31, 61},    {36, 67},
-    {40, 80},   {43, 78},  {47, 79},  {50, 56},   {57, 54},   {60, 47},  {68, 51},  {76, 45.5},  {80, 78},
-    {83, 81},   {88, 85},  {95, 92},  {99, 112},  {105, 102}, {110, 89}, {112, 95}, {128, 54},   {145, 13},
-    {221, 4.5}, {224, 15}, {228, 21}, {233, 25},  {235, 71},  {239, 55}, {244, 44}, {247, 61},   {255, 67},
-    {269, 80},  {274, 78}, {277, 79}, {280, 56},  {291, 54},  {299, 47}, {303, 51}, {306, 45.5}, {320, 78},
-    {324, 81},  {328, 85}, {339, 92}, {355, 112}, {375, 102}, {380, 89}, {389, 95}, {395, 54},   {398, 13},
-    {402, 4.5}, {405, 15}, {409, 21}, {450, 25}};
 
 TEST_CASE("Points tests")
 {
@@ -140,19 +74,19 @@ TEST_CASE("Peaks tests")
 
 TEST_CASE("Signal creation from STL containers")
 {
-    ContainerVariant variant;
+    test::ContainerVariant variant;
 
-    SECTION("Vector of doubles") { variant = vectorInput<double>(); }
+    SECTION("Vector of doubles") { variant = test::vectorInput<double>(); }
 
-    SECTION("Vector of integers") { variant = vectorInput<int>(); }
+    SECTION("Vector of integers") { variant = test::vectorInput<int>(); }
 
-    SECTION("Vector of floats") { variant = vectorInput<float>(); }
+    SECTION("Vector of floats") { variant = test::vectorInput<float>(); }
 
-    SECTION("Array of doubles") { variant = arrayInput<double>(); }
-
-    SECTION("Array of integers") { variant = arrayInput<int>(); }
-
-    SECTION("Array of floats") { variant = arrayInput<float>(); }
+    //    SECTION("Array of doubles") { variant = test::arrayInput<double>(); }
+    //
+    //    SECTION("Array of integers") { variant = test::arrayInput<int>(); }
+    //
+    //    SECTION("Array of floats") { variant = test::arrayInput<float>(); }
 
     auto signal = std::make_unique<calgopp::signal::Signal>();
     REQUIRE(signal->empty());
@@ -175,21 +109,22 @@ TEST_CASE("Signal creation from STL containers")
             break;
         }
 
-        case 3:
-        {
-            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<double, 1000>>(variant));
-            break;
-        }
-        case 4:
-        {
-            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<int, 1000>>(variant));
-            break;
-        }
-        case 5:
-        {
-            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<float, 1000>>(variant));
-            break;
-        }
+            //        case 3:
+            //        {
+            //            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<double,
+            //            1000>>(variant)); break;
+            //        }
+            //        case 4:
+            //        {
+            //            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<int, 1000>>(variant));
+            //            break;
+            //        }
+            //        case 5:
+            //        {
+            //            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<float,
+            //            1000>>(variant)); break;
+            //        }
+        default: break;
     }
 
     REQUIRE(signal->size() == 1000);
@@ -219,19 +154,19 @@ TEST_CASE("Signal creation from C style arrays")
 
     SECTION("Integer array")
     {
-        CStyleArrayVariant<int> cStyleArray(1000);
+        test::CStyleArrayVariant<int> cStyleArray(1000);
         signal = std::make_unique<calgopp::signal::Signal>(static_cast<int*>(cStyleArray), 1000);
     }
 
     SECTION("Double array")
     {
-        CStyleArrayVariant<double> cStyleArray(1000);
+        test::CStyleArrayVariant<double> cStyleArray(1000);
         signal = std::make_unique<calgopp::signal::Signal>(static_cast<double*>(cStyleArray), 1000);
     }
 
     SECTION("Float array")
     {
-        CStyleArrayVariant<float> cStyleArray(1000);
+        test::CStyleArrayVariant<float> cStyleArray(1000);
         signal = std::make_unique<calgopp::signal::Signal>(static_cast<float*>(cStyleArray), 1000);
     }
 
@@ -259,7 +194,6 @@ TEST_CASE("Appending points")
 {
     calgopp::signal::Signal signal;
     REQUIRE(signal.empty());
-    REQUIRE(signal.capacity() == 10);
 
     addPoints(signal, 1);
     REQUIRE(!signal.empty());
@@ -269,14 +203,12 @@ TEST_CASE("Appending points")
     addPoints(signal, 5);
 
     REQUIRE(signal.size() == 6);
-    REQUIRE(signal.capacity() == 10);
     REQUIRE(signal[3].x == 3);
     REQUIRE(signal[3].y == 13);
 
     addPoints(signal, 5);
 
     REQUIRE(signal.size() == 11);
-    REQUIRE(signal.capacity() == 20);
 
     addPoints(signal, 4000);
 
@@ -289,7 +221,6 @@ TEST_CASE("Erasing points")
 {
     calgopp::signal::Signal signal;
     REQUIRE(signal.empty());
-    REQUIRE(signal.capacity() == 10);
 
     addPoints(signal, 4000, true);
     REQUIRE(!signal.empty());
@@ -307,156 +238,48 @@ TEST_CASE("Erasing points")
     {
         signal[3999];
     }
-    catch (std::exception& e)
+    catch (const char* str) // NOLINT
     {
-        REQUIRE(std::string(e.what()) == "Index out of scope");
+        REQUIRE(std::string(str) == "Index out of scope");
     }
 }
 
-// TEST_CASE("Signal tests")
-//{
-//    auto setPeaksType = [](std::vector<calgopp::types::Peak>& peaks, calgopp::types::PeakType type) {
-//        for (auto& peak : peaks)
-//        {
-//            peak.type = type;
-//        }
-//    };
-//    std::vector<calgopp::types::Peak> inputPeaks;
-//    std::vector<calgopp::types::Peak> detectedPeaks;
-//    std::vector<calgopp::types::Peak> expectedPeaks;
-//    std::vector<long double> values;
-//    std::vector<long double> indexes;
-//    calgopp::types::PeakType type{};
-//    std::uint32_t distance = 1;
-//    auto height = std::numeric_limits<double>::min();
-//    std::vector<calgopp::types::Point> rawDataset;
-//    SECTION("Small dataset")
-//    {
-//        inputPeaks = cSmallDataset;
-//        SECTION("Highs")
-//        {
-//            type = calgopp::types::PeakType::eHigh;
-//            setPeaksType(inputPeaks, type);
-//            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
-//            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
-//            SECTION("Distance - 5")
-//            {
-//                distance = 5;
-//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-//            }
-//            SECTION("Distance - 10")
-//            {
-//                distance = 10;
-//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-//            }
-//        }
-//        SECTION("Lows")
-//        {
-//            type = calgopp::types::PeakType::eLow;
-//            setPeaksType(inputPeaks, type);
-//            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
-//            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
-//            SECTION("Distance - 5")
-//            {
-//                distance = 5;
-//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-//            }
-//            SECTION("Distance - 10")
-//            {
-//                distance = 10;
-//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-//            }
-//        }
-//    }
-//
-//    SECTION("Medium dataset")
-//    {
-//        inputPeaks = cMediumDataset;
-//        SECTION("Highs")
-//        {
-//            type = calgopp::types::PeakType::eHigh;
-//            setPeaksType(inputPeaks, type);
-//            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
-//            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
-//            SECTION("Distance - 5")
-//            {
-//                distance = 5;
-//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-//            }
-//            SECTION("Distance - 10")
-//            {
-//                distance = 10;
-//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-//            }
-//        }
-//        SECTION("Lows")
-//        {
-//            type = calgopp::types::PeakType::eLow;
-//            setPeaksType(inputPeaks, type);
-//            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
-//            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
-//            SECTION("Distance - 5")
-//            {
-//                distance = 5;
-//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-//            }
-//            SECTION("Distance - 10")
-//            {
-//                distance = 10;
-//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-//            }
-//        }
-//    }
-//
-//    SECTION("Big dataset")
-//    {
-//        inputPeaks = cBigDataset;
-//        SECTION("Highs")
-//        {
-//            type = calgopp::types::PeakType::eHigh;
-//            setPeaksType(inputPeaks, type);
-//            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
-//            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
-//            SECTION("Distance - 5")
-//            {
-//                distance = 5;
-//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-//            }
-//            SECTION("Distance - 10")
-//            {
-//                distance = 10;
-//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-//            }
-//        }
-//        SECTION("Lows")
-//        {
-//            type = calgopp::types::PeakType::eLow;
-//            setPeaksType(inputPeaks, type);
-//            std::tie(values, indexes) = test::prepareDataset(inputPeaks);
-//            SECTION("Distance - 1") { expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type); }
-//            SECTION("Distance - 5")
-//            {
-//                distance = 5;
-//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-//            }
-//            SECTION("Distance - 10")
-//            {
-//                distance = 10;
-//                expectedPeaks = test::calculateExpectedPeaks(inputPeaks, distance, type);
-//            }
-//        }
-//    }
-//    calgopp::signal::Signal signal(values, indexes);
-//    std::string typeString = type == calgopp::types::PeakType::eLow ? "lows" : "highs";
-//    INFO("Type: " + typeString);
-//    INFO("Distance: " << distance);
-//    INFO("Height: " << height);
-//
-//    detectedPeaks = signal.peaks(type, distance, height);
-//    CHECK(expectedPeaks.size() == detectedPeaks.size());
-//    for (std::uint32_t i = 0; i < detectedPeaks.size(); i++)
-//    {
-//        CHECK(expectedPeaks[i].x == detectedPeaks[i].x);
-//        CHECK(expectedPeaks[i].y == detectedPeaks[i].y);
-//    }
-//}
+TEST_CASE("Signal tests")
+{
+    calgopp::types::PeakType peakType{calgopp::types::PeakType::eHigh};
+    std::vector<types::Point> rawDataset;
+    std::vector<types::Peak> expectedPeaks;
+    types::Container<types::Peak> detectedPeaks;
+    SECTION("Highs") { peakType = calgopp::types::PeakType::eHigh; }
+
+    SECTION("Lows") { peakType = calgopp::types::PeakType::eLow; }
+
+    for (std::uint32_t i = 1; i < 5; i++)
+    {
+        for (std::uint32_t j = 1; j < 4; j++)
+        {
+            for (std::uint32_t k = 0; k < 3; k++)
+            {
+                double datasetSize = pow(100, i);
+                double distance = j * 5;
+                double height = k * 0.1;
+                REQUIRE(test::testDataset("/tmp/dataset_generator.py",
+                                          "/tmp/dataset.json",
+                                          std::uint32_t(datasetSize),
+                                          height,
+                                          distance,
+                                          peakType) == 0);
+                rawDataset = test::getRawDataset("/tmp/dataset.json");
+                expectedPeaks = test::getPeaks("/tmp/dataset.json");
+                auto signal = calgopp::signal::Signal(calgopp::types::Container<types::Point>(rawDataset));
+                detectedPeaks = signal.peaks(peakType, height, distance);
+                CHECK(detectedPeaks.size() == expectedPeaks.size());
+                for (std::uint32_t l = 0; l < expectedPeaks.size(); l++)
+                {
+                    REQUIRE(expectedPeaks[l].y == detectedPeaks[l].y);
+                    REQUIRE(expectedPeaks[l].x == detectedPeaks[l].x);
+                }
+            }
+        }
+    }
+}

@@ -12,6 +12,12 @@ struct Point
         , y(double(y))
     {}
 
+    template <typename T, typename Y>
+    Point(T x, Y y)
+        : x(double(x))
+        , y(double(y))
+    {}
+
     long double x{};
     long double y{};
 

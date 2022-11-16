@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 add_library(calgopp-signal EXCLUDE_FROM_ALL
-        Iterator.cpp
+        Jacymirski.cpp
         Signal.cpp
         )
 
@@ -12,4 +12,4 @@ target_include_directories(calgopp-signal
         )
 
 target_link_libraries(calgopp-signal
-        PUBLIC calgopp::types)
+        PUBLIC calgopp::types calgopp::algorithm)

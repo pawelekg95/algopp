@@ -2,48 +2,73 @@
 
 #include "calgopp/types/Point.h"
 #include "calgopp/types/Peak.h"
-#include "Iterator.h"
-
-#include <cstdint>
-#include <cstdlib>
+#include "calgopp/types/Container.h"
+#include "calgopp/algorithm/numeric.h"
 
 namespace calgopp::signal {
 
 class Signal
 {
 public:
-    Signal();
-    Signal(const Signal& other);
+    Signal() = default;
+    Signal(const Signal& other) = default;
     Signal(Signal&& other) noexcept;
 
     Signal& operator=(const Signal& other);
     Signal& operator=(Signal&& other) noexcept;
 
-    template <typename InputType>
-    Signal(const InputType* values, std::size_t length)
-        : m_size(length)
-        , m_capacity(m_size > 0 ? m_size * 2 : 10)
-    {
-        m_points = new types::Point[m_capacity]; // NOLINT cppcoreguidelines-owning-memory
-        for (uint32_t i = 0; i < m_size; i++)
-        {
-            m_points[i] = {double(i), double(values[i])};
-        }
-        m_empty = m_size == 0;
-        m_begin = Iterator(m_points);
-        m_end = Iterator(&m_points[m_size]);
-    }
-
-    template <typename Container>
-    Signal(const Container& values)
-        : Signal(values.data(), values.size())
+    template <template <typename> class Container, typename Type>
+    Signal(const Container<Type>& values)
+        : Signal(types::Container<Type>(values))
     {}
 
-    Signal(const types::Point* points, std::size_t size);
+    template <template <typename> class Container, typename Type>
+    Signal(const Container<Type>& values, const Container<Type>& indexes)
+        : Signal(types::Container<Type>(values), types::Container<Type>(indexes))
+    {}
 
-    ~Signal() { delete[] m_points; }
+    template <typename InputType>
+    Signal(const InputType* values, unsigned int length)
+        : Signal(types::Container<InputType>(values, length))
+    {}
 
-    bool empty() const { return m_empty; }
+    template <template <typename, typename> class Container, typename Type>
+    Signal(const Container<Type, unsigned int>& values)
+        : Signal(types::Container<Type>(values))
+    {}
+
+    template <template <typename, typename> class Container, typename Type, typename Size>
+    Signal(const Container<Type, Size>& values, const Container<Type, Size>& indexes)
+        : Signal(types::Container<Type>(values), types::Container<Type>(indexes))
+    {}
+
+    template <typename Type>
+    Signal(const types::Container<Type>& values, const types::Container<Type>& indexes)
+    {
+        if (values.size() != indexes.size())
+        {
+            throw "Invalid size of containers";
+        }
+        for (unsigned int i = 0; i < values.size(); i++)
+        {
+            m_points.append(types::Point{indexes.at(i), values.at(i)});
+        }
+    }
+
+    template <typename Type>
+    Signal(const types::Container<Type>& values)
+        : Signal(values, algorithm::numeric::range<Type>(0, values.size()))
+    {}
+
+    Signal(types::Container<types::Point> values)
+        : m_points(static_cast<types::Container<types::Point>&&>(values))
+    {}
+
+    Signal(const types::Point* points, unsigned int size);
+
+    ~Signal() = default;
+
+    bool empty() const { return m_points.empty(); }
 
     operator bool() const { return !empty(); }
 
@@ -55,28 +80,21 @@ public:
 
     void append(const types::Point& point);
 
-    void remove(uint32_t index);
+    void remove(unsigned int index);
 
-    types::Point& operator[](uint32_t index);
+    types::Point& operator[](unsigned int index);
 
-    std::size_t size() const { return m_size; }
+    int size() const { return m_points.size(); }
 
-    std::size_t capacity() const { return m_capacity; }
+    types::Container<types::Peak>
+    peaks(types::PeakType type = types::PeakType::eHigh, long double height = 0, long double distance = 0);
 
-    Iterator begin() const { return m_begin; }
+    types::Container<types::Point>::Iterator begin() const { return m_points.begin(); }
 
-    Iterator end() const { return m_end; }
-
-    //    std::vector<types::Peak> peaks(types::PeakType type = types::PeakType::eHigh,
-    //                                   long double height = std::numeric_limits<long double>::min());
+    types::Container<types::Point>::Iterator end() const { return m_points.end(); }
 
 private:
-    uint32_t m_size{};
-    uint32_t m_capacity{};
-    bool m_empty{true};
-    types::Point* m_points{nullptr};
-    Iterator m_begin;
-    Iterator m_end;
+    types::Container<types::Point> m_points;
 };
 
 } // namespace calgopp::signal
