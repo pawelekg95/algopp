@@ -69,7 +69,9 @@ jobs:
 
   # Cleanup /tmp dir
   Clean-up:
-    needs: Valgrind
+    needs:
+      - Valgrind
+      - Doxygen
     runs-on: self-hosted
     steps:
       - run: rm -rf /tmp/Build*
