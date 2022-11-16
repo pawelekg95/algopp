@@ -62,6 +62,11 @@ jobs:
       pre_run: cd "${{ github.workspace }}"; rm -rf ./cmake-build; mkdir ./cmake-build; cd ./cmake-build; cmake .. --preset signal_tests_clang_debug
       linter: run-clang-tidy
 
+  # Deploy
+  Doxygen:
+    needs: Clang-tidy
+    uses: ./.github/workflows/deployment.yml
+
   # Cleanup /tmp dir
   Clean-up:
     needs: Valgrind

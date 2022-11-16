@@ -1,0 +1,22 @@
+name: Build_documentation_and_deploy
+on: [workflow_call, push]
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          BUILD_DIR="/tmp/Build-calgopp-doxygen-${{ github.sha }}"
+          rm -rf "${BUILD_DIR}"
+          mkdir "${BUILD_DIR}"
+          cd "${BUILD_DIR}"
+          cmake ${{ github.workspace }} --preset signal_tests_clang_debug
+          make doxygen
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: /tmp/Build-calgopp-doxygen-${{ github.sha }}/bin/docs # The folder the action should deploy.
