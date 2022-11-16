@@ -224,9 +224,9 @@ public:
 
         bool operator<(const Iterator& rhs) { return m_data < rhs.m_data; }
 
-        bool operator>=(const Iterator& rhs) { return !(*this < rhs); }
+        bool operator>=(const Iterator& rhs) { return *this >= rhs; }
 
-        bool operator<=(const Iterator& rhs) { return !(*this > rhs); }
+        bool operator<=(const Iterator& rhs) { return *this <= rhs; }
 
         Type& operator*() { return *m_data; }
 
@@ -237,6 +237,18 @@ public:
     Iterator begin() const { return m_begin; }
 
     Iterator end() const { return m_end; }
+
+    Iterator find(const Type& element)
+    {
+        for (unsigned int i = 0; i < m_size; i++)
+        {
+            if (m_data[i] == element)
+            {
+                return &m_data[i];
+            }
+        }
+        return end();
+    }
 
 protected:
     void updateIterators()

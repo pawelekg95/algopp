@@ -69,6 +69,10 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
         return (type == types::PeakType::eLow ? first > second && second < third : first < second && second > third);
     };
 
+    auto lastElementIsPeak = [&type](long double first, long double second) -> bool {
+        return (type == types::PeakType::eLow ? first > second : first < second);
+    };
+
     types::Container<types::Peak> peaks;
     auto beginIt = begin();
     auto endIt = end();
@@ -82,6 +86,10 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
         if (isPeak((*(beginIt - 1)).y, (*beginIt).y, (*(beginIt + 1)).y))
         {
             peaks.append(types::Peak({(*beginIt).x, (*beginIt).y, type}));
+        }
+        else if (beginIt == endIt - 2 && lastElementIsPeak((*beginIt).y, (*(beginIt + 1)).y))
+        {
+            peaks.append(types::Peak({(*(beginIt + 1)).x, (*(beginIt + 1)).y, type}));
         }
     }
 
@@ -101,21 +109,23 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
     for (unsigned int i = 0; i < m_points.size(); i += int(distance))
     {
         types::Container<types::Peak> inRangePeaks;
-        while ((*currentPeak).x >= i && (*currentPeak).x < i + distance && currentPeak < peaks.end())
+        while ((*currentPeak).x >= i && (*currentPeak).x <= i + distance && currentPeak < peaks.end())
         {
             inRangePeaks.append(*currentPeak);
             currentPeak++;
         }
-        if (!inRangePeaks.empty())
+        auto elementToAdd = type == types::PeakType::eLow
+                            ? *algorithm::numeric::findElement<types::Peak>(inRangePeaks.begin(),
+                                                                            inRangePeaks.end(),
+                                                                            minComparator)
+                            : *algorithm::numeric::findElement<types::Peak>(inRangePeaks.begin(),
+                                                                            inRangePeaks.end(),
+                                                                            maxComparator);
+        if (!inRangePeaks.empty() && filteredPeaks.empty())
         {
-            filteredPeaks.append(type == types::PeakType::eLow
-                                     ? *algorithm::numeric::findElement<types::Peak>(inRangePeaks.begin(),
-                                                                                     inRangePeaks.end(),
-                                                                                     minComparator)
-                                     : *algorithm::numeric::findElement<types::Peak>(inRangePeaks.begin(),
-                                                                                     inRangePeaks.end(),
-                                                                                     maxComparator));
+            filteredPeaks.append(elementToAdd);
         }
+        else if (!inRangePeaks.empty() && *(filteredPeaks.end() - 1). - elementToAdd)
     }
 
     return filteredPeaks;

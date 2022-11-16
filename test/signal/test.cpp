@@ -252,7 +252,7 @@ TEST_CASE("Signal tests")
     types::Container<types::Peak> detectedPeaks;
     SECTION("Highs") { peakType = calgopp::types::PeakType::eHigh; }
 
-    SECTION("Lows") { peakType = calgopp::types::PeakType::eLow; }
+//    SECTION("Lows") { peakType = calgopp::types::PeakType::eLow; }
 
     for (std::uint32_t i = 1; i < 5; i++)
     {

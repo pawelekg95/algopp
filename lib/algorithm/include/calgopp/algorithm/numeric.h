@@ -19,6 +19,22 @@ It findElement(It begin, It end, bool (*comparator)(const Type& elem1, const Typ
     return current;
 }
 
+template <typename Type, typename It>
+It minElement(It begin, It end)
+{
+    return findElement<Type, It>(begin, end, [](const Type& first, const Type& second) -> bool {
+        return first <= second;
+    });
+}
+
+template <typename Type, typename It>
+It maxElement(It begin, It end)
+{
+    return findElement<Type, It>(begin, end, [](const Type& first, const Type& second) -> bool {
+        return first >= second;
+    });
+}
+
 template <typename Type>
 types::Container<Type> range(int begin, int end)
 {
