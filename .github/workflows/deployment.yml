@@ -1,5 +1,5 @@
 name: Build_documentation_and_deploy
-on: [workflow_call, push]
+on: [workflow_call]
 permissions:
   contents: write
 
