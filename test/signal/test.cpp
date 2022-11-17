@@ -273,11 +273,16 @@ TEST_CASE("Signal tests")
                 expectedPeaks = test::getPeaks("/tmp/dataset.json");
                 auto signal = calgopp::signal::Signal(calgopp::types::Container<types::Point>(rawDataset));
                 detectedPeaks = signal.peaks(peakType, height, distance);
+                for (const auto& peak : detectedPeaks)
+                {
+                    std::cout << peak.y << " " << peak.x << std::endl;
+                }
                 CHECK(detectedPeaks.size() == expectedPeaks.size());
                 for (std::uint32_t l = 0; l < expectedPeaks.size(); l++)
                 {
-                    REQUIRE(expectedPeaks[l].y == detectedPeaks[l].y);
-                    REQUIRE(expectedPeaks[l].x == detectedPeaks[l].x);
+                    std::cout << "Peak no: " << l << std::endl;
+                    REQUIRE(detectedPeaks[l].y == expectedPeaks[l].y);
+                    REQUIRE(detectedPeaks[l].x == expectedPeaks[l].x);
                 }
             }
         }

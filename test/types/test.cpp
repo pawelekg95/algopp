@@ -99,6 +99,17 @@ TEST_CASE("Add and remove data")
     REQUIRE(container[50] == 100);
     REQUIRE(container[51] == 104);
     REQUIRE(container[52] == 106);
+
+    container.insert(222, 51);
+    REQUIRE(container.size() == 1000);
+    REQUIRE(container[51] == 222);
+    REQUIRE(container[52] == 104);
+    REQUIRE(container[53] == 106);
+
+    container.insert(999, 0);
+    REQUIRE(container.size() == 1001);
+    REQUIRE(container[0] == 999);
+    REQUIRE(container[1] == 0);
 }
 
 TEST_CASE("Constructors")

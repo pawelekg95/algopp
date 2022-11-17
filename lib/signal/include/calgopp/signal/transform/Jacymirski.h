@@ -4,7 +4,7 @@
 
 namespace calgopp::signal::transform {
 
-class Jacymirski : public IProcessor
+class Jacymirski : public process::IProcessor
 {
 public:
     Signal process(const Signal& signal) override;

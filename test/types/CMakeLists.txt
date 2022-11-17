@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-set(EXECUTABLE_NAME types_tests${EXE_EXTENSION})
+set(EXECUTABLE_NAME tests${EXE_EXTENSION})
 
 add_executable(${EXECUTABLE_NAME}
         test.cpp

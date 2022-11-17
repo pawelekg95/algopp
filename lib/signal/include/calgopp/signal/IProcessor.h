@@ -2,7 +2,7 @@
 
 #include "calgopp/signal/Signal.h"
 
-namespace calgopp::signal {
+namespace calgopp::signal::process {
 
 class IProcessor
 {
@@ -24,4 +24,4 @@ public:
     }
 };
 
-} // namespace calgopp::signal
+} // namespace calgopp::signal::process

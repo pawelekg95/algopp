@@ -98,6 +98,7 @@ public:
         {
             m_data[i] = other.m_data[i];
         }
+        updateIterators();
         return *this;
     }
 
@@ -116,6 +117,7 @@ public:
         other.m_size = 0;
         other.m_capacity = 0;
         other.m_empty = true;
+        updateIterators();
         return *this;
     }
 
@@ -123,16 +125,25 @@ public:
     {
         if (m_size >= m_capacity)
         {
-            m_capacity = m_capacity * 2;
-            auto* tmp = new Type[m_capacity]; // NOLINT cppcoreguidelines-owning-memory
-            for (unsigned int i = 0; i < m_size; i++)
-            {
-                tmp[i] = m_data[i];
-            }
-            delete[] m_data;
-            m_data = tmp;
+            extend();
         }
         m_data[m_size] = data;
+        m_size++;
+        m_empty = m_size == 0;
+        updateIterators();
+    }
+
+    void insert(const Type& data, unsigned int index)
+    {
+        if (m_size >= m_capacity)
+        {
+            extend();
+        }
+        for (unsigned int i = m_size; i > index; i--)
+        {
+            m_data[i] = m_data[i - 1];
+        }
+        m_data[index] = data;
         m_size++;
         m_empty = m_size == 0;
         updateIterators();
@@ -212,23 +223,23 @@ public:
             return tmp;
         }
 
-        Iterator operator+(int value) { return m_data + value; }
+        Iterator operator+(int value) const { return m_data + value; }
 
-        Iterator operator-(int value) { return m_data - value; }
+        Iterator operator-(int value) const { return m_data - value; }
 
-        bool operator==(const Iterator& rhs) { return m_data == rhs.m_data; }
+        bool operator==(const Iterator& rhs) const { return m_data == rhs.m_data; }
 
-        bool operator!=(const Iterator& rhs) { return !(*this == rhs); }
+        bool operator!=(const Iterator& rhs) const { return !(*this == rhs); }
 
-        bool operator>(const Iterator& rhs) { return m_data > rhs.m_data; }
+        bool operator>(const Iterator& rhs) const { return m_data > rhs.m_data; }
 
-        bool operator<(const Iterator& rhs) { return m_data < rhs.m_data; }
+        bool operator<(const Iterator& rhs) const { return m_data < rhs.m_data; }
 
-        bool operator>=(const Iterator& rhs) { return *this >= rhs; }
+        bool operator>=(const Iterator& rhs) const { return !(*this < rhs); }
 
-        bool operator<=(const Iterator& rhs) { return *this <= rhs; }
+        bool operator<=(const Iterator& rhs) const { return !(*this > rhs); }
 
-        Type& operator*() { return *m_data; }
+        Type& operator*() const { return *m_data; }
 
     private:
         Type* m_data{nullptr};
@@ -255,6 +266,18 @@ protected:
     {
         m_begin = m_data;
         m_end = &m_data[m_size];
+    }
+
+    void extend()
+    {
+        m_capacity = m_capacity * 2;
+        auto* tmp = new Type[m_capacity]; // NOLINT cppcoreguidelines-owning-memory
+        for (unsigned int i = 0; i < m_size; i++)
+        {
+            tmp[i] = m_data[i];
+        }
+        delete[] m_data;
+        m_data = tmp;
     }
 
 protected:

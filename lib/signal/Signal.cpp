@@ -69,66 +69,56 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
         return (type == types::PeakType::eLow ? first > second && second < third : first < second && second > third);
     };
 
-    auto lastElementIsPeak = [&type](long double first, long double second) -> bool {
-        return (type == types::PeakType::eLow ? first > second : first < second);
+    auto comparator = [&type](const long double& lhs, const long double& rhs) -> bool {
+        return (type == types::PeakType::eLow ? lhs < rhs : lhs > rhs);
+    };
+
+    auto isGreatestPeakInRange = [&comparator, this](const types::Container<types::Point>::Iterator& it, long double distance) -> bool {
+        bool isGreatest = true;
+        for (int i = 1; i < int(distance / 2); i++)
+        {
+            if (it == end() || it + i == end())
+            {
+                return isGreatest;
+            }
+            if (comparator((*(it + i)).y, (*it).y))
+            {
+                isGreatest = false;
+            }
+        }
+        return isGreatest;
     };
 
     types::Container<types::Peak> peaks;
-    auto beginIt = begin();
     auto endIt = end();
-    while (beginIt < endIt - 2)
+    auto currentIt = begin();
+    while (currentIt <= endIt - 2)
     {
-        beginIt++;
-        if ((*beginIt).y < height)
+        currentIt++;
+        if ((*currentIt).y < height)
         {
             continue;
         }
-        if (isPeak((*(beginIt - 1)).y, (*beginIt).y, (*(beginIt + 1)).y))
+        if (!isPeak((*(currentIt - 1)).y, (*currentIt).y, (*(currentIt + 1)).y))
         {
-            peaks.append(types::Peak({(*beginIt).x, (*beginIt).y, type}));
+            continue;
         }
-        else if (beginIt == endIt - 2 && lastElementIsPeak((*beginIt).y, (*(beginIt + 1)).y))
+        if (!isGreatestPeakInRange(currentIt, distance))
         {
-            peaks.append(types::Peak({(*(beginIt + 1)).x, (*(beginIt + 1)).y, type}));
+            continue;
         }
+        if (peaks.empty())
+        {
+            peaks.append(types::Peak((*currentIt).x, (*currentIt).y, type));
+        }
+        if ((*currentIt).x - (*(peaks.end() - 1)).x <= distance)
+        {
+            continue;
+        }
+        peaks.append(types::Peak((*currentIt).x, (*currentIt).y, type));
     }
 
-    if (distance == 0 || distance == 1 || distance == 2 || peaks.empty())
-    {
-        return peaks;
-    }
-
-    auto currentPeak = peaks.begin();
-    types::Container<types::Peak> filteredPeaks;
-    auto minComparator = [](const types::Peak& first, const types::Peak& second) -> bool {
-        return first.y <= second.y;
-    };
-    auto maxComparator = [](const types::Peak& first, const types::Peak& second) -> bool {
-        return first.y >= second.y;
-    };
-    for (unsigned int i = 0; i < m_points.size(); i += int(distance))
-    {
-        types::Container<types::Peak> inRangePeaks;
-        while ((*currentPeak).x >= i && (*currentPeak).x <= i + distance && currentPeak < peaks.end())
-        {
-            inRangePeaks.append(*currentPeak);
-            currentPeak++;
-        }
-        auto elementToAdd = type == types::PeakType::eLow
-                            ? *algorithm::numeric::findElement<types::Peak>(inRangePeaks.begin(),
-                                                                            inRangePeaks.end(),
-                                                                            minComparator)
-                            : *algorithm::numeric::findElement<types::Peak>(inRangePeaks.begin(),
-                                                                            inRangePeaks.end(),
-                                                                            maxComparator);
-        if (!inRangePeaks.empty() && filteredPeaks.empty())
-        {
-            filteredPeaks.append(elementToAdd);
-        }
-        else if (!inRangePeaks.empty() && *(filteredPeaks.end() - 1). - elementToAdd)
-    }
-
-    return filteredPeaks;
+    return peaks;
 }
 
 } // namespace calgopp::signal
