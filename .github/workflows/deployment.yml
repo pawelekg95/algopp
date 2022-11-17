@@ -1,5 +1,9 @@
 name: Build_documentation_and_deploy
-on: [workflow_call]
+on:
+  push:
+    branches:
+      - main
+
 permissions:
   contents: write
 
@@ -9,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          BUILD_DIR="/tmp/Build-calgopp-doxygen-${{ github.sha }}"
+          BUILD_DIR="/tmp/calgopp-doxygen-${{ github.sha }}"
           rm -rf "${BUILD_DIR}"
           mkdir "${BUILD_DIR}"
           cd "${BUILD_DIR}"
@@ -19,4 +23,5 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: /tmp/Build-calgopp-doxygen-${{ github.sha }}/docs # The folder the action should deploy.
+          folder: /tmp/calgopp-doxygen-${{ github.sha }}/docs # The folder the action should deploy.
+      - run: rm -rf /tmp/calgopp-doxygen-${{ github.sha }}
