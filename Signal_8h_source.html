@@ -76,35 +76,43 @@ $(function() {
   <div class="headertitle"><div class="title">Signal.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<a href="Signal_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;calgopp/types/Point.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;calgopp/types/Peak.h&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Point_8h.html">calgopp/types/Point.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Peak_8h.html">calgopp/types/Peak.h</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;limits&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;optional&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span>calgopp::signal {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacecalgopp_1_1signal.html">calgopp::signal</a> {</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classcalgopp_1_1signal_1_1Signal.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="classcalgopp_1_1signal_1_1Signal.html">Signal</a></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="classcalgopp_1_1signal_1_1Signal.html">Signal</a>(<span class="keyword">const</span> std::vector&lt;long double&gt;&amp; values, std::optional&lt;std::vector&lt;long double&gt;&gt; indexes);</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::vector&lt;types::Peak&gt; peaks(types::PeakType type = types::PeakType::eHigh,</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::vector&lt;types::Peak&gt; <a class="code hl_function" href="classcalgopp_1_1signal_1_1Signal.html#a516f01dbe9a3b34c18ad5180bdb874d0">peaks</a>(<a class="code hl_enumeration" href="namespacecalgopp_1_1types.html#a7c0dc29f8bb2c826271613c66c5bf9a2">types::PeakType</a> type = <a class="code hl_enumvalue" href="namespacecalgopp_1_1types.html#a7c0dc29f8bb2c826271613c66c5bf9a2a257f156f0a0b12eb536ac506d530cd0d">types::PeakType::eHigh</a>,</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>                                   <span class="keywordtype">long</span> <span class="keywordtype">double</span> distance = 0,</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>                                   <span class="keywordtype">long</span> <span class="keywordtype">double</span> height = std::numeric_limits&lt;long double&gt;::min());</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    std::vector&lt;types::Point&gt; points() { <span class="keywordflow">return</span> m_points; }</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classcalgopp_1_1signal_1_1Signal.html#aa6047144ab3f3407306bc80222dcacc2">   22</a></span>    std::vector&lt;types::Point&gt; <a class="code hl_function" href="classcalgopp_1_1signal_1_1Signal.html#aa6047144ab3f3407306bc80222dcacc2">points</a>() { <span class="keywordflow">return</span> <a class="code hl_variable" href="classcalgopp_1_1signal_1_1Signal.html#ab04096f644ef1c9541063bc53b00bb88">m_points</a>; }</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    std::vector&lt;types::Point&gt; m_points;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classcalgopp_1_1signal_1_1Signal.html#ab04096f644ef1c9541063bc53b00bb88">   25</a></span>    std::vector&lt;types::Point&gt; <a class="code hl_variable" href="classcalgopp_1_1signal_1_1Signal.html#ab04096f644ef1c9541063bc53b00bb88">m_points</a>;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>} <span class="comment">// namespace calgopp::signal</span></div>
+<div class="ttc" id="aPeak_8h_html"><div class="ttname"><a href="Peak_8h.html">Peak.h</a></div></div>
+<div class="ttc" id="aPoint_8h_html"><div class="ttname"><a href="Point_8h.html">Point.h</a></div></div>
 <div class="ttc" id="aclasscalgopp_1_1signal_1_1Signal_html"><div class="ttname"><a href="classcalgopp_1_1signal_1_1Signal.html">calgopp::signal::Signal</a></div><div class="ttdef"><b>Definition:</b> Signal.h:14</div></div>
+<div class="ttc" id="aclasscalgopp_1_1signal_1_1Signal_html_a516f01dbe9a3b34c18ad5180bdb874d0"><div class="ttname"><a href="classcalgopp_1_1signal_1_1Signal.html#a516f01dbe9a3b34c18ad5180bdb874d0">calgopp::signal::Signal::peaks</a></div><div class="ttdeci">std::vector&lt; types::Peak &gt; peaks(types::PeakType type=types::PeakType::eHigh, long double distance=0, long double height=std::numeric_limits&lt; long double &gt;::min())</div><div class="ttdef"><b>Definition:</b> Signal.cpp:21</div></div>
+<div class="ttc" id="aclasscalgopp_1_1signal_1_1Signal_html_aa6047144ab3f3407306bc80222dcacc2"><div class="ttname"><a href="classcalgopp_1_1signal_1_1Signal.html#aa6047144ab3f3407306bc80222dcacc2">calgopp::signal::Signal::points</a></div><div class="ttdeci">std::vector&lt; types::Point &gt; points()</div><div class="ttdef"><b>Definition:</b> Signal.h:22</div></div>
+<div class="ttc" id="aclasscalgopp_1_1signal_1_1Signal_html_ab04096f644ef1c9541063bc53b00bb88"><div class="ttname"><a href="classcalgopp_1_1signal_1_1Signal.html#ab04096f644ef1c9541063bc53b00bb88">calgopp::signal::Signal::m_points</a></div><div class="ttdeci">std::vector&lt; types::Point &gt; m_points</div><div class="ttdef"><b>Definition:</b> Signal.h:25</div></div>
+<div class="ttc" id="anamespacecalgopp_1_1signal_html"><div class="ttname"><a href="namespacecalgopp_1_1signal.html">calgopp::signal</a></div><div class="ttdef"><b>Definition:</b> IFilter.h:5</div></div>
+<div class="ttc" id="anamespacecalgopp_1_1types_html_a7c0dc29f8bb2c826271613c66c5bf9a2"><div class="ttname"><a href="namespacecalgopp_1_1types.html#a7c0dc29f8bb2c826271613c66c5bf9a2">calgopp::types::PeakType</a></div><div class="ttdeci">PeakType</div><div class="ttdef"><b>Definition:</b> Peak.h:8</div></div>
+<div class="ttc" id="anamespacecalgopp_1_1types_html_a7c0dc29f8bb2c826271613c66c5bf9a2a257f156f0a0b12eb536ac506d530cd0d"><div class="ttname"><a href="namespacecalgopp_1_1types.html#a7c0dc29f8bb2c826271613c66c5bf9a2a257f156f0a0b12eb536ac506d530cd0d">calgopp::types::PeakType::eHigh</a></div><div class="ttdeci">@ eHigh</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
