@@ -63,30 +63,18 @@ types::Point& Signal::operator[](unsigned int index)
     return m_points[index];
 }
 
-types::Container<types::Peak> Signal::peaks(types::PeakType type, long double height, long double distance)
+types::Container<types::Peak> Signal::peaks(types::PeakType type, long double height, unsigned int distance)
 {
+    if (distance == 0)
+    {
+        throw "Invalid distance";
+    }
     auto isPeak = [&type](long double first, long double second, long double third) -> bool {
         return (type == types::PeakType::eLow ? first > second && second < third : first < second && second > third);
     };
 
-    auto comparator = [&type](const long double& lhs, const long double& rhs) -> bool {
-        return (type == types::PeakType::eLow ? lhs < rhs : lhs > rhs);
-    };
-
-    auto isGreatestPeakInRange = [&comparator, this](const types::Container<types::Point>::Iterator& it, long double distance) -> bool {
-        bool isGreatest = true;
-        for (int i = 1; i < int(distance / 2); i++)
-        {
-            if (it == end() || it + i == end())
-            {
-                return isGreatest;
-            }
-            if (comparator((*(it + i)).y, (*it).y))
-            {
-                isGreatest = false;
-            }
-        }
-        return isGreatest;
+    auto comparator = [&type](long double first, long double second) -> bool {
+        return (type == types::PeakType::eLow ? first > second : first < second);
     };
 
     types::Container<types::Peak> peaks;
@@ -103,19 +91,20 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
         {
             continue;
         }
-        if (!isGreatestPeakInRange(currentIt, distance))
-        {
-            continue;
-        }
-        if (peaks.empty())
-        {
-            peaks.append(types::Peak((*currentIt).x, (*currentIt).y, type));
-        }
-        if ((*currentIt).x - (*(peaks.end() - 1)).x <= distance)
-        {
-            continue;
-        }
         peaks.append(types::Peak((*currentIt).x, (*currentIt).y, type));
+    }
+
+    auto peaksLen = peaks.size();
+    for (unsigned int i = 0; i < peaksLen - 1; i++)
+    {
+        if (m_points.index(types::Point(peaks[i + 1].x, peaks[i + 1].y)) -
+                m_points.index(types::Point(peaks[i].x, peaks[i].y)) <
+            distance)
+        {
+            peaks.remove(comparator(peaks[i].y, peaks[i + 1].y) ? i : i + 1);
+            i--;
+            peaksLen--;
+        }
     }
 
     return peaks;

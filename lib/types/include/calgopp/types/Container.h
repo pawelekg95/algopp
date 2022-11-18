@@ -182,6 +182,18 @@ public:
         return m_data[index];
     }
 
+    unsigned int index(const Type& element)
+    {
+        for (unsigned int i = 0; i < m_size; i++)
+        {
+            if (m_data[i] == element)
+            {
+                return i;
+            }
+        }
+        throw "No element";
+    }
+
     unsigned int size() const { return m_size; }
 
     unsigned int capacity() const { return m_capacity; }
@@ -222,6 +234,8 @@ public:
             m_data--;
             return tmp;
         }
+
+        Type* operator->() { return m_data; }
 
         Iterator operator+(int value) const { return m_data + value; }
 

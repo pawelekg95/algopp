@@ -49,6 +49,14 @@
     },
 
     {
+      "name": "ALGORITHM_TEST",
+      "hidden": true,
+      "cacheVariables": {
+        "APP": "test/algorithm"
+      }
+    },
+
+    {
       "name": "signal_tests_gcc_debug",
       "inherits": [ "Debug", "SIGNAL_TEST", "Linux_GCC" ]
     },
@@ -79,6 +87,22 @@
     {
       "name": "types_tests_clang_release",
       "inherits": [ "Release", "TYPES_TEST", "Linux_Clang" ]
+    },
+    {
+      "name": "algorithm_tests_gcc_debug",
+      "inherits": [ "Debug", "ALGORITHM_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "algorithm_tests_clang_debug",
+      "inherits": [ "Debug", "ALGORITHM_TEST", "Linux_Clang" ]
+    },
+    {
+      "name": "algorithm_tests_gcc_release",
+      "inherits": [ "Release", "ALGORITHM_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "algorithm_tests_clang_release",
+      "inherits": [ "Release", "ALGORITHM_TEST", "Linux_Clang" ]
     }
   ]
 }

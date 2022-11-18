@@ -5,13 +5,17 @@ Copyright (c) 2022 Pawel Gmurczyk
 Documentation:
 * [Reference](https://pawelekg95.github.io/calgopp/)
 
-# CI status
+# CI status ![ci_status]
 
-| ![linux_badge] | ![quality_badge] |
-| :------------: | :--------------: |
+| ![linux_badge] | ![build_badge] | ![test_badge] | ![quality_badge] | ![deployment_badge] |
+| :------------: | :--------------: | :--------------: | :--------------: | :--------------: |
 
+[ci_status]: https://github.com/pawelekg95/calgopp/actions/workflows/calgopp_ci.yml/badge.svg
 [linux_badge]: https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black
-[quality_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/calgopp_CI.yml/badge.svg
+[build_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/build_tests.yml/badge.svg
+[test_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/test.yml/badge.svg
+[quality_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/quality.yml/badge.svg
+[deployment_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/deployment.yml/badge.svg
 
 # Introduction
 Calgopp is scientific and technical computing library written in C++ for embedded devices (but not only).

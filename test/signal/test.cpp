@@ -244,7 +244,7 @@ TEST_CASE("Erasing points")
     }
 }
 
-TEST_CASE("Signal tests")
+TEST_CASE("Signal tests - peaks")
 {
     calgopp::types::PeakType peakType{calgopp::types::PeakType::eHigh};
     std::vector<types::Point> rawDataset;
@@ -252,17 +252,17 @@ TEST_CASE("Signal tests")
     types::Container<types::Peak> detectedPeaks;
     SECTION("Highs") { peakType = calgopp::types::PeakType::eHigh; }
 
-//    SECTION("Lows") { peakType = calgopp::types::PeakType::eLow; }
+    SECTION("Lows") { peakType = calgopp::types::PeakType::eLow; }
 
-    for (std::uint32_t i = 1; i < 5; i++)
+    for (std::uint32_t size = 1; size < 5; size++)
     {
-        for (std::uint32_t j = 1; j < 4; j++)
+        for (std::uint32_t distanceMultiplier = 1; distanceMultiplier < 4; distanceMultiplier++)
         {
-            for (std::uint32_t k = 0; k < 3; k++)
+            for (std::uint32_t heightMultiplier = 0; heightMultiplier < 3; heightMultiplier++)
             {
-                double datasetSize = pow(100, i);
-                double distance = j * 5;
-                double height = k * 0.1;
+                double datasetSize = pow(100, size);
+                std::uint32_t distance = distanceMultiplier * 5;
+                double height = heightMultiplier * 0.1;
                 REQUIRE(test::testDataset("/tmp/dataset_generator.py",
                                           "/tmp/dataset.json",
                                           std::uint32_t(datasetSize),

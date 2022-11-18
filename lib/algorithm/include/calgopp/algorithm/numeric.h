@@ -4,13 +4,33 @@
 
 namespace calgopp::algorithm::numeric {
 
-template <typename Type, typename It>
-It findElement(It begin, It end, bool (*comparator)(const Type& elem1, const Type& elem2))
+const long double cEpsilon = 0.0000000001;
+
+struct LessComparator
+{
+    template <typename Type>
+    bool operator()(const Type& lhs, const Type& rhs)
+    {
+        return lhs < rhs;
+    }
+};
+
+struct GreaterComparator
+{
+    template <typename Type>
+    bool operator()(const Type& lhs, const Type& rhs)
+    {
+        return lhs > rhs;
+    }
+};
+
+template <typename It, typename Comparator>
+It findElement(It begin, It end, Comparator comparator)
 {
     auto current = begin;
     while (begin < end - 1)
     {
-        if (comparator(*begin, *(begin + 1)))
+        if (comparator(*begin, *(current)))
         {
             current = begin;
         }
@@ -19,20 +39,16 @@ It findElement(It begin, It end, bool (*comparator)(const Type& elem1, const Typ
     return current;
 }
 
-template <typename Type, typename It>
+template <typename It>
 It minElement(It begin, It end)
 {
-    return findElement<Type, It>(begin, end, [](const Type& first, const Type& second) -> bool {
-        return first <= second;
-    });
+    return findElement(begin, end, LessComparator());
 }
 
-template <typename Type, typename It>
+template <typename It>
 It maxElement(It begin, It end)
 {
-    return findElement<Type, It>(begin, end, [](const Type& first, const Type& second) -> bool {
-        return first >= second;
-    });
+    return findElement(begin, end, GreaterComparator());
 }
 
 template <typename Type>
@@ -49,5 +65,15 @@ types::Container<Type> range(int begin, int end)
     }
     return token;
 }
+
+template <typename Type>
+Type abs(const Type& number)
+{
+    return number < 0 ? -number : number;
+}
+
+template <typename Type>
+Type min()
+{}
 
 } // namespace calgopp::algorithm::numeric

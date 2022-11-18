@@ -87,7 +87,7 @@ public:
     int size() const { return m_points.size(); }
 
     types::Container<types::Peak>
-    peaks(types::PeakType type = types::PeakType::eHigh, long double height = 0, long double distance = 0);
+    peaks(types::PeakType type = types::PeakType::eHigh, long double height = 0, unsigned int distance = 1);
 
     types::Container<types::Point>::Iterator begin() const { return m_points.begin(); }
 
