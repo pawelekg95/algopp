@@ -12,16 +12,31 @@ enum class PeakType
 
 struct Peak : public Point
 {
-    Peak(long double x, long double y)
-        : Peak(x, y, PeakType::eHigh)
+    Peak() = default;
+
+    template <typename T>
+    Peak(T x, T y)
+        : Point(x, y)
     {}
 
-    Peak(long double x, long double y, PeakType type)
+    template <typename T>
+    Peak(T x, T y, PeakType type)
         : Point(x, y)
         , type(type)
     {}
 
-    PeakType type{};
+    template <typename T, typename Y>
+    Peak(T x, Y y)
+        : Point(x, y)
+    {}
+
+    template <typename T, typename Y>
+    Peak(T x, Y y, PeakType type)
+        : Point(x, y)
+        , type(type)
+    {}
+
+    PeakType type{PeakType::eHigh};
 };
 
 bool operator==(const Peak& lhs, const Peak& rhs);

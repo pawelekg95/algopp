@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.22)
 
 include(cmake/Catch2.cmake)
 include(cmake/toolchain.cmake)
+include(cmake/rapidjson.cmake)
 include(cmake/doxygen.cmake)
 
 if(NOT CMAKE_BUILD_TYPE)

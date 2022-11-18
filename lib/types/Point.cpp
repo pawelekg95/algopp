@@ -1,4 +1,5 @@
 #include "calgopp/types/Point.h"
+#include "calgopp/algorithm/numeric.h"
 
 namespace calgopp::types {
 
@@ -18,12 +19,14 @@ Point& Point::operator-=(const Point& other)
 
 bool operator==(const Point& lhs, const Point& rhs)
 {
-    return lhs.x == rhs.x && lhs.y == rhs.y;
+    return algorithm::numeric::abs(lhs.x - rhs.x) < algorithm::numeric::cEpsilon &&
+           algorithm::numeric::abs(lhs.y - rhs.y) < algorithm::numeric::cEpsilon;
 }
 
 bool operator==(const Point&& lhs, const Point&& rhs)
 {
-    return lhs.x == rhs.x && lhs.y == rhs.y;
+    return algorithm::numeric::abs(lhs.x - rhs.x) < algorithm::numeric::cEpsilon &&
+           algorithm::numeric::abs(lhs.y - rhs.y) < algorithm::numeric::cEpsilon;
 }
 
 bool operator!=(const Point& lhs, const Point& rhs)

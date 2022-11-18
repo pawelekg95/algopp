@@ -1,68 +1,113 @@
 #include "calgopp/signal/Signal.h"
 
-#include <algorithm>
-#include <exception>
-
 namespace calgopp::signal {
 
-Signal::Signal(const std::vector<long double>& values, std::optional<std::vector<long double>> indexes)
-    : m_points(values.size())
+Signal::Signal(const types::Point* points, unsigned int size)
+    : m_points(points, size)
+{}
+
+Signal::Signal(Signal&& other) noexcept
+    : m_points(static_cast<types::Container<types::Point>&&>(other.m_points))
+{}
+
+Signal& Signal::operator=(Signal&& other) noexcept
 {
-    if (indexes && values.size() != (*indexes).size())
+    if (&other == this)
     {
-        throw std::exception();
+        return *this;
     }
-    for (std::uint32_t i = 0; i < values.size(); i++)
+    m_points = static_cast<types::Container<types::Point>&&>(other.m_points);
+    return *this;
+}
+
+Signal& Signal::operator=(const Signal& other)
+{
+    if (&other == this)
     {
-        m_points[i] = {(indexes ? (*indexes)[i] : i), values[i]};
+        return *this;
+    }
+    m_points = other.m_points;
+    return *this;
+}
+
+void Signal::operator+=(const types::Point& point)
+{
+    append(point);
+}
+
+void Signal::operator--()
+{
+    m_points.remove(m_points.size() - 1);
+}
+
+void Signal::operator+=(const Signal& signal)
+{
+    for (const auto& point : signal)
+    {
+        append(point);
     }
 }
 
-std::vector<types::Peak> Signal::peaks(types::PeakType type, long double distance, long double height)
+void Signal::append(const types::Point& point)
 {
+    m_points.append(point);
+}
+
+void Signal::remove(unsigned int index)
+{
+    m_points.remove(index);
+}
+
+types::Point& Signal::operator[](unsigned int index)
+{
+    return m_points[index];
+}
+
+types::Container<types::Peak> Signal::peaks(types::PeakType type, long double height, unsigned int distance)
+{
+    if (distance == 0)
+    {
+        throw "Invalid distance"; // NOLINT
+    }
     auto isPeak = [&type](long double first, long double second, long double third) -> bool {
         return (type == types::PeakType::eLow ? first > second && second < third : first < second && second > third);
     };
-    std::vector<types::Peak> peaks;
-    auto beginIt = m_points.begin();
-    while (beginIt < m_points.end() - 2)
+
+    auto comparator = [&type](long double first, long double second) -> bool {
+        return (type == types::PeakType::eLow ? first > second : first < second);
+    };
+
+    types::Container<types::Peak> peaks;
+    auto endIt = end();
+    auto currentIt = begin();
+    while (currentIt <= endIt - 2)
     {
-        beginIt++;
-        if ((*beginIt).y < height)
+        currentIt++;
+        if ((*currentIt).y < height)
         {
             continue;
         }
-        if (isPeak((beginIt - 1)->y, beginIt->y, (beginIt + 1)->y))
+        if (!isPeak((*(currentIt - 1)).y, (*currentIt).y, (*(currentIt + 1)).y))
         {
-            peaks.emplace_back(types::Peak({beginIt->x, beginIt->y, type}));
+            continue;
         }
+        peaks.append(types::Peak((*currentIt).x, (*currentIt).y, type));
     }
 
-    if (distance == 0 || distance == 1 || distance == 2 || peaks.empty())
+    auto peaksLen = peaks.size();
+    for (unsigned int i = 0; i < peaksLen - 1; i++)
     {
-        return peaks;
-    }
-
-    auto currentPeak = peaks.begin();
-    std::vector<types::Peak> filteredPeaks;
-    auto comparator = [](const types::Peak& first, const types::Peak& second) { return first.y <= second.y; };
-    for (std::uint32_t i = 0; i < m_points.size(); i += distance)
-    {
-        std::vector<types::Peak> inRangePeaks;
-        while ((*currentPeak).x >= i && (*currentPeak).x < i + distance && currentPeak < peaks.end())
+        if (m_points.index(types::Point(peaks[i + 1].x, peaks[i + 1].y)) -
+                m_points.index(types::Point(peaks[i].x, peaks[i].y)) <
+            distance)
         {
-            inRangePeaks.emplace_back(*currentPeak);
-            currentPeak++;
-        }
-        if (!inRangePeaks.empty())
-        {
-            filteredPeaks.emplace_back(type == types::PeakType::eLow
-                                           ? *std::min_element(inRangePeaks.begin(), inRangePeaks.end(), comparator)
-                                           : *std::max_element(inRangePeaks.begin(), inRangePeaks.end(), comparator));
+            peaks.remove(comparator(peaks[i].y, peaks[i + 1].y) ? i : i + 1);
+            i--;
+            peaksLen--;
         }
     }
 
-    return filteredPeaks;
+    return peaks;
 }
 
 } // namespace calgopp::signal

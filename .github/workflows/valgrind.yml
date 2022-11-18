@@ -1,0 +1,25 @@
+name: Valgrind_tests
+on:
+  workflow_call:
+    inputs:
+      test_app:
+        required: true
+        type: string
+      arguments:
+        required: false
+        type: string
+      pre_run:
+        required: false
+        type: string
+      post_run:
+        required: false
+        type: string
+
+jobs:
+  Valgrind_Test:
+    runs-on: self-hosted
+    steps:
+      - run: |
+          ${{ inputs.pre_run }}
+          valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ${{ inputs.test_app }} ${{ inputs.arguments }}
+          ${{ inputs.post_run }}

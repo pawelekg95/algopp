@@ -6,9 +6,16 @@ struct Point
 {
     Point() = default;
 
-    Point(long double x, long double y)
-        : x(x)
-        , y(y)
+    template <typename T>
+    Point(T x, T y)
+        : x(double(x))
+        , y(double(y))
+    {}
+
+    template <typename T, typename Y>
+    Point(T x, Y y)
+        : x(double(x))
+        , y(double(y))
     {}
 
     long double x{};

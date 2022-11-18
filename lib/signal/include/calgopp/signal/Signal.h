@@ -2,27 +2,70 @@
 
 #include "calgopp/types/Point.h"
 #include "calgopp/types/Peak.h"
-
-#include <vector>
-#include <cstdint>
-#include <limits>
-#include <optional>
+#include "calgopp/types/Container.h"
+#include "calgopp/algorithm/numeric.h"
 
 namespace calgopp::signal {
 
 class Signal
 {
 public:
-    Signal(const std::vector<long double>& values, std::optional<std::vector<long double>> indexes);
+    Signal() = default;
+    Signal(const Signal& other) = default;
+    Signal(Signal&& other) noexcept;
 
-    std::vector<types::Peak> peaks(types::PeakType type = types::PeakType::eHigh,
-                                   long double distance = 0,
-                                   long double height = std::numeric_limits<long double>::min());
+    Signal& operator=(const Signal& other);
+    Signal& operator=(Signal&& other) noexcept;
 
-    std::vector<types::Point> points() { return m_points; }
+    template <typename InputContainer>
+    Signal(const InputContainer& values)
+        : Signal(values.data(), values.size())
+    {}
+
+    template <typename Type>
+    Signal(const Type* values, unsigned int size)
+    {
+        for (unsigned int i = 0; i < size; i++)
+        {
+            m_points.append(types::Point{i, values[i]});
+        }
+    }
+
+    Signal(types::Container<types::Point> points)
+        : m_points(static_cast<types::Container<types::Point>&&>(points))
+    {}
+
+    Signal(const types::Point* points, unsigned int size);
+
+    ~Signal() = default;
+
+    bool empty() const { return m_points.empty(); }
+
+    operator bool() const { return !empty(); }
+
+    void operator+=(const types::Point& point);
+
+    void operator+=(const Signal& signal);
+
+    void operator--();
+
+    void append(const types::Point& point);
+
+    void remove(unsigned int index);
+
+    types::Point& operator[](unsigned int index);
+
+    int size() const { return m_points.size(); }
+
+    types::Container<types::Peak>
+    peaks(types::PeakType type = types::PeakType::eHigh, long double height = 0, unsigned int distance = 1);
+
+    types::Container<types::Point>::Iterator begin() const { return m_points.begin(); }
+
+    types::Container<types::Point>::Iterator end() const { return m_points.end(); }
 
 private:
-    std::vector<types::Point> m_points;
+    types::Container<types::Point> m_points;
 };
 
 } // namespace calgopp::signal
