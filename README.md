@@ -7,13 +7,14 @@ Documentation:
 
 # CI status ![ci_status]
 
-| ![linux_badge] | ![build_badge] | ![test_badge] | ![test_badge] | ![quality_badge] | ![deployment_badge] |
+| ![linux_badge] | ![build_badge] | ![test_badge] | ![valgrind_badge] | ![quality_badge] | ![deployment_badge] |
 | :------------: | :--------------: | :--------------: | :--------------: | :--------------: | :--------------: |
 
 [ci_status]: https://github.com/pawelekg95/calgopp/actions/workflows/calgopp_ci.yml/badge.svg
 [linux_badge]: https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black
 [build_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/build_tests.yml/badge.svg
 [test_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/test.yml/badge.svg
+[valgrind_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/valgrind.yml/badge.svg
 [quality_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/quality.yml/badge.svg
 [deployment_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/deployment.yml/badge.svg
 
