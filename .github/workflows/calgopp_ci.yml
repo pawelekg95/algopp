@@ -87,7 +87,10 @@ jobs:
 
   # Cleanup /tmp dir
   Clean-up:
-    needs: "**_valgrind"
+    needs:
+      - Signal_test_valgrind
+      - Types_test_valgrind
+      - Algorithm_test_valgrind
     runs-on: self-hosted
     steps:
       - run: rm -rf /tmp/Build*
