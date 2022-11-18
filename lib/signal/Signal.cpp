@@ -67,7 +67,7 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
 {
     if (distance == 0)
     {
-        throw "Invalid distance";
+        throw "Invalid distance"; // NOLINT
     }
     auto isPeak = [&type](long double first, long double second, long double third) -> bool {
         return (type == types::PeakType::eLow ? first > second && second < third : first < second && second > third);

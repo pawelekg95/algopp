@@ -31,6 +31,7 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       test_app: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
+      arguments: ~"Signal tests - peaks"
 
   Types_test:
     name: Types_test

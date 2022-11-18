@@ -7,8 +7,8 @@ Documentation:
 
 # CI status ![ci_status]
 
-| ![linux_badge] | ![build_badge] | ![test_badge] | ![quality_badge] | ![deployment_badge] |
-| :------------: | :--------------: | :--------------: | :--------------: | :--------------: |
+| ![linux_badge] | ![build_badge] | ![test_badge] | ![test_badge] | ![quality_badge] | ![deployment_badge] |
+| :------------: | :--------------: | :--------------: | :--------------: | :--------------: | :--------------: |
 
 [ci_status]: https://github.com/pawelekg95/calgopp/actions/workflows/calgopp_ci.yml/badge.svg
 [linux_badge]: https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black

@@ -82,11 +82,11 @@ TEST_CASE("Signal creation from STL containers")
 
     SECTION("Vector of floats") { variant = test::vectorInput<float>(); }
 
-    //    SECTION("Array of doubles") { variant = test::arrayInput<double>(); }
-    //
-    //    SECTION("Array of integers") { variant = test::arrayInput<int>(); }
-    //
-    //    SECTION("Array of floats") { variant = test::arrayInput<float>(); }
+    SECTION("Array of doubles") { variant = test::arrayInput<double>(); }
+
+    SECTION("Array of integers") { variant = test::arrayInput<int>(); }
+
+    SECTION("Array of floats") { variant = test::arrayInput<float>(); }
 
     auto signal = std::make_unique<calgopp::signal::Signal>();
     REQUIRE(signal->empty());
@@ -109,21 +109,21 @@ TEST_CASE("Signal creation from STL containers")
             break;
         }
 
-            //        case 3:
-            //        {
-            //            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<double,
-            //            1000>>(variant)); break;
-            //        }
-            //        case 4:
-            //        {
-            //            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<int, 1000>>(variant));
-            //            break;
-            //        }
-            //        case 5:
-            //        {
-            //            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<float,
-            //            1000>>(variant)); break;
-            //        }
+        case 3:
+        {
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<double, 1000>>(variant));
+            break;
+        }
+        case 4:
+        {
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<int, 1000>>(variant));
+            break;
+        }
+        case 5:
+        {
+            signal = std::make_unique<calgopp::signal::Signal>(std::get<std::array<float, 1000>>(variant));
+            break;
+        }
         default: break;
     }
 

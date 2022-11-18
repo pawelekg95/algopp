@@ -17,51 +17,22 @@ public:
     Signal& operator=(const Signal& other);
     Signal& operator=(Signal&& other) noexcept;
 
-    template <template <typename> class Container, typename Type>
-    Signal(const Container<Type>& values)
-        : Signal(types::Container<Type>(values))
-    {}
-
-    template <template <typename> class Container, typename Type>
-    Signal(const Container<Type>& values, const Container<Type>& indexes)
-        : Signal(types::Container<Type>(values), types::Container<Type>(indexes))
-    {}
-
-    template <typename InputType>
-    Signal(const InputType* values, unsigned int length)
-        : Signal(types::Container<InputType>(values, length))
-    {}
-
-    template <template <typename, typename> class Container, typename Type>
-    Signal(const Container<Type, unsigned int>& values)
-        : Signal(types::Container<Type>(values))
-    {}
-
-    template <template <typename, typename> class Container, typename Type, typename Size>
-    Signal(const Container<Type, Size>& values, const Container<Type, Size>& indexes)
-        : Signal(types::Container<Type>(values), types::Container<Type>(indexes))
+    template <typename InputContainer>
+    Signal(const InputContainer& values)
+        : Signal(values.data(), values.size())
     {}
 
     template <typename Type>
-    Signal(const types::Container<Type>& values, const types::Container<Type>& indexes)
+    Signal(const Type* values, unsigned int size)
     {
-        if (values.size() != indexes.size())
+        for (unsigned int i = 0; i < size; i++)
         {
-            throw "Invalid size of containers";
-        }
-        for (unsigned int i = 0; i < values.size(); i++)
-        {
-            m_points.append(types::Point{indexes.at(i), values.at(i)});
+            m_points.append(types::Point{i, values[i]});
         }
     }
 
-    template <typename Type>
-    Signal(const types::Container<Type>& values)
-        : Signal(values, algorithm::numeric::range<Type>(0, values.size()))
-    {}
-
-    Signal(types::Container<types::Point> values)
-        : m_points(static_cast<types::Container<types::Point>&&>(values))
+    Signal(types::Container<types::Point> points)
+        : m_points(static_cast<types::Container<types::Point>&&>(points))
     {}
 
     Signal(const types::Point* points, unsigned int size);
