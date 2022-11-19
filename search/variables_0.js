@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['m_5fpoints_0',['m_points',['../classcalgopp_1_1signal_1_1Signal.html#ab04096f644ef1c9541063bc53b00bb88',1,'calgopp::signal::Signal']]]
+  ['cepsilon_0',['cEpsilon',['../namespacecalgopp_1_1algorithm_1_1numeric.html#ab7892c9a3388cb85d322656423e5fc5a',1,'calgopp::algorithm::numeric']]]
 ];

@@ -1,9 +1,4 @@
 var searchData=
 [
-  ['operator_21_3d_0',['operator!=',['../namespacecalgopp_1_1types.html#afe274e9caad18c6780e776da09dcd44c',1,'calgopp::types::operator!=(const Peak &amp;lhs, const Peak &amp;rhs)'],['../namespacecalgopp_1_1types.html#aaa9f212fa8e21b3ad28bc7edd9c7c8d9',1,'calgopp::types::operator!=(const Peak &amp;&amp;lhs, const Peak &amp;&amp;rhs)'],['../namespacecalgopp_1_1types.html#a22b09e662a21a167f8f5b804fbdd2b62',1,'calgopp::types::operator!=(const Point &amp;lhs, const Point &amp;rhs)'],['../namespacecalgopp_1_1types.html#a461f9ddcd915070092d7c0d2e05f15ed',1,'calgopp::types::operator!=(const Point &amp;&amp;lhs, const Point &amp;&amp;rhs)']]],
-  ['operator_2b_1',['operator+',['../namespacecalgopp_1_1types.html#a7c400227efd5ebb0d61fd99efc2c8d83',1,'calgopp::types']]],
-  ['operator_2b_3d_2',['operator+=',['../structcalgopp_1_1types_1_1Point.html#a23ee50193577621fd1fe4d62fc5e8db4',1,'calgopp::types::Point']]],
-  ['operator_2d_3',['operator-',['../namespacecalgopp_1_1types.html#abd90c6205d570f1a52c1a8604a600ed6',1,'calgopp::types']]],
-  ['operator_2d_3d_4',['operator-=',['../structcalgopp_1_1types_1_1Point.html#aa5428a682a0b64a934535ea41bcc8347',1,'calgopp::types::Point']]],
-  ['operator_3d_3d_5',['operator==',['../namespacecalgopp_1_1types.html#a17aad548b6b97ec6b39da7a27348e805',1,'calgopp::types::operator==(const Peak &amp;lhs, const Peak &amp;rhs)'],['../namespacecalgopp_1_1types.html#a655ef9c3bdc5d1c213f47143508a188b',1,'calgopp::types::operator==(const Peak &amp;&amp;lhs, const Peak &amp;&amp;rhs)'],['../namespacecalgopp_1_1types.html#ab1af9baac68f648634cc015a5180a54b',1,'calgopp::types::operator==(const Point &amp;lhs, const Point &amp;rhs)'],['../namespacecalgopp_1_1types.html#a5ecaa164b01be0145119fcc29a503212',1,'calgopp::types::operator==(const Point &amp;&amp;lhs, const Point &amp;&amp;rhs)']]]
+  ['begin_0',['begin',['../classcalgopp_1_1signal_1_1Signal.html#a58c47a555d39395634445e1188a6a562',1,'calgopp::signal::Signal::begin()'],['../classcalgopp_1_1types_1_1Container.html#a106573b822e04b5f99653eb3eed6a833',1,'calgopp::types::Container::begin()']]]
 ];

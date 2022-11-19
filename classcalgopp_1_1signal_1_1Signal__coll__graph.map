@@ -1,4 +1,11 @@
 <map id="calgopp::signal::Signal" name="calgopp::signal::Signal">
-<area shape="rect" id="node1" title=" " alt="" coords="8,123,184,207"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,187,60"/>
+<area shape="rect" id="node1" title=" " alt="" coords="265,1384,441,1747"/>
+<area shape="rect" id="node2" href="$classcalgopp_1_1types_1_1Container.html" title=" " alt="" coords="255,929,451,1321"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,233,116,273"/>
+<area shape="rect" id="node9" href="$classcalgopp_1_1types_1_1Container.html" title=" " alt="" coords="299,475,495,867"/>
+<area shape="rect" id="node4" href="$classbool.html" title=" " alt="" coords="501,233,559,273"/>
+<area shape="rect" id="node5" href="$structcalgopp_1_1types_1_1Point.html" title=" " alt="" coords="645,614,812,727"/>
+<area shape="rect" id="node6" title=" " alt="" coords="675,233,782,273"/>
+<area shape="rect" id="node7" href="$classcalgopp_1_1types_1_1Container_1_1Iterator.html" title=" " alt="" coords="152,108,348,397"/>
+<area shape="rect" id="node8" title=" " alt="" coords="288,5,359,45"/>
 </map>

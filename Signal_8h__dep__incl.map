@@ -1,5 +1,7 @@
 <map id="lib/signal/include/calgopp/signal/Signal.h" name="lib/signal/include/calgopp/signal/Signal.h">
-<area shape="rect" id="node1" title=" " alt="" coords="87,5,263,45"/>
+<area shape="rect" id="node1" title=" " alt="" coords="93,5,269,45"/>
 <area shape="rect" id="node2" href="$Signal_8cpp.html" title=" " alt="" coords="5,101,157,126"/>
-<area shape="rect" id="node3" href="$IFilter_8h.html" title=" " alt="" coords="182,93,354,133"/>
+<area shape="rect" id="node3" href="$IProcessor_8h.html" title=" " alt="" coords="181,93,384,133"/>
+<area shape="rect" id="node4" href="$Jacymirski_8h.html" title=" " alt="" coords="189,181,377,236"/>
+<area shape="rect" id="node5" href="$Jacymirski_8cpp.html" title=" " alt="" coords="193,284,373,309"/>
 </map>

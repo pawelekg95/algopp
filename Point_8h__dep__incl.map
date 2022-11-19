@@ -1,9 +1,11 @@
 <map id="lib/types/include/calgopp/types/Point.h" name="lib/types/include/calgopp/types/Point.h">
-<area shape="rect" id="node1" title=" " alt="" coords="135,5,319,45"/>
-<area shape="rect" id="node2" href="$Signal_8h.html" title=" " alt="" coords="87,181,263,221"/>
-<area shape="rect" id="node5" href="$Point_8cpp.html" title=" " alt="" coords="155,101,298,126"/>
-<area shape="rect" id="node6" href="$Peak_8h.html" title=" " alt="" coords="323,93,507,133"/>
+<area shape="rect" id="node1" title=" " alt="" coords="141,5,325,45"/>
+<area shape="rect" id="node2" href="$Signal_8h.html" title=" " alt="" coords="93,181,269,221"/>
+<area shape="rect" id="node7" href="$Point_8cpp.html" title=" " alt="" coords="162,101,305,126"/>
+<area shape="rect" id="node8" href="$Peak_8h.html" title=" " alt="" coords="329,93,513,133"/>
 <area shape="rect" id="node3" href="$Signal_8cpp.html" title=" " alt="" coords="5,277,157,302"/>
-<area shape="rect" id="node4" href="$IFilter_8h.html" title=" " alt="" coords="182,269,354,309"/>
-<area shape="rect" id="node7" href="$Peak_8cpp.html" title=" " alt="" coords="344,189,485,214"/>
+<area shape="rect" id="node4" href="$IProcessor_8h.html" title=" " alt="" coords="181,269,384,309"/>
+<area shape="rect" id="node5" href="$Jacymirski_8h.html" title=" " alt="" coords="189,357,377,412"/>
+<area shape="rect" id="node6" href="$Jacymirski_8cpp.html" title=" " alt="" coords="193,460,373,485"/>
+<area shape="rect" id="node9" href="$Peak_8cpp.html" title=" " alt="" coords="351,189,492,214"/>
 </map>
