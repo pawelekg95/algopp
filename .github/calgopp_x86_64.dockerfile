@@ -21,6 +21,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+WORKDIR /root
+
 # Download run-clang-format wrapper
 RUN git clone https://github.com/Sarcasm/run-clang-format.git
 WORKDIR /root/run-clang-format
