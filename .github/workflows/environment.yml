@@ -6,11 +6,10 @@ on:
         required: true
         type: string
 
-environment: docker
-
 jobs:
   Build_image:
     runs-on: ubuntu-20.04
+    environment: docker
     permissions:
       contents: read
       packages: write
