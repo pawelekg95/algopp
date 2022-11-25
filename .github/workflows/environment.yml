@@ -14,12 +14,12 @@ jobs:
 
       - name: Log in to Docker Hub
         env:
-          DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_LOGIN: ${{ env.DOCKER_LOGIN }}
+          DOCKER_PASSWORD: ${{ env.DOCKER_PASSWORD }}
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
-          username: ${{ env.DOCKER_LOGIN }}
-          password: ${{ env.DOCKER_PASSWORD }}
+          username: ${{ DOCKER_LOGIN }}
+          password: ${{ DOCKER_PASSWORD }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
