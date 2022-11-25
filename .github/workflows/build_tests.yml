@@ -17,7 +17,7 @@ jobs:
       DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     container:
-      image: ${{ env.DOCKER_LOGIN }}/calgopp_x86_64:${{ github.sha }}
+      image: pawelekg95/calgopp_x86_64:${{ github.sha }}
       credentials:
         username: ${{ env.DOCKER_LOGIN }}
         password: ${{ env.DOCKER_PASSWORD }}
