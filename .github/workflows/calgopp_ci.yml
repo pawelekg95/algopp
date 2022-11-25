@@ -18,6 +18,7 @@ jobs:
     with:
       preset: signal_tests_gcc_debug
       app: Build_signal_tests_gcc_debug
+    secrets: inherit
 
   Build_types_tests_gcc_debug:
     name: Build_types_tests_gcc_debug
@@ -26,6 +27,7 @@ jobs:
     with:
       preset: types_tests_gcc_debug
       app: Build_types_tests_gcc_debug
+    secrets: inherit
 
   Build_algorithm_tests_gcc_debug:
     name: Build_algorithm_tests_gcc_debug
@@ -34,6 +36,7 @@ jobs:
     with:
       preset: algorithm_tests_gcc_debug
       app: Build_algorithm_tests_gcc_debug
+    secrets: inherit
 
 #  # Test stage
 #  Signal_test:

@@ -12,17 +12,27 @@ on:
 jobs:
   Build_tests:
     runs-on: ubuntu-20.04
+    env:
+      DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     container:
-      image: ghcr.io/pawelekg95/calgopp_x86_64:${{ github.sha }}
+      image: hub.docker.com/v2/pawelekg95/calgopp_x86_64:${{ github.sha }}
       credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.github_token }}
+        username: ${{ env.DOCKER_LOGIN }}
+        password: ${{ env.DOCKER_PASSWORD }}
     steps:
       - uses: actions/checkout@v3
-      - run: |
+      - name: Build test application
+        run: |
           BUILD_DIR="/tmp/${{ inputs.app }}-${{ github.sha }}"
           rm -rf "${BUILD_DIR}"
           mkdir "${BUILD_DIR}"
           cd "${BUILD_DIR}"
           cmake ${{ github.workspace }} --preset ${{ inputs.preset }}
           make -j 2
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ inputs.app }}-${{ github.sha }}"
+          path: /tmp/${{ inputs.app }}-${{ github.sha }}
