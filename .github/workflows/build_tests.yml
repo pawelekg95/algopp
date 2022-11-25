@@ -13,10 +13,10 @@ jobs:
   Build_tests:
     runs-on: ubuntu-20.04
     container:
-      image: docker/pawelekg95/images/calgopp_x86_64
+      image: ghcr.io/pawelekg95/calgopp_x86_64:${{ github.sha }}
       credentials:
-        username: ${{ secrets.DOCKER_LOGIN }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
     steps:
       - uses: actions/checkout@v3
       - run: |
