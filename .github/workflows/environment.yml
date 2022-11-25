@@ -31,4 +31,4 @@ jobs:
           context: .
           file: .github/${{ inputs.image }}.dockerfile
           push: true
-          tags: ${{ inputs.image }}:${{ github.sha }}
+          tags: pawelekg95/${{ inputs.image }}:${{ github.sha }}
