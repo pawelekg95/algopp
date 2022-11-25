@@ -16,6 +16,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Check login
+        env:
+          DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: echo $DOCKER_LOGIN
+
       - name: Log in to Docker Hub
         env:
           DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
