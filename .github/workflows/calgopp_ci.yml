@@ -5,6 +5,7 @@ jobs:
   # Environment
   Calgopp_x86_64_docker:
     name: Calgopp_x86_64_docker
+    environment: docker
     uses: ./.github/workflows/environment.yml
     with:
       image: calgopp_x86_64
