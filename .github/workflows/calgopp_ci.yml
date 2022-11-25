@@ -2,9 +2,17 @@ name: Calgopp_CI
 on: push
 
 jobs:
+  # Environment
+  Calgopp_x86_64_docker:
+    name: Calgopp_x86_64_docker
+    uses: ./.github/workflows/environment.yml
+    with:
+      image: calgopp_x86_64
+
   # Build tests stage
   Build_signal_tests_gcc_debug:
     name: Build_signal_tests_gcc_debug
+    needs: Calgopp_x86_64_docker
     uses: ./.github/workflows/build_tests.yml
     with:
       preset: signal_tests_gcc_debug
@@ -12,6 +20,7 @@ jobs:
 
   Build_types_tests_gcc_debug:
     name: Build_types_tests_gcc_debug
+    needs: Calgopp_x86_64_docker
     uses: ./.github/workflows/build_tests.yml
     with:
       preset: types_tests_gcc_debug
@@ -19,79 +28,80 @@ jobs:
 
   Build_algorithm_tests_gcc_debug:
     name: Build_algorithm_tests_gcc_debug
+    needs: Calgopp_x86_64_docker
     uses: ./.github/workflows/build_tests.yml
     with:
       preset: algorithm_tests_gcc_debug
       app: Build_algorithm_tests_gcc_debug
 
-  # Test stage
-  Signal_test:
-    name: Signal_test
-    needs: Build_signal_tests_gcc_debug
-    uses: ./.github/workflows/test.yml
-    with:
-      test_app: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
-      arguments: ~"Signal tests - peaks"
-
-  Types_test:
-    name: Types_test
-    needs: Build_types_tests_gcc_debug
-    uses: ./.github/workflows/test.yml
-    with:
-      test_app: /tmp/Build_types_tests_gcc_debug-${{ github.sha }}/bin/tests
-
-  Algorithm_test:
-    name: Algorithm_test
-    needs: Build_algorithm_tests_gcc_debug
-    uses: ./.github/workflows/test.yml
-    with:
-      test_app: /tmp/Build_algorithm_tests_gcc_debug-${{ github.sha }}/bin/tests
-
-  # Valgrind tests
-  Signal_test_valgrind:
-    name: Signal_test_valgrind
-    needs: Signal_test
-    uses: ./.github/workflows/valgrind.yml
-    with:
-      test_app: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
-      arguments: ~"Signal tests - peaks"
-
-  Types_test_valgrind:
-    name: Types_test_valgrind
-    needs: Types_test
-    uses: ./.github/workflows/valgrind.yml
-    with:
-      test_app: /tmp/Build_types_tests_gcc_debug-${{ github.sha }}/bin/tests
-
-  Algorithm_test_valgrind:
-    name: Algorithm_test_valgrind
-    needs: Algorithm_test
-    uses: ./.github/workflows/valgrind.yml
-    with:
-      test_app: /tmp/Build_algorithm_tests_gcc_debug-${{ github.sha }}/bin/tests
-
-  # Quality
-  Clang-format:
-    needs: Build_signal_tests_gcc_debug
-    uses: ./.github/workflows/quality.yml
-    with:
-      pre_run: cd "${{ github.workspace }}"
-      linter: run-clang-format.py
-      arguments: -r lib test
-
-  Clang-tidy:
-    needs: Build_signal_tests_gcc_debug
-    uses: ./.github/workflows/quality.yml
-    with:
-      pre_run: cd "${{ github.workspace }}"; rm -rf ./cmake-build; mkdir ./cmake-build; cd ./cmake-build; cmake .. --preset signal_tests_clang_debug
-      linter: run-clang-tidy
-
-  # Cleanup /tmp dir
-  Clean-up:
-    needs:
-      - Signal_test_valgrind
-      - Types_test_valgrind
-      - Algorithm_test_valgrind
-    runs-on: self-hosted
-    steps:
-      - run: rm -rf /tmp/Build*
+#  # Test stage
+#  Signal_test:
+#    name: Signal_test
+#    needs: Build_signal_tests_gcc_debug
+#    uses: ./.github/workflows/test.yml
+#    with:
+#      test_app: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
+#      arguments: ~"Signal tests - peaks"
+#
+#  Types_test:
+#    name: Types_test
+#    needs: Build_types_tests_gcc_debug
+#    uses: ./.github/workflows/test.yml
+#    with:
+#      test_app: /tmp/Build_types_tests_gcc_debug-${{ github.sha }}/bin/tests
+#
+#  Algorithm_test:
+#    name: Algorithm_test
+#    needs: Build_algorithm_tests_gcc_debug
+#    uses: ./.github/workflows/test.yml
+#    with:
+#      test_app: /tmp/Build_algorithm_tests_gcc_debug-${{ github.sha }}/bin/tests
+#
+#  # Valgrind tests
+#  Signal_test_valgrind:
+#    name: Signal_test_valgrind
+#    needs: Signal_test
+#    uses: ./.github/workflows/valgrind.yml
+#    with:
+#      test_app: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
+#      arguments: ~"Signal tests - peaks"
+#
+#  Types_test_valgrind:
+#    name: Types_test_valgrind
+#    needs: Types_test
+#    uses: ./.github/workflows/valgrind.yml
+#    with:
+#      test_app: /tmp/Build_types_tests_gcc_debug-${{ github.sha }}/bin/tests
+#
+#  Algorithm_test_valgrind:
+#    name: Algorithm_test_valgrind
+#    needs: Algorithm_test
+#    uses: ./.github/workflows/valgrind.yml
+#    with:
+#      test_app: /tmp/Build_algorithm_tests_gcc_debug-${{ github.sha }}/bin/tests
+#
+#  # Quality
+#  Clang-format:
+#    needs: Build_signal_tests_gcc_debug
+#    uses: ./.github/workflows/quality.yml
+#    with:
+#      pre_run: cd "${{ github.workspace }}"
+#      linter: run-clang-format.py
+#      arguments: -r lib test
+#
+#  Clang-tidy:
+#    needs: Build_signal_tests_gcc_debug
+#    uses: ./.github/workflows/quality.yml
+#    with:
+#      pre_run: cd "${{ github.workspace }}"; rm -rf ./cmake-build; mkdir ./cmake-build; cd ./cmake-build; cmake .. --preset signal_tests_clang_debug
+#      linter: run-clang-tidy
+#
+#  # Cleanup /tmp dir
+#  Clean-up:
+#    needs:
+#      - Signal_test_valgrind
+#      - Types_test_valgrind
+#      - Algorithm_test_valgrind
+#    runs-on: ubuntu-20.04
+#    steps:
+#      - run: rm -rf /tmp/Build*

@@ -11,7 +11,12 @@ on:
 
 jobs:
   Build_tests:
-    runs-on: self-hosted
+    runs-on: ubuntu-20.04
+    container:
+      image: docker/pawelekg95/images/calgopp_x86_64
+      credentials:
+        username: ${{ secrets.DOCKER_LOGIN }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
     steps:
       - uses: actions/checkout@v3
       - run: |

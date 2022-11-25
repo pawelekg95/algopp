@@ -17,7 +17,7 @@ on:
 
 jobs:
   Valgrind_Test:
-    runs-on: self-hosted
+    runs-on: ubuntu-20.04
     steps:
       - run: |
           ${{ inputs.pre_run }}
