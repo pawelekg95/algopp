@@ -29,6 +29,6 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
-          path: .github/${{ inputs.image }}.dockerfile
+          file: .github/${{ inputs.image }}.dockerfile
           push: true
           tags: ${{ inputs.image }}:${{ github.sha }}
