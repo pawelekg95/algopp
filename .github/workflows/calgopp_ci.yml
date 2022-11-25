@@ -8,6 +8,8 @@ jobs:
     uses: ./.github/workflows/environment.yml
     with:
       image: calgopp_x86_64
+      user: ${{ secrets.DOCKER_LOGIN }}
+      pass: ${{ secrets.DOCKER_PASSWORD }}
 
   # Build tests stage
   Build_signal_tests_gcc_debug:
