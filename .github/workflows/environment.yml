@@ -10,7 +10,6 @@ jobs:
   Build_image:
     runs-on: ubuntu-20.04
     environment: docker
-    secrets: inherit
     permissions:
       contents: read
       packages: write
