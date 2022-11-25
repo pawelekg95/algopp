@@ -29,7 +29,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ghcr.io/pawelekg95/${{ inputs.image }}:${{ github.sha }}
+          images: pawelekg95/images/${{ inputs.image }}:${{ github.sha }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
@@ -37,3 +37,4 @@ jobs:
           context: .
           file: .github/${{ inputs.image }}.dockerfile
           push: true
+          tags: ${{ inputs.image }}:${{ github.sha }}
