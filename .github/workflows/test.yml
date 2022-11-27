@@ -3,7 +3,7 @@ on:
   workflow_call:
     inputs:
       artifacts_name:
-        require: true
+        required: true
         type: string
       test_app:
         required: true
