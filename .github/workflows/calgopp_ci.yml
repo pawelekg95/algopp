@@ -95,29 +95,19 @@ jobs:
       artifacts_name: Build_algorithm_tests_gcc_debug-${{ github.sha }}
       test_app: bin/tests
     secrets: inherit
-#
-#  # Quality
-#  Clang-format:
-#    needs: Build_signal_tests_gcc_debug
-#    uses: ./.github/workflows/quality.yml
-#    with:
-#      pre_run: cd "${{ github.workspace }}"
-#      linter: run-clang-format.py
-#      arguments: -r lib test
-#
-#  Clang-tidy:
-#    needs: Build_signal_tests_gcc_debug
-#    uses: ./.github/workflows/quality.yml
-#    with:
-#      pre_run: cd "${{ github.workspace }}"; rm -rf ./cmake-build; mkdir ./cmake-build; cd ./cmake-build; cmake .. --preset signal_tests_clang_debug
-#      linter: run-clang-tidy
-#
-#  # Cleanup /tmp dir
-#  Clean-up:
-#    needs:
-#      - Signal_test_valgrind
-#      - Types_test_valgrind
-#      - Algorithm_test_valgrind
-#    runs-on: ubuntu-20.04
-#    steps:
-#      - run: rm -rf /tmp/Build*
+
+  # Quality
+  Clang-format:
+    needs: Build_signal_tests_gcc_debug
+    uses: ./.github/workflows/quality.yml
+    with:
+      pre_run: cd "${{ github.workspace }}"
+      linter: run-clang-format.py
+      arguments: -r lib test
+
+  Clang-tidy:
+    needs: Build_signal_tests_gcc_debug
+    uses: ./.github/workflows/quality.yml
+    with:
+      pre_run: cd "${{ github.workspace }}"; rm -rf ./cmake-build; mkdir ./cmake-build; cd ./cmake-build; cmake .. --preset signal_tests_clang_debug
+      linter: run-clang-tidy
