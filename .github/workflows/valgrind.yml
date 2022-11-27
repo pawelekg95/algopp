@@ -2,6 +2,9 @@ name: Valgrind_tests
 on:
   workflow_call:
     inputs:
+      artifacts_name:
+        required: true
+        type: string
       test_app:
         required: true
         type: string
@@ -20,6 +23,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - run: |
+          chmod 755 ${{ inputs.test_app }}
           ${{ inputs.pre_run }}
           valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ${{ inputs.test_app }} ${{ inputs.arguments }}
           ${{ inputs.post_run }}

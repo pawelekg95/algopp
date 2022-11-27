@@ -66,29 +66,35 @@ jobs:
       artifacts_name: Build_algorithm_tests_gcc_debug-${{ github.sha }}
       test_app: bin/tests
     secrets: inherit
-#
-#  # Valgrind tests
-#  Signal_test_valgrind:
-#    name: Signal_test_valgrind
-#    needs: Signal_test
-#    uses: ./.github/workflows/valgrind.yml
-#    with:
-#      test_app: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
-#      arguments: ~"Signal tests - peaks"
-#
-#  Types_test_valgrind:
-#    name: Types_test_valgrind
-#    needs: Types_test
-#    uses: ./.github/workflows/valgrind.yml
-#    with:
-#      test_app: /tmp/Build_types_tests_gcc_debug-${{ github.sha }}/bin/tests
-#
-#  Algorithm_test_valgrind:
-#    name: Algorithm_test_valgrind
-#    needs: Algorithm_test
-#    uses: ./.github/workflows/valgrind.yml
-#    with:
-#      test_app: /tmp/Build_algorithm_tests_gcc_debug-${{ github.sha }}/bin/tests
+
+  # Valgrind tests
+  Signal_test_valgrind:
+    name: Signal_test_valgrind
+    needs: Signal_test
+    uses: ./.github/workflows/valgrind.yml
+    with:
+      artifacts_name: Build_signal_tests_gcc_debug-${{ github.sha }}
+      test_app: bin/tests
+      arguments: ~"Signal tests - peaks"
+    secrets: inherit
+
+  Types_test_valgrind:
+    name: Types_test_valgrind
+    needs: Types_test
+    uses: ./.github/workflows/valgrind.yml
+    with:
+      artifacts_name: Build_types_tests_gcc_debug-${{ github.sha }}
+      test_app: bin/tests
+    secrets: inherit
+
+  Algorithm_test_valgrind:
+    name: Algorithm_test_valgrind
+    needs: Algorithm_test
+    uses: ./.github/workflows/valgrind.yml
+    with:
+      artifacts_name: Build_algorithm_tests_gcc_debug-${{ github.sha }}
+      test_app: bin/tests
+    secrets: inherit
 #
 #  # Quality
 #  Clang-format:
