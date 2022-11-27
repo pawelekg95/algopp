@@ -36,6 +36,7 @@ jobs:
           name: ${{ inputs.artifacts_name }}
 
       - run: |
+          ls
           ${{ inputs.pre_run }}
           ${{ inputs.test_app }} ${{ inputs.arguments }}
           ${{ inputs.post_run }}
