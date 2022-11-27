@@ -9,14 +9,15 @@ on:
         required: true
         type: string
 
+environment: docker
+env:
+  DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKERFILE_HASH: ${{ needs.Hash.outputs.DOCKERFILE_HASH }}
+
 jobs:
   Build_tests:
     runs-on: ubuntu-20.04
-    environment: docker
-    env:
-      DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      DOCKERFILE_HASH: ${{ needs.Hash.outputs.DOCKERFILE_HASH }}
     container:
       image: pawelekg95/calgopp_x86_64:${{ env.DOCKERFILE_HASH }}
       credentials:
