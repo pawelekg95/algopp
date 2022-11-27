@@ -9,7 +9,6 @@ on:
 jobs:
   Build_image:
     runs-on: ubuntu-20.04
-    needs: Check_if_exists
     environment: docker
     permissions:
       contents: read
