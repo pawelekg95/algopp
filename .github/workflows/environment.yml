@@ -13,8 +13,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    outputs:
-      DOCKERFILE_HASH: ${{ steps.Hash.outputs.DOCKERFILE_HASH }}
     steps:
       - uses: actions/checkout@v3
 
@@ -23,7 +21,6 @@ jobs:
           ls ${{ github.workspace }}
           DOCKERFILE_HASH=$(utils/sha256.py -f .github/${{ inputs.image }}.dockerfile)
           echo "DOCKERFILE_HASH=$DOCKERFILE_HASH" >> $GITHUB_ENV
-          echo "DOCKERFILE_HASH=$DOCKERFILE_HASH" >> $GITHUB_OUTPUT
 
       - name: Check if image exists
         env:
@@ -62,4 +59,6 @@ jobs:
           context: .
           file: .github/${{ inputs.image }}.dockerfile
           push: true
-          tags: pawelekg95/${{ inputs.image }}:${{ env.DOCKERFILE_HASH}}
+          tags: |
+            pawelekg95/${{ inputs.image }}:${{ env.DOCKERFILE_HASH}}
+            pawelekg95/${{ inputs.image }}:latest

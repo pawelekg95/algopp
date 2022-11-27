@@ -9,17 +9,15 @@ on:
         required: true
         type: string
 
-environment: docker
-env:
-  DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  DOCKERFILE_HASH: ${{ needs.Hash.outputs.DOCKERFILE_HASH }}
-
 jobs:
   Build_tests:
     runs-on: ubuntu-20.04
+    environment: docker
+    env:
+      DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     container:
-      image: pawelekg95/calgopp_x86_64:${{ env.DOCKERFILE_HASH }}
+      image: pawelekg95/calgopp_x86_64:latest
       credentials:
         username: ${{ env.DOCKER_LOGIN }}
         password: ${{ env.DOCKER_PASSWORD }}
@@ -27,15 +25,15 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build test application
         run: |
-          BUILD_DIR="/tmp/${{ inputs.app }}-${{ github.sha }}"
+          BUILD_DIR="${{ inputs.app }}-${{ github.sha }}"
           rm -rf "${BUILD_DIR}"
           mkdir "${BUILD_DIR}"
           cd "${BUILD_DIR}"
-          cmake ${{ github.workspace }} --preset ${{ inputs.preset }}
+          cmake .. --preset ${{ inputs.preset }}
           make -j 2
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: ${{ inputs.app }}-${{ github.sha }}"
-          path: /tmp/${{ inputs.app }}-${{ github.sha }}
+          path: ${{ inputs.app }}-${{ github.sha }}
