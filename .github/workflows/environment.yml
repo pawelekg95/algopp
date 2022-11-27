@@ -7,8 +7,26 @@ on:
         type: string
 
 jobs:
+  Check_if_exists:
+    runs-on: ubuntu-20.04
+    environment: docker
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Check if image exists
+        env:
+          DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker login -u ${{ env.DOCKER_LOGIN }} -p ${{ env.DOCKER_PASSWORD }}
+          result=0
+          docker manifest inspect pawelekg95/${{ inputs.image }}:${{ github.sha }} > /dev/null || result=$?
+          echo "IMAGE_EXISTS=$result" >> $GITHUB_ENV
+
   Build_image:
     runs-on: ubuntu-20.04
+    if: env.IMAGE_EXISTS == 0
     environment: docker
     permissions:
       contents: read
