@@ -14,7 +14,7 @@ RUN apt-get update && \
     python3=3.8.2-0ubuntu2 python3-pip=20.0.2-5ubuntu1.6 shellcheck=0.7.0-2build2 git=1:2.25.1-1ubuntu3.6 make=4.2.1-1.2 \
     clang-format=1:10.0-50~exp1 clang-tidy=1:10.0-50~exp1 wget=1.20.3-1ubuntu2 xz-utils=5.2.4-1ubuntu1.1 valgrind=1:3.15.0-1ubuntu9.1 \
     lcov=1.14-2 curl=7.68.0-1ubuntu2.14 gnupg=2.2.19-3ubuntu2.2 flex=2.6.4-6.2 bison=2:3.5.1+dfsg-1 \
-    clang-tools=1:10.0-50~exp1 python-is-python2=2.7.17-4 && \
+    clang-tools=1:10.0-50~exp1 python-is-python2=2.7.17-4 rsync=3.1.3-8ubuntu0.4 && \
     ln -s /usr/bin/clang++-10 /usr/bin/clang++ && \
     ln -s /usr/bin/clang-10 /usr/bin/clang && \
     apt-get autoremove -y && \
