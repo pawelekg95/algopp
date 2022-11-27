@@ -22,16 +22,16 @@ jobs:
           docker login -u ${{ env.DOCKER_LOGIN }} -p ${{ env.DOCKER_PASSWORD }}
           result=0
           docker manifest inspect pawelekg95/${{ inputs.image }} > /dev/null || result=$?
-          echo "IMAGE_EXISTS=$result" >> $GITHUB_ENV
+          echo "NO_IMAGE=$result" >> $GITHUB_ENV
 
       - name: Check
-        run: echo ${{ env.IMAGE_EXISTS }}
+        run: echo ${{ env.NO_IMAGE }}
 
       - uses: actions/checkout@v3
-        if: ${{ env.IMAGE_EXISTS == 0 }}
+        if: ${{ env.NO_IMAGE == 1 }}
 
       - name: Log in to Docker Hub
-        if: ${{ env.IMAGE_EXISTS == 0 }}
+        if: ${{ env.NO_IMAGE == 1 }}
         env:
           DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -41,14 +41,14 @@ jobs:
           password: ${{ env.DOCKER_PASSWORD }}
 
       - name: Extract metadata (tags, labels) for Docker
-        if: ${{ env.IMAGE_EXISTS == 0 }}
+        if: ${{ env.NO_IMAGE == 1 }}
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: pawelekg95/${{ inputs.image }}:latest
 
       - name: Build and push Docker image
-        if: ${{ env.IMAGE_EXISTS == 0 }}
+        if: ${{ env.NO_IMAGE == 1 }}
         uses: docker/build-push-action@v2
         with:
           context: .
