@@ -34,6 +34,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Check github env
+        run: echo ${{ env.IMAGE_EXISTS }}
+
       - name: Log in to Docker Hub
         if: ${{ env.IMAGE_EXISTS == 0 }}
         env:
