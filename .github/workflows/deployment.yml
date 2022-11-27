@@ -26,7 +26,7 @@ jobs:
           rm -rf "${BUILD_DIR}"
           mkdir "${BUILD_DIR}"
           cd "${BUILD_DIR}"
-          cmake ${{ github.workspace }} --preset signal_tests_clang_debug
+          cmake .. --preset signal_tests_clang_debug
           make doxygen
 
       - name: Deploy
