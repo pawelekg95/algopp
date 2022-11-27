@@ -16,8 +16,9 @@ jobs:
     env:
       DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      DOCKERFILE_HASH: ${{ needs.Hash.outputs.DOCKERFILE_HASH }}
     container:
-      image: pawelekg95/calgopp_x86_64:${{ needs.Hash.outputs.DOCKERFILE_HASH }}
+      image: pawelekg95/calgopp_x86_64:${{ DOCKERFILE_HASH }}
       credentials:
         username: ${{ env.DOCKER_LOGIN }}
         password: ${{ env.DOCKER_PASSWORD }}
