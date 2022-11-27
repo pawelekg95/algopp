@@ -14,6 +14,14 @@ jobs:
       contents: read
       packages: write
     steps:
+      - uses: actions/checkout@v3
+
+      - name: Calculate hash of dockerfile to build
+        run: |
+          ls ${{ github.workspace }}
+          DOCKERFILE_HASH=$(utils/sha256.py -f .github/${{ inputs.image }}.dockerfile
+          echo "DOCKERFILE_HASH=$DOCKERFILE_HASH" >> $GITHUB_ENV
+
       - name: Check if image exists
         env:
           DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
@@ -21,11 +29,8 @@ jobs:
         run: |
           docker login -u ${{ env.DOCKER_LOGIN }} -p ${{ env.DOCKER_PASSWORD }}
           result=0
-          docker manifest inspect pawelekg95/${{ inputs.image }} > /dev/null || result=$?
+          docker manifest inspect pawelekg95/${{ inputs.image }}:${{ env.DOCKERFILE_HASH}} > /dev/null || result=$?
           echo "NO_IMAGE=$result" >> $GITHUB_ENV
-
-      - name: Check
-        run: echo ${{ env.NO_IMAGE }}
 
       - uses: actions/checkout@v3
         if: ${{ env.NO_IMAGE == 1 }}
