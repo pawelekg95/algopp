@@ -32,10 +32,18 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v3
+      - name: Check if image exists
+        env:
+          DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker login -u ${{ env.DOCKER_LOGIN }} -p ${{ env.DOCKER_PASSWORD }}
+          result=0
+          docker manifest inspect pawelekg95/${{ inputs.image }} > /dev/null || result=$?
+          echo "IMAGE_EXISTS=$result" >> $GITHUB_ENV
 
-      - name: Check github env
-        run: echo ${{ env.IMAGE_EXISTS }}
+      - uses: actions/checkout@v3
+        if: ${{ env.IMAGE_EXISTS == 0 }}
 
       - name: Log in to Docker Hub
         if: ${{ env.IMAGE_EXISTS == 0 }}
