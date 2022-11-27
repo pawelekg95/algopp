@@ -1,8 +1,8 @@
 name: Build_documentation_and_deploy
-on:
-  push:
-    branches:
-      - main
+on: push
+#  push:
+#    branches:
+#      - main
 
 permissions:
   contents: write
@@ -10,10 +10,19 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-20.04
+    environment: docker
+    env:
+      DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    container:
+      image: pawelekg95/calgopp_x86_64:latest
+      credentials:
+        username: ${{ env.DOCKER_LOGIN }}
+        password: ${{ env.DOCKER_PASSWORD }}
     steps:
       - uses: actions/checkout@v3
       - run: |
-          BUILD_DIR="/tmp/calgopp-doxygen-${{ github.sha }}"
+          BUILD_DIR="calgopp-doxygen-${{ github.sha }}"
           rm -rf "${BUILD_DIR}"
           mkdir "${BUILD_DIR}"
           cd "${BUILD_DIR}"
@@ -23,5 +32,4 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: /tmp/calgopp-doxygen-${{ github.sha }}/docs # The folder the action should deploy.
-      - run: rm -rf /tmp/calgopp-doxygen-${{ github.sha }}
+          folder: calgopp-doxygen-${{ github.sha }}/docs # The folder the action should deploy.
