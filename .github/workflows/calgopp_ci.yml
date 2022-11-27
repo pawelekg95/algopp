@@ -38,28 +38,31 @@ jobs:
       app: Build_algorithm_tests_gcc_debug
     secrets: inherit
 
-#  # Test stage
-#  Signal_test:
-#    name: Signal_test
-#    needs: Build_signal_tests_gcc_debug
-#    uses: ./.github/workflows/test.yml
-#    with:
-#      test_app: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
-#      arguments: ~"Signal tests - peaks"
-#
-#  Types_test:
-#    name: Types_test
-#    needs: Build_types_tests_gcc_debug
-#    uses: ./.github/workflows/test.yml
-#    with:
-#      test_app: /tmp/Build_types_tests_gcc_debug-${{ github.sha }}/bin/tests
-#
-#  Algorithm_test:
-#    name: Algorithm_test
-#    needs: Build_algorithm_tests_gcc_debug
-#    uses: ./.github/workflows/test.yml
-#    with:
-#      test_app: /tmp/Build_algorithm_tests_gcc_debug-${{ github.sha }}/bin/tests
+  # Test stage
+  Signal_test:
+    name: Signal_test
+    needs: Build_signal_tests_gcc_debug
+    uses: ./.github/workflows/test.yml
+    with:
+      artifacts_name: Build_signal_tests_gcc_debug-${{ github.sha }}
+      test_app: Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
+      arguments: ~"Signal tests - peaks"
+
+  Types_test:
+    name: Types_test
+    needs: Build_types_tests_gcc_debug
+    uses: ./.github/workflows/test.yml
+    with:
+      artifacts_name: Build_types_tests_gcc_debug-${{ github.sha }}
+      test_app: Build_types_tests_gcc_debug-${{ github.sha }}/bin/tests
+
+  Algorithm_test:
+    name: Algorithm_test
+    needs: Build_algorithm_tests_gcc_debug
+    uses: ./.github/workflows/test.yml
+    with:
+      artifacts_name: Build_algorithm_tests_gcc_debug-${{ github.sha }}
+      test_app: Build_algorithm_tests_gcc_debug-${{ github.sha }}/bin/tests
 #
 #  # Valgrind tests
 #  Signal_test_valgrind:
