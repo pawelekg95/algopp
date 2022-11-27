@@ -23,37 +23,37 @@ RUN apt-get update && \
 
 WORKDIR /root
 
-# Download run-clang-format wrapper
-RUN git clone https://github.com/Sarcasm/run-clang-format.git
-WORKDIR /root/run-clang-format
-RUN git checkout 39081c9c42768ab5e8321127a7494ad1647c6a2f . && \
-    ln -s /root/run-clang-format/run-clang-format.py /usr/bin/
-
-WORKDIR /root
-
-# Install custom CMake version
-RUN curl -o "cmake_v${CMAKE_VER}" -L "${CMAKE_URL}" && \
-    mkdir -p "/opt/cmake/${CMAKE_VER}" && \
-    tar -xf "$(basename cmake_v${CMAKE_VER})" -C "/opt/cmake/${CMAKE_VER}" --strip-components=1 && \
-    rm "$(basename cmake_v${CMAKE_VER})" && \
-    ln -s /opt/cmake/"${CMAKE_VER}"/bin/* /usr/bin/ && \
-    apt-get autoremove -y && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# Install hadolint - Dockerfile linter
-RUN curl -o /usr/bin/hadolint -L "${HADOLINT_URL}" && \
-    chmod 775 /usr/bin/hadolint
-
-# Install base python packages
-RUN pip3 --no-cache-dir install scipy==1.9.1 numpy==1.23.3
-
-# Install doxygen
-RUN curl https://www.doxygen.nl/files/doxygen-1.9.5.src.tar.gz -o doxygen-1.9.5.src.tar.gz && \
-    tar -xvzf ./doxygen-1.9.5.src.tar.gz && \
-    cd doxygen-1.9.5 && \
-    mkdir build && \
-    cd build && \
-    cmake -G "Unix Makefiles" .. && \
-    make && \
-    make install
+# # Download run-clang-format wrapper
+# RUN git clone https://github.com/Sarcasm/run-clang-format.git
+# WORKDIR /root/run-clang-format
+# RUN git checkout 39081c9c42768ab5e8321127a7494ad1647c6a2f . && \
+#     ln -s /root/run-clang-format/run-clang-format.py /usr/bin/
+#
+# WORKDIR /root
+#
+# # Install custom CMake version
+# RUN curl -o "cmake_v${CMAKE_VER}" -L "${CMAKE_URL}" && \
+#     mkdir -p "/opt/cmake/${CMAKE_VER}" && \
+#     tar -xf "$(basename cmake_v${CMAKE_VER})" -C "/opt/cmake/${CMAKE_VER}" --strip-components=1 && \
+#     rm "$(basename cmake_v${CMAKE_VER})" && \
+#     ln -s /opt/cmake/"${CMAKE_VER}"/bin/* /usr/bin/ && \
+#     apt-get autoremove -y && \
+#     apt-get clean && \
+#     rm -rf /var/lib/apt/lists/*
+#
+# # Install hadolint - Dockerfile linter
+# RUN curl -o /usr/bin/hadolint -L "${HADOLINT_URL}" && \
+#     chmod 775 /usr/bin/hadolint
+#
+# # Install base python packages
+# RUN pip3 --no-cache-dir install scipy==1.9.1 numpy==1.23.3
+#
+# # Install doxygen
+# RUN curl https://www.doxygen.nl/files/doxygen-1.9.5.src.tar.gz -o doxygen-1.9.5.src.tar.gz && \
+#     tar -xvzf ./doxygen-1.9.5.src.tar.gz && \
+#     cd doxygen-1.9.5 && \
+#     mkdir build && \
+#     cd build && \
+#     cmake -G "Unix Makefiles" .. && \
+#     make && \
+#     make install
