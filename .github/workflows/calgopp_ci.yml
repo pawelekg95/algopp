@@ -45,7 +45,7 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       artifacts_name: Build_signal_tests_gcc_debug-${{ github.sha }}
-      test_app: Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
+      test_app: bin/tests
       arguments: ~"Signal tests - peaks"
     secrets: inherit
 
@@ -55,7 +55,7 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       artifacts_name: Build_types_tests_gcc_debug-${{ github.sha }}
-      test_app: Build_types_tests_gcc_debug-${{ github.sha }}/bin/tests
+      test_app: bin/tests
     secrets: inherit
 
   Algorithm_test:
@@ -64,7 +64,7 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       artifacts_name: Build_algorithm_tests_gcc_debug-${{ github.sha }}
-      test_app: Build_algorithm_tests_gcc_debug-${{ github.sha }}/bin/tests
+      test_app: bin/tests
     secrets: inherit
 #
 #  # Valgrind tests
