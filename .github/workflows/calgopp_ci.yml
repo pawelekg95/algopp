@@ -113,3 +113,17 @@ jobs:
       pre_run: cd "${{ github.workspace }}"; rm -rf ./cmake-build; mkdir ./cmake-build; cd ./cmake-build; cmake .. --preset signal_tests_clang_debug
       linter: run-clang-tidy
     secrets: inherit
+
+  Dockerfiles-hadolint:
+    uses: ./.github/workflows/quality.yml
+    with:
+      linter: hadolint
+      arguments: .github/*.dockerfile
+    secrets: inherit
+
+  Pylint:
+    uses: ./.github/workflows/quality.yml
+    with:
+      linter: pylint
+      arguments: utils/sha256.py
+    secrets: inherit
