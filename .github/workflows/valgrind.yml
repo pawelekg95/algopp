@@ -21,7 +21,20 @@ on:
 jobs:
   Valgrind_Test:
     runs-on: ubuntu-20.04
+    environment: docker
+    env:
+      DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    container:
+      image: pawelekg95/calgopp_x86_64:latest
+      credentials:
+        username: ${{ env.DOCKER_LOGIN }}
+        password: ${{ env.DOCKER_PASSWORD }}
     steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.artifacts_name }}
+
       - run: |
           chmod 755 ${{ inputs.test_app }}
           ${{ inputs.pre_run }}
