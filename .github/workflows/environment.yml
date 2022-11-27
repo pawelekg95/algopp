@@ -21,7 +21,7 @@ jobs:
         run: |
           docker login -u ${{ env.DOCKER_LOGIN }} -p ${{ env.DOCKER_PASSWORD }}
           result=0
-          docker manifest inspect pawelekg95/${{ inputs.image }}:${{ github.sha }} > /dev/null || result=$?
+          docker manifest inspect pawelekg95/${{ inputs.image }} > /dev/null || result=$?
           echo "IMAGE_EXISTS=$result" >> $GITHUB_ENV
 
   Build_image:
