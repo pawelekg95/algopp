@@ -53,7 +53,8 @@ RUN curl https://www.doxygen.nl/files/doxygen-1.9.5.src.tar.gz -o doxygen-1.9.5.
     tar -xvzf ./doxygen-1.9.5.src.tar.gz && \
 
 WORKDIR /root/doxygen-1.9.5
-    mkdir build && \
+
+RUN mkdir build && \
     cd build && \
     cmake -G "Unix Makefiles" .. && \
     make && \
