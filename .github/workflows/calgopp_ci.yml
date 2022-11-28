@@ -115,6 +115,7 @@ jobs:
     secrets: inherit
 
   Dockerfiles-hadolint:
+    needs: Calgopp_x86_64_docker
     uses: ./.github/workflows/quality.yml
     with:
       linter: hadolint
@@ -122,6 +123,7 @@ jobs:
     secrets: inherit
 
   Pylint:
+    needs: Calgopp_x86_64_docker
     uses: ./.github/workflows/quality.yml
     with:
       linter: pylint

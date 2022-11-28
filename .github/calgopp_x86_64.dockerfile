@@ -46,12 +46,13 @@ RUN curl -o /usr/bin/hadolint -L "${HADOLINT_URL}" && \
     chmod 775 /usr/bin/hadolint
 
 # Install base python packages
-RUN pip3 --no-cache-dir install scipy==1.9.1 numpy==1.23.3
+RUN pip3 --no-cache-dir install scipy==1.9.1 numpy==1.23.3 pylint==2.12.2
 
 # Install doxygen
 RUN curl https://www.doxygen.nl/files/doxygen-1.9.5.src.tar.gz -o doxygen-1.9.5.src.tar.gz && \
     tar -xvzf ./doxygen-1.9.5.src.tar.gz && \
-    cd doxygen-1.9.5 && \
+
+WORKDIR /root/doxygen-1.9.5
     mkdir build && \
     cd build && \
     cmake -G "Unix Makefiles" .. && \

@@ -20,6 +20,13 @@ jobs:
         username: ${{ env.DOCKER_LOGIN }}
         password: ${{ env.DOCKER_PASSWORD }}
     steps:
+      - name: Wait for tests to succeed
+          uses: lewagon/wait-on-check-action@v1.2.0
+          with:
+            check-name: Calgopp_x86_64_docker
+            repo-token: ${{ secrets.GITHUB_TOKEN }}
+            wait-interval: 30
+
       - uses: actions/checkout@v3
       - run: |
           BUILD_DIR="calgopp-doxygen-${{ github.sha }}"
