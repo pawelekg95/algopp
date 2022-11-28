@@ -1,0 +1,14 @@
+digraph "lib/algorithm/include/calgopp/algorithm"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_54e360b79649e752a54a4ed7c16747b9 {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="calgopp", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_54e360b79649e752a54a4ed7c16747b9.html",tooltip=""]
+  dir_ee6f609f36b7f01bc5cabbc5cefdf872 [label="algorithm", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_ee6f609f36b7f01bc5cabbc5cefdf872.html",tooltip=""];
+  }
+  dir_560694f03ee5bf1136d79e4f1ca1ca37 [label="types", fillcolor="#edf0f7", color="red", style="filled,dashed", URL="dir_560694f03ee5bf1136d79e4f1ca1ca37.html",tooltip=""];
+  dir_ee6f609f36b7f01bc5cabbc5cefdf872->dir_560694f03ee5bf1136d79e4f1ca1ca37 [headlabel="1", labeldistance=1.5 headhref="dir_000001_000012.html" color="steelblue1" fontcolor="steelblue1"];
+}
