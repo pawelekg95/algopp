@@ -50,12 +50,11 @@ RUN pip3 --no-cache-dir install scipy==1.9.1 numpy==1.23.3 pylint==2.12.2
 
 # Install doxygen
 RUN curl https://www.doxygen.nl/files/doxygen-1.9.5.src.tar.gz -o doxygen-1.9.5.src.tar.gz && \
-    tar -xvzf ./doxygen-1.9.5.src.tar.gz
+    tar -xvzf ./doxygen-1.9.5.src.tar.gz && \
+    mkdir doxygen-1.9.5/build
 
-WORKDIR /root/doxygen-1.9.5
+WORKDIR /root/doxygen-1.9.5/build
 
-RUN mkdir build && \
-    cd build && \
-    cmake -G "Unix Makefiles" .. && \
+RUN cmake -G "Unix Makefiles" .. && \
     make && \
     make install

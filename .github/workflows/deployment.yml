@@ -21,7 +21,7 @@ jobs:
         username: ${{ env.DOCKER_LOGIN }}
         password: ${{ env.DOCKER_PASSWORD }}
     steps:
-      - name: Wait for tests to succeed
+      - name: Wait for image
         uses: lewagon/wait-on-check-action@v1.2.0
         with:
           check-name: Calgopp_x86_64_docker
