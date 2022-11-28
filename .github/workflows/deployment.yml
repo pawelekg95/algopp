@@ -9,19 +9,36 @@ permissions:
 
 jobs:
   build-and-deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-20.04
+    environment: docker
+    env:
+      DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    container:
+      image: pawelekg95/calgopp_x86_64:latest
+      credentials:
+        username: ${{ env.DOCKER_LOGIN }}
+        password: ${{ env.DOCKER_PASSWORD }}
     steps:
+      - name: Wait for image
+        uses: lewagon/wait-on-check-action@v1.0.0
+        with:
+          ref: ${{ github.ref }}
+          check-name: Calgopp_x86_64_docker / Build_image
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 30
+
       - uses: actions/checkout@v3
-      - run: |
-          BUILD_DIR="/tmp/calgopp-doxygen-${{ github.sha }}"
+      - name: Build doxygen
+        run: |
+          BUILD_DIR="calgopp-doxygen-${{ github.sha }}"
           rm -rf "${BUILD_DIR}"
           mkdir "${BUILD_DIR}"
           cd "${BUILD_DIR}"
-          cmake ${{ github.workspace }} --preset signal_tests_clang_debug
+          cmake .. --preset signal_tests_clang_debug
           make doxygen
 
-      - name: Deploy
+      - name: Deploy documentation
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: /tmp/calgopp-doxygen-${{ github.sha }}/docs # The folder the action should deploy.
-      - run: rm -rf /tmp/calgopp-doxygen-${{ github.sha }}
+          folder: calgopp-doxygen-${{ github.sha }}/docs # The folder the action should deploy.

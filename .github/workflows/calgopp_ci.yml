@@ -2,27 +2,41 @@ name: Calgopp_CI
 on: push
 
 jobs:
+  # Environment
+  Calgopp_x86_64_docker:
+    name: Calgopp_x86_64_docker
+    uses: ./.github/workflows/environment.yml
+    with:
+      image: calgopp_x86_64
+    secrets: inherit
+
   # Build tests stage
   Build_signal_tests_gcc_debug:
     name: Build_signal_tests_gcc_debug
+    needs: Calgopp_x86_64_docker
     uses: ./.github/workflows/build_tests.yml
     with:
       preset: signal_tests_gcc_debug
       app: Build_signal_tests_gcc_debug
+    secrets: inherit
 
   Build_types_tests_gcc_debug:
     name: Build_types_tests_gcc_debug
+    needs: Calgopp_x86_64_docker
     uses: ./.github/workflows/build_tests.yml
     with:
       preset: types_tests_gcc_debug
       app: Build_types_tests_gcc_debug
+    secrets: inherit
 
   Build_algorithm_tests_gcc_debug:
     name: Build_algorithm_tests_gcc_debug
+    needs: Calgopp_x86_64_docker
     uses: ./.github/workflows/build_tests.yml
     with:
       preset: algorithm_tests_gcc_debug
       app: Build_algorithm_tests_gcc_debug
+    secrets: inherit
 
   # Test stage
   Signal_test:
@@ -30,22 +44,28 @@ jobs:
     needs: Build_signal_tests_gcc_debug
     uses: ./.github/workflows/test.yml
     with:
-      test_app: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
+      artifacts_name: Build_signal_tests_gcc_debug-${{ github.sha }}
+      test_app: bin/tests
       arguments: ~"Signal tests - peaks"
+    secrets: inherit
 
   Types_test:
     name: Types_test
     needs: Build_types_tests_gcc_debug
     uses: ./.github/workflows/test.yml
     with:
-      test_app: /tmp/Build_types_tests_gcc_debug-${{ github.sha }}/bin/tests
+      artifacts_name: Build_types_tests_gcc_debug-${{ github.sha }}
+      test_app: bin/tests
+    secrets: inherit
 
   Algorithm_test:
     name: Algorithm_test
     needs: Build_algorithm_tests_gcc_debug
     uses: ./.github/workflows/test.yml
     with:
-      test_app: /tmp/Build_algorithm_tests_gcc_debug-${{ github.sha }}/bin/tests
+      artifacts_name: Build_algorithm_tests_gcc_debug-${{ github.sha }}
+      test_app: bin/tests
+    secrets: inherit
 
   # Valgrind tests
   Signal_test_valgrind:
@@ -53,22 +73,28 @@ jobs:
     needs: Signal_test
     uses: ./.github/workflows/valgrind.yml
     with:
-      test_app: /tmp/Build_signal_tests_gcc_debug-${{ github.sha }}/bin/tests
+      artifacts_name: Build_signal_tests_gcc_debug-${{ github.sha }}
+      test_app: bin/tests
       arguments: ~"Signal tests - peaks"
+    secrets: inherit
 
   Types_test_valgrind:
     name: Types_test_valgrind
     needs: Types_test
     uses: ./.github/workflows/valgrind.yml
     with:
-      test_app: /tmp/Build_types_tests_gcc_debug-${{ github.sha }}/bin/tests
+      artifacts_name: Build_types_tests_gcc_debug-${{ github.sha }}
+      test_app: bin/tests
+    secrets: inherit
 
   Algorithm_test_valgrind:
     name: Algorithm_test_valgrind
     needs: Algorithm_test
     uses: ./.github/workflows/valgrind.yml
     with:
-      test_app: /tmp/Build_algorithm_tests_gcc_debug-${{ github.sha }}/bin/tests
+      artifacts_name: Build_algorithm_tests_gcc_debug-${{ github.sha }}
+      test_app: bin/tests
+    secrets: inherit
 
   # Quality
   Clang-format:
@@ -78,6 +104,7 @@ jobs:
       pre_run: cd "${{ github.workspace }}"
       linter: run-clang-format.py
       arguments: -r lib test
+    secrets: inherit
 
   Clang-tidy:
     needs: Build_signal_tests_gcc_debug
@@ -85,13 +112,20 @@ jobs:
     with:
       pre_run: cd "${{ github.workspace }}"; rm -rf ./cmake-build; mkdir ./cmake-build; cd ./cmake-build; cmake .. --preset signal_tests_clang_debug
       linter: run-clang-tidy
+    secrets: inherit
 
-  # Cleanup /tmp dir
-  Clean-up:
-    needs:
-      - Signal_test_valgrind
-      - Types_test_valgrind
-      - Algorithm_test_valgrind
-    runs-on: self-hosted
-    steps:
-      - run: rm -rf /tmp/Build*
+  Dockerfiles-hadolint:
+    needs: Calgopp_x86_64_docker
+    uses: ./.github/workflows/quality.yml
+    with:
+      linter: hadolint
+      arguments: .github/*.dockerfile
+    secrets: inherit
+
+  Pylint:
+    needs: Calgopp_x86_64_docker
+    uses: ./.github/workflows/quality.yml
+    with:
+      linter: pylint
+      arguments: utils/sha256.py
+    secrets: inherit
