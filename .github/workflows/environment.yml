@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - id: Hash
+      - name: Calculate image file hash for check
         run: |
           ls ${{ github.workspace }}
           DOCKERFILE_HASH=$(utils/sha256.py -f .github/${{ inputs.image }}.dockerfile)

@@ -35,7 +35,8 @@ jobs:
         with:
           name: ${{ inputs.artifacts_name }}
 
-      - run: |
+      - name: Test
+        run: |
           chmod 755 ${{ inputs.test_app }}
           ${{ inputs.pre_run }}
           ${{ inputs.test_app }} ${{ inputs.arguments }}

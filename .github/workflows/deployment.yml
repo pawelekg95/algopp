@@ -1,8 +1,8 @@
 name: Build_documentation_and_deploy
-on: push
-#  push:
-#    branches:
-#      - main
+on:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -29,7 +29,8 @@ jobs:
           wait-interval: 30
 
       - uses: actions/checkout@v3
-      - run: |
+      - name: Build doxygen
+        run: |
           BUILD_DIR="calgopp-doxygen-${{ github.sha }}"
           rm -rf "${BUILD_DIR}"
           mkdir "${BUILD_DIR}"
@@ -37,7 +38,7 @@ jobs:
           cmake .. --preset signal_tests_clang_debug
           make doxygen
 
-      - name: Deploy
+      - name: Deploy documentation
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: calgopp-doxygen-${{ github.sha }}/docs # The folder the action should deploy.
