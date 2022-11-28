@@ -14,7 +14,6 @@ jobs:
     env:
       DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      ImageOS: ruby
     container:
       image: pawelekg95/calgopp_x86_64:latest
       credentials:
@@ -22,7 +21,7 @@ jobs:
         password: ${{ env.DOCKER_PASSWORD }}
     steps:
       - name: Wait for image
-        uses: lewagon/wait-on-check-action@v1.2.0
+        uses: lewagon/wait-on-check-action@v1.0.0
         with:
           check-name: Calgopp_x86_64_docker
           repo-token: ${{ secrets.GITHUB_TOKEN }}
