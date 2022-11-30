@@ -5,27 +5,21 @@ Copyright (c) 2022 Pawel Gmurczyk
 Documentation:
 * [Reference](https://pawelekg95.github.io/calgopp/)
 
-# CI status ![ci_status]
+# CI status
 
-| ![linux_badge] | ![build_badge] | ![test_badge] | ![valgrind_badge] | ![quality_badge] | ![deployment_badge] |
-| :------------: | :--------------: | :--------------: | :--------------: | :--------------: | :--------------: |
+| ![linux_badge] | ![ci_status] |
+| :------------: | :--------------: |
 
 [ci_status]: https://github.com/pawelekg95/calgopp/actions/workflows/calgopp_ci.yml/badge.svg
 [linux_badge]: https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black
-[build_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/build_tests.yml/badge.svg
-[test_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/test.yml/badge.svg
-[valgrind_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/valgrind.yml/badge.svg
-[quality_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/quality.yml/badge.svg
-[deployment_badge]: https://github.com/pawelekg95/calgopp/actions/workflows/deployment.yml/badge.svg
 
 # Introduction
 Calgopp is scientific and technical computing library written in C++ for embedded devices (but not only).
 It was inspired by Python [SciPy](https://scipy.org/).
 
 Signal handling:
-* creating signal objects from C-style arrays
-* possibility to create it from STL containers
-* adding, deleting, modifying objects
+* creating signal objects from C-style arrays and STL containers
+* adding, deleting, modifying signals
 
 Signal processing:
 * transforms (Fourier, Jacymirski)

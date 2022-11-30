@@ -281,8 +281,8 @@ TEST_CASE("Signal tests - peaks")
                 for (std::uint32_t l = 0; l < expectedPeaks.size(); l++)
                 {
                     std::cout << "Peak no: " << l << std::endl;
-                    REQUIRE(detectedPeaks[l].y == expectedPeaks[l].y);
-                    REQUIRE(detectedPeaks[l].x == expectedPeaks[l].x);
+                    CHECK(detectedPeaks[l].y == expectedPeaks[l].y);
+                    CHECK(detectedPeaks[l].x == expectedPeaks[l].x);
                 }
             }
         }

@@ -4,9 +4,17 @@
 
 namespace calgopp::signal::transform {
 
+/**
+ * Implementation of prof. Michał Jacymirski transform
+ */
 class Jacymirski : public process::IProcessor
 {
 public:
+    /**
+     * Processing signal using Jacymirski's transform
+     * @param signal                    Input signal
+     * @return Transformed signal
+     */
     Signal process(const Signal& signal) override;
 };
 
