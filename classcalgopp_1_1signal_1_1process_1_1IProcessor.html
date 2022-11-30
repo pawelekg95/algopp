@@ -105,7 +105,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a23c0d2f39efe2f5b92e9eabc7394066b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classcalgopp_1_1signal_1_1Signal.html">Signal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1signal_1_1process_1_1IProcessor.html#a23c0d2f39efe2f5b92e9eabc7394066b">postProcess</a> (const <a class="el" href="classcalgopp_1_1signal_1_1Signal.html">Signal</a> &amp;signal)</td></tr>
 <tr class="separator:a23c0d2f39efe2f5b92e9eabc7394066b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Base class for any classes to process signal in any way </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1523cee7eb99a4278d738abe7a902cf1" name="a1523cee7eb99a4278d738abe7a902cf1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1523cee7eb99a4278d738abe7a902cf1">&#9670;&#160;</a></span>~IProcessor()</h2>
 
@@ -155,6 +157,13 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Virtual post-processing method </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">signal</td><td>Input signal </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Post-processed signal </dd></dl>
 
 </div>
 </div>
@@ -181,6 +190,13 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Virtual pre-processing method. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">signal</td><td>Input signal </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pre processed signal </dd></dl>
 
 </div>
 </div>
@@ -207,6 +223,13 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Virtual processing method </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">signal</td><td>Input signal </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Processed signal </dd></dl>
 
 <p>Implemented in <a class="el" href="classcalgopp_1_1signal_1_1transform_1_1Jacymirski.html#a887308e60fcb36d147d437bb3931a6a7">calgopp::signal::transform::Jacymirski</a>.</p>
 

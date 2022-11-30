@@ -103,8 +103,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7e079d680ebb2494489718a13936ced9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0911e1c92692ceb9025d2639f695eda"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html#ab0911e1c92692ceb9025d2639f695eda">operator--</a> (int)</td></tr>
 <tr class="separator:ab0911e1c92692ceb9025d2639f695eda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af45063398ec31e7e1d4c2605aa4c8308"><td class="memItemLeft" align="right" valign="top">Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html#af45063398ec31e7e1d4c2605aa4c8308">operator-&gt;</a> ()</td></tr>
-<tr class="separator:af45063398ec31e7e1d4c2605aa4c8308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add06aa24e7969b03ecf45ee44d830d1c"><td class="memItemLeft" align="right" valign="top">Type &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html#add06aa24e7969b03ecf45ee44d830d1c">operator-&gt;</a> ()</td></tr>
+<tr class="separator:add06aa24e7969b03ecf45ee44d830d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b31b145c6b674a7d798ec5caaf4700d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html#a0b31b145c6b674a7d798ec5caaf4700d">operator+</a> (int value) const</td></tr>
 <tr class="separator:a0b31b145c6b674a7d798ec5caaf4700d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e7690346c3fcb41fec8307e7daab92e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html#a0e7690346c3fcb41fec8307e7daab92e">operator-</a> (int value) const</td></tr>
@@ -129,7 +129,10 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a5b16174309d0605beabf4e84d587fc7a"><td class="memItemLeft" align="right" valign="top">Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html#a5b16174309d0605beabf4e84d587fc7a">m_data</a> {nullptr}</td></tr>
 <tr class="separator:a5b16174309d0605beabf4e84d587fc7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Type&gt;<br />
+class calgopp::types::Container&lt; Type &gt;::Iterator</div><p ><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html">Iterator</a> class of container. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2ffa6a8d7d7edee34c8be4b30d3c3c4f" name="a2ffa6a8d7d7edee34c8be4b30d3c3c4f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2ffa6a8d7d7edee34c8be4b30d3c3c4f">&#9670;&#160;</a></span>Iterator() <span class="overload">[1/2]</span></h2>
 
@@ -154,6 +157,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Default constructor. Points to no element. </p>
 
 </div>
 </div>
@@ -182,6 +186,12 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Initializes iterator with data. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Pointer to data. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -211,6 +221,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Inequality operator. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>Right hand iterator. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if iterators point to different data, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -238,6 +255,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Dereference operator. </p><dl class="section return"><dt>Returns</dt><dd>Reference to data. </dd></dl>
 
 </div>
 </div>
@@ -266,6 +284,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Addition operator. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Value to increment iterator. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>New iterator incremented by value. </dd></dl>
 
 </div>
 </div>
@@ -293,6 +318,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Pre increment. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html">Iterator</a> on next element. </dd></dl>
 
 </div>
 </div>
@@ -321,6 +347,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Post increment. </p><dl class="section return"><dt>Returns</dt><dd>This. </dd></dl>
 
 </div>
 </div>
@@ -349,6 +376,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Subtraction operator. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Value to decrement iterator. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>New iterator decremented by value. </dd></dl>
 
 </div>
 </div>
@@ -376,6 +410,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Pre decrement. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html">Iterator</a> to previous element. </dd></dl>
 
 </div>
 </div>
@@ -404,11 +439,12 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Post decrement </p><dl class="section return"><dt>Returns</dt><dd>This </dd></dl>
 
 </div>
 </div>
-<a id="af45063398ec31e7e1d4c2605aa4c8308" name="af45063398ec31e7e1d4c2605aa4c8308"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af45063398ec31e7e1d4c2605aa4c8308">&#9670;&#160;</a></span>operator-&gt;()</h2>
+<a id="add06aa24e7969b03ecf45ee44d830d1c" name="add06aa24e7969b03ecf45ee44d830d1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add06aa24e7969b03ecf45ee44d830d1c">&#9670;&#160;</a></span>operator-&gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -419,7 +455,7 @@ template&lt;typename Type &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Type * <a class="el" href="classcalgopp_1_1types_1_1Container.html">calgopp::types::Container</a>&lt; Type &gt;::Iterator::operator-&gt; </td>
+          <td class="memname">Type &amp; <a class="el" href="classcalgopp_1_1types_1_1Container.html">calgopp::types::Container</a>&lt; Type &gt;::Iterator::operator-&gt; </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -431,6 +467,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Pointer access operator. Allows to access element like pointer. </p><dl class="section return"><dt>Returns</dt><dd>Reference to held object </dd></dl>
 
 </div>
 </div>
@@ -459,6 +496,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Less operator. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>Right hand iterator. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if this iterator points to preceding data to rhs, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -487,6 +531,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Less or equal operator. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>Right hand iterator. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if this iterator points to the same or preceding data to rhs, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -515,6 +566,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Equlity operator. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>Right hand iterator. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if iterators point to the same data, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -543,6 +601,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Greater operator. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>Right hand iterator. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if this iterator points to data consecutive to rhs, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -571,6 +636,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Greater or equal operator. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>Right hand iterator. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if this iterator points to the same or consecutive data to rhs, false otherwise. </dd></dl>
 
 </div>
 </div>

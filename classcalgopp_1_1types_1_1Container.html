@@ -108,9 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac28e57bdaadbcc8da6057496991a946d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ad093be89677c857abcf83cefa569ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#a2ad093be89677c857abcf83cefa569ba">Container</a> (int <a class="el" href="classcalgopp_1_1types_1_1Container.html#a9a2fa4d8f54a292a5b7b0598f09a657a">size</a>)</td></tr>
 <tr class="separator:a2ad093be89677c857abcf83cefa569ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b5b325de35d668869500d9d90ad31e1"><td class="memTemplParams" colspan="2">template&lt;typename InputType &gt; </td></tr>
-<tr class="memitem:a5b5b325de35d668869500d9d90ad31e1"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#a5b5b325de35d668869500d9d90ad31e1">Container</a> (const InputType *values, unsigned int length)</td></tr>
-<tr class="separator:a5b5b325de35d668869500d9d90ad31e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafe3f141b0fb5b16678263c7249b185a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#aafe3f141b0fb5b16678263c7249b185a">Container</a> (const Type *values, unsigned int length)</td></tr>
+<tr class="separator:aafe3f141b0fb5b16678263c7249b185a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a391475a1362960b0e4b34423fa11eb93"><td class="memTemplParams" colspan="2">template&lt;typename ContainerType &gt; </td></tr>
 <tr class="memitem:a391475a1362960b0e4b34423fa11eb93"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#a391475a1362960b0e4b34423fa11eb93">Container</a> (const ContainerType &amp;values)</td></tr>
 <tr class="separator:a391475a1362960b0e4b34423fa11eb93"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,7 +170,15 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a1fd9fb7917feb1690a78526dcece6d68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#a1fd9fb7917feb1690a78526dcece6d68">m_end</a></td></tr>
 <tr class="separator:a1fd9fb7917feb1690a78526dcece6d68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Type&gt;<br />
+class calgopp::types::Container&lt; Type &gt;</div><p >Calgopp generic container, for continuous memory storage on the heap. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Type</td><td>Type of elements to be stored </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac28e57bdaadbcc8da6057496991a946d" name="ac28e57bdaadbcc8da6057496991a946d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac28e57bdaadbcc8da6057496991a946d">&#9670;&#160;</a></span>Container() <span class="overload">[1/6]</span></h2>
 
@@ -196,6 +203,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Default constructor. Initializes empty container. Pre allocates memory for 10 elements. </p>
 
 </div>
 </div>
@@ -224,18 +232,22 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Initializes empty container with memory allocated for elements number equal to size argument. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Size of allocated memory </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="a5b5b325de35d668869500d9d90ad31e1" name="a5b5b325de35d668869500d9d90ad31e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b5b325de35d668869500d9d90ad31e1">&#9670;&#160;</a></span>Container() <span class="overload">[3/6]</span></h2>
+<a id="aafe3f141b0fb5b16678263c7249b185a" name="aafe3f141b0fb5b16678263c7249b185a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafe3f141b0fb5b16678263c7249b185a">&#9670;&#160;</a></span>Container() <span class="overload">[3/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Type &gt; </div>
-<div class="memtemplate">
-template&lt;typename InputType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -243,7 +255,7 @@ template&lt;typename InputType &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classcalgopp_1_1types_1_1Container.html">calgopp::types::Container</a>&lt; Type &gt;::Container </td>
           <td>(</td>
-          <td class="paramtype">const InputType *&#160;</td>
+          <td class="paramtype">const Type *&#160;</td>
           <td class="paramname"><em>values</em>, </td>
         </tr>
         <tr>
@@ -264,6 +276,13 @@ template&lt;typename InputType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Initializes <a class="el" href="classcalgopp_1_1types_1_1Container.html">Container</a> from C-style array. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">values</td><td>Elements to be stored </td></tr>
+    <tr><td class="paramname">length</td><td>Array size </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -294,6 +313,18 @@ template&lt;typename ContainerType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Constructs container from STL containers </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ContainerType</td><td>STL alike container type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">values</td><td>Elements to be stored </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -322,6 +353,12 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Copy constructor. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Other container </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -350,6 +387,12 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Moving constructor </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Other container </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -377,6 +420,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Destructor. Deallocates memory </p>
 
 </div>
 </div>
@@ -406,6 +450,12 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Appends new element to end of container. If allocated memory is not enough, expands it twice. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Element to be added. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -434,6 +484,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Returns copy of element stored at index. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>Index of element to copy. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Copy of element at index. </dd></dl>
 
 </div>
 </div>
@@ -461,6 +518,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Returns iterator to first point of the signal. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html">Iterator</a> to first point. </dd></dl>
 
 </div>
 </div>
@@ -488,6 +546,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Returns for how many objects memory has been allocated. </p><dl class="section return"><dt>Returns</dt><dd>Capacity of container. </dd></dl>
 
 </div>
 </div>
@@ -515,6 +574,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Checks if container is empty. </p><dl class="section return"><dt>Returns</dt><dd>True if container is empty, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -542,6 +602,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Returns iterator to data past last point in the signal. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html">Iterator</a> to last point + 1 </dd></dl>
 
 </div>
 </div>
@@ -569,6 +630,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Extends memory by twice the current size and moves data there. Deallocates old block. </p>
 
 </div>
 </div>
@@ -597,6 +659,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Searches for element in signal and returns it's iterator. If no element found, return end iterator. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>Element to find. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html">Iterator</a> to element if present in signal, <a class="el" href="classcalgopp_1_1types_1_1Container.html#af20ed300415261064e9449915c2c992a">end()</a> iterator otherwise. </dd></dl>
 
 </div>
 </div>
@@ -625,6 +694,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Gets index of element. Throws const char* in case of no such element. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>Element to be found </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Index of element. </dd></dl>
 
 </div>
 </div>
@@ -663,6 +739,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Inserts element on at defined index. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Element to be inserted </td></tr>
+    <tr><td class="paramname">index</td><td>Index where to store element </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -691,6 +774,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Copy assignment operator. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Other container </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>New container </dd></dl>
 
 </div>
 </div>
@@ -719,6 +809,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Move assignment operator. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Other container. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>New container </dd></dl>
 
 </div>
 </div>
@@ -747,6 +844,13 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Index operator. Accesses element at index. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>Index of element to access. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to element at index. </dd></dl>
 
 </div>
 </div>
@@ -775,6 +879,12 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Removes element placed at index </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>Index of element to be removed </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -802,6 +912,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Returns size of container. </p><dl class="section return"><dt>Returns</dt><dd>Size of container. </dd></dl>
 
 </div>
 </div>
@@ -829,6 +940,7 @@ template&lt;typename Type &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Updates iterators. </p>
 
 </div>
 </div>
