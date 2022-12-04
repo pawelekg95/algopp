@@ -7,7 +7,7 @@ namespace calgopp::signal::transform {
 /**
  * Implementation of prof. Michał Jacymirski transform
  */
-class Jacymirski : public process::IProcessor
+class JacymirskiTransform : public process::IProcessor
 {
 public:
     /**

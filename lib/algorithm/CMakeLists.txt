@@ -9,4 +9,4 @@ target_include_directories(calgopp-algorithm
         )
 
 target_link_libraries(calgopp-algorithm
-        INTERFACE calgopp::types)
+        INTERFACE calgopp::types calgopp::math)

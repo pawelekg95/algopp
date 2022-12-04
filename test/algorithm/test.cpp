@@ -2,9 +2,8 @@
 // in one cpp file
 #include <catch2/catch_all.hpp>
 
-#include "calgopp/algorithm/numeric.h"
+#include "calgopp/algorithm/algorithm.h"
 
-#include <cmath>
 #include <numeric>
 #include <vector>
 
@@ -15,11 +14,4 @@ TEST_CASE("Basic algorithms - finding elements in container")
             *calgopp::algorithm::numeric::minElement(vec.begin(), vec.end()));
     REQUIRE(*std::max_element(vec.begin(), vec.end()) ==
             *calgopp::algorithm::numeric::maxElement(vec.begin(), vec.end()));
-}
-
-TEST_CASE("Numerics")
-{
-    REQUIRE(std::abs(-15) == calgopp::algorithm::numeric::abs(-15));
-    REQUIRE(std::abs(-15.4) == calgopp::algorithm::numeric::abs(-15.4));
-    REQUIRE(std::abs(15) == calgopp::algorithm::numeric::abs(-15));
 }

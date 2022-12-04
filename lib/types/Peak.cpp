@@ -1,18 +1,18 @@
 #include "calgopp/types/Peak.h"
-#include "calgopp/algorithm/numeric.h"
+#include "calgopp/math/math.h"
 
 namespace calgopp::types {
 
 bool operator==(const Peak& lhs, const Peak& rhs)
 {
-    return algorithm::numeric::abs(lhs.x - rhs.x) < algorithm::numeric::cEpsilon &&
-           algorithm::numeric::abs(lhs.y - rhs.y) < algorithm::numeric::cEpsilon && lhs.type == rhs.type;
+    return math::abs(lhs.x - rhs.x) < math::cEpsilon &&
+    		math::abs(lhs.y - rhs.y) < math::cEpsilon && lhs.type == rhs.type;
 }
 
 bool operator==(const Peak&& lhs, const Peak&& rhs)
 {
-    return algorithm::numeric::abs(lhs.x - rhs.x) < algorithm::numeric::cEpsilon &&
-           algorithm::numeric::abs(lhs.y - rhs.y) < algorithm::numeric::cEpsilon && lhs.type == rhs.type;
+    return math::abs(lhs.x - rhs.x) < math::cEpsilon &&
+    	   math::abs(lhs.y - rhs.y) < math::cEpsilon && lhs.type == rhs.type;
 }
 
 bool operator!=(const Peak& lhs, const Peak& rhs)

@@ -55,6 +55,14 @@
         "APP": "test/algorithm"
       }
     },
+    
+    {
+      "name": "MATH_TEST",
+      "hidden": true,
+      "cacheVariables": {
+        "APP": "test/math"
+      }
+    },
 
     {
       "name": "signal_tests_gcc_debug",
@@ -103,6 +111,22 @@
     {
       "name": "algorithm_tests_clang_release",
       "inherits": [ "Release", "ALGORITHM_TEST", "Linux_Clang" ]
+    },
+    {
+      "name": "math_tests_gcc_release",
+      "inherits": [ "Release", "MATH_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "math_tests_clang_release",
+      "inherits": [ "Release", "MATH_TEST", "Linux_Clang" ]
+    },
+    {
+      "name": "math_tests_gcc_debug",
+      "inherits": [ "Debug", "MATH_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "math_tests_clang_debug",
+      "inherits": [ "Debug", "MATH_TEST", "Linux_Clang" ]
     }
   ]
 }

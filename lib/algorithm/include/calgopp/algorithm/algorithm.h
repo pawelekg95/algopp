@@ -1,13 +1,8 @@
 #pragma once
 
-#include "calgopp/types/Container.h"
+#include "calgopp/math/math.h"
 
 namespace calgopp::algorithm::numeric {
-
-/**
- * Epsilon constant for floating point comparisons
- */
-const long double cEpsilon = 0.0000000001;
 
 /**
  * Functor object for default less comparator
@@ -107,31 +102,19 @@ It maxElement(It begin, It end)
  * @param end                           End of range
  * @return Container with numbers
  */
-template <typename Type>
-types::Container<Type> range(int begin, int end)
+template <template <typename> class Container, typename Type>
+Container<Type> range(int begin, int end)
 {
     if (begin >= end)
     {
         return {};
     }
-    types::Container<Type> token;
+    Container<Type> token;
     for (int i = begin; i < end; i++)
     {
         token.append(i);
     }
     return token;
-}
-
-/**
- * Absolute operator
- * @tparam Type                         Number type
- * @param number                        Argument
- * @return Absolute value of argument
- */
-template <typename Type>
-Type abs(const Type& number)
-{
-    return number < 0 ? -number : number;
 }
 
 template <typename Type>
