@@ -7,6 +7,3 @@ add_library(calgopp::math ALIAS calgopp-math)
 target_include_directories(calgopp-math
         INTERFACE include
         )
-
-target_link_libraries(calgopp-math
-        INTERFACE calgopp::types)

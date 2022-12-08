@@ -1,7 +1,5 @@
 #pragma once
 
-#include "calgopp/math/math.h"
-
 namespace calgopp::algorithm::numeric {
 
 /**
@@ -117,8 +115,23 @@ Container<Type> range(int begin, int end)
     return token;
 }
 
-template <typename Type>
-Type min()
-{}
+/**
+ * Calculates sum of all elements in range between iterators.
+ * @tparam It                           Iterator type.
+ * @param begin                         Begin of range.
+ * @param end                           End of range.
+ * @return Sum of all objects from range.
+ */
+template <typename It>
+double sum(It begin, It end)
+{
+    double token{};
+    while (begin < end - 1)
+    {
+        token += *begin;
+        begin++;
+    }
+    return token;
+}
 
 } // namespace calgopp::algorithm::numeric

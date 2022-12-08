@@ -7,4 +7,4 @@ add_executable(${EXECUTABLE_NAME}
         )
 
 target_link_libraries(${EXECUTABLE_NAME}
-        PRIVATE calgopp::math Catch2::Catch2WithMain test-utils)
+        PRIVATE calgopp::math test-utils Catch2::Catch2WithMain)
