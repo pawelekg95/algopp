@@ -83,6 +83,7 @@ jobs:
     with:
       artifacts_name: Build_math_tests_gcc_debug-${{ github.sha }}
       test_app: bin/tests
+      arguments: ~"Benchmark test"
     secrets: inherit
 
   # Valgrind tests
@@ -121,6 +122,7 @@ jobs:
     with:
       artifacts_name: Build_math_tests_gcc_debug-${{ github.sha }}
       test_app: bin/tests
+      arguments: ~"Benchmark test"
     secrets: inherit
 
   # Quality
