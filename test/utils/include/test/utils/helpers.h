@@ -105,10 +105,14 @@ inline std::uint64_t benchmark(const std::function<void()>& function)
 }
 
 template <typename Type1, typename Type2>
-bool almostEqual(const Type1& var1, const Type2& var2)
+bool almostEqual(const Type1& var1, const Type2& var2, double threshold = 0.0000001)
 {
     double dif = std::abs(var1 - var2);
-    double threshold = 0.0000001;
+    if (!(dif < std::abs(threshold * double(var1)) && dif < std::abs(threshold * double(var2))))
+    {
+        std::cout << "Variables don't equal. Var1: " << var1 << ", var2: " << var2 << ", difference: " << dif
+                  << std::endl;
+    }
     return dif < std::abs(threshold * double(var1)) && dif < std::abs(threshold * double(var2));
 }
 

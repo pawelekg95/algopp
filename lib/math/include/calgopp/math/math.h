@@ -6,7 +6,8 @@
 namespace calgopp::math {
 
 /**
- * Epsilon constant for floating point comparisons
+ * Epsilon number approximation.
+ * @return Epsilon number.
  */
 inline long double epsilon()
 {
@@ -14,8 +15,8 @@ inline long double epsilon()
 }
 
 /**
- * Euler number approximation
- * @return
+ * Euler number approximation.
+ * @return Euler number.
  */
 inline long double euler()
 {
@@ -23,8 +24,8 @@ inline long double euler()
 }
 
 /**
- * PI number approximation
- * @return
+ * PI number approximation.
+ * @return PI number.
  */
 inline long double pi()
 {
@@ -32,10 +33,10 @@ inline long double pi()
 }
 
 /**
- * Absolute operator
- * @tparam Type                         Number type
- * @param number                        Argument
- * @return Absolute value of argument
+ * Absolute operator.
+ * @tparam Type                         Number type.
+ * @param number                        Argument.
+ * @return Absolute value of argument.
  */
 template <typename Type>
 Type abs(const Type& number)
@@ -52,21 +53,31 @@ Type abs(const Type& number)
 template <typename Type>
 Type floor(const Type& number)
 {
-    return Type(int(number));
+    return number < 0 ? -ceil(abs(number)) : int(number);
 }
 
 /**
  * Returns next integer to number.
- * @tparam Type
- * @param number
- * @return
+ * @tparam Type                         Number type.
+ * @param number                        Argument.
+ * @return Next integer after number.
  */
 template <typename Type>
 Type ceil(const Type& number)
 {
-    return Type(int(number + 1));
+    if (int(number) == number)
+    {
+        return number;
+    }
+    return number < 0 ? -floor(abs(number)) : int(number + 1);
 }
 
+/**
+ * Rounds number to either ceil or floor if floating point part is <0.5.
+ * @tparam Type                         Number type.
+ * @param number                        Argument.
+ * @return Nearest integer.
+ */
 template <typename Type>
 Type round(const Type& number)
 {
@@ -74,40 +85,55 @@ Type round(const Type& number)
     return number - flr < 0.5 ? flr : ceil(number);
 }
 
+/**
+ * Calculates greatest common divisor of provided numbers.
+ * @param a                             First number.
+ * @param b                             Second number.
+ * @return Greates common divisor.
+ */
+int gcd(int a, int b);
+
+/**
+ * Fraction.
+ * Stores fraction of the number as numerator and denominator.
+ */
 class Fraction
 {
 public:
+    /**
+     * Template constructor. Allows to store fraction of any floating type number.
+     * @tparam Floating                 Floating number type.
+     * @param num                       Number to get fraction.
+     */
     template <typename Floating>
     explicit Fraction(const Floating& num)
     {
         double integral = floor(num);
         double frac = num - integral;
 
-        const long precision = 100000; // This is the accuracy.
+        const int precision = 10000;
 
-        long gcd_ = gcd(round(frac * precision), precision);
+        int commonDivisor = gcd(int(round(frac * precision)), precision);
 
-        m_denominator = precision / gcd_;
-        m_numerator = round(frac * precision) / gcd_;
+        m_denominator = precision / commonDivisor;
+        m_numerator = int(round(frac * precision) / commonDivisor);
     }
 
-    int numerator() { return m_numerator; }
+    bool operator()() const { return m_denominator != 0 && m_numerator != 0; }
 
-    int denominator() { return m_denominator; }
+    bool operator!() const { return m_numerator == 0 || m_denominator == 0; }
 
-private:
-    long gcd(long a, long b)
-    {
-        if (a == 0)
-        {
-            return b;
-        }
-        if (b == 0)
-        {
-            return a;
-        }
-        return a < b ? gcd(a, b % a) : gcd(b, a % b);
-    }
+    /**
+     * Numerator getter.
+     * @return Fraction numerator.
+     */
+    int numerator() const { return m_numerator; }
+
+    /**
+     * Denominator getter.
+     * @return Fraction denominator.
+     */
+    int denominator() const { return m_denominator; }
 
 private:
     int m_numerator{};
@@ -227,30 +253,74 @@ long double pow(ArgumentType number, int power)
 template <typename ArgumentType, typename PowerType>
 long double pow(ArgumentType number, PowerType power)
 {
-    if (power < 0 && int(power) % 2 == 0)
+    Fraction pwrFraction(power);
+    if (power < 0 && int(power) % 2 == 0 && !pwrFraction)
     {
         return pow(number, abs(power));
     }
-    if (power < 0 && int(power) % 2 == 1)
+    if (power < 0 && int(power) % 2 == 1 && !pwrFraction)
     {
         return -pow(number, abs(power));
     }
     auto basePwr = pow(number, int(floor(power)));
-    Fraction pwrFraction(power);
     auto fractionPwr = root(pow(number, pwrFraction.numerator()), pwrFraction.denominator());
     return basePwr * fractionPwr;
 }
 
 /**
  * Exponential function.
- * @tparam PowerType
- * @param power
- * @return
+ * @tparam PowerType                            Power type.
+ * @param power                                 Euler number power.
+ * @return Calculated exponential.
  */
 template <typename PowerType>
 long double exp(const PowerType& power)
 {
     return pow(euler(), power);
+}
+
+/**
+ * Sine function. Calculates sine for argument.
+ * @tparam Number
+ * @param num
+ * @return
+ */
+template <typename Number>
+double sin(const Number& num)
+{
+    double t = num;
+    double sine = t;
+    for (int a = 1; a < 20; ++a)
+    {
+        double mult = -num * num / ((2 * a + 1) * (2 * a));
+        t *= mult;
+        sine += t;
+    }
+    return sine;
+}
+
+/**
+ * Cosine function.
+ * @tparam Number
+ * @param num
+ * @return
+ */
+template <typename Number>
+double cos(const Number& num)
+{
+    return root(1 - pow(sin(num), 2), 2);
+}
+
+/**
+ * Tangent function.
+ * @tparam Number
+ * @param num
+ * @return
+ */
+template <typename Number>
+double tan(const Number& num)
+{
+    return sin(num) / cos(num);
 }
 
 } // namespace calgopp::math

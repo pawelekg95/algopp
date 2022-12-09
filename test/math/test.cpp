@@ -36,6 +36,19 @@ TEST_CASE("Floor and ceil")
     REQUIRE(std::ceil(25.50) == calgopp::math::ceil(25.50));
     REQUIRE(std::ceil(90.9) == calgopp::math::ceil(90.9));
     REQUIRE(std::ceil(1.14) == calgopp::math::ceil(1.14));
+
+    REQUIRE(std::floor(-1.14) == calgopp::math::floor(-1.14));
+    REQUIRE(std::floor(-25.50) == calgopp::math::floor(-25.50));
+    REQUIRE(std::floor(-90.9) == calgopp::math::floor(-90.9));
+    REQUIRE(std::floor(-1.14) == calgopp::math::floor(-1.14));
+
+    REQUIRE(std::ceil(-1.14) == calgopp::math::ceil(-1.14));
+    REQUIRE(std::ceil(-25.50) == calgopp::math::ceil(-25.50));
+    REQUIRE(std::ceil(-90.9) == calgopp::math::ceil(-90.9));
+    REQUIRE(std::ceil(-1.14) == calgopp::math::ceil(-1.14));
+
+    REQUIRE(std::ceil(25.0) == calgopp::math::ceil(25.0));
+    REQUIRE(std::floor(25.0) == calgopp::math::floor(25.0));
 }
 
 TEST_CASE("Round")
@@ -84,6 +97,7 @@ TEST_CASE("Power")
     REQUIRE(test::almostEqual(std::pow(10, 1.5), calgopp::math::pow(10, 1.5)));
     REQUIRE(test::almostEqual(std::pow(10, 2.5), calgopp::math::pow(10, 2.5)));
     REQUIRE(test::almostEqual(std::pow(234, 6.2), calgopp::math::pow(234, 6.2)));
+    REQUIRE(test::almostEqual(std::pow(234, -6.2), calgopp::math::pow(234, -6.2)));
 }
 
 TEST_CASE("Exponential function")
@@ -92,6 +106,16 @@ TEST_CASE("Exponential function")
     REQUIRE(test::almostEqual(std::exp(10), calgopp::math::exp(10)));
     REQUIRE(test::almostEqual(std::exp(23.245), calgopp::math::exp(23.245)));
     REQUIRE(test::almostEqual(std::exp(std::pow(6, 3)), calgopp::math::exp(math::pow(6, 3))));
+    REQUIRE(test::almostEqual(std::exp(std::sin(60 * (M_PI / 180))),
+                              calgopp::math::exp(math::sin(60 * (math::pi() / 180))),
+                              0.0001));
+}
+
+TEST_CASE("Trigonometry")
+{
+    REQUIRE(test::almostEqual(std::sin(60 * (M_PI / 180)), calgopp::math::sin(60 * (calgopp::math::pi() / 180))));
+    REQUIRE(test::almostEqual(std::cos(60 * (M_PI / 180)), calgopp::math::cos(60 * (calgopp::math::pi() / 180))));
+    REQUIRE(test::almostEqual(std::tan(60 * (M_PI / 180)), calgopp::math::tan(60 * (calgopp::math::pi() / 180))));
 }
 
 TEST_CASE("Benchmark test")

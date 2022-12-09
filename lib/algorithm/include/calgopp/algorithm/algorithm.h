@@ -126,7 +126,7 @@ template <typename It>
 double sum(It begin, It end)
 {
     double token{};
-    while (begin < end - 1)
+    while (begin < end)
     {
         token += *begin;
         begin++;
