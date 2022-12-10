@@ -82,7 +82,7 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       artifacts_name: Build_math_tests_gcc_debug-${{ github.sha }}
-      test_app: tests
+      test_app: ./tests
       arguments: ~"Benchmark test"
     secrets: inherit
 
