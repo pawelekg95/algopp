@@ -1,13 +1,6 @@
 #pragma once
 
-#include "calgopp/types/Container.h"
-
 namespace calgopp::algorithm::numeric {
-
-/**
- * Epsilon constant for floating point comparisons
- */
-const long double cEpsilon = 0.0000000001;
 
 /**
  * Functor object for default less comparator
@@ -107,14 +100,14 @@ It maxElement(It begin, It end)
  * @param end                           End of range
  * @return Container with numbers
  */
-template <typename Type>
-types::Container<Type> range(int begin, int end)
+template <template <typename> class Container, typename Type>
+Container<Type> range(int begin, int end)
 {
     if (begin >= end)
     {
         return {};
     }
-    types::Container<Type> token;
+    Container<Type> token;
     for (int i = begin; i < end; i++)
     {
         token.append(i);
@@ -123,19 +116,22 @@ types::Container<Type> range(int begin, int end)
 }
 
 /**
- * Absolute operator
- * @tparam Type                         Number type
- * @param number                        Argument
- * @return Absolute value of argument
+ * Calculates sum of all elements in range between iterators.
+ * @tparam It                           Iterator type.
+ * @param begin                         Begin of range.
+ * @param end                           End of range.
+ * @return Sum of all objects from range.
  */
-template <typename Type>
-Type abs(const Type& number)
+template <typename It>
+double sum(It begin, It end)
 {
-    return number < 0 ? -number : number;
+    double token{};
+    while (begin < end)
+    {
+        token += *begin;
+        begin++;
+    }
+    return token;
 }
-
-template <typename Type>
-Type min()
-{}
 
 } // namespace calgopp::algorithm::numeric

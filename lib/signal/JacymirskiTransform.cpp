@@ -1,8 +1,8 @@
-#include "calgopp/signal/transform/Jacymirski.h"
+#include "calgopp/signal/transform/JacymirskiTransform.h"
 
 namespace calgopp::signal::transform {
 
-Signal Jacymirski::process(const Signal& signal)
+Signal JacymirskiTransform::process(const Signal& signal)
 {
     (void) signal;
     return {};

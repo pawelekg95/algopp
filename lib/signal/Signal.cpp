@@ -1,4 +1,5 @@
 #include "calgopp/signal/Signal.h"
+#include "calgopp/math/math.h"
 
 namespace calgopp::signal {
 

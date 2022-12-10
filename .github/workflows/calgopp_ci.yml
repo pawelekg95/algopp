@@ -38,6 +38,15 @@ jobs:
       app: Build_algorithm_tests_gcc_debug
     secrets: inherit
 
+  Build_math_tests_gcc_debug:
+    name: Build_math_tests_gcc_debug
+    needs: Calgopp_x86_64_docker
+    uses: ./.github/workflows/build_tests.yml
+    with:
+      preset: math_tests_gcc_debug
+      app: Build_math_tests_gcc_debug
+    secrets: inherit
+
   # Test stage
   Signal_test:
     name: Signal_test
@@ -45,7 +54,7 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       artifacts_name: Build_signal_tests_gcc_debug-${{ github.sha }}
-      test_app: bin/tests
+      test_app: ./tests
       arguments: ~"Signal tests - peaks"
     secrets: inherit
 
@@ -55,7 +64,7 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       artifacts_name: Build_types_tests_gcc_debug-${{ github.sha }}
-      test_app: bin/tests
+      test_app: ./tests
     secrets: inherit
 
   Algorithm_test:
@@ -64,7 +73,17 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       artifacts_name: Build_algorithm_tests_gcc_debug-${{ github.sha }}
-      test_app: bin/tests
+      test_app: ./tests
+    secrets: inherit
+
+  Math_test:
+    name: Math_test
+    needs: Build_math_tests_gcc_debug
+    uses: ./.github/workflows/test.yml
+    with:
+      artifacts_name: Build_math_tests_gcc_debug-${{ github.sha }}
+      test_app: ./tests
+      arguments: ~"Benchmark test"
     secrets: inherit
 
   # Valgrind tests
@@ -74,7 +93,7 @@ jobs:
     uses: ./.github/workflows/valgrind.yml
     with:
       artifacts_name: Build_signal_tests_gcc_debug-${{ github.sha }}
-      test_app: bin/tests
+      test_app: ./tests
       arguments: ~"Signal tests - peaks"
     secrets: inherit
 
@@ -84,7 +103,7 @@ jobs:
     uses: ./.github/workflows/valgrind.yml
     with:
       artifacts_name: Build_types_tests_gcc_debug-${{ github.sha }}
-      test_app: bin/tests
+      test_app: ./tests
     secrets: inherit
 
   Algorithm_test_valgrind:
@@ -93,7 +112,17 @@ jobs:
     uses: ./.github/workflows/valgrind.yml
     with:
       artifacts_name: Build_algorithm_tests_gcc_debug-${{ github.sha }}
-      test_app: bin/tests
+      test_app: ./tests
+    secrets: inherit
+
+  Math_test_valgrind:
+    name: Math_test_valgrind
+    needs: Math_test
+    uses: ./.github/workflows/valgrind.yml
+    with:
+      artifacts_name: Build_math_tests_gcc_debug-${{ github.sha }}
+      test_app: ./tests
+      arguments: ~"Benchmark test"
     secrets: inherit
 
   # Quality

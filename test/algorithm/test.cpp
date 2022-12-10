@@ -2,13 +2,12 @@
 // in one cpp file
 #include <catch2/catch_all.hpp>
 
-#include "calgopp/algorithm/numeric.h"
+#include "calgopp/algorithm/algorithm.h"
 
-#include <cmath>
 #include <numeric>
 #include <vector>
 
-TEST_CASE("Basic algorithms - finding elements in container")
+TEST_CASE("Find")
 {
     std::vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9, 1};
     REQUIRE(*std::min_element(vec.begin(), vec.end()) ==
@@ -17,9 +16,10 @@ TEST_CASE("Basic algorithms - finding elements in container")
             *calgopp::algorithm::numeric::maxElement(vec.begin(), vec.end()));
 }
 
-TEST_CASE("Numerics")
+TEST_CASE("Sum")
 {
-    REQUIRE(std::abs(-15) == calgopp::algorithm::numeric::abs(-15));
-    REQUIRE(std::abs(-15.4) == calgopp::algorithm::numeric::abs(-15.4));
-    REQUIRE(std::abs(15) == calgopp::algorithm::numeric::abs(-15));
+    std::vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+    REQUIRE(calgopp::algorithm::numeric::sum(vec.begin(), vec.end()) == std::accumulate(vec.begin(), vec.end(), 0));
+    REQUIRE(calgopp::algorithm::numeric::sum(vec.begin() + 5, vec.end()) ==
+            std::accumulate(vec.begin() + 5, vec.end(), 0));
 }
