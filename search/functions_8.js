@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['peak_0',['Peak',['../structcalgopp_1_1types_1_1Peak.html#add85f0acbc1b2e42597e9072f212d022',1,'calgopp::types::Peak::Peak()=default'],['../structcalgopp_1_1types_1_1Peak.html#a92df25c04d8e135e3afb7ba6828fb366',1,'calgopp::types::Peak::Peak(T x, T y)'],['../structcalgopp_1_1types_1_1Peak.html#afc633729bd2dd8c2e5b37d5c622ca987',1,'calgopp::types::Peak::Peak(T x, T y, PeakType type)'],['../structcalgopp_1_1types_1_1Peak.html#a0326b1e5b52e74873a7e300f3b36a39a',1,'calgopp::types::Peak::Peak(T x, Y y)'],['../structcalgopp_1_1types_1_1Peak.html#a6550670c8c0e62b6f3141357b1bf4d3b',1,'calgopp::types::Peak::Peak(T x, Y y, PeakType type)']]],
-  ['peaks_1',['peaks',['../classcalgopp_1_1signal_1_1Signal.html#a52f340746c6dab8d22763e5275b993f4',1,'calgopp::signal::Signal']]],
-  ['point_2',['Point',['../structcalgopp_1_1types_1_1Point.html#adcdc7991b31e04fec40b236f8155ce90',1,'calgopp::types::Point::Point()=default'],['../structcalgopp_1_1types_1_1Point.html#ae56b97be57fba9777166c19a541a915a',1,'calgopp::types::Point::Point(T x, T y)'],['../structcalgopp_1_1types_1_1Point.html#ab2270d1d3568a1d79cc001f2c9d421dc',1,'calgopp::types::Point::Point(T x, Y y)']]],
-  ['postprocess_3',['postProcess',['../classcalgopp_1_1signal_1_1process_1_1IProcessor.html#a23c0d2f39efe2f5b92e9eabc7394066b',1,'calgopp::signal::process::IProcessor']]],
-  ['preprocess_4',['preProcess',['../classcalgopp_1_1signal_1_1process_1_1IProcessor.html#a934a2a76c7b9de9949351bf8835c2ceb',1,'calgopp::signal::process::IProcessor']]],
-  ['process_5',['process',['../classcalgopp_1_1signal_1_1process_1_1IProcessor.html#aaa58d8a74b9def7e3a16c6135327bfd5',1,'calgopp::signal::process::IProcessor::process()'],['../classcalgopp_1_1signal_1_1transform_1_1Jacymirski.html#a887308e60fcb36d147d437bb3931a6a7',1,'calgopp::signal::transform::Jacymirski::process()']]]
+  ['maxelement_0',['maxElement',['../namespacecalgopp_1_1algorithm_1_1numeric.html#a790cc0348abab2256fcc788b1e828912',1,'calgopp::algorithm::numeric']]],
+  ['minelement_1',['minElement',['../namespacecalgopp_1_1algorithm_1_1numeric.html#aab9dbedc88d4fc8171ab58cd41198105',1,'calgopp::algorithm::numeric']]]
 ];

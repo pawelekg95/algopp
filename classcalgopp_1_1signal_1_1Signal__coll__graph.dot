@@ -8,7 +8,7 @@ digraph "calgopp::signal::Signal"
   Node2 -> Node1 [color="grey25",style="solid",label=" -m_points" ,arrowhead="odiamond"];
   Node2 [label="{calgopp::types::Container\l\< calgopp::types::Point \>\n||+ Container()\l+ Container()\l+ Container()\l+ Container()\l+ Container()\l+ Container()\l+ ~Container()\l+ operator=()\l+ operator=()\l+ append()\l+ insert()\l+ remove()\l+ operator[]()\l+ at()\l+ index()\l+ size()\l+ capacity()\l+ empty()\l+ begin()\l+ end()\l+ find()\l# updateIterators()\l# extend()\l}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classcalgopp_1_1types_1_1Container.html",tooltip=" "];
   Node3 -> Node2 [color="grey25",style="solid",label=" #m_capacity\n#m_size" ,arrowhead="odiamond"];
-  Node3 [label="{unsigned int\n||}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",tooltip=" "];
+  Node3 [label="{int\n||}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",tooltip=" "];
   Node4 -> Node2 [color="grey25",style="solid",label=" #m_empty" ,arrowhead="odiamond"];
   Node4 [label="{bool\n||}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classbool.html",tooltip=" "];
   Node5 -> Node2 [color="grey25",style="solid",label=" #m_data" ,arrowhead="odiamond"];

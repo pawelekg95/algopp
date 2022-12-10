@@ -13,6 +13,4 @@ digraph "lib/algorithm/include/calgopp"
   dir_ee6f609f36b7f01bc5cabbc5cefdf872 [label="algorithm", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_ee6f609f36b7f01bc5cabbc5cefdf872.html",tooltip=""];
   }
   }
-  dir_560694f03ee5bf1136d79e4f1ca1ca37 [label="types", fillcolor="#edf0f7", color="red", style="filled,dashed", URL="dir_560694f03ee5bf1136d79e4f1ca1ca37.html",tooltip=""];
-  dir_ee6f609f36b7f01bc5cabbc5cefdf872->dir_560694f03ee5bf1136d79e4f1ca1ca37 [headlabel="1", labeldistance=1.5 headhref="dir_000001_000012.html" color="steelblue1" fontcolor="steelblue1"];
 }

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['type_0',['type',['../structcalgopp_1_1types_1_1Peak.html#afac7d1ed61c49fc953bb58bcaf1a79e6',1,'calgopp::types::Peak']]]
+  ['x_0',['x',['../structcalgopp_1_1types_1_1Point.html#a7e306cab655756021ca2b2bb5e4bd59f',1,'calgopp::types::Point']]]
 ];

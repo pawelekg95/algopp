@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['index_0',['index',['../classcalgopp_1_1types_1_1Container.html#a75d8d9a1beafb95c6880481ed4351642',1,'calgopp::types::Container']]],
-  ['insert_1',['insert',['../classcalgopp_1_1types_1_1Container.html#a4029aec3e84b1dd456f7bc667411e914',1,'calgopp::types::Container']]],
-  ['iterator_2',['Iterator',['../classcalgopp_1_1types_1_1Container_1_1Iterator.html#a2ffa6a8d7d7edee34c8be4b30d3c3c4f',1,'calgopp::types::Container::Iterator::Iterator()=default'],['../classcalgopp_1_1types_1_1Container_1_1Iterator.html#a9f304a01f1e1d15a7163a54abb3d9c55',1,'calgopp::types::Container::Iterator::Iterator(Type *data)']]]
+  ['find_0',['find',['../classcalgopp_1_1types_1_1Container.html#adc010892846ec477e993e2cfbd616f82',1,'calgopp::types::Container']]],
+  ['findelement_1',['findElement',['../namespacecalgopp_1_1algorithm_1_1numeric.html#a5cf61bd1d3256111b55b025ddc7303f7',1,'calgopp::algorithm::numeric']]],
+  ['floor_2',['floor',['../namespacecalgopp_1_1math.html#ab002b40ef50c28f31d74c9b402f24f64',1,'calgopp::math']]],
+  ['fraction_3',['Fraction',['../classcalgopp_1_1math_1_1Fraction.html#a2627d962080773809af3b97d2895c034',1,'calgopp::math::Fraction']]]
 ];

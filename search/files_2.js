@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['jacymirski_2ecpp_0',['Jacymirski.cpp',['../Jacymirski_8cpp.html',1,'']]],
-  ['jacymirski_2eh_1',['Jacymirski.h',['../Jacymirski_8h.html',1,'']]]
+  ['fouriertransform_2ecpp_0',['FourierTransform.cpp',['../FourierTransform_8cpp.html',1,'']]],
+  ['fouriertransform_2eh_1',['FourierTransform.h',['../FourierTransform_8h.html',1,'']]]
 ];

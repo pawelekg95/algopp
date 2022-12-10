@@ -7,12 +7,10 @@ digraph "lib/algorithm"
   compound=true
   subgraph clusterdir_97aefd0d527b934f1d99a682da8fe6a9 {
     graph [ bgcolor="#edf0f7", pencolor="grey25", label="lib", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_97aefd0d527b934f1d99a682da8fe6a9.html",tooltip=""]
-  dir_560694f03ee5bf1136d79e4f1ca1ca37 [label="types", fillcolor="#a2b4d6", color="red", style="filled", URL="dir_560694f03ee5bf1136d79e4f1ca1ca37.html",tooltip=""];
   subgraph clusterdir_f5dd86dbd9583e7b6fc3983d3949da68 {
     graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_f5dd86dbd9583e7b6fc3983d3949da68.html",tooltip=""]
     dir_f5dd86dbd9583e7b6fc3983d3949da68 [shape=plaintext, label="algorithm"];
   dir_9a97ad998015a048f4ab0c3f00568bf1 [label="include", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_9a97ad998015a048f4ab0c3f00568bf1.html",tooltip=""];
   }
   }
-  dir_9a97ad998015a048f4ab0c3f00568bf1->dir_560694f03ee5bf1136d79e4f1ca1ca37 [headlabel="1", labeldistance=1.5 headhref="dir_000005_000012.html" color="steelblue1" fontcolor="steelblue1"];
 }

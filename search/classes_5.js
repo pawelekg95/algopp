@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['peak_0',['Peak',['../structcalgopp_1_1types_1_1Peak.html',1,'calgopp::types']]],
-  ['point_1',['Point',['../structcalgopp_1_1types_1_1Point.html',1,'calgopp::types']]]
+  ['lesscomparator_0',['LessComparator',['../structcalgopp_1_1algorithm_1_1numeric_1_1LessComparator.html',1,'calgopp::algorithm::numeric']]]
 ];

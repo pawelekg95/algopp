@@ -14,7 +14,6 @@ digraph "lib/signal/Signal.cpp"
   Node4 -> Node3 [color="steelblue1",style="solid"];
   Node2 -> Node5 [color="steelblue1",style="solid"];
   Node5 [label="calgopp/types/Container.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Container_8h.html",tooltip=" "];
-  Node2 -> Node6 [color="steelblue1",style="solid"];
-  Node6 [label="calgopp/algorithm/numeric.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$numeric_8h.html",tooltip=" "];
-  Node6 -> Node5 [color="steelblue1",style="solid"];
+  Node1 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="calgopp/math/math.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$math_8h.html",tooltip=" "];
 }

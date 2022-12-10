@@ -12,7 +12,4 @@ digraph "lib/signal/include/calgopp/signal/Signal.h"
   Node3 -> Node2 [color="steelblue1",style="solid"];
   Node1 -> Node4 [color="steelblue1",style="solid"];
   Node4 [label="calgopp/types/Container.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Container_8h.html",tooltip=" "];
-  Node1 -> Node5 [color="steelblue1",style="solid"];
-  Node5 [label="calgopp/algorithm/numeric.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$numeric_8h.html",tooltip=" "];
-  Node5 -> Node4 [color="steelblue1",style="solid"];
 }

@@ -1,5 +1,11 @@
 var searchData=
 [
-  ['find_0',['find',['../classcalgopp_1_1types_1_1Container.html#adc010892846ec477e993e2cfbd616f82',1,'calgopp::types::Container']]],
-  ['findelement_1',['findElement',['../namespacecalgopp_1_1algorithm_1_1numeric.html#a5cf61bd1d3256111b55b025ddc7303f7',1,'calgopp::algorithm::numeric']]]
+  ['ehigh_0',['eHigh',['../namespacecalgopp_1_1types.html#a7c0dc29f8bb2c826271613c66c5bf9a2a257f156f0a0b12eb536ac506d530cd0d',1,'calgopp::types']]],
+  ['elow_1',['eLow',['../namespacecalgopp_1_1types.html#a7c0dc29f8bb2c826271613c66c5bf9a2acb74aeeb17d27a2ffad55cf50c052023',1,'calgopp::types']]],
+  ['empty_2',['empty',['../classcalgopp_1_1signal_1_1Signal.html#aec69d1110e049dc1d084ac28d080eca8',1,'calgopp::signal::Signal::empty()'],['../classcalgopp_1_1types_1_1Container.html#a46eac34baff44c27ce3ac00784078397',1,'calgopp::types::Container::empty()']]],
+  ['end_3',['end',['../classcalgopp_1_1signal_1_1Signal.html#ae0f963b92cff1cf1adc87b57a8c7d6b6',1,'calgopp::signal::Signal::end()'],['../classcalgopp_1_1types_1_1Container.html#af20ed300415261064e9449915c2c992a',1,'calgopp::types::Container::end()']]],
+  ['epsilon_4',['epsilon',['../namespacecalgopp_1_1math.html#aa2dd51878691938cfad5e6db903982ec',1,'calgopp::math']]],
+  ['euler_5',['euler',['../namespacecalgopp_1_1math.html#a66b0918b253b17e264bbe616dc93545f',1,'calgopp::math']]],
+  ['exp_6',['exp',['../namespacecalgopp_1_1math.html#aed640f1507cbbe6ba1cc928887c585d1',1,'calgopp::math']]],
+  ['extend_7',['extend',['../classcalgopp_1_1types_1_1Container.html#aee6ce08e53b3394a220c1d4f7ea29a68',1,'calgopp::types::Container']]]
 ];

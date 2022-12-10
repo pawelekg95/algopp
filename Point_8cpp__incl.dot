@@ -8,7 +8,5 @@ digraph "lib/types/Point.cpp"
   Node1 -> Node2 [color="steelblue1",style="solid"];
   Node2 [label="calgopp/types/Point.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Point_8h.html",tooltip=" "];
   Node1 -> Node3 [color="steelblue1",style="solid"];
-  Node3 [label="calgopp/algorithm/numeric.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$numeric_8h.html",tooltip=" "];
-  Node3 -> Node4 [color="steelblue1",style="solid"];
-  Node4 [label="calgopp/types/Container.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Container_8h.html",tooltip=" "];
+  Node3 [label="calgopp/math/math.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$math_8h.html",tooltip=" "];
 }
