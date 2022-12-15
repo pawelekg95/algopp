@@ -9,4 +9,4 @@ if __name__ == "__main__":
     parser.add_argument('-f', '--file', dest='file')
     args = parser.parse_args()
     with open(args.file, 'rb') as file:
-        print(hashlib.md5(file.read()).hexdigest())
+        print(hashlib.sha256(file.read()).hexdigest())

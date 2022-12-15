@@ -139,3 +139,12 @@ TEST_CASE("Benchmark test")
     CHECK(cThresholdMultiplier * test::benchmark([]() { std::pow(-12, 3); }) >=
           test::benchmark([]() { calgopp::math::pow(-12, 3); }));
 }
+
+TEST_CASE("Logarithms")
+{
+    REQUIRE(test::almostEqual(std::log(10), calgopp::math::log(10)));
+    REQUIRE(test::almostEqual(std::log(2), calgopp::math::log(2)));
+    REQUIRE(test::almostEqual(std::log(1.5), calgopp::math::log(1.5)));
+    REQUIRE(test::almostEqual(std::log(12), calgopp::math::log(12)));
+    REQUIRE(test::almostEqual(std::log(12.78), calgopp::math::log(12.78)));
+}

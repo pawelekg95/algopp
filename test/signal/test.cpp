@@ -5,13 +5,14 @@
 #include "calgopp/signal/Signal.h"
 #include "calgopp/types/Peak.h"
 #include "calgopp/types/Point.h"
+#include "calgopp/math/math.h"
+#include "calgopp/signal/transform/FourierTransform.h"
 
 #include "test/utils/helpers.h"
 
 #include <vector>
 #include <utility>
 #include <iostream>
-#include <tuple>
 #include <array>
 #include <list>
 #include <variant>
@@ -40,6 +41,19 @@ void removePoints(calgopp::signal::Signal& signal, std::uint32_t amount)
         signal.remove(signal.size() - 1);
         amount--;
     }
+}
+
+TEST_CASE("Complex")
+{
+    calgopp::types::Complex a{10, 0};
+    calgopp::types::Complex b{10, 0};
+    REQUIRE(a == b);
+    a.imag = 25.6;
+    REQUIRE(a != b);
+    REQUIRE(b * b == calgopp::types::Complex{100, 0});
+    REQUIRE(calgopp::types::Complex{100, 0} == math::pow(b, 2));
+    calgopp::types::Complex c{0, -1};
+    REQUIRE(c * c == calgopp::types::Complex{1, 0});
 }
 
 TEST_CASE("Points tests")
@@ -250,11 +264,26 @@ TEST_CASE("Signal tests - peaks")
     std::vector<types::Point> rawDataset;
     std::vector<types::Peak> expectedPeaks;
     types::Container<types::Peak> detectedPeaks;
+
+    auto peakDetected = [&expectedPeaks](const calgopp::types::Peak& peak) -> bool {
+        bool peakDetectedCorrectly = std::find(expectedPeaks.begin(), expectedPeaks.end(), peak) != expectedPeaks.end();
+        if (!peakDetectedCorrectly)
+        {
+            std::cout << "Detected peak not found in expected peaks. Index: " << peak.x << ", value: " << peak.y
+                      << std::endl;
+        }
+        return peakDetectedCorrectly;
+    };
+
     SECTION("Highs") { peakType = calgopp::types::PeakType::eHigh; }
 
     SECTION("Lows") { peakType = calgopp::types::PeakType::eLow; }
 
-    for (std::uint32_t size = 1; size < 5; size++)
+    std::uint32_t truePositivePredictions{};
+    std::uint32_t allDetectedPredictions{};
+    std::uint32_t expectedPredictions{};
+
+    for (std::uint32_t size = 1; size < 2; size++)
     {
         for (std::uint32_t distanceMultiplier = 1; distanceMultiplier < 4; distanceMultiplier++)
         {
@@ -273,18 +302,37 @@ TEST_CASE("Signal tests - peaks")
                 expectedPeaks = test::getPeaks("/tmp/dataset.json");
                 auto signal = calgopp::signal::Signal(calgopp::types::Container<types::Point>(rawDataset));
                 detectedPeaks = signal.peaks(peakType, height, distance);
-                for (const auto& peak : detectedPeaks)
+                expectedPredictions += expectedPeaks.size();
+                for (const auto& detectedPeak : detectedPeaks)
                 {
-                    std::cout << peak.y << " " << peak.x << std::endl;
-                }
-                CHECK(detectedPeaks.size() == expectedPeaks.size());
-                for (std::uint32_t l = 0; l < expectedPeaks.size(); l++)
-                {
-                    std::cout << "Peak no: " << l << std::endl;
-                    CHECK(detectedPeaks[l].y == expectedPeaks[l].y);
-                    CHECK(detectedPeaks[l].x == expectedPeaks[l].x);
+                    allDetectedPredictions++;
+                    truePositivePredictions += std::uint32_t(peakDetected(detectedPeak));
                 }
             }
         }
+    }
+    REQUIRE(double(truePositivePredictions) / double(allDetectedPredictions) > 0.95);
+    REQUIRE(double(allDetectedPredictions) / double(expectedPredictions) > 0.8);
+
+    std::cout << "true positive / all detected predictions: "
+              << double(truePositivePredictions) / double(allDetectedPredictions) << std::endl;
+    std::cout << "detected predictions / expected predictions: "
+              << double(allDetectedPredictions) / double(expectedPredictions) << std::endl;
+}
+
+TEST_CASE("Transforms")
+{
+    REQUIRE(test::testDataset("/tmp/dataset_generator.py", "/tmp/dataset.json", 10) == 0);
+    auto rawDataset = test::getRawDataset("/tmp/dataset.json");
+    auto modelTransformedDataset = test::getTransformedDataset("/tmp/dataset.json", test::Transform::eFastFourier);
+    calgopp::signal::transform::FourierTransform fourierTransform;
+    std::cout << "Processing signal" << std::endl;
+    auto testedTransformedDataset = fourierTransform.process(calgopp::signal::Signal{rawDataset});
+    std::cout << "Signal processed" << std::endl;
+    CHECK(testedTransformedDataset.size() == modelTransformedDataset.size());
+
+    for (std::uint32_t i = 0; i < modelTransformedDataset.size(); i++)
+    {
+        CHECK(testedTransformedDataset[i].y == modelTransformedDataset[i]);
     }
 }

@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 add_library(calgopp-types EXCLUDE_FROM_ALL
+        Complex.cpp
         Point.cpp
         Peak.cpp
         )

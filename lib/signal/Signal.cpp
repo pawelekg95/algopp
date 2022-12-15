@@ -1,5 +1,4 @@
 #include "calgopp/signal/Signal.h"
-#include "calgopp/math/math.h"
 
 namespace calgopp::signal {
 
@@ -75,7 +74,7 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
     };
 
     auto comparator = [&type](long double first, long double second) -> bool {
-        return (type == types::PeakType::eLow ? first > second : first < second);
+        return (type == types::PeakType::eLow ? first >= second : first <= second);
     };
 
     types::Container<types::Peak> peaks;
@@ -109,6 +108,11 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
     }
 
     return peaks;
+}
+
+types::Point Signal::get(unsigned int index) const
+{
+    return m_points.at(index);
 }
 
 } // namespace calgopp::signal

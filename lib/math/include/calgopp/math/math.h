@@ -50,7 +50,7 @@ Type abs(const Type& number)
 template <typename Type>
 Type floor(const Type& number)
 {
-    return number < 0 ? -ceil(abs(number)) : int(number);
+    return number < 0 ? -floor(abs(number - 1)) : int(number);
 }
 
 /**
@@ -66,7 +66,7 @@ Type ceil(const Type& number)
     {
         return number;
     }
-    return number < 0 ? -floor(abs(number)) : int(number + 1);
+    return number < 0 ? -ceil(abs(number + 1)) : int(number + 1);
 }
 
 /**
@@ -227,7 +227,7 @@ long double pow(ArgumentType number, int power)
     }
     if (absPower == 1)
     {
-        return power < 0 ? 1.0 / number : number;
+        return power < 0 ? 1.0 / double(number) : double(number);
     }
     long double token = number;
     while (absPower > 1)
@@ -318,6 +318,18 @@ template <typename Number>
 double tan(const Number& num)
 {
     return sin(num) / cos(num);
+}
+
+template <typename T>
+long double log(const T& argument)
+{
+    long double token{};
+    auto base = double(argument - 1) / double(argument + 1);
+    for (unsigned int i = 1; i < 200; i += 2)
+    {
+        token += (1.0 / double(i)) * pow(base, i);
+    }
+    return 2 * token;
 }
 
 } // namespace calgopp::math

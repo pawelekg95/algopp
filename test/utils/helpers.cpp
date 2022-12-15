@@ -48,11 +48,33 @@ std::vector<calgopp::types::Peak> getPeaks(const std::string& datasetPath)
     assert(!parsedConfig.HasParseError());
 
     auto datasetArray = parsedConfig.GetObject()["peaks"].GetArray();
+    auto peaksType = std::string(parsedConfig.GetObject()["peaks_type"].GetString());
     std::vector<calgopp::types::Peak> dataset(datasetArray.Size());
     for (std::uint32_t i = 0; i < datasetArray.Size(); i++)
     {
         auto pointArray = datasetArray[i].GetArray();
-        dataset[i] = types::Peak{pointArray[0].GetInt(), pointArray[1].GetFloat()};
+        dataset[i] = types::Peak{pointArray[0].GetInt(),
+                                 pointArray[1].GetFloat(),
+                                 peaksType == "high" ? types::PeakType::eHigh : types::PeakType::eLow};
+    }
+    return dataset;
+}
+
+std::vector<calgopp::types::Complex> getTransformedDataset(const std::string& datasetPath, Transform transform)
+{
+    (void) transform;
+    std::ifstream file(datasetPath);
+    rapidjson::IStreamWrapper stream(file);
+    rapidjson::Document parsedConfig;
+    parsedConfig.ParseStream(stream);
+    assert(!parsedConfig.HasParseError());
+
+    auto datasetArray = parsedConfig.GetObject()["fourier"].GetArray();
+    std::vector<calgopp::types::Complex> dataset(datasetArray.Size());
+    for (std::uint32_t i = 0; i < datasetArray.Size(); i++)
+    {
+        auto pointArray = datasetArray[i].GetArray();
+        dataset[i] = types::Complex{pointArray[0].GetDouble(), pointArray[1].GetDouble()};
     }
     return dataset;
 }

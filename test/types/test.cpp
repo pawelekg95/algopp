@@ -221,3 +221,9 @@ TEST_CASE("Multidimensional containers")
         }
     }
 }
+
+TEST_CASE("Complex")
+{
+    REQUIRE(test::almostEqual(math::pow(2, types::Complex{5, 12}), types::Complex{-14.3147539, 28.61971035}));
+    REQUIRE(test::almostEqual(math::pow(3, types::Complex{5.5, 11.1}), types::Complex{392.135, 152.896}, 0.001));
+}

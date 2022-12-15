@@ -129,6 +129,8 @@ public:
      */
     void remove(unsigned int index);
 
+    types::Point get(unsigned int index) const;
+
     /**
      * Index operator. Accesses reference to item at index. Throws const char* on invalid index.
      * @param index                     Index of point to access.
@@ -165,6 +167,8 @@ public:
      * @return Iterator to 1 place after last element.
      */
     types::Container<types::Point>::Iterator end() const { return m_points.end(); }
+
+    unsigned int index(const types::Point& point) const { return m_points.index(point); }
 
 private:
     types::Container<types::Point> m_points;

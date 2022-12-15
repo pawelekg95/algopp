@@ -5,14 +5,12 @@ namespace calgopp::types {
 
 bool operator==(const Peak& lhs, const Peak& rhs)
 {
-    return math::abs(lhs.x - rhs.x) < math::epsilon() && math::abs(lhs.y - rhs.y) < math::epsilon() &&
-           lhs.type == rhs.type;
+    return math::abs(lhs.x - rhs.x) < math::epsilon() && lhs.y == rhs.y && lhs.type == rhs.type;
 }
 
 bool operator==(const Peak&& lhs, const Peak&& rhs)
 {
-    return math::abs(lhs.x - rhs.x) < math::epsilon() && math::abs(lhs.y - rhs.y) < math::epsilon() &&
-           lhs.type == rhs.type;
+    return math::abs(lhs.x - rhs.x) < math::epsilon() && lhs.y == rhs.y && lhs.type == rhs.type;
 }
 
 bool operator!=(const Peak& lhs, const Peak& rhs)

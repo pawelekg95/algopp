@@ -1,5 +1,7 @@
 #pragma once
 
+#include "calgopp/types/Complex.h"
+
 namespace calgopp::types {
 
 /**
@@ -37,8 +39,14 @@ struct Point
         , y(double(y))
     {}
 
+    template <typename T>
+    Point(T x, Complex y)
+        : x(double(x))
+        , y(y)
+    {}
+
     long double x{};
-    long double y{};
+    Complex y{};
 
     /**
      * Appending and assignment operator.

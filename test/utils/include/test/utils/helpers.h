@@ -22,6 +22,11 @@ using namespace calgopp;
 
 namespace test {
 
+enum class Transform
+{
+    eFastFourier
+};
+
 using ContainerVariant = std::variant<std::vector<double>,
                                       std::vector<int>,
                                       std::vector<float>,
@@ -87,12 +92,15 @@ int testDataset(const std::string& scriptPath,
                 const std::string& outputPath,
                 std::uint32_t size,
                 double height = 0,
-                double distance = 0,
+                double distance = 1,
                 types::PeakType type = types::PeakType::eHigh);
 
 std::vector<calgopp::types::Point> getRawDataset(const std::string& datasetPath);
 
 std::vector<calgopp::types::Peak> getPeaks(const std::string& datasetPath);
+
+std::vector<calgopp::types::Complex> getTransformedDataset(const std::string& datasetPath,
+                                                           Transform transform = Transform::eFastFourier);
 
 inline std::uint64_t benchmark(const std::function<void()>& function)
 {

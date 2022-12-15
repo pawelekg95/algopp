@@ -13,4 +13,4 @@ target_include_directories(calgopp-signal
         )
 
 target_link_libraries(calgopp-signal
-        PUBLIC calgopp::types calgopp::math)
+        PUBLIC calgopp::algorithm calgopp::types calgopp::math)
