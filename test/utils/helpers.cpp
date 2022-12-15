@@ -9,20 +9,20 @@
 
 namespace test {
 
-int testDataset(const std::string& scriptPath,
-                const std::string& outputPath,
+int testDataset(const std::filesystem::path& scriptPath,
+                const std::filesystem::path& outputPath,
                 std::uint32_t size,
                 double height,
                 double distance,
                 types::PeakType type)
 {
-    std::string command = scriptPath + " -p " + outputPath + " -s " + std::to_string(size) + " --height " +
-                          std::to_string(height) + " -d " + std::to_string(distance) + " -t " +
+    std::string command = scriptPath.string() + " -p " + outputPath.string() + " -s " + std::to_string(size) +
+                          " --height " + std::to_string(height) + " -d " + std::to_string(distance) + " -t " +
                           (type == calgopp::types::PeakType::eHigh ? "high" : "low");
     return system(command.c_str()); // NOLINT cert-env33-c
 }
 
-std::vector<calgopp::types::Point> getRawDataset(const std::string& datasetPath)
+std::vector<calgopp::types::Point> getRawDataset(const std::filesystem::path& datasetPath)
 {
     std::ifstream file(datasetPath);
     rapidjson::IStreamWrapper stream(file);
@@ -39,7 +39,7 @@ std::vector<calgopp::types::Point> getRawDataset(const std::string& datasetPath)
     return dataset;
 }
 
-std::vector<calgopp::types::Peak> getPeaks(const std::string& datasetPath)
+std::vector<calgopp::types::Peak> getPeaks(const std::filesystem::path& datasetPath)
 {
     std::ifstream file(datasetPath);
     rapidjson::IStreamWrapper stream(file);
@@ -60,7 +60,8 @@ std::vector<calgopp::types::Peak> getPeaks(const std::string& datasetPath)
     return dataset;
 }
 
-std::vector<calgopp::types::Complex> getTransformedDataset(const std::string& datasetPath, Transform transform)
+std::vector<calgopp::types::Complex> getTransformedDataset(const std::filesystem::path& datasetPath,
+                                                           Transform transform)
 {
     (void) transform;
     std::ifstream file(datasetPath);

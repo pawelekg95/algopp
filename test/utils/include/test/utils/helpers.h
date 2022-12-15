@@ -17,6 +17,7 @@
 #include <functional>
 #include <iostream>
 #include <iomanip>
+#include <filesystem>
 
 using namespace calgopp;
 
@@ -88,18 +89,18 @@ void addData(types::Container<T>& container, std::uint32_t amount)
     }
 }
 
-int testDataset(const std::string& scriptPath,
-                const std::string& outputPath,
+int testDataset(const std::filesystem::path& scriptPath,
+                const std::filesystem::path& outputPath,
                 std::uint32_t size,
                 double height = 0,
                 double distance = 1,
                 types::PeakType type = types::PeakType::eHigh);
 
-std::vector<calgopp::types::Point> getRawDataset(const std::string& datasetPath);
+std::vector<calgopp::types::Point> getRawDataset(const std::filesystem::path& datasetPath);
 
-std::vector<calgopp::types::Peak> getPeaks(const std::string& datasetPath);
+std::vector<calgopp::types::Peak> getPeaks(const std::filesystem::path& datasetPath);
 
-std::vector<calgopp::types::Complex> getTransformedDataset(const std::string& datasetPath,
+std::vector<calgopp::types::Complex> getTransformedDataset(const std::filesystem::path& datasetPath,
                                                            Transform transform = Transform::eFastFourier);
 
 inline std::uint64_t benchmark(const std::function<void()>& function)

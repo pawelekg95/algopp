@@ -16,7 +16,7 @@ Signal FourierTransform::process(const Signal& signal)
             auto n = signal.index(element);
             auto xn = element.y;
             types::Complex token = xn * math::pow(math::euler(), types::Complex{0, (-2 * math::pi() * k * n) / N});
-            return {0,  token};
+            return {0, token};
         };
         token += algorithm::numeric::sum(signal.begin(), signal.end(), types::Point{signal.get(k).x, 0}, modifier);
         std::cout << (*(token.end() - 1)).y.real << " " << (*(token.end() - 1)).y.imag << std::endl;

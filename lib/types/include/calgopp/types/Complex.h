@@ -108,8 +108,9 @@ namespace calgopp::math {
 template <typename T>
 types::Complex pow(const T& number, const types::Complex& power)
 {
-    int multiplier = int(power.imag)%2 == 1 || power.imag == 0 ? 1 : -1;
-    return {multiplier * math::pow(number, power.real) * math::cos(power.imag * math::log(number)), math::pow(number, power.real) * math::sin(power.imag * math::log(number))};
+    int multiplier = int(power.imag) % 2 == 1 || power.imag == 0 ? 1 : -1;
+    return {multiplier * math::pow(number, power.real) * math::cos(power.imag * math::log(number)),
+            math::pow(number, power.real) * math::sin(power.imag * math::log(number))};
 }
 
 } // namespace calgopp::math

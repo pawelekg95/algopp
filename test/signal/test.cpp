@@ -292,14 +292,15 @@ TEST_CASE("Signal tests - peaks")
                 double datasetSize = pow(100, size);
                 std::uint32_t distance = distanceMultiplier * 5;
                 double height = heightMultiplier * 0.1;
-                REQUIRE(test::testDataset("/tmp/dataset_generator.py",
-                                          "/tmp/dataset.json",
+                auto currentPath = std::filesystem::canonical("/proc/self/exe").parent_path();
+                REQUIRE(test::testDataset(currentPath / "dataset_generator.py",
+                                          currentPath / "dataset.json",
                                           std::uint32_t(datasetSize),
                                           height,
                                           distance,
                                           peakType) == 0);
-                rawDataset = test::getRawDataset("/tmp/dataset.json");
-                expectedPeaks = test::getPeaks("/tmp/dataset.json");
+                rawDataset = test::getRawDataset(currentPath / "dataset.json");
+                expectedPeaks = test::getPeaks(currentPath / "dataset.json");
                 auto signal = calgopp::signal::Signal(calgopp::types::Container<types::Point>(rawDataset));
                 detectedPeaks = signal.peaks(peakType, height, distance);
                 expectedPredictions += expectedPeaks.size();
@@ -322,9 +323,11 @@ TEST_CASE("Signal tests - peaks")
 
 TEST_CASE("Transforms")
 {
-    REQUIRE(test::testDataset("/tmp/dataset_generator.py", "/tmp/dataset.json", 10) == 0);
-    auto rawDataset = test::getRawDataset("/tmp/dataset.json");
-    auto modelTransformedDataset = test::getTransformedDataset("/tmp/dataset.json", test::Transform::eFastFourier);
+    auto currentPath = std::filesystem::canonical("/proc/self/exe").parent_path();
+    REQUIRE(test::testDataset(currentPath / "dataset_generator.py", currentPath / "dataset.json", 10) == 0);
+    auto rawDataset = test::getRawDataset(currentPath / "dataset.json");
+    auto modelTransformedDataset =
+        test::getTransformedDataset(currentPath / "dataset.json", test::Transform::eFastFourier);
     calgopp::signal::transform::FourierTransform fourierTransform;
     std::cout << "Processing signal" << std::endl;
     auto testedTransformedDataset = fourierTransform.process(calgopp::signal::Signal{rawDataset});

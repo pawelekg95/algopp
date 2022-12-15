@@ -117,10 +117,7 @@ Container range(int begin, int end)
 
 struct DoubleModifier
 {
-    double operator()(double& argument)
-    {
-        return argument;
-    }
+    double operator()(double& argument) { return argument; }
 };
 
 /**
@@ -130,7 +127,7 @@ struct DoubleModifier
  * @param end                           End of range.
  * @return Sum of all objects from range.
  */
-template <typename It, typename T = double, typename Modifier = T(*)(T)>
+template <typename It, typename T = double, typename Modifier = T (*)(T)>
 T sum(
     It begin,
     It end,
