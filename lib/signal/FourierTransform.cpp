@@ -10,16 +10,16 @@ Signal FourierTransform::process(const Signal& signal)
 {
     signal::Signal token;
     auto N = signal.size();
-    for (unsigned int k = 0; k < N; k++)
+    unsigned int k{};
+    auto modifier = [&k, &N, &signal](const types::Point& element) -> types::Point {
+        auto n = signal.index(element);
+        auto arg = 2 * math::pi() * k * n / N;
+        auto power = types::Complex{math::cos(arg), -math::sin(arg)};
+        return {0, element.y * power};
+    };
+    for (k = 0; k < N; k++)
     {
-        auto modifier = [&signal, k, N](types::Point element) -> types::Point {
-            auto n = signal.index(element);
-            auto xn = element.y;
-            types::Complex token = xn * math::pow(math::euler(), types::Complex{0, (-2 * math::pi() * k * n) / N});
-            return {0, token};
-        };
-        token += algorithm::numeric::sum(signal.begin(), signal.end(), types::Point{signal.get(k).x, 0}, modifier);
-        std::cout << (*(token.end() - 1)).y.real << " " << (*(token.end() - 1)).y.imag << std::endl;
+        token += algorithm::numeric::sum(signal.begin(), signal.end(), types::Point{signal.get(k).x, 0.0}, modifier);
     }
     return token;
 }

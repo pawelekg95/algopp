@@ -324,7 +324,7 @@ TEST_CASE("Signal tests - peaks")
 TEST_CASE("Transforms")
 {
     auto currentPath = std::filesystem::canonical("/proc/self/exe").parent_path();
-    REQUIRE(test::testDataset(currentPath / "dataset_generator.py", currentPath / "dataset.json", 10) == 0);
+    REQUIRE(test::testDataset(currentPath / "dataset_generator.py", currentPath / "dataset.json", 9) == 0);
     auto rawDataset = test::getRawDataset(currentPath / "dataset.json");
     auto modelTransformedDataset =
         test::getTransformedDataset(currentPath / "dataset.json", test::Transform::eFastFourier);
@@ -336,6 +336,6 @@ TEST_CASE("Transforms")
 
     for (std::uint32_t i = 0; i < modelTransformedDataset.size(); i++)
     {
-        CHECK(testedTransformedDataset[i].y == modelTransformedDataset[i]);
+        CHECK(test::almostEqual(testedTransformedDataset[i].y, modelTransformedDataset[i]));
     }
 }

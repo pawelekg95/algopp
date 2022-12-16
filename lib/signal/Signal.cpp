@@ -6,30 +6,6 @@ Signal::Signal(const types::Point* points, unsigned int size)
     : m_points(points, size)
 {}
 
-Signal::Signal(Signal&& other) noexcept
-    : m_points(static_cast<types::Container<types::Point>&&>(other.m_points))
-{}
-
-Signal& Signal::operator=(Signal&& other) noexcept
-{
-    if (&other == this)
-    {
-        return *this;
-    }
-    m_points = static_cast<types::Container<types::Point>&&>(other.m_points);
-    return *this;
-}
-
-Signal& Signal::operator=(const Signal& other)
-{
-    if (&other == this)
-    {
-        return *this;
-    }
-    m_points = other.m_points;
-    return *this;
-}
-
 void Signal::operator+=(const types::Point& point)
 {
     append(point);

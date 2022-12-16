@@ -132,7 +132,7 @@ T sum(
     It begin,
     It end,
     T initialValue = 0.0,
-    Modifier modifier = [](double argument) -> double { return argument; })
+    Modifier modifier = [](T argument) -> T { return argument; })
 {
     while (begin < end)
     {

@@ -80,4 +80,22 @@ std::vector<calgopp::types::Complex> getTransformedDataset(const std::filesystem
     return dataset;
 }
 
+bool almostEqual(const types::Complex& var1, const types::Complex& var2, double threshold)
+{
+    double realDif = std::abs(var1.real - var2.real);
+    double imagDif = std::abs(var1.imag - var2.imag);
+    if (realDif > threshold)
+    {
+        std::cout << "Variables real parts don't equal. Var1: " << var1.real << ", var2: " << var2.real << ", difference: " << realDif
+                  << std::endl;
+    }
+
+    if (imagDif > threshold)
+    {
+        std::cout << "Variables imag parts don't equal. Var1: " << var1.imag << ", var2: " << var2.imag << ", difference: " << imagDif
+                  << std::endl;
+    }
+    return realDif < threshold && imagDif < threshold;
+}
+
 } // namespace test

@@ -8,6 +8,14 @@ struct Complex
 {
     Complex() = default;
 
+    Complex(const Complex& other) = default;
+
+    Complex(Complex&& other) noexcept = default;
+
+    Complex& operator=(const Complex& other) = default;
+
+    Complex& operator=(Complex&& other) noexcept = default;
+
     template <typename T>
     Complex(T real)
         : real(double(real))
@@ -99,18 +107,46 @@ bool operator!=(const Complex&& complex, unsigned int number);
 
 bool operator!=(const Complex&& complex, long double number);
 
-Complex operator*(const Complex& num1, const double& num2);
+template <typename T>
+Complex operator*(const types::Complex& num1, const T& num2)
+{
+    return {num1.real * num2, num1.imag * num2};
+}
+
+template <typename T>
+Complex operator*(const T& num1, const Complex& num2)
+{
+    return {num1 * num2.real, num1 * num2.imag};
+}
+
+template <typename T>
+Complex operator/(const T& num1, const Complex& num2)
+{
+    return {num1 / num2.real, num1 / num2.imag};
+}
+
+template <typename T>
+Complex operator/(const Complex& num1, const T& num2)
+{
+    return {num1.real / num2, num1.imag / num2};
+}
 
 } // namespace calgopp::types
 
 namespace calgopp::math {
 
+double abs(const types::Complex& number);
+
 template <typename T>
 types::Complex pow(const T& number, const types::Complex& power)
 {
-    int multiplier = int(power.imag) % 2 == 1 || power.imag == 0 ? 1 : -1;
-    return {multiplier * math::pow(number, power.real) * math::cos(power.imag * math::log(number)),
-            math::pow(number, power.real) * math::sin(power.imag * math::log(number))};
+    auto pwr = math::pow(number, power.real);
+    return {pwr * math::cos(power.imag * math::log(number)),
+            pwr * math::sin(power.imag * math::log(number))};
 }
+
+types::Complex pow(const types::Complex& number, unsigned int power);
+
+types::Complex pow(const types::Complex& number, int power);
 
 } // namespace calgopp::math

@@ -27,21 +27,21 @@ public:
      * Moving constructor
      * @param other                 Other signal to be moved
      */
-    Signal(Signal&& other) noexcept;
+    Signal(Signal&& other) noexcept = default;
 
     /**
      * Copying assignment operator
      * @param other                 Other signal to be copied
      * @return Copied signal
      */
-    Signal& operator=(const Signal& other);
+    Signal& operator=(const Signal& other) = default;
 
     /**
      * Moving assignment operator
      * @param other                 Other signal to be moved
      * @return Moved signal
      */
-    Signal& operator=(Signal&& other) noexcept;
+    Signal& operator=(Signal&& other) noexcept = default;
 
     /**
      * Template constructor that accepts STL containers

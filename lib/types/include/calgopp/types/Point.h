@@ -14,6 +14,14 @@ struct Point
      */
     Point() = default;
 
+    Point(const Point& other) = default;
+
+    Point(Point&& other) noexcept = default;
+
+    Point& operator=(const Point& other) = default;
+
+    Point& operator=(Point&& other) noexcept = default;
+
     /**
      * Constructs point from same numeric type of arguments
      * @tparam T                    Type of input arguments.

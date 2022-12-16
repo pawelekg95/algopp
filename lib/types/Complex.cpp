@@ -49,7 +49,7 @@ Complex operator-(const Complex& lhs, const Complex& rhs)
 
 Complex operator*(const Complex& lhs, const Complex& rhs)
 {
-    return {lhs.real * rhs.real + lhs.imag * rhs.imag, lhs.real * rhs.imag + lhs.imag * rhs.real};
+    return {lhs.real * rhs.real - lhs.imag * rhs.imag, lhs.real * rhs.imag + lhs.imag * rhs.real};
 }
 
 Complex operator/(const Complex& lhs, const Complex& rhs)
@@ -118,9 +118,33 @@ bool operator!=(const Complex&& complex, long double number)
     return !(complex == number);
 }
 
-Complex operator*(const types::Complex& num1, const double& num2)
+} // namespace calgopp::types
+
+namespace calgopp::math {
+
+double abs(const types::Complex& number)
 {
-    return {num1.real * num2, num1.imag * num2};
+    return root(pow(number.real, 2) + pow(number.imag, 2), 2);
 }
 
-} // namespace calgopp::types
+types::Complex pow(const types::Complex& number, unsigned int power)
+{
+    if (power == 0)
+    {
+        return {1, 0};
+    }
+    types::Complex token{number};
+    while (power-- > 1)
+    {
+        token = token * number;
+    }
+    return token;
+}
+
+types::Complex pow(const types::Complex& number, int power)
+{
+    unsigned int absPower = abs(power);
+    return power > 0 ? pow(number, absPower) : 1.0 / pow(number, absPower);
+}
+
+}
