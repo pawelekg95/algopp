@@ -105,7 +105,9 @@ TEST_CASE("Exponential function")
     REQUIRE(test::almostEqual(std::exp(2), calgopp::math::exp(2)));
     REQUIRE(test::almostEqual(std::exp(10), calgopp::math::exp(10)));
     REQUIRE(test::almostEqual(std::exp(23.245), calgopp::math::exp(23.245), 1));
-    REQUIRE(test::almostEqual(std::exp(std::pow(6, 3)), calgopp::math::exp(math::pow(6, 3)), 0.05 * std::exp(std::pow(6, 3))));
+    REQUIRE(test::almostEqual(std::exp(std::pow(6, 3)),
+                              calgopp::math::exp(math::pow(6, 3)),
+                              0.05 * std::exp(std::pow(6, 3))));
     REQUIRE(test::almostEqual(std::exp(std::sin(60 * (M_PI / 180))),
                               calgopp::math::exp(math::sin(60 * (math::pi() / 180))),
                               0.0001));

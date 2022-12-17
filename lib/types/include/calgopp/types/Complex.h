@@ -141,8 +141,7 @@ template <typename T>
 types::Complex pow(const T& number, const types::Complex& power)
 {
     auto pwr = math::pow(number, power.real);
-    return {pwr * math::cos(power.imag * math::log(number)),
-            pwr * math::sin(power.imag * math::log(number))};
+    return {pwr * math::cos(power.imag * math::log(number)), pwr * math::sin(power.imag * math::log(number))};
 }
 
 types::Complex pow(const types::Complex& number, unsigned int power);
