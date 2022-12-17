@@ -147,4 +147,4 @@ types::Complex pow(const types::Complex& number, int power)
     return power > 0 ? pow(number, absPower) : 1.0 / pow(number, absPower);
 }
 
-}
+} // namespace calgopp::math

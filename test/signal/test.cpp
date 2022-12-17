@@ -53,7 +53,7 @@ TEST_CASE("Complex")
     REQUIRE(b * b == calgopp::types::Complex{100, 0});
     REQUIRE(calgopp::types::Complex{100, 0} == math::pow(b, 2));
     calgopp::types::Complex c{0, -1};
-    REQUIRE(c * c == calgopp::types::Complex{1, 0});
+    REQUIRE(c * c == calgopp::types::Complex{-1, 0});
 }
 
 TEST_CASE("Points tests")
@@ -336,6 +336,6 @@ TEST_CASE("Transforms")
 
     for (std::uint32_t i = 0; i < modelTransformedDataset.size(); i++)
     {
-        CHECK(test::almostEqual(testedTransformedDataset[i].y, modelTransformedDataset[i]));
+        CHECK(test::almostEqual(testedTransformedDataset[i].y, modelTransformedDataset[i], 0.001));
     }
 }

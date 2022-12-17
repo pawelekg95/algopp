@@ -9,12 +9,12 @@ namespace calgopp::signal::transform {
 Signal FourierTransform::process(const Signal& signal)
 {
     signal::Signal token;
-    auto N = signal.size();
+    auto N = signal.size(); // NOLINT
     unsigned int k{};
     auto modifier = [&k, &N, &signal](const types::Point& element) -> types::Point {
         auto n = signal.index(element);
-        auto arg = 2 * math::pi() * k * n / N;
-        auto power = types::Complex{math::cos(arg), -math::sin(arg)};
+        auto arg = -2.0 * math::pi() * k * n / N;
+        auto power = math::pow(math::euler(), types::Complex{0, arg});
         return {0, element.y * power};
     };
     for (k = 0; k < N; k++)
