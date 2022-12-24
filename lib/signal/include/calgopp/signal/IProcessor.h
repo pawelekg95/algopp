@@ -17,11 +17,7 @@ public:
      * @param signal                Input signal
      * @return Pre processed signal
      */
-    virtual Signal preProcess(const Signal& signal)
-    {
-        (void) signal;
-        return {};
-    }
+    virtual Signal preProcess(const Signal& signal) { return signal; }
 
     /**
      * Virtual processing method
@@ -35,11 +31,7 @@ public:
      * @param signal                Input signal
      * @return  Post-processed signal
      */
-    virtual Signal postProcess(const Signal& signal)
-    {
-        (void) signal;
-        return {};
-    }
+    virtual Signal postProcess(const Signal& signal) { return signal; }
 };
 
 } // namespace calgopp::signal::process

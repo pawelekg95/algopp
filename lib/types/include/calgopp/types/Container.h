@@ -251,7 +251,7 @@ public:
      * @param element               Element to be found
      * @return Index of element.
      */
-    unsigned int index(const Type& element)
+    unsigned int index(const Type& element) const
     {
         for (unsigned int i = 0; i < m_size; i++)
         {

@@ -100,20 +100,25 @@ It maxElement(It begin, It end)
  * @param end                           End of range
  * @return Container with numbers
  */
-template <template <typename> class Container, typename Type>
-Container<Type> range(int begin, int end)
+template <typename Container>
+Container range(int begin, int end)
 {
     if (begin >= end)
     {
         return {};
     }
-    Container<Type> token;
+    Container token;
     for (int i = begin; i < end; i++)
     {
         token.append(i);
     }
     return token;
 }
+
+struct DoubleModifier
+{
+    double operator()(double& argument) { return argument; }
+};
 
 /**
  * Calculates sum of all elements in range between iterators.
@@ -122,16 +127,19 @@ Container<Type> range(int begin, int end)
  * @param end                           End of range.
  * @return Sum of all objects from range.
  */
-template <typename It>
-double sum(It begin, It end)
+template <typename It, typename T = double, typename Modifier = T (*)(T)>
+T sum(
+    It begin,
+    It end,
+    T initialValue = 0.0,
+    Modifier modifier = [](T argument) -> T { return argument; })
 {
-    double token{};
     while (begin < end)
     {
-        token += *begin;
+        initialValue += modifier(*begin);
         begin++;
     }
-    return token;
+    return initialValue;
 }
 
 } // namespace calgopp::algorithm::numeric

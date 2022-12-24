@@ -1,5 +1,7 @@
 #pragma once
 
+#include "calgopp/types/Complex.h"
+
 namespace calgopp::types {
 
 /**
@@ -11,6 +13,14 @@ struct Point
      * Default constructor
      */
     Point() = default;
+
+    Point(const Point& other) = default;
+
+    Point(Point&& other) noexcept = default;
+
+    Point& operator=(const Point& other) = default;
+
+    Point& operator=(Point&& other) noexcept = default;
 
     /**
      * Constructs point from same numeric type of arguments
@@ -37,8 +47,14 @@ struct Point
         , y(double(y))
     {}
 
+    template <typename T>
+    Point(T x, Complex y)
+        : x(double(x))
+        , y(y)
+    {}
+
     long double x{};
-    long double y{};
+    Complex y{};
 
     /**
      * Appending and assignment operator.

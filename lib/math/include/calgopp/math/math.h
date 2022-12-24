@@ -2,13 +2,23 @@
 
 namespace calgopp::math {
 
+inline double toRadians(double degrees)
+{
+    return degrees / 57.29577951;
+}
+
+inline double toDegrees(double radians)
+{
+    return radians * 57.29577951;
+}
+
 /**
  * Epsilon number approximation.
  * @return Epsilon number.
  */
 inline long double epsilon()
 {
-    return 0.0000001;
+    return 0.0000000000000000000001;
 }
 
 /**
@@ -50,7 +60,7 @@ Type abs(const Type& number)
 template <typename Type>
 Type floor(const Type& number)
 {
-    return number < 0 ? -ceil(abs(number)) : int(number);
+    return number < 0 ? -floor(abs(number - 1)) : int(number);
 }
 
 /**
@@ -66,7 +76,7 @@ Type ceil(const Type& number)
     {
         return number;
     }
-    return number < 0 ? -floor(abs(number)) : int(number + 1);
+    return number < 0 ? -ceil(abs(number + 1)) : int(number + 1);
 }
 
 /**
@@ -227,7 +237,7 @@ long double pow(ArgumentType number, int power)
     }
     if (absPower == 1)
     {
-        return power < 0 ? 1.0 / number : number;
+        return power < 0 ? 1.0 / double(number) : double(number);
     }
     long double token = number;
     while (absPower > 1)
@@ -305,7 +315,16 @@ double sin(const Number& num)
 template <typename Number>
 double cos(const Number& num)
 {
-    return root(1 - pow(sin(num), 2), 2);
+    auto shouldBePositive = [num]() -> bool {
+        auto degrees = abs(toDegrees(num));
+        while (degrees > 360)
+        {
+            degrees -= 360;
+        }
+        return (degrees >= 0 && degrees <= 90) || (degrees >= 270 && degrees <= 360);
+    };
+    auto result = root(1 - pow(sin(num), 2), 2);
+    return shouldBePositive() ? result : -result;
 }
 
 /**
@@ -317,7 +336,28 @@ double cos(const Number& num)
 template <typename Number>
 double tan(const Number& num)
 {
-    return sin(num) / cos(num);
+    auto shouldBePositive = [num]() -> bool {
+        auto degrees = abs(toDegrees(num));
+        while (degrees > 360)
+        {
+            degrees -= 360;
+        }
+        return (degrees >= 0 && degrees <= 90) || (degrees > 180 && degrees <= 270);
+    };
+    auto result = abs(sin(num) / cos(num));
+    return shouldBePositive() ? result : -result;
+}
+
+template <typename T>
+long double log(const T& argument)
+{
+    long double token{};
+    auto base = double(argument - 1) / double(argument + 1);
+    for (unsigned int i = 1; i < 200; i += 2)
+    {
+        token += (1.0 / double(i)) * pow(base, i);
+    }
+    return 2 * token;
 }
 
 } // namespace calgopp::math

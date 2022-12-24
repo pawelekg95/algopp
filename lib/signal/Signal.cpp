@@ -1,35 +1,10 @@
 #include "calgopp/signal/Signal.h"
-#include "calgopp/math/math.h"
 
 namespace calgopp::signal {
 
 Signal::Signal(const types::Point* points, unsigned int size)
     : m_points(points, size)
 {}
-
-Signal::Signal(Signal&& other) noexcept
-    : m_points(static_cast<types::Container<types::Point>&&>(other.m_points))
-{}
-
-Signal& Signal::operator=(Signal&& other) noexcept
-{
-    if (&other == this)
-    {
-        return *this;
-    }
-    m_points = static_cast<types::Container<types::Point>&&>(other.m_points);
-    return *this;
-}
-
-Signal& Signal::operator=(const Signal& other)
-{
-    if (&other == this)
-    {
-        return *this;
-    }
-    m_points = other.m_points;
-    return *this;
-}
 
 void Signal::operator+=(const types::Point& point)
 {
@@ -75,7 +50,7 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
     };
 
     auto comparator = [&type](long double first, long double second) -> bool {
-        return (type == types::PeakType::eLow ? first > second : first < second);
+        return (type == types::PeakType::eLow ? first >= second : first <= second);
     };
 
     types::Container<types::Peak> peaks;
@@ -109,6 +84,11 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
     }
 
     return peaks;
+}
+
+types::Point Signal::get(unsigned int index) const
+{
+    return m_points.at(index);
 }
 
 } // namespace calgopp::signal

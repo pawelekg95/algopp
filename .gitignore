@@ -1,4 +1,7 @@
 cmake-build-*
 
 .project
+.cproject
 .pydevproject
+build/
+.settings

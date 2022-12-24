@@ -10,4 +10,4 @@ target_link_libraries(${EXECUTABLE_NAME}
         PRIVATE calgopp::signal calgopp::types Catch2::Catch2WithMain test-utils)
 
 
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/dataset_generator.py DESTINATION /tmp)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/dataset_generator.py DESTINATION ${CMAKE_BINARY_DIR}/bin)

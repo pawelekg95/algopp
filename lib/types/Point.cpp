@@ -19,12 +19,12 @@ Point& Point::operator-=(const Point& other)
 
 bool operator==(const Point& lhs, const Point& rhs)
 {
-    return math::abs(lhs.x - rhs.x) < math::epsilon() && math::abs(lhs.y - rhs.y) < math::epsilon();
+    return math::abs(lhs.x - rhs.x) < math::epsilon() && lhs.y == rhs.y;
 }
 
 bool operator==(const Point&& lhs, const Point&& rhs)
 {
-    return math::abs(lhs.x - rhs.x) < math::epsilon() && math::abs(lhs.y - rhs.y) < math::epsilon();
+    return math::abs(lhs.x - rhs.x) < math::epsilon() && lhs.y == rhs.y;
 }
 
 bool operator!=(const Point& lhs, const Point& rhs)
