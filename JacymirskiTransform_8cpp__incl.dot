@@ -13,9 +13,13 @@ digraph "lib/signal/JacymirskiTransform.cpp"
   Node4 [label="calgopp/signal/Signal.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Signal_8h.html",tooltip=" "];
   Node4 -> Node5 [color="steelblue1",style="solid"];
   Node5 [label="calgopp/types/Point.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Point_8h.html",tooltip=" "];
-  Node4 -> Node6 [color="steelblue1",style="solid"];
-  Node6 [label="calgopp/types/Peak.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Peak_8h.html",tooltip=" "];
-  Node6 -> Node5 [color="steelblue1",style="solid"];
-  Node4 -> Node7 [color="steelblue1",style="solid"];
-  Node7 [label="calgopp/types/Container.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Container_8h.html",tooltip=" "];
+  Node5 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="calgopp/types/Complex.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Complex_8h.html",tooltip=" "];
+  Node6 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="calgopp/math/math.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$math_8h.html",tooltip=" "];
+  Node4 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="calgopp/types/Peak.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Peak_8h.html",tooltip=" "];
+  Node8 -> Node5 [color="steelblue1",style="solid"];
+  Node4 -> Node9 [color="steelblue1",style="solid"];
+  Node9 [label="calgopp/types/Container.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Container_8h.html",tooltip=" "];
 }

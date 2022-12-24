@@ -9,4 +9,6 @@ digraph "lib/types/include/calgopp/types"
     graph [ bgcolor="#edf0f7", pencolor="grey50", label="calgopp", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_cf277c2d25ca4bf20c5e5c22db337edc.html",tooltip=""]
   dir_95524db1f36e9636e61d99da91a74b9c [label="types", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_95524db1f36e9636e61d99da91a74b9c.html",tooltip=""];
   }
+  dir_a36354df93aef5eec904487b77fa4fab [label="math", fillcolor="#edf0f7", color="red", style="filled,dashed", URL="dir_a36354df93aef5eec904487b77fa4fab.html",tooltip=""];
+  dir_95524db1f36e9636e61d99da91a74b9c->dir_a36354df93aef5eec904487b77fa4fab [headlabel="1", labeldistance=1.5 headhref="dir_000017_000011.html" color="steelblue1" fontcolor="steelblue1"];
 }

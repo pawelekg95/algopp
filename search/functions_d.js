@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['signal_0',['Signal',['../classcalgopp_1_1signal_1_1Signal.html#acf56c09d6df0cc7e2033c999f2431e4e',1,'calgopp::signal::Signal::Signal()=default'],['../classcalgopp_1_1signal_1_1Signal.html#ac079b3bb7cf8f552d22969ccdc3b1663',1,'calgopp::signal::Signal::Signal(const Signal &amp;other)=default'],['../classcalgopp_1_1signal_1_1Signal.html#a215d208257a00a13547ac53840a16672',1,'calgopp::signal::Signal::Signal(Signal &amp;&amp;other) noexcept'],['../classcalgopp_1_1signal_1_1Signal.html#af54259c207b0d205acf85bfedbbe4bd6',1,'calgopp::signal::Signal::Signal(const InputContainer &amp;values)'],['../classcalgopp_1_1signal_1_1Signal.html#a1628f32d15afdb7f7009ce3784607787',1,'calgopp::signal::Signal::Signal(const Type *values, unsigned int size)'],['../classcalgopp_1_1signal_1_1Signal.html#a55fef2d987d61a48a47b6ee60809c593',1,'calgopp::signal::Signal::Signal(types::Container&lt; types::Point &gt; points)'],['../classcalgopp_1_1signal_1_1Signal.html#a73bce01d437875b9ec9fc4ed574b15f8',1,'calgopp::signal::Signal::Signal(const types::Point *points, unsigned int size)']]],
-  ['sin_1',['sin',['../namespacecalgopp_1_1math.html#af6461d9920dac56e602c4c4bfc89bda1',1,'calgopp::math']]],
-  ['size_2',['size',['../classcalgopp_1_1signal_1_1Signal.html#ab1d13d4acfe8c03bd40cac3aacc916c8',1,'calgopp::signal::Signal::size()'],['../classcalgopp_1_1types_1_1Container.html#a9a2fa4d8f54a292a5b7b0598f09a657a',1,'calgopp::types::Container::size()']]],
-  ['sum_3',['sum',['../namespacecalgopp_1_1algorithm_1_1numeric.html#a931102273c057bc3798d990d9347598b',1,'calgopp::algorithm::numeric']]]
+  ['range_0',['range',['../namespacecalgopp_1_1algorithm_1_1numeric.html#acb5c1df66cb9486738dea94299f9253b',1,'calgopp::algorithm::numeric']]],
+  ['remove_1',['remove',['../classcalgopp_1_1signal_1_1Signal.html#a167a9a2ae53a0d2d6c1165be9badbd3f',1,'calgopp::signal::Signal::remove()'],['../classcalgopp_1_1types_1_1Container.html#ac2b4d7900ccb694ae9a0db2ace63f030',1,'calgopp::types::Container::remove()']]],
+  ['root_2',['root',['../namespacecalgopp_1_1math.html#aa04179ed00f93eb41f22f066667d9b0b',1,'calgopp::math']]],
+  ['round_3',['round',['../namespacecalgopp_1_1math.html#a096340030ed99ce004b325f3fe221a71',1,'calgopp::math']]]
 ];

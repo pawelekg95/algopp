@@ -9,6 +9,9 @@ digraph "lib/types/Peak.cpp"
   Node2 [label="calgopp/types/Peak.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Peak_8h.html",tooltip=" "];
   Node2 -> Node3 [color="steelblue1",style="solid"];
   Node3 [label="calgopp/types/Point.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Point_8h.html",tooltip=" "];
-  Node1 -> Node4 [color="steelblue1",style="solid"];
-  Node4 [label="calgopp/math/math.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$math_8h.html",tooltip=" "];
+  Node3 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="calgopp/types/Complex.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Complex_8h.html",tooltip=" "];
+  Node4 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="calgopp/math/math.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$math_8h.html",tooltip=" "];
+  Node1 -> Node5 [color="steelblue1",style="solid"];
 }

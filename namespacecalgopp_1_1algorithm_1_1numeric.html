@@ -82,6 +82,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcalgopp_1_1algorithm_1_1numeric_1_1DoubleModifier.html">DoubleModifier</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcalgopp_1_1algorithm_1_1numeric_1_1GreaterComparator.html">GreaterComparator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcalgopp_1_1algorithm_1_1numeric_1_1LessComparator.html">LessComparator</a></td></tr>
@@ -98,12 +100,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a790cc0348abab2256fcc788b1e828912"><td class="memTemplParams" colspan="2">template&lt;typename It &gt; </td></tr>
 <tr class="memitem:a790cc0348abab2256fcc788b1e828912"><td class="memTemplItemLeft" align="right" valign="top">It&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecalgopp_1_1algorithm_1_1numeric.html#a790cc0348abab2256fcc788b1e828912">maxElement</a> (It begin, It end)</td></tr>
 <tr class="separator:a790cc0348abab2256fcc788b1e828912"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f237591d86277360072d686689834cd"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename &gt; class Container, typename Type &gt; </td></tr>
-<tr class="memitem:a3f237591d86277360072d686689834cd"><td class="memTemplItemLeft" align="right" valign="top">Container&lt; Type &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecalgopp_1_1algorithm_1_1numeric.html#a3f237591d86277360072d686689834cd">range</a> (int begin, int end)</td></tr>
-<tr class="separator:a3f237591d86277360072d686689834cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a931102273c057bc3798d990d9347598b"><td class="memTemplParams" colspan="2">template&lt;typename It &gt; </td></tr>
-<tr class="memitem:a931102273c057bc3798d990d9347598b"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecalgopp_1_1algorithm_1_1numeric.html#a931102273c057bc3798d990d9347598b">sum</a> (It begin, It end)</td></tr>
-<tr class="separator:a931102273c057bc3798d990d9347598b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb5c1df66cb9486738dea94299f9253b"><td class="memTemplParams" colspan="2">template&lt;typename Container &gt; </td></tr>
+<tr class="memitem:acb5c1df66cb9486738dea94299f9253b"><td class="memTemplItemLeft" align="right" valign="top">Container&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecalgopp_1_1algorithm_1_1numeric.html#acb5c1df66cb9486738dea94299f9253b">range</a> (int begin, int end)</td></tr>
+<tr class="separator:acb5c1df66cb9486738dea94299f9253b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97529a710b75f842974ca7ba02f617f2"><td class="memTemplParams" colspan="2">template&lt;typename It , typename T  = double, typename Modifier  = T (*)(T)&gt; </td></tr>
+<tr class="memitem:a97529a710b75f842974ca7ba02f617f2"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecalgopp_1_1algorithm_1_1numeric.html#a97529a710b75f842974ca7ba02f617f2">sum</a> (It begin, It end, T initialValue=0.0, Modifier modifier=[](T argument) -&gt; T { return argument;})</td></tr>
+<tr class="separator:a97529a710b75f842974ca7ba02f617f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a5cf61bd1d3256111b55b025ddc7303f7" name="a5cf61bd1d3256111b55b025ddc7303f7"></a>
@@ -246,16 +248,16 @@ template&lt;typename It &gt; </div>
 
 </div>
 </div>
-<a id="a3f237591d86277360072d686689834cd" name="a3f237591d86277360072d686689834cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f237591d86277360072d686689834cd">&#9670;&#160;</a></span>range()</h2>
+<a id="acb5c1df66cb9486738dea94299f9253b" name="acb5c1df66cb9486738dea94299f9253b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb5c1df66cb9486738dea94299f9253b">&#9670;&#160;</a></span>range()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;template&lt; typename &gt; class Container, typename Type &gt; </div>
+template&lt;typename Container &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Container&lt; Type &gt; calgopp::algorithm::numeric::range </td>
+          <td class="memname">Container calgopp::algorithm::numeric::range </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
@@ -290,16 +292,16 @@ template&lt;template&lt; typename &gt; class Container, typename Type &gt; </div
 
 </div>
 </div>
-<a id="a931102273c057bc3798d990d9347598b" name="a931102273c057bc3798d990d9347598b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a931102273c057bc3798d990d9347598b">&#9670;&#160;</a></span>sum()</h2>
+<a id="a97529a710b75f842974ca7ba02f617f2" name="a97529a710b75f842974ca7ba02f617f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97529a710b75f842974ca7ba02f617f2">&#9670;&#160;</a></span>sum()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename It &gt; </div>
+template&lt;typename It , typename T  = double, typename Modifier  = T (*)(T)&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double calgopp::algorithm::numeric::sum </td>
+          <td class="memname">T calgopp::algorithm::numeric::sum </td>
           <td>(</td>
           <td class="paramtype">It&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
@@ -308,7 +310,19 @@ template&lt;typename It &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">It&#160;</td>
-          <td class="paramname"><em>end</em>&#160;</td>
+          <td class="paramname"><em>end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>initialValue</em> = <code>0.0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Modifier&#160;</td>
+          <td class="paramname"><em>modifier</em> = <code>[](T&#160;argument)&#160;-&gt;&#160;T&#160;{&#160;return&#160;argument;&#160;}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>

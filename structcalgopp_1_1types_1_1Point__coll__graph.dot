@@ -4,7 +4,10 @@ digraph "calgopp::types::Point"
   bgcolor="transparent";
   edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  Node1 [label="{calgopp::types::Point\n||+ Point()\l+ Point()\l+ Point()\l+ operator+=()\l+ operator-=()\l}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
-  Node2 -> Node1 [color="grey25",style="solid",label=" +x\n+y" ,arrowhead="odiamond"];
-  Node2 [label="{long double\n||}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",tooltip=" "];
+  Node1 [label="{calgopp::types::Point\n||+ Point()\l+ Point()\l+ Point()\l+ operator=()\l+ operator=()\l+ Point()\l+ Point()\l+ Point()\l+ operator+=()\l+ operator-=()\l}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +x" ,arrowhead="odiamond"];
+  Node2 [label="{double\n||}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",tooltip=" "];
+  Node3 -> Node1 [color="grey25",style="solid",label=" +y" ,arrowhead="odiamond"];
+  Node3 [label="{calgopp::types::Complex\n||+ Complex()\l+ Complex()\l+ Complex()\l+ operator=()\l+ operator=()\l+ Complex()\l+ Complex()\l+ Complex()\l+ operator double()\l+ operator+=()\l+ operator-=()\l}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$structcalgopp_1_1types_1_1Complex.html",tooltip=" "];
+  Node2 -> Node3 [color="grey25",style="solid",label=" +imag\n+real" ,arrowhead="odiamond"];
 }
