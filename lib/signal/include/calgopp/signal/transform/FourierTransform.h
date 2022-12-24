@@ -5,13 +5,13 @@
 namespace calgopp::signal::transform {
 
 /**
- * Implementation of continuous Fourier transform.
+ * Implementation of discrete Fourier transform.
  */
 class FourierTransform : public process::IProcessor
 {
 public:
     /**
-     * Processing signal using Jacymirski's transform
+     * Processing signal using Discrete Fourier transform
      * @param signal                    Input signal
      * @return Transformed signal
      */
