@@ -126,9 +126,9 @@ public:
         m_numerator = int(round(frac * precision) / commonDivisor);
     }
 
-    bool operator()() const { return m_denominator != 0 && m_numerator != 0; }
+    bool operator()() const { return m_denominator != 0 || m_numerator != 0; }
 
-    bool operator!() const { return m_numerator == 0 || m_denominator == 0; }
+    bool operator!() const { return m_numerator == 0 && m_denominator == 0; }
 
     /**
      * Numerator getter.
