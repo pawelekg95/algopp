@@ -112,19 +112,8 @@ public:
      * @tparam Floating                 Floating number type.
      * @param num                       Number to get fraction.
      */
-    template <typename Floating>
-    explicit Fraction(const Floating& num)
-    {
-        double integral = floor(num);
-        double frac = num - integral;
 
-        const int precision = 10000;
-
-        int commonDivisor = gcd(int(round(frac * precision)), precision);
-
-        m_denominator = precision / commonDivisor;
-        m_numerator = int(round(frac * precision) / commonDivisor);
-    }
+    Fraction(double num);
 
     bool operator()() const { return m_denominator != 0 || m_numerator != 0; }
 
@@ -147,78 +136,26 @@ private:
     int m_denominator{};
 };
 
-/**
- * Finds root of the number.
- * @tparam ArgumentType                 Number type.
- * @param number                        Number to find root.
- * @param root                          Root grade.
- * @return Approximation of root of the number with precision of epsilon().
- */
-template <typename ArgumentType>
-double root(ArgumentType number, unsigned int base)
-{
-    double precision = epsilon() / 10000.0;
-    auto multiplication = [](double currentNumber, unsigned int base) {
-        double token{currentNumber};
-        for (unsigned int i = 1; i < base; i++)
-        {
-            token = token * currentNumber;
-        }
-        return token;
-    };
-    const double cMultiplier = 0.5;
-    int maxSpins = 100000;
+double root(int number, int base);
 
-    auto increase =
-        [&multiplication, &base, &precision, &maxSpins](double& token, const double& threshold, double& step) {
-            while (multiplication(token, base) - threshold < precision)
-            {
-                if (maxSpins < 0)
-                {
-                    break;
-                }
-                token += step;
-                maxSpins--;
-            }
-        };
+double root(long int number, int base);
 
-    auto decrease =
-        [&multiplication, &base, &precision, &maxSpins](double& token, const double& threshold, double& step) {
-            while (multiplication(token, base) - threshold > precision)
-            {
-                if (maxSpins < 0)
-                {
-                    break;
-                }
-                token -= step;
-                maxSpins--;
-            }
-        };
+double root(long long int number, int base);
 
-    double token = epsilon();
-    double jump = cMultiplier * number;
+double root(int number, unsigned int base);
 
-    while (abs(multiplication(token, base) - number) > precision)
-    {
-        if (maxSpins < 0)
-        {
-            break;
-        }
-        auto multiplied = multiplication(token, base);
-        if (multiplied - number > precision)
-        {
-            jump = jump * cMultiplier;
-            decrease(token, number, jump);
-        }
-        else if (multiplied - number < precision)
-        {
-            jump = jump * cMultiplier;
-            increase(token, number, jump);
-        }
-        maxSpins--;
-    }
-    return token;
-}
+double root(long int number, unsigned int base);
+
+double root(long long int number, unsigned int base);
+
+
+double root(double number, int base);
+
+double root(long double number, int base);
+
+double root(double number, unsigned int base);
+
+double root(long double number, unsigned int base);
 
 /**
  * Calculates power of the number.

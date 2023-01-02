@@ -9,6 +9,12 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
 
+if(${GPU_PARALLEL})
+    message("GPU parallelization set")
+else()
+    message("No GPU parallelization set")
+endif()
+
 project(calgopp)
 
 add_compile_options(-Wall -Wextra -Wpedantic -Werror $<$<COMPILE_LANGUAGE:CXX>:-std=c++17>)
