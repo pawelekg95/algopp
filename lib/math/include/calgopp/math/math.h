@@ -1,6 +1,7 @@
 #pragma once
 
-namespace calgopp::math {
+namespace calgopp {
+namespace math {
 
 inline double toRadians(double degrees)
 {
@@ -16,7 +17,7 @@ inline double toDegrees(double radians)
  * Epsilon number approximation.
  * @return Epsilon number.
  */
-inline long double epsilon()
+inline double epsilon()
 {
     return 0.0000000000000000000001;
 }
@@ -25,7 +26,7 @@ inline long double epsilon()
  * Euler number approximation.
  * @return Euler number.
  */
-inline long double euler()
+inline double euler()
 {
     return 2.7182818284590452353602874713526624977572;
 }
@@ -34,7 +35,7 @@ inline long double euler()
  * PI number approximation.
  * @return PI number.
  */
-inline long double pi()
+inline double pi()
 {
     return 3.14159265358979323846;
 }
@@ -113,7 +114,7 @@ public:
      * @param num                       Number to get fraction.
      */
 
-    Fraction(double num);
+    Fraction(long double num);
 
     bool operator()() const { return m_denominator != 0 || m_numerator != 0; }
 
@@ -136,80 +137,36 @@ private:
     int m_denominator{};
 };
 
-double root(int number, int base);
-
-double root(long int number, int base);
-
-double root(long long int number, int base);
-
 double root(int number, unsigned int base);
 
 double root(long int number, unsigned int base);
 
-double root(long long int number, unsigned int base);
+double root(double number, unsigned int base);
 
+double root(int number, int base);
+
+double root(long int number, int base);
 
 double root(double number, int base);
 
-double root(long double number, int base);
 
-double root(double number, unsigned int base);
+double pow(int number, unsigned int power);
 
-double root(long double number, unsigned int base);
+double pow(long int number, unsigned int power);
 
-/**
- * Calculates power of the number.
- * @tparam ArgumentType                         Number type.
- * @param number                                Argument.
- * @param power                                 Power.
- * @return Approximation of power of the provided number with precision of epsilon().
- */
-template <typename ArgumentType>
-long double pow(ArgumentType number, int power)
-{
-    unsigned int absPower = abs(power);
-    if (power == 0)
-    {
-        return 1;
-    }
-    if (absPower == 1)
-    {
-        return power < 0 ? 1.0 / double(number) : double(number);
-    }
-    long double token = number;
-    while (absPower > 1)
-    {
-        token = token * double(number);
-        absPower--;
-    }
+double pow(double number, unsigned int power);
 
-    return power < 0 ? 1.0 / token : token;
-}
+double pow(int number, int power);
 
-/**
- * Power for floating point powers.
- * @tparam ArgumentType                         Number type.
- * @tparam PowerType                            Power type.
- * @param number                                Number to power.
- * @param power                                 Power.
- * @return Approximation of power of the provided number with precision of epsilon().
- */
-template <typename ArgumentType, typename PowerType>
-long double pow(ArgumentType number, PowerType power)
-{
-    Fraction pwrFraction(power);
-    if (power < 0 && int(power) % 2 == 0 && !pwrFraction)
-    {
-        return pow(number, abs(power));
-    }
-    if (power < 0 && int(power) % 2 == 1 && !pwrFraction)
-    {
-        return -pow(number, abs(power));
-    }
-    auto basePwr = pow(number, int(floor(power)));
-    auto fractionPwr = root(pow(number, pwrFraction.numerator()), pwrFraction.denominator());
-    return basePwr * fractionPwr;
-}
+double pow(long int number, int power);
+
+double pow(double number, int power);
+
+double pow(int number, double power);
+
+double pow(long int number, double power);
+
+double pow(double number, double power);
 
 /**
  * Exponential function.
@@ -218,7 +175,7 @@ long double pow(ArgumentType number, PowerType power)
  * @return Calculated exponential.
  */
 template <typename PowerType>
-long double exp(const PowerType& power)
+double exp(const PowerType& power)
 {
     return pow(euler(), power);
 }
@@ -297,4 +254,5 @@ long double log(const T& argument)
     return 2 * token;
 }
 
-} // namespace calgopp::math
+} // namespace math
+} // namespace calgopp

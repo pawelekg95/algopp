@@ -114,16 +114,21 @@ inline std::uint64_t benchmark(const std::function<void()>& function)
         .count();
 }
 
-template <typename Type1, typename Type2>
-bool almostEqual(const Type1& var1, const Type2& var2, double threshold = 0.0000001)
+template <typename T>
+bool almostEqual(const T& var1, const T& var2, double threshold = 0.0000001)
 {
     double dif = std::abs(var1 - var2);
-    if (dif > threshold)
+    if (dif == 0)
     {
-        std::cout << "Variables don't equal. Var1: " << var1 << ", var2: " << var2 << ", difference: " << dif
+        return true;
+    }
+    bool diffGreaterThanThreshold = dif >= threshold;
+    if (diffGreaterThanThreshold)
+    {
+        std::cout << std::setprecision(20) << "Variables don't equal. Var1: " << var1 << ", var2: " << var2 << ", difference: " << dif
                   << std::endl;
     }
-    return dif < threshold;
+    return !diffGreaterThanThreshold;
 }
 
 bool almostEqual(const types::Complex& var1, const types::Complex& var2, double threshold = 0.0000001);
