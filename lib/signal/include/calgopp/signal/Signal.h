@@ -68,6 +68,15 @@ public:
         }
     }
 
+    template <typename Type>
+    Signal(const Type* reals, const Type* imags, unsigned int size)
+    {
+        for (unsigned int i = 0; i < size; i++)
+        {
+            m_points.append(types::Point{i, {reals[i], imags[i]}});
+        }
+    }
+
     /**
      * Creates signal from container of points
      * @param points                Signal points

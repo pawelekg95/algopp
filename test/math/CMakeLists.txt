@@ -8,3 +8,9 @@ add_executable(${EXECUTABLE_NAME}
 
 target_link_libraries(${EXECUTABLE_NAME}
         PRIVATE calgopp::math test-utils Catch2::Catch2WithMain)
+
+if (GPU_PARALLEL)
+    target_compile_definitions(${EXECUTABLE_NAME}
+            PUBLIC GPU_PARALLEL
+            )
+endif ()

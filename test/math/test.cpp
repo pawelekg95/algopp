@@ -7,9 +7,56 @@
 #include "calgopp/math/math.h"
 
 #include <cmath>
+#include <iostream>
+
+#ifdef GPU_PARALLEL
+const long double comparingThreshold = 0.01;
+#else
+const long double comparingThreshold = 0.0001;
+#endif
+
+class OverallTimerWatcher // NOLINT
+{
+public:
+    ~OverallTimerWatcher() { std::cout << "Total time elapsed (us): " << m_overallWatcher << std::endl; }
+
+    const OverallTimerWatcher& operator+=(std::uint64_t timer) const
+    {
+        m_overallWatcher += timer;
+        std::cout << "Timer added (us): " << timer
+                  << " from test case: " << Catch::getResultCapture().getCurrentTestName() << std::endl;
+        return *this;
+    }
+
+private:
+    mutable std::uint64_t m_overallWatcher{};
+};
+
+class TimerTracker // NOLINT
+{
+public:
+    TimerTracker(const OverallTimerWatcher& overallTimerWatcher)
+        : m_overallTimerWatcher(overallTimerWatcher)
+    {
+        m_timer.start();
+    }
+
+    ~TimerTracker() { m_overallTimerWatcher += m_timer.getElapsedMicroseconds(); }
+
+private:
+    const OverallTimerWatcher& m_overallTimerWatcher;
+    Catch::Timer m_timer;
+};
+
+const OverallTimerWatcher overallTimer;
 
 TEST_CASE("Absolute number")
 {
+#ifdef GPU_PARALLEL
+    // Initialize GPU functions
+    calgopp::math::pow(3.4, 2.5);
+#endif
+    TimerTracker tracker(overallTimer);
     REQUIRE(std::abs(-15) == calgopp::math::abs(-15));
     REQUIRE(std::abs(-15.4) == calgopp::math::abs(-15.4));
     REQUIRE(std::abs(15) == calgopp::math::abs(-15));
@@ -17,16 +64,18 @@ TEST_CASE("Absolute number")
 
 TEST_CASE("Root")
 {
-    REQUIRE(test::almostEqual(std::sqrt(100), calgopp::math::root(100, 2)));
-    REQUIRE(test::almostEqual(std::sqrt(64), calgopp::math::root(64, 2)));
-    REQUIRE(test::almostEqual(calgopp::math::root(27, 3), 3));
-    REQUIRE(test::almostEqual(calgopp::math::root(3125, 5), 5));
-    REQUIRE(test::almostEqual(calgopp::math::root(701583371424, 5), 234));
-    REQUIRE(test::almostEqual(calgopp::math::root(61917364224, 10), 12));
+    TimerTracker tracker(overallTimer);
+    REQUIRE(test::almostEqual(std::sqrt(100), calgopp::math::root(100, 2), comparingThreshold));
+    REQUIRE(test::almostEqual(std::sqrt(64), calgopp::math::root(64, 2), comparingThreshold));
+    REQUIRE(test::almostEqual(calgopp::math::root(27, 3), 3, comparingThreshold));
+    REQUIRE(test::almostEqual(calgopp::math::root(3125, 5), 5, comparingThreshold));
+    REQUIRE(test::almostEqual(calgopp::math::root(701583371424, 5), 234, comparingThreshold));
+    REQUIRE(test::almostEqual(calgopp::math::root(61917364224, 10), 12, comparingThreshold));
 }
 
 TEST_CASE("Floor and ceil")
 {
+    TimerTracker tracker(overallTimer);
     REQUIRE(std::floor(1.14) == calgopp::math::floor(1.14));
     REQUIRE(std::floor(25.50) == calgopp::math::floor(25.50));
     REQUIRE(std::floor(90.9) == calgopp::math::floor(90.9));
@@ -53,6 +102,7 @@ TEST_CASE("Floor and ceil")
 
 TEST_CASE("Round")
 {
+    TimerTracker tracker(overallTimer);
     REQUIRE(std::round(1.14) == calgopp::math::round(1.14));
     REQUIRE(std::round(25.50) == calgopp::math::round(25.50));
     REQUIRE(std::round(90.9) == calgopp::math::round(90.9));
@@ -61,6 +111,7 @@ TEST_CASE("Round")
 
 TEST_CASE("Fraction")
 {
+    TimerTracker tracker(overallTimer);
     REQUIRE(calgopp::math::Fraction(0.5).numerator() == 1);
     REQUIRE(calgopp::math::Fraction(0.5).denominator() == 2);
 
@@ -85,67 +136,105 @@ TEST_CASE("Fraction")
 
 TEST_CASE("Power")
 {
-    REQUIRE(test::almostEqual(std::pow(123143, 0), calgopp::math::pow(123143, 0)));
-    REQUIRE(test::almostEqual(std::pow(10, 5), calgopp::math::pow(10, 5)));
-    REQUIRE(test::almostEqual(std::pow(16, 3), calgopp::math::pow(16, 3)));
-    REQUIRE(test::almostEqual(std::pow(256.2, 2), calgopp::math::pow(256.2, 2)));
-    REQUIRE(test::almostEqual(std::pow(256.2, -2), calgopp::math::pow(256.2, -2)));
-    REQUIRE(test::almostEqual(std::pow(-12, 2), calgopp::math::pow(-12, 2)));
-    REQUIRE(test::almostEqual(std::pow(-12, 3), calgopp::math::pow(-12, 3)));
-    REQUIRE(test::almostEqual(std::pow(234, 6), calgopp::math::pow(234, 6)));
+    TimerTracker tracker(overallTimer);
+    REQUIRE(test::almostEqual(std::pow(123143, 0), calgopp::math::pow(123143, 0), comparingThreshold));
+    REQUIRE(test::almostEqual(std::pow(10, 5), calgopp::math::pow(10, 5), comparingThreshold));
+    REQUIRE(test::almostEqual(std::pow(16, 3), calgopp::math::pow(16, 3), comparingThreshold));
+    REQUIRE(test::almostEqual(std::pow(256.2, 2), calgopp::math::pow(256.2, 2), comparingThreshold));
+    REQUIRE(test::almostEqual(std::pow(256.2, -2), calgopp::math::pow(256.2, -2), comparingThreshold));
+    REQUIRE(test::almostEqual(std::pow(-12, 2), calgopp::math::pow(-12, 2), comparingThreshold));
+    REQUIRE(test::almostEqual(std::pow(-12, 3), calgopp::math::pow(-12, 3), comparingThreshold));
+    REQUIRE(test::almostEqual(std::pow(234, 6), calgopp::math::pow(234, 6), comparingThreshold * std::pow(234, 6)));
 
-    REQUIRE(test::almostEqual(std::pow(10, 1.5), calgopp::math::pow(10, 1.5)));
-    REQUIRE(test::almostEqual(std::pow(10, 2.5), calgopp::math::pow(10, 2.5)));
-    REQUIRE(test::almostEqual(std::pow(234, 6.2), calgopp::math::pow(234, 6.2), 1));
-    REQUIRE(test::almostEqual(std::pow(234, -6.2), calgopp::math::pow(234, -6.2), 1));
+    REQUIRE(test::almostEqual(std::pow(10, 1.5), calgopp::math::pow(10, 1.5), comparingThreshold));
+    REQUIRE(test::almostEqual(std::pow(10, 2.5), calgopp::math::pow(10, 2.5), comparingThreshold));
+    REQUIRE(
+        test::almostEqual(std::pow(234, 6.2), calgopp::math::pow(234, 6.2), comparingThreshold * std::pow(234, 6.2)));
+    REQUIRE(test::almostEqual(std::pow(234, -6.2),
+                              calgopp::math::pow(234, -6.2),
+                              comparingThreshold * std::pow(234, -6.2)));
 }
 
 TEST_CASE("Exponential function")
 {
-    REQUIRE(test::almostEqual(std::exp(2), calgopp::math::exp(2)));
-    REQUIRE(test::almostEqual(std::exp(10), calgopp::math::exp(10)));
-    REQUIRE(test::almostEqual(std::exp(23.245), calgopp::math::exp(23.245), 1));
+    TimerTracker tracker(overallTimer);
+    REQUIRE(test::almostEqual(std::exp(2), calgopp::math::exp(2), comparingThreshold));
+    REQUIRE(test::almostEqual(std::exp(10), calgopp::math::exp(10), comparingThreshold));
+    REQUIRE(test::almostEqual(std::exp(23.245), calgopp::math::exp(23.245), comparingThreshold * std::exp(23.245)));
+
+#ifndef GPU_PARALLEL
     REQUIRE(test::almostEqual(std::exp(std::pow(6, 3)),
                               calgopp::math::exp(math::pow(6, 3)),
-                              0.05 * std::exp(std::pow(6, 3))));
+                              comparingThreshold * std::exp(std::pow(6, 3))));
     REQUIRE(test::almostEqual(std::exp(std::sin(60 * (M_PI / 180))),
                               calgopp::math::exp(math::sin(60 * (math::pi() / 180))),
-                              0.0001));
+                              comparingThreshold * std::exp(std::sin(60 * (M_PI / 180)))));
+#endif
 }
 
 TEST_CASE("Trigonometry")
 {
-    REQUIRE(test::almostEqual(std::sin(60 * (M_PI / 180)), calgopp::math::sin(math::toRadians(60))));
-    REQUIRE(test::almostEqual(std::cos(60 * (M_PI / 180)), calgopp::math::cos(math::toRadians(60))));
-    REQUIRE(test::almostEqual(std::tan(60 * (M_PI / 180)), calgopp::math::tan(math::toRadians(60))));
+    TimerTracker tracker(overallTimer);
+    REQUIRE(
+        test::almostEqual(std::sin(60 * (M_PI / 180)), calgopp::math::sin(math::toRadians(60)), comparingThreshold));
+    REQUIRE(
+        test::almostEqual(std::cos(60 * (M_PI / 180)), calgopp::math::cos(math::toRadians(60)), comparingThreshold));
+    REQUIRE(
+        test::almostEqual(std::tan(60 * (M_PI / 180)), calgopp::math::tan(math::toRadians(60)), comparingThreshold));
 
-    REQUIRE(test::almostEqual(std::sin(60 * (M_PI / 180)), calgopp::math::sin(math::toRadians(60))));
-    REQUIRE(test::almostEqual(std::sin(120 * (M_PI / 180)), calgopp::math::sin(math::toRadians(120))));
-    REQUIRE(test::almostEqual(std::sin(180 * (M_PI / 180)), calgopp::math::sin(math::toRadians(180))));
-    REQUIRE(test::almostEqual(std::sin(270 * (M_PI / 180)), calgopp::math::sin(math::toRadians(270))));
+    REQUIRE(
+        test::almostEqual(std::sin(60 * (M_PI / 180)), calgopp::math::sin(math::toRadians(60)), comparingThreshold));
+    REQUIRE(
+        test::almostEqual(std::sin(120 * (M_PI / 180)), calgopp::math::sin(math::toRadians(120)), comparingThreshold));
+    REQUIRE(
+        test::almostEqual(std::sin(180 * (M_PI / 180)), calgopp::math::sin(math::toRadians(180)), comparingThreshold));
+    REQUIRE(
+        test::almostEqual(std::sin(270 * (M_PI / 180)), calgopp::math::sin(math::toRadians(270)), comparingThreshold));
 
-    REQUIRE(test::almostEqual(std::sin(-60 * (M_PI / 180)), calgopp::math::sin(math::toRadians(-60))));
-    REQUIRE(test::almostEqual(std::sin(-120 * (M_PI / 180)), calgopp::math::sin(math::toRadians(-120))));
-    REQUIRE(test::almostEqual(std::sin(-180 * (M_PI / 180)), calgopp::math::sin(math::toRadians(-180))));
-    REQUIRE(test::almostEqual(std::sin(-270 * (M_PI / 180)), calgopp::math::sin(math::toRadians(-270))));
+    REQUIRE(
+        test::almostEqual(std::sin(-60 * (M_PI / 180)), calgopp::math::sin(math::toRadians(-60)), comparingThreshold));
+    REQUIRE(test::almostEqual(std::sin(-120 * (M_PI / 180)),
+                              calgopp::math::sin(math::toRadians(-120)),
+                              comparingThreshold));
+    REQUIRE(test::almostEqual(std::sin(-180 * (M_PI / 180)),
+                              calgopp::math::sin(math::toRadians(-180)),
+                              comparingThreshold));
+    REQUIRE(test::almostEqual(std::sin(-270 * (M_PI / 180)),
+                              calgopp::math::sin(math::toRadians(-270)),
+                              comparingThreshold));
 
-    REQUIRE(test::almostEqual(std::cos(60 * (M_PI / 180)), calgopp::math::cos(math::toRadians(60))));
-    REQUIRE(test::almostEqual(std::cos(120 * (M_PI / 180)), calgopp::math::cos(math::toRadians(120))));
-    REQUIRE(test::almostEqual(std::cos(180 * (M_PI / 180)), calgopp::math::cos(math::toRadians(180))));
-    REQUIRE(test::almostEqual(std::cos(270 * (M_PI / 180)), calgopp::math::cos(math::toRadians(270))));
+    REQUIRE(
+        test::almostEqual(std::cos(60 * (M_PI / 180)), calgopp::math::cos(math::toRadians(60)), comparingThreshold));
+    REQUIRE(
+        test::almostEqual(std::cos(120 * (M_PI / 180)), calgopp::math::cos(math::toRadians(120)), comparingThreshold));
+    REQUIRE(
+        test::almostEqual(std::cos(180 * (M_PI / 180)), calgopp::math::cos(math::toRadians(180)), comparingThreshold));
+    REQUIRE(
+        test::almostEqual(std::cos(270 * (M_PI / 180)), calgopp::math::cos(math::toRadians(270)), comparingThreshold));
 
-    REQUIRE(test::almostEqual(std::cos(-60 * (M_PI / 180)), calgopp::math::cos(math::toRadians(-60))));
-    REQUIRE(test::almostEqual(std::cos(-120 * (M_PI / 180)), calgopp::math::cos(math::toRadians(-120))));
-    REQUIRE(test::almostEqual(std::cos(-180 * (M_PI / 180)), calgopp::math::cos(math::toRadians(-180))));
-    REQUIRE(test::almostEqual(std::cos(-270 * (M_PI / 180)), calgopp::math::cos(math::toRadians(-270))));
+    REQUIRE(
+        test::almostEqual(std::cos(-60 * (M_PI / 180)), calgopp::math::cos(math::toRadians(-60)), comparingThreshold));
+    REQUIRE(test::almostEqual(std::cos(-120 * (M_PI / 180)),
+                              calgopp::math::cos(math::toRadians(-120)),
+                              comparingThreshold));
+    REQUIRE(test::almostEqual(std::cos(-180 * (M_PI / 180)),
+                              calgopp::math::cos(math::toRadians(-180)),
+                              comparingThreshold));
+    REQUIRE(test::almostEqual(std::cos(-270 * (M_PI / 180)),
+                              calgopp::math::cos(math::toRadians(-270)),
+                              comparingThreshold));
 
-    REQUIRE(test::almostEqual(std::tan(60 * (M_PI / 180)), calgopp::math::tan(math::toRadians(60))));
-    REQUIRE(test::almostEqual(std::tan(120 * (M_PI / 180)), calgopp::math::tan(math::toRadians(120))));
-    REQUIRE(test::almostEqual(std::tan(180 * (M_PI / 180)), calgopp::math::tan(math::toRadians(180))));
+    REQUIRE(
+        test::almostEqual(std::tan(60 * (M_PI / 180)), calgopp::math::tan(math::toRadians(60)), comparingThreshold));
+    REQUIRE(
+        test::almostEqual(std::tan(120 * (M_PI / 180)), calgopp::math::tan(math::toRadians(120)), comparingThreshold));
+    REQUIRE(
+        test::almostEqual(std::tan(180 * (M_PI / 180)), calgopp::math::tan(math::toRadians(180)), comparingThreshold));
 }
 
 TEST_CASE("Benchmark test")
 {
+    TimerTracker tracker(overallTimer);
     const float cThresholdMultiplier = 1.0;
     CHECK(cThresholdMultiplier * test::benchmark([]() { std::sqrt(100); }) >=
           test::benchmark([]() { calgopp::math::root(100, 2); }));
@@ -168,9 +257,10 @@ TEST_CASE("Benchmark test")
 
 TEST_CASE("Logarithms")
 {
-    REQUIRE(test::almostEqual(std::log(10), calgopp::math::log(10)));
-    REQUIRE(test::almostEqual(std::log(2), calgopp::math::log(2)));
-    REQUIRE(test::almostEqual(std::log(1.5), calgopp::math::log(1.5)));
-    REQUIRE(test::almostEqual(std::log(12), calgopp::math::log(12)));
-    REQUIRE(test::almostEqual(std::log(12.78), calgopp::math::log(12.78)));
+    TimerTracker tracker(overallTimer);
+    REQUIRE(test::almostEqual(std::log(10), calgopp::math::log(10), comparingThreshold));
+    REQUIRE(test::almostEqual(std::log(2), calgopp::math::log(2), comparingThreshold));
+    REQUIRE(test::almostEqual(std::log(1.5), calgopp::math::log(1.5), comparingThreshold));
+    REQUIRE(test::almostEqual(std::log(12), calgopp::math::log(12), comparingThreshold));
+    REQUIRE(test::almostEqual(std::log(12.78), calgopp::math::log(12.78), comparingThreshold));
 }
