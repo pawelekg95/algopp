@@ -5,18 +5,15 @@
 namespace calgopp {
 namespace function {
 
-template<typename Functor>
+template <typename Functor>
 class Function
 {
 public:
     Function(Functor functor)
         : m_functor(functor)
-    {}   
+    {}
 
-    types::Complex operator()(double argument)
-    {
-        return m_functor(argument);
-    }
+    types::Complex operator()(double argument) { return m_functor(argument); }
 
 protected:
     Functor m_functor;

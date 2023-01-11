@@ -10,10 +10,7 @@ struct LinearFunctionImpl
     double a{};
     double b{};
 
-    double operator()(double argument)
-    {
-        return a * argument + b;
-    }
+    double operator()(double argument) { return a * argument + b; }
 };
 
 class LinearFunction : public Function<LinearFunctionImpl>
@@ -23,7 +20,6 @@ public:
         : Function({a, b})
     {}
 };
-
 
 } // namespace function
 } // namespace calgopp

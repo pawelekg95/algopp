@@ -11,18 +11,12 @@
 
 struct Sine
 {
-    double operator()(double argument)
-    {
-        return sin(argument);
-    }
+    double operator()(double argument) { return sin(argument); }
 };
 
 struct Cosine
 {
-    double operator()(double argument)
-    {
-        return cos(argument);
-    }
+    double operator()(double argument) { return cos(argument); }
 };
 
 TEST_CASE("Trigonometry functions")
@@ -37,4 +31,28 @@ TEST_CASE("Trigonometry functions")
     calgopp::function::Function<Cosine> cosineFunction(cosine);
     REQUIRE(double(cosineFunction(60.0)) == cos(60.0));
     REQUIRE(double(cosineFunction(60.0)) != sin(60.0));
+
+    calgopp::function::Function<double (*)(double)> mathSinFunction(std::sin);
+    REQUIRE(double(mathSinFunction(60.0)) == sin(60.0));
+    REQUIRE(double(mathSinFunction(60.0)) != cos(60.0));
+
+    auto sinLambda = [](double argument) -> double { return std::sin(argument); };
+    calgopp::function::Function<double (*)(double)> lambdaFunction(sinLambda);
+    REQUIRE(double(lambdaFunction(60.0)) == sin(60.0));
+    REQUIRE(double(lambdaFunction(60.0)) != cos(60.0));
+}
+
+TEST_CASE("Linear function")
+{
+    calgopp::function::LinearFunction linearFunction(1, 0);
+    REQUIRE(double(linearFunction(100)) == 100);
+    REQUIRE(double(linearFunction(54)) == 54);
+
+    linearFunction = calgopp::function::LinearFunction(2, 0);
+    REQUIRE(double(linearFunction(100)) == 200);
+    REQUIRE(double(linearFunction(54)) == 108);
+
+    linearFunction = calgopp::function::LinearFunction(2, 5);
+    REQUIRE(double(linearFunction(100)) == 205);
+    REQUIRE(double(linearFunction(54)) == 113);
 }
