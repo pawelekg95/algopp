@@ -149,7 +149,6 @@ double root(long int number, int base);
 
 double root(double number, int base);
 
-
 double pow(int number, unsigned int power);
 
 double pow(long int number, unsigned int power);

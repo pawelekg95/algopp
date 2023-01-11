@@ -1,3 +1,7 @@
+/**
+ * Leftover after initial learning about OpenCL library
+ */
+
 #define CL_HPP_TARGET_OPENCL_VERSION 210
 #define CL_HPP_ENABLE_EXCEPTIONS
 #include "calgopp/math/math.h"
@@ -16,9 +20,10 @@ const std::string cPowerFunctionId = "mathPow";
 const std::string cRootFunctionId = "mathRoot";
 
 const std::string cPowGPU = {R"CLC(
-    kernel void )CLC" + cPowerFunctionId + R"CLC((global float* number, global int* power, global float* ret)
+    kernel void )CLC" + cPowerFunctionId +
+                             R"CLC((float number, int power, global float* ret)
     {
-         unsigned int absPower = (*power) < 0 ? -(*power) : (*power);
+         unsigned int absPower = (power) < 0 ? -(power) : (power);
          if (absPower == 0)
          {
              *ret = (float)(1);
@@ -26,17 +31,17 @@ const std::string cPowGPU = {R"CLC(
          }
          if (absPower == 1)
          {
-             *ret = (*power) < 0 ? (float)(1) / (float)(*number) : (float)(*number);
+             *ret = (power) < 0 ? (float)(1) / (float)(number) : (float)(number);
              return;
          }
-         float token = *number;
+         float token = number;
          while (absPower > 1)
          {
-             token = token * (float)(*number);
+             token = token * (float)(number);
              absPower--;
          }
 
-         *ret = (*power) < 0 ? (float)(1) / token : token;
+         *ret = (power) < 0 ? (float)(1) / token : token;
     })CLC"};
 
 const std::string cRootGPU = {R"CLC(
@@ -84,30 +89,31 @@ const std::string cRootGPU = {R"CLC(
     };
 
 
-    kernel void )CLC" + cRootFunctionId + R"CLC((global float* number, global int* base, global float* ret, global float* epsilon)
+    kernel void )CLC" + cRootFunctionId +
+                              R"CLC((float number, int base, global float* ret, float epsilon)
     {
-        float precision = *epsilon / (float)(10000.0);
+        float precision = epsilon / (float)(10000.0);
         int maxSpins = 10000;
 
-        float token = *epsilon;
-        float jump = cMultiplier * (*number);
+        float token = epsilon;
+        float jump = cMultiplier * (number);
 
-        while (abs(multiplication(token, *base) - *number) > precision)
+        while (abs(multiplication(token, base) - number) > precision)
         {
             if (maxSpins < 0)
             {
                 break;
             }
-            float multiplied = multiplication(token, *base);
-            if (multiplied - *number > precision)
+            float multiplied = multiplication(token, base);
+            if (multiplied - number > precision)
             {
                 jump = jump * cMultiplier;
-                decrease(&token, *number, jump, &maxSpins, precision, *base);
+                decrease(&token, number, jump, &maxSpins, precision, base);
             }
-            else if (multiplied - *number < precision)
+            else if (multiplied - number < precision)
             {
                 jump = jump * cMultiplier;
-                increase(&token, *number, jump, &maxSpins, precision, *base);
+                increase(&token, number, jump, &maxSpins, precision, base);
             }
             maxSpins--;
         }
@@ -132,20 +138,17 @@ public:
         calgopp::gpu::Timer timer;
         timer.start();
 
-        static cl::Buffer numberBuf(*context,  CL_MEM_USE_HOST_PTR, sizeof(float), &number);
-        static cl::Buffer powerBuf(*context, CL_MEM_USE_HOST_PTR, sizeof(int), &power);
-        static auto resultBuf = std::make_shared<cl::Buffer>(*context, CL_MEM_READ_WRITE, sizeof(float));
-
-        queue->enqueueWriteBuffer(numberBuf, CL_TRUE, 0, sizeof(float), &number);
-        queue->enqueueWriteBuffer(powerBuf, CL_TRUE, 0, sizeof(int), &power);
+        auto resultBuf = std::make_shared<cl::Buffer>(*context,
+                                                      CL_MEM_WRITE_ONLY | CL_MEM_HOST_READ_ONLY | CL_MEM_ALLOC_HOST_PTR,
+                                                      sizeof(float));
 
         timer.stop("Buffers allocating");
 
         auto functionPtr = proxy.getFunction(cPowerFunctionId);
 
         timer.start();
-        functionPtr->setArg(0, numberBuf);
-        functionPtr->setArg(1, powerBuf);
+        functionPtr->setArg(0, cl_float(number));
+        functionPtr->setArg(1, cl_int(power));
         functionPtr->setArg(2, *resultBuf);
         timer.stop("Setting arguments");
 
@@ -162,17 +165,16 @@ public:
     {
         auto& proxy = calgopp::gpu::Proxy::get();
         auto context = proxy.getContext();
-        cl::Buffer numberBuf(*context, CL_MEM_HOST_WRITE_ONLY | CL_MEM_USE_HOST_PTR, sizeof(float), &number);
-        cl::Buffer epsilonBuf(*context, CL_MEM_HOST_WRITE_ONLY | CL_MEM_USE_HOST_PTR, sizeof(float), &epsilon);
-        cl::Buffer baseBuf(*context, CL_MEM_HOST_WRITE_ONLY | CL_MEM_USE_HOST_PTR, sizeof(int), &base);
-        auto resultBuf = std::make_shared<cl::Buffer>(*context, CL_MEM_READ_WRITE, sizeof(float));
+        auto resultBuf = std::make_shared<cl::Buffer>(*context,
+                                                      CL_MEM_WRITE_ONLY | CL_MEM_HOST_READ_ONLY | CL_MEM_ALLOC_HOST_PTR,
+                                                      sizeof(float));
 
         auto functionPtr = proxy.getFunction(cRootFunctionId);
 
-        functionPtr->setArg(0, numberBuf);
-        functionPtr->setArg(1, baseBuf);
+        functionPtr->setArg(0, cl_float(number));
+        functionPtr->setArg(1, cl_int(base));
         functionPtr->setArg(2, *resultBuf);
-        functionPtr->setArg(3, epsilonBuf);
+        functionPtr->setArg(3, cl_float(epsilon));
 
         auto event = std::make_shared<cl::Event>();
 
@@ -257,30 +259,30 @@ double root(double number, int base)
     int maxSpins = 10000;
 
     auto increase =
-            [&multiplication, &base, &precision, &maxSpins](double& token, const double& threshold, double& step) {
-                while (multiplication(token, base) - threshold < precision)
+        [&multiplication, &base, &precision, &maxSpins](double& token, const double& threshold, double& step) {
+            while (multiplication(token, base) - threshold < precision)
+            {
+                if (maxSpins < 0)
                 {
-                    if (maxSpins < 0)
-                    {
-                        break;
-                    }
-                    token += step;
-                    maxSpins--;
+                    break;
                 }
-            };
+                token += step;
+                maxSpins--;
+            }
+        };
 
     auto decrease =
-            [&multiplication, &base, &precision, &maxSpins](double& token, const double& threshold, double& step) {
-                while (multiplication(token, base) - threshold > precision)
+        [&multiplication, &base, &precision, &maxSpins](double& token, const double& threshold, double& step) {
+            while (multiplication(token, base) - threshold > precision)
+            {
+                if (maxSpins < 0)
                 {
-                    if (maxSpins < 0)
-                    {
-                        break;
-                    }
-                    token -= step;
-                    maxSpins--;
+                    break;
                 }
-            };
+                token -= step;
+                maxSpins--;
+            }
+        };
 
     double token = epsilon();
     double jump = cMultiplier * number;

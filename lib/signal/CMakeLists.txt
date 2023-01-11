@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.14)
 
-list(APPEND sources FourierTransform.cpp JacymirskiTransform.cpp)
+list(APPEND sources JacymirskiTransform.cpp)
 
 if(${GPU_PARALLEL} MATCHES "1")
     find_package(OpenCL REQUIRED)
-    list(APPEND sources SignalOpenCL.cpp)
+    list(APPEND sources SignalOpenCL.cpp FourierTransformOpenCL.cpp)
 else()
-    list(APPEND sources Signal.cpp)
+    list(APPEND sources Signal.cpp FourierTransform.cpp)
 endif()
 
 add_library(calgopp-signal EXCLUDE_FROM_ALL
@@ -14,7 +14,7 @@ add_library(calgopp-signal EXCLUDE_FROM_ALL
         )
 
 if(${GPU_PARALLEL} MATCHES "1")
-    target_link_libraries(calgopp-math
+    target_link_libraries(calgopp-signal
             PRIVATE calgopp::gpu OpenCL::OpenCL)
 endif()
 

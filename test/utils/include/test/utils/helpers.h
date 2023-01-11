@@ -125,8 +125,8 @@ bool almostEqual(const T& var1, const T& var2, double threshold = 0.0000001)
     bool diffGreaterThanThreshold = dif >= threshold;
     if (diffGreaterThanThreshold)
     {
-        std::cout << std::setprecision(20) << "Variables don't equal. Var1: " << var1 << ", var2: " << var2 << ", difference: " << dif
-                  << std::endl;
+        std::cout << std::setprecision(20) << "Variables don't equal. Var1: " << var1 << ", var2: " << var2
+                  << ", difference: " << dif << std::endl;
     }
     return !diffGreaterThanThreshold;
 }

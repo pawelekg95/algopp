@@ -9,36 +9,22 @@
 #include <cstdint>
 #include <map>
 #include <string>
-#include <iostream>
-#include <chrono>
 
 namespace calgopp {
 namespace gpu {
 
-class Timer
-{
-public:
-    void start() { m_start = std::chrono::system_clock::now(); }
-
-    void stop(const std::string& message = "")
-    {
-        auto now = std::chrono::system_clock::now();
-        std::cout << "Time elapsed: " << std::chrono::duration_cast<std::chrono::nanoseconds>(now - m_start).count() << "ns. Message: " << message << std::endl;
-    }
-
-private:
-    std::chrono::time_point<std::chrono::system_clock> m_start;
-};
-
-template<typename T>
+template <typename T>
 class Result
 {
 public:
-    Result(std::shared_ptr<cl::CommandQueue> commandQueue, std::shared_ptr<cl::Buffer> buffer, std::shared_ptr<cl::Event> event, std::uint32_t size = sizeof(T))
-            : m_commandQueue(std::move(commandQueue))
-            , m_buffer(std::move(buffer))
-            , m_event(std::move(event))
-            , m_bufferSize(size)
+    Result(std::shared_ptr<cl::CommandQueue> commandQueue,
+           std::shared_ptr<cl::Buffer> buffer,
+           std::shared_ptr<cl::Event> event,
+           std::uint32_t size = sizeof(T))
+        : m_commandQueue(std::move(commandQueue))
+        , m_buffer(std::move(buffer))
+        , m_event(std::move(event))
+        , m_bufferSize(size)
     {}
 
     void get(T* result)
@@ -47,15 +33,22 @@ public:
         {
             throw "Failed to finish event";
         }
-        Timer timer;
-        timer.start();
         if (m_commandQueue->enqueueReadBuffer(*m_buffer, CL_TRUE, 0, m_bufferSize, result) != 0)
         {
             throw "Failed to read from device";
         }
-        timer.stop("Reading buffer");
+    }
 
-        m_commandQueue->flush();
+    void get(T result)
+    {
+        if (m_event->wait() != 0)
+        {
+            throw "Failed to finish event";
+        }
+        if (m_commandQueue->enqueueReadBuffer(*m_buffer, CL_TRUE, 0, m_bufferSize, result) != 0)
+        {
+            throw "Failed to read from device";
+        }
     }
 
 private:

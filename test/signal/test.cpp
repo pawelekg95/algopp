@@ -19,6 +19,41 @@
 #include <memory>
 #include <cmath>
 
+class OverallTimerWatcher
+{
+public:
+    ~OverallTimerWatcher() { std::cout << "Total time elapsed (us): " << m_overallWatcher << std::endl; }
+
+    const OverallTimerWatcher& operator+=(std::uint64_t timer) const
+    {
+        m_overallWatcher += timer;
+        std::cout << "Timer added (us): " << timer
+                  << " from test case: " << Catch::getResultCapture().getCurrentTestName() << std::endl;
+        return *this;
+    }
+
+private:
+    mutable std::uint64_t m_overallWatcher{};
+};
+
+class TimerTracker
+{
+public:
+    TimerTracker(const OverallTimerWatcher& overallTimerWatcher)
+        : m_overallTimerWatcher(overallTimerWatcher)
+    {
+        m_timer.start();
+    }
+
+    ~TimerTracker() { m_overallTimerWatcher += m_timer.getElapsedMicroseconds(); }
+
+private:
+    const OverallTimerWatcher& m_overallTimerWatcher;
+    Catch::Timer m_timer;
+};
+
+const OverallTimerWatcher overallTimer;
+
 void addPoints(calgopp::signal::Signal& signal, std::uint32_t amount, bool reset = false)
 {
     static std::uint32_t last = 0;
@@ -323,8 +358,9 @@ TEST_CASE("Signal tests - peaks")
 
 TEST_CASE("Transforms")
 {
+    TimerTracker tracker(overallTimer);
     auto currentPath = std::filesystem::canonical("/proc/self/exe").parent_path();
-    REQUIRE(test::testDataset(currentPath / "dataset_generator.py", currentPath / "dataset.json", 9) == 0);
+    REQUIRE(test::testDataset(currentPath / "dataset_generator.py", currentPath / "dataset.json", 1000) == 0);
     auto rawDataset = test::getRawDataset(currentPath / "dataset.json");
     auto modelTransformedDataset =
         test::getTransformedDataset(currentPath / "dataset.json", test::Transform::eFastFourier);
@@ -336,6 +372,8 @@ TEST_CASE("Transforms")
 
     for (std::uint32_t i = 0; i < modelTransformedDataset.size(); i++)
     {
-        CHECK(test::almostEqual(testedTransformedDataset[i].y, modelTransformedDataset[i], 0.001));
+        CHECK(test::almostEqual(testedTransformedDataset[i].y,
+                                modelTransformedDataset[i],
+                                0.001 * calgopp::math::abs(modelTransformedDataset[i])));
     }
 }

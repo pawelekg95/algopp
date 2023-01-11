@@ -1,7 +1,5 @@
 #include "calgopp/gpu/Proxy.h"
 
-#include <iostream>
-
 namespace calgopp {
 namespace gpu {
 
@@ -24,21 +22,13 @@ Proxy::Proxy()
     m_context = std::make_shared<cl::Context>(default_device);
     m_commandQueue = std::make_shared<cl::CommandQueue>(*m_context, default_device);
 
-    try
-    {
-        m_program = std::make_shared<cl::Program>(*m_context, m_sources);
+    m_program = std::make_shared<cl::Program>(*m_context, m_sources);
 
-        m_program->build({ default_device });
+    m_program->build({default_device});
 
-        for (auto& [functionId, functionPtr] : m_functions)
-        {
-            functionPtr = std::make_shared<cl::Kernel>(*m_program, functionId.c_str());
-        }
-    }
-    catch(cl::Error& e)
+    for (auto& [functionId, functionPtr] : m_functions)
     {
-        std::cout << "Fail. What: " << e.what() << ", error code: " << e.err() << std::endl;
-        std::cout << m_program->getBuildInfo<CL_PROGRAM_BUILD_LOG>(default_device) << std::endl;
+        functionPtr = std::make_shared<cl::Kernel>(*m_program, functionId.c_str());
     }
 }
 
