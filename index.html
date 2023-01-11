@@ -90,7 +90,11 @@ Introduction</h1>
 <li>adding, deleting, modifying signals</li>
 </ul>
 <p >Signal processing:</p><ul>
-<li>transforms (Fourier, Jacymirski)</li>
+<li>transforms<ul>
+<li>Fourier - DFT</li>
+<li>Jacymirski</li>
+</ul>
+</li>
 <li>filtering</li>
 <li>wavelets</li>
 </ul>
@@ -118,7 +122,11 @@ CMake</h3>
 <div class="line">    PUBLIC calgopp::&lt;submodule&gt;</div>
 <div class="line">)</div>
 </div><!-- fragment --><p >To enable GPU parallelization set CMake variable GPU_PARALLEL to 1: </p><div class="fragment"><div class="line">set(GPU_PARALLEL 1)</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
+</div><!-- fragment --><p >Modules that currently might[1] benefit from GPU parallelization:</p><ul>
+<li>signal</li>
+</ul>
+<p >[1] Performance of GPU parallelization varies from some conditions. Noticeable gain is achievable when processing big data sets.</p>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Usage</h1>
 <p >See <code>test</code> directory for examples. </p>
 </div></div><!-- PageDoc -->

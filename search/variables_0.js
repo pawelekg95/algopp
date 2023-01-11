@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['imag_0',['imag',['../structcalgopp_1_1types_1_1Complex.html#a8ac4e5a15d3de2bb87af1d20ea67f228',1,'calgopp::types::Complex']]]
+  ['gpufunctions_0',['gpuFunctions',['../namespacecalgopp_1_1signal_1_1transform.html#a5388453485b408d11b00f96ee7cb3f61',1,'calgopp::signal::transform']]]
 ];

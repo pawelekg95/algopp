@@ -8,13 +8,17 @@ digraph "lib/signal/include/calgopp/signal/Signal.h"
   Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
   Node2 [label="lib/signal/Signal.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Signal_8cpp.html",tooltip=" "];
   Node1 -> Node3 [dir="back",color="steelblue1",style="solid"];
-  Node3 [label="lib/signal/include\l/calgopp/signal/IProcessor.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$IProcessor_8h.html",tooltip=" "];
-  Node3 -> Node4 [dir="back",color="steelblue1",style="solid"];
-  Node4 [label="lib/signal/include\l/calgopp/signal/transform\l/FourierTransform.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$FourierTransform_8h.html",tooltip=" "];
+  Node3 [label="lib/signal/SignalOpenCL.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$SignalOpenCL_8cpp.html",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="lib/signal/include\l/calgopp/signal/IProcessor.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$IProcessor_8h.html",tooltip=" "];
   Node4 -> Node5 [dir="back",color="steelblue1",style="solid"];
-  Node5 [label="lib/signal/FourierTransform.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$FourierTransform_8cpp.html",tooltip=" "];
-  Node3 -> Node6 [dir="back",color="steelblue1",style="solid"];
-  Node6 [label="lib/signal/include\l/calgopp/signal/transform\l/JacymirskiTransform.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$JacymirskiTransform_8h.html",tooltip=" "];
-  Node6 -> Node7 [dir="back",color="steelblue1",style="solid"];
-  Node7 [label="lib/signal/JacymirskiTransform.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$JacymirskiTransform_8cpp.html",tooltip=" "];
+  Node5 [label="lib/signal/include\l/calgopp/signal/transform\l/FourierTransform.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$FourierTransform_8h.html",tooltip=" "];
+  Node5 -> Node6 [dir="back",color="steelblue1",style="solid"];
+  Node6 [label="lib/signal/FourierTransform.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$FourierTransform_8cpp.html",tooltip=" "];
+  Node5 -> Node7 [dir="back",color="steelblue1",style="solid"];
+  Node7 [label="lib/signal/FourierTransform\lOpenCL.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$FourierTransformOpenCL_8cpp.html",tooltip=" "];
+  Node4 -> Node8 [dir="back",color="steelblue1",style="solid"];
+  Node8 [label="lib/signal/include\l/calgopp/signal/transform\l/JacymirskiTransform.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$JacymirskiTransform_8h.html",tooltip=" "];
+  Node8 -> Node9 [dir="back",color="steelblue1",style="solid"];
+  Node9 [label="lib/signal/JacymirskiTransform.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$JacymirskiTransform_8cpp.html",tooltip=" "];
 }
