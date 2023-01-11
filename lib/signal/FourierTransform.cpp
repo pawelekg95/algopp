@@ -7,7 +7,7 @@ calgopp::types::Complex fourierSum(const calgopp::signal::Signal& signal, unsign
 {
     double tokenReal = 0;
     double tokenImag = 0;
-    auto N = signal.size();
+    auto N = signal.size(); // NOLINT
     for (unsigned int n = 0; n < N; n++)
     {
         double arg = 2.0 * calgopp::math::pi() * k * n / N;

@@ -33,7 +33,7 @@ double root(int number, unsigned int base)
     return root(static_cast<double>(number), static_cast<int>(base));
 }
 
-double root(long int number, unsigned int base)
+double root(long int number, unsigned int base) // NOLINT
 {
     return root(static_cast<double>(number), static_cast<int>(base));
 }
@@ -48,7 +48,7 @@ double root(int number, int base)
     return root(static_cast<double>(number), base);
 }
 
-double root(long int number, int base)
+double root(long int number, int base) // NOLINT
 {
     return root(static_cast<double>(number), base);
 }
@@ -123,7 +123,7 @@ double pow(int number, unsigned int power)
     return pow(static_cast<double>(number), static_cast<int>(power));
 }
 
-double pow(long int number, unsigned int power)
+double pow(long int number, unsigned int power) // NOLINT
 {
     return pow(static_cast<double>(number), static_cast<int>(power));
 }
@@ -138,7 +138,7 @@ double pow(int number, int power)
     return pow(static_cast<double>(number), power);
 }
 
-double pow(long int number, int power)
+double pow(long int number, int power) // NOLINT
 {
     return pow(static_cast<double>(number), power);
 }
@@ -169,12 +169,12 @@ double pow(int number, double power)
     return pow(static_cast<double>(number), power);
 }
 
-double pow(long int number, double power)
+double pow(long int number, double power) // NOLINT
 {
     return pow(static_cast<double>(number), power);
 }
 
-double pow(double number, double power)
+double pow(double number, double power) // NOLINT
 {
     Fraction pwrFraction(power);
     if (power < 0 && int(power) % 2 == 0 && !pwrFraction)

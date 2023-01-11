@@ -15,7 +15,7 @@ const long double comparingThreshold = 0.01;
 const long double comparingThreshold = 0.0001;
 #endif
 
-class OverallTimerWatcher
+class OverallTimerWatcher // NOLINT
 {
 public:
     ~OverallTimerWatcher() { std::cout << "Total time elapsed (us): " << m_overallWatcher << std::endl; }
@@ -32,7 +32,7 @@ private:
     mutable std::uint64_t m_overallWatcher{};
 };
 
-class TimerTracker
+class TimerTracker // NOLINT
 {
 public:
     TimerTracker(const OverallTimerWatcher& overallTimerWatcher)
