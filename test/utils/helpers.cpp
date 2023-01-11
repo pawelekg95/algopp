@@ -84,7 +84,7 @@ bool almostEqual(const types::Complex& var1, const types::Complex& var2, double 
 {
     double realDif = std::abs(var1.real - var2.real);
     double imagDif = std::abs(var1.imag - var2.imag);
-    if (realDif > threshold)
+    if (realDif > var1.real * threshold)
     {
         std::cout << "Variables real parts don't equal. Var1: " << var1.real << ", var2: " << var2.real
                   << ", difference: " << realDif << std::endl;

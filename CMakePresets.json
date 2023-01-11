@@ -63,6 +63,14 @@
         "APP": "test/math"
       }
     },
+    
+    {
+   	  "name": "GPU_PARALLEL",
+   	  "hidden": true,
+   	  "cacheVariables": { 
+   	  	"GPU_PARALLEL": "1"
+   	  }
+    },
 
     {
       "name": "FUNCTION_TEST",
@@ -136,6 +144,72 @@
       "name": "math_tests_clang_debug",
       "inherits": [ "Debug", "MATH_TEST", "Linux_Clang" ]
     },
+    
+    
+    {
+      "name": "signal_tests_gcc_debug_parallel",
+      "inherits": [ "signal_tests_gcc_debug", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "signal_tests_clang_debug_parallel",
+      "inherits": [ "signal_tests_clang_debug", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "signal_tests_gcc_release_parallel",
+      "inherits": [ "signal_tests_gcc_release", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "signal_tests_clang_release_parallel",
+      "inherits": [ "signal_tests_gcc_release", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "types_tests_gcc_debug_parallel",
+      "inherits": [ "types_tests_gcc_debug", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "types_tests_clang_debug_parallel",
+      "inherits": [ "types_tests_clang_debug", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "types_tests_gcc_release_parallel",
+      "inherits": [ "types_tests_gcc_release", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "types_tests_clang_release_parallel",
+      "inherits": [ "types_tests_clang_release", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "algorithm_tests_gcc_debug_parallel",
+      "inherits": [ "algorithm_tests_gcc_debug", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "algorithm_tests_clang_debug_parallel",
+      "inherits": [ "algorithm_tests_clang_debug", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "algorithm_tests_gcc_release_parallel",
+      "inherits": [ "algorithm_tests_gcc_release", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "algorithm_tests_clang_release_parallel",
+      "inherits": [ "algorithm_tests_clang_release", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "math_tests_gcc_release_parallel",
+      "inherits": [ "math_tests_gcc_release", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "math_tests_clang_release_parallel",
+      "inherits": [ "math_tests_clang_release", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "math_tests_gcc_debug_parallel",
+      "inherits": [ "math_tests_gcc_debug", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "math_tests_clang_debug_parallel",
+      "inherits": [ "math_tests_clang_debug", "GPU_PARALLEL" ]
+    },
     {
       "name": "function_tests_gcc_debug",
       "inherits": [ "Debug", "FUNCTION_TEST", "Linux_GCC" ]
@@ -152,5 +226,6 @@
       "name": "function_tests_clang_release",
       "inherits": [ "Release", "FUNCTION_TEST", "Linux_Clang" ]
     }
+    
   ]
 }

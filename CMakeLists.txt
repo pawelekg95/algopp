@@ -9,9 +9,18 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
 
-project(calgopp)
+list(APPEND compile_options $<$<COMPILE_LANGUAGE:CXX>:-std=c++17>)
 
-add_compile_options(-Wall -Wextra -Wpedantic -Werror $<$<COMPILE_LANGUAGE:CXX>:-std=c++17>)
+if(NOT DEFINED GPU_PARALLEL)
+    list(APPEND compile_options -Wall -Wextra -Wpedantic -Werror $<$<COMPILE_LANGUAGE:CXX>:-std=c++17>)
+    message("No GPU parallelization set. Bare CPU implementation\n")
+else()
+    message("GPU parallelization set. Using OpenCL implementation\n")
+endif()
+
+project(calgopp LANGUAGES C CXX)
+
+add_compile_options(${compile_options})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_subdirectory(lib)

@@ -22,7 +22,9 @@ Signal handling:
 * adding, deleting, modifying signals
 
 Signal processing:
-* transforms (Fourier, Jacymirski)
+* transforms
+  * Fourier - DFT
+  * Jacymirski
 * filtering
 * wavelets
 
@@ -61,6 +63,12 @@ To enable GPU parallelization set CMake variable GPU_PARALLEL to 1:
 ````
 set(GPU_PARALLEL 1)
 ````
+
+Modules that currently might[1] benefit from GPU parallelization:
+* signal
+
+[1] Performance of GPU parallelization varies from some conditions.
+Noticeable gain is achievable when processing big data sets.
 
 # Usage
 See `test` directory for examples.
