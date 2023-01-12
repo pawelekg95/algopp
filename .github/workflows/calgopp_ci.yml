@@ -56,7 +56,8 @@ jobs:
       app: Build_function_tests_gcc_debug
     secrets: inherit
 
-  name: Build_approximation_tests_gcc_debug
+  Build_approximation_tests_gcc_debug:
+    name: Build_approximation_tests_gcc_debug
     needs: Calgopp_x86_64_docker
     uses: ./.github/workflows/build_tests.yml
     with:
