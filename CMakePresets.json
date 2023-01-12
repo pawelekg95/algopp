@@ -73,6 +73,14 @@
     },
 
     {
+      "name": "FUNCTION_TEST",
+      "hidden": true,
+      "cacheVariables": {
+        "APP": "test/function"
+      }
+    },
+
+    {
       "name": "signal_tests_gcc_debug",
       "inherits": [ "Debug", "SIGNAL_TEST", "Linux_GCC" ]
     },
@@ -201,6 +209,22 @@
     {
       "name": "math_tests_clang_debug_parallel",
       "inherits": [ "math_tests_clang_debug", "GPU_PARALLEL" ]
+    },
+    {
+      "name": "function_tests_gcc_debug",
+      "inherits": [ "Debug", "FUNCTION_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "function_tests_clang_debug",
+      "inherits": [ "Debug", "FUNCTION_TEST", "Linux_Clang" ]
+    },
+    {
+      "name": "function_tests_gcc_release",
+      "inherits": [ "Release", "FUNCTION_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "function_tests_clang_release",
+      "inherits": [ "Release", "FUNCTION_TEST", "Linux_Clang" ]
     }
     
   ]

@@ -47,6 +47,15 @@ jobs:
       app: Build_math_tests_gcc_debug
     secrets: inherit
 
+  Build_function_tests_gcc_debug:
+    name: Build_function_tests_gcc_debug
+    needs: Calgopp_x86_64_docker
+    uses: ./.github/workflows/build_tests.yml
+    with:
+      preset: function_tests_gcc_debug
+      app: Build_function_tests_gcc_debug
+    secrets: inherit
+
   # Test stage
   Signal_test:
     name: Signal_test
@@ -87,6 +96,15 @@ jobs:
       arguments: ~"Benchmark test"
     secrets: inherit
 
+  Function_test:
+    name: Function_test
+    needs: Build_function_tests_gcc_debug
+    uses: ./.github/workflows/test.yml
+    with:
+      artifacts_name: Build_function_tests_gcc_debug-${{ github.sha }}
+      test_app: ./tests
+    secrets: inherit
+
   # Valgrind tests
   Signal_test_valgrind:
     name: Signal_test_valgrind
@@ -125,6 +143,15 @@ jobs:
       artifacts_name: Build_math_tests_gcc_debug-${{ github.sha }}
       test_app: ./tests
       arguments: ~"Benchmark test"
+    secrets: inherit
+
+  Function_test_valgrind:
+    name: Function_test_valgrind
+    needs: Function_test
+    uses: ./.github/workflows/valgrind.yml
+    with:
+      artifacts_name: Build_function_tests_gcc_debug-${{ github.sha }}
+      test_app: ./tests
     secrets: inherit
 
   # Quality
