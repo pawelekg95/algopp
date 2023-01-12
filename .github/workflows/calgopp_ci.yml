@@ -56,6 +56,14 @@ jobs:
       app: Build_function_tests_gcc_debug
     secrets: inherit
 
+  name: Build_approximation_tests_gcc_debug
+    needs: Calgopp_x86_64_docker
+    uses: ./.github/workflows/build_tests.yml
+    with:
+      preset: approximation_tests_gcc_debug
+      app: Build_approximation_tests_gcc_debug
+    secrets: inherit
+
   # Test stage
   Signal_test:
     name: Signal_test
@@ -105,6 +113,15 @@ jobs:
       test_app: ./tests
     secrets: inherit
 
+  Approximation_test:
+    name: Approximation_test
+    needs: Build_approximation_tests_gcc_debug
+    uses: ./.github/workflows/test.yml
+    with:
+      artifacts_name: Build_approximation_tests_gcc_debug-${{ github.sha }}
+      test_app: ./tests
+    secrets: inherit
+
   # Valgrind tests
   Signal_test_valgrind:
     name: Signal_test_valgrind
@@ -151,6 +168,15 @@ jobs:
     uses: ./.github/workflows/valgrind.yml
     with:
       artifacts_name: Build_function_tests_gcc_debug-${{ github.sha }}
+      test_app: ./tests
+    secrets: inherit
+
+  Approximation_test_valgrind:
+    name: Approximation_test_valgrind
+    needs: Approximation_test
+    uses: ./.github/workflows/valgrind.yml
+    with:
+      artifacts_name: Build_approximation_tests_gcc_debug-${{ github.sha }}
       test_app: ./tests
     secrets: inherit
 
