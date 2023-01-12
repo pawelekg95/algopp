@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['imag_0',['imag',['../structcalgopp_1_1types_1_1Complex.html#a8ac4e5a15d3de2bb87af1d20ea67f228',1,'calgopp::types::Complex']]]
+  ['b_0',['b',['../structcalgopp_1_1function_1_1LinearFunctionImpl.html#abf5f00c394e1b769fd07431466058378',1,'calgopp::function::LinearFunctionImpl']]]
 ];

@@ -8,5 +8,8 @@ var searchData=
   ['fouriertransform_2ecpp_5',['FourierTransform.cpp',['../FourierTransform_8cpp.html',1,'']]],
   ['fouriertransform_2eh_6',['FourierTransform.h',['../FourierTransform_8h.html',1,'']]],
   ['fouriertransformopencl_2ecpp_7',['FourierTransformOpenCL.cpp',['../FourierTransformOpenCL_8cpp.html',1,'']]],
-  ['fraction_8',['Fraction',['../classcalgopp_1_1math_1_1Fraction.html',1,'calgopp::math::Fraction'],['../classcalgopp_1_1math_1_1Fraction.html#a3e8230533ac178d9fc68673573ddb04e',1,'calgopp::math::Fraction::Fraction()']]]
+  ['fraction_8',['Fraction',['../classcalgopp_1_1math_1_1Fraction.html',1,'calgopp::math::Fraction'],['../classcalgopp_1_1math_1_1Fraction.html#a3e8230533ac178d9fc68673573ddb04e',1,'calgopp::math::Fraction::Fraction()']]],
+  ['function_9',['Function',['../classcalgopp_1_1function_1_1Function.html',1,'calgopp::function::Function&lt; Functor &gt;'],['../classcalgopp_1_1function_1_1Function.html#a4131e0803105dad213a5ea3bb7f372c9',1,'calgopp::function::Function::Function()']]],
+  ['function_2eh_10',['Function.h',['../Function_8h.html',1,'']]],
+  ['function_3c_20linearfunctionimpl_20_3e_11',['Function&lt; LinearFunctionImpl &gt;',['../classcalgopp_1_1function_1_1Function.html',1,'calgopp::function']]]
 ];

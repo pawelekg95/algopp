@@ -1,4 +1,21 @@
 var searchData=
 [
-  ['type_0',['type',['../structcalgopp_1_1types_1_1Peak.html#afac7d1ed61c49fc953bb58bcaf1a79e6',1,'calgopp::types::Peak']]]
+  ['m_5fbegin_0',['m_begin',['../classcalgopp_1_1types_1_1Container.html#aea28255a87567d3a26a30a49698ad56c',1,'calgopp::types::Container']]],
+  ['m_5fbuffer_1',['m_buffer',['../classcalgopp_1_1gpu_1_1Result.html#abb9f5e9344459ba4b5ef091a3e2c5d16',1,'calgopp::gpu::Result']]],
+  ['m_5fbuffersize_2',['m_bufferSize',['../classcalgopp_1_1gpu_1_1Result.html#a3439f55246233c47fd165ad3dcc619f1',1,'calgopp::gpu::Result']]],
+  ['m_5fcapacity_3',['m_capacity',['../classcalgopp_1_1types_1_1Container.html#ae91cb82c2f8177d1feaa998d65079ad1',1,'calgopp::types::Container']]],
+  ['m_5fcommandqueue_4',['m_commandQueue',['../classcalgopp_1_1gpu_1_1Result.html#a912f24689e0b5705035e147989d45d79',1,'calgopp::gpu::Result::m_commandQueue()'],['../classcalgopp_1_1gpu_1_1Proxy.html#a14fcffc47e2e242d99ae8390af18f48d',1,'calgopp::gpu::Proxy::m_commandQueue()']]],
+  ['m_5fcontext_5',['m_context',['../classcalgopp_1_1gpu_1_1Proxy.html#aa48b2925a621695ad88804f2f79876bb',1,'calgopp::gpu::Proxy']]],
+  ['m_5fdata_6',['m_data',['../classcalgopp_1_1types_1_1Container_1_1Iterator.html#a5b16174309d0605beabf4e84d587fc7a',1,'calgopp::types::Container::Iterator::m_data()'],['../classcalgopp_1_1types_1_1Container.html#ad0f6b79886a9795f0a7a98865e9d8161',1,'calgopp::types::Container::m_data()']]],
+  ['m_5fdenominator_7',['m_denominator',['../classcalgopp_1_1math_1_1Fraction.html#a1a11c3388962006a3b74f5c4b3c9794c',1,'calgopp::math::Fraction']]],
+  ['m_5fempty_8',['m_empty',['../classcalgopp_1_1types_1_1Container.html#a9a7e065175a9f98b46d454446b293cf8',1,'calgopp::types::Container']]],
+  ['m_5fend_9',['m_end',['../classcalgopp_1_1types_1_1Container.html#a1fd9fb7917feb1690a78526dcece6d68',1,'calgopp::types::Container']]],
+  ['m_5fevent_10',['m_event',['../classcalgopp_1_1gpu_1_1Result.html#aa0d6e734ef75383d4cfd39b91c612a72',1,'calgopp::gpu::Result']]],
+  ['m_5ffunctions_11',['m_functions',['../classcalgopp_1_1gpu_1_1Proxy.html#a4954764e9bd7668232c6ac8efcf21d1a',1,'calgopp::gpu::Proxy']]],
+  ['m_5ffunctor_12',['m_functor',['../classcalgopp_1_1function_1_1Function.html#a563b15738937371557ce0634012c6136',1,'calgopp::function::Function']]],
+  ['m_5fnumerator_13',['m_numerator',['../classcalgopp_1_1math_1_1Fraction.html#a73651ed207f44dda67361c0f3f152e19',1,'calgopp::math::Fraction']]],
+  ['m_5fpoints_14',['m_points',['../classcalgopp_1_1signal_1_1Signal.html#a006e0faa9cda2e3e23350d6a4e99bd7d',1,'calgopp::signal::Signal']]],
+  ['m_5fprogram_15',['m_program',['../classcalgopp_1_1gpu_1_1Proxy.html#aa2b685cb6eab9416597b5c52a78962c5',1,'calgopp::gpu::Proxy']]],
+  ['m_5fsize_16',['m_size',['../classcalgopp_1_1types_1_1Container.html#a553f824318aafc48b72f86dd48d19b98',1,'calgopp::types::Container']]],
+  ['m_5fsources_17',['m_sources',['../classcalgopp_1_1gpu_1_1Proxy.html#a714bd982fc8ff1e679b4d4b83ed1779f',1,'calgopp::gpu::Proxy']]]
 ];
