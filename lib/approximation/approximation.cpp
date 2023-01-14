@@ -2,13 +2,12 @@
 #include "calgopp/algorithm/algorithm.h"
 #include "calgopp/types/Point.h"
 
-namespace calgopp {
-namespace approximation {
+namespace calgopp::approximation {
 
 function::LinearFunction leastSquares(const signal::Signal& signal)
 {
     double sumX =
-        algorithm::numeric::sum(signal.begin(), signal.end(), 0.0, [](const types::Point& a) -> double { return a.x; });
+        algorithm::numeric::sum(signal.begin(), signal.end(), 0.0, [](const types::Point& a) -> double { return double(a.x); });
     double sumY = algorithm::numeric::sum(signal.begin(), signal.end(), 0.0, [](const types::Point& a) -> double {
         return double(a.y);
     });
@@ -16,7 +15,7 @@ function::LinearFunction leastSquares(const signal::Signal& signal)
         return double(a.x * a.y);
     });
     double sumX2 = algorithm::numeric::sum(signal.begin(), signal.end(), 0.0, [](const types::Point& a) -> double {
-        return (a.x * a.x);
+        return double(a.x * a.x);
     });
     if (sumX <= 0.000000001 || sumX2 <= 0.000000001)
     {
@@ -29,5 +28,4 @@ function::LinearFunction leastSquares(const signal::Signal& signal)
     return {a, b};
 }
 
-} // namespace approximation
-} // namespace calgopp
+} // namespace calgopp::approximation
