@@ -8,5 +8,5 @@ digraph "calgopp::function::Function&lt; Functor &gt;"
   Node1 -> Node2 [dir="back",color="orange",style="solid",label=" \< LinearFunctionImpl \>" ];
   Node2 [label="{calgopp::function::\lFunction\< LinearFunctionImpl \>\n|# m_functor\l|+ Function()\l+ operator()()\l}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classcalgopp_1_1function_1_1Function.html",tooltip=" "];
   Node2 -> Node3 [dir="back",color="steelblue1",style="solid",arrowtail="onormal"];
-  Node3 [label="{calgopp::function::\lLinearFunction\n||+ LinearFunction()\l}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classcalgopp_1_1function_1_1LinearFunction.html",tooltip=" "];
+  Node3 [label="{calgopp::function::\lLinearFunction\n|- m_a\l- m_b\l|+ LinearFunction()\l+ a()\l+ b()\l}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classcalgopp_1_1function_1_1LinearFunction.html",tooltip=" "];
 }
