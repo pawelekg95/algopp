@@ -81,6 +81,14 @@
     },
 
     {
+      "name": "APPROXIMATION_TEST",
+      "hidden": true,
+      "cacheVariables": {
+        "APP": "test/approximation"
+      }
+    },
+
+    {
       "name": "signal_tests_gcc_debug",
       "inherits": [ "Debug", "SIGNAL_TEST", "Linux_GCC" ]
     },
@@ -225,6 +233,22 @@
     {
       "name": "function_tests_clang_release",
       "inherits": [ "Release", "FUNCTION_TEST", "Linux_Clang" ]
+    },
+    {
+      "name": "approximation_tests_gcc_debug",
+      "inherits": [ "Debug", "APPROXIMATION_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "approximation_tests_clang_debug",
+      "inherits": [ "Debug", "APPROXIMATION_TEST", "Linux_Clang" ]
+    },
+    {
+      "name": "approximation_tests_gcc_release",
+      "inherits": [ "Release", "APPROXIMATION_TEST", "Linux_GCC" ]
+    },
+    {
+      "name": "approximation_tests_clang_release",
+      "inherits": [ "Release", "APPROXIMATION_TEST", "Linux_Clang" ]
     }
     
   ]
