@@ -23,4 +23,5 @@ digraph "lib/approximation/include/calgopp/approximation/approximation.h"
   Node8 -> Node9 [color="steelblue1",style="solid"];
   Node9 [label="calgopp/function/Function.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Function_8h.html",tooltip=" "];
   Node9 -> Node4 [color="steelblue1",style="solid"];
+  Node8 -> Node5 [color="steelblue1",style="solid"];
 }

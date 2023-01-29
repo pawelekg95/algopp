@@ -10,5 +10,7 @@ digraph "lib/function/include/calgopp/function"
   dir_d2b92af5a2cfbc9acf9c6f0ed7f1652b [label="function", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_d2b92af5a2cfbc9acf9c6f0ed7f1652b.html",tooltip=""];
   }
   dir_560694f03ee5bf1136d79e4f1ca1ca37 [label="types", fillcolor="#edf0f7", color="red", style="filled,dashed", URL="dir_560694f03ee5bf1136d79e4f1ca1ca37.html",tooltip=""];
+  dir_a36354df93aef5eec904487b77fa4fab [label="math", fillcolor="#edf0f7", color="red", style="filled,dashed", URL="dir_a36354df93aef5eec904487b77fa4fab.html",tooltip=""];
   dir_d2b92af5a2cfbc9acf9c6f0ed7f1652b->dir_560694f03ee5bf1136d79e4f1ca1ca37 [headlabel="1", labeldistance=1.5 headhref="dir_000012_000028.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_d2b92af5a2cfbc9acf9c6f0ed7f1652b->dir_a36354df93aef5eec904487b77fa4fab [headlabel="1", labeldistance=1.5 headhref="dir_000012_000023.html" color="steelblue1" fontcolor="steelblue1"];
 }

@@ -25,6 +25,7 @@ digraph "lib/approximation/approximation.cpp"
   Node9 -> Node10 [color="steelblue1",style="solid"];
   Node10 [label="calgopp/function/Function.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Function_8h.html",tooltip=" "];
   Node10 -> Node5 [color="steelblue1",style="solid"];
+  Node9 -> Node6 [color="steelblue1",style="solid"];
   Node1 -> Node11 [color="steelblue1",style="solid"];
   Node11 [label="calgopp/algorithm/algorithm.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$algorithm_8h.html",tooltip=" "];
   Node1 -> Node4 [color="steelblue1",style="solid"];
