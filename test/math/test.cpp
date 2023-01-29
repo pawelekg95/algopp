@@ -230,6 +230,31 @@ TEST_CASE("Trigonometry")
         test::almostEqual(std::tan(120 * (M_PI / 180)), calgopp::math::tan(math::toRadians(120)), comparingThreshold));
     REQUIRE(
         test::almostEqual(std::tan(180 * (M_PI / 180)), calgopp::math::tan(math::toRadians(180)), comparingThreshold));
+
+    REQUIRE(test::almostEqual(std::asin(1), calgopp::math::asin(1), comparingThreshold));
+    REQUIRE(test::almostEqual(std::asin(0.8), calgopp::math::asin(0.8), comparingThreshold));
+    REQUIRE(test::almostEqual(std::asin(0.6), calgopp::math::asin(0.6), comparingThreshold));
+    REQUIRE(test::almostEqual(std::asin(-1), calgopp::math::asin(-1), comparingThreshold));
+    REQUIRE(test::almostEqual(std::asin(-0.8), calgopp::math::asin(-0.8), comparingThreshold));
+    REQUIRE(test::almostEqual(std::asin(-0.6), calgopp::math::asin(-0.6), comparingThreshold));
+
+    REQUIRE(test::almostEqual(std::acos(1), calgopp::math::acos(1), comparingThreshold));
+    REQUIRE(test::almostEqual(std::acos(0.8), calgopp::math::acos(0.8), comparingThreshold));
+    REQUIRE(test::almostEqual(std::acos(0.6), calgopp::math::acos(0.6), comparingThreshold));
+    REQUIRE(test::almostEqual(std::acos(-1), calgopp::math::acos(-1), comparingThreshold));
+    REQUIRE(test::almostEqual(std::acos(-0.8), calgopp::math::acos(-0.8), comparingThreshold));
+    REQUIRE(test::almostEqual(std::acos(-0.6), calgopp::math::acos(-0.6), comparingThreshold));
+
+    REQUIRE(test::almostEqual(std::atan(1), calgopp::math::atan(1), comparingThreshold));
+    REQUIRE(test::almostEqual(std::atan(0.8), calgopp::math::atan(0.8), comparingThreshold));
+    REQUIRE(test::almostEqual(std::atan(0.6), calgopp::math::atan(0.6), comparingThreshold));
+    REQUIRE(test::almostEqual(std::atan(-1), calgopp::math::atan(-1), comparingThreshold));
+    REQUIRE(test::almostEqual(std::atan(-0.8), calgopp::math::atan(-0.8), comparingThreshold));
+    REQUIRE(test::almostEqual(std::atan(-0.6), calgopp::math::atan(-0.6), comparingThreshold));
+    REQUIRE(test::almostEqual(std::atan(2), calgopp::math::atan(2), comparingThreshold));
+    REQUIRE(test::almostEqual(std::atan(3), calgopp::math::atan(3), comparingThreshold));
+    REQUIRE(test::almostEqual(std::atan(-2), calgopp::math::atan(-2), comparingThreshold));
+    REQUIRE(test::almostEqual(std::atan(-3), calgopp::math::atan(-3), comparingThreshold));
 }
 
 TEST_CASE("Benchmark test")

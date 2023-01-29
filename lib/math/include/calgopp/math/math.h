@@ -1,7 +1,6 @@
 #pragma once
 
-namespace calgopp {
-namespace math {
+namespace calgopp::math {
 
 inline double toRadians(double degrees)
 {
@@ -253,5 +252,47 @@ long double log(const T& argument)
     return 2 * token;
 }
 
-} // namespace math
-} // namespace calgopp
+template <typename Number>
+double asin(const Number& num)
+{
+    [[maybe_unused]] bool negate = num < 0;
+    auto absNum = abs(num);
+    auto a0 = 1.5707288;
+    auto a1 = -0.2121144;
+    auto a2 = 0.0742610;
+    auto a3 = -0.0187293;
+    auto ret = ((pi() / 2) - root((1 - absNum), 2) * (a0 + a1 * absNum + a2 * pow(absNum, 2) + a3 * pow(absNum, 3)));
+    return negate ? -ret : ret;
+}
+
+template <typename Number>
+double acos(const Number& num)
+{
+    auto absNum = abs(num);
+    float negate = float(num < 0);
+    float ret = -0.0187293;
+    ret = ret * absNum;
+    ret = ret + 0.0742610;
+    ret = ret * absNum;
+    ret = ret - 0.2121144;
+    ret = ret * absNum;
+    ret = ret + 1.5707288;
+    ret = ret * root(1.0 - absNum, 2);
+    ret = ret - 2 * negate * ret;
+    return negate * 3.14159265358979 + ret;
+}
+
+template <typename Number>
+double atan(const Number& num)
+{
+    if (abs(num) <= 1)
+    {
+        return asin(2 * num / (1 + pow(num, 2))) / 2;
+    }
+    bool negate = num < -1;
+    auto numPowered = pow(num, 2);
+    auto ret = acos((1 - numPowered) / (1 + numPowered)) / 2;
+    return negate ? -ret : ret;
+}
+
+} // namespace calgopp::math
