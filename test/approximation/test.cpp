@@ -20,4 +20,14 @@ TEST_CASE("Least squares method")
         REQUIRE(linearFunction.b() == -14.6);
         std::cout << linearFunction.a() << " " << linearFunction.b() << std::endl;
     }
+
+    SECTION("2 points")
+    {
+        calgopp::types::Point points[] = {{2.0, 4.0}, {4.0, 10.0}};
+        calgopp::signal::Signal signal(points, 2);
+        auto linearFunction = calgopp::approximation::leastSquares(signal);
+        REQUIRE(linearFunction.a() == 3);
+        REQUIRE(linearFunction.b() == -2);
+        std::cout << linearFunction.a() << " " << linearFunction.b() << std::endl;
+    }
 }

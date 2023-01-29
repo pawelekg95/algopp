@@ -1,6 +1,7 @@
 #pragma once
 
 #include "calgopp/function/Function.h"
+#include "calgopp/math/math.h"
 
 namespace calgopp {
 namespace function {
@@ -25,6 +26,8 @@ public:
     double a() { return m_a; }
 
     double b() { return m_b; }
+
+    double slope() { return math::atan(m_a); }
 
 private:
     double m_a{};
