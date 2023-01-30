@@ -163,7 +163,7 @@ public:
      * @return Container with peaks.
      */
     types::Container<types::Peak>
-    peaks(types::PeakType type = types::PeakType::eHigh, long double height = 0, unsigned int distance = 1);
+    peaks(types::PeakType type = types::PeakType::eHigh, long double height = 0, unsigned int distance = 1) const;
 
     /**
      * Begin iterator.
