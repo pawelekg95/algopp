@@ -39,7 +39,7 @@ types::Point& Signal::operator[](unsigned int index)
     return m_points[index];
 }
 
-types::Container<types::Peak> Signal::peaks(types::PeakType type, long double height, unsigned int distance)
+types::Container<types::Peak> Signal::peaks(types::PeakType type, long double height, unsigned int distance) const
 {
     if (distance == 0)
     {
