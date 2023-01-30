@@ -9,4 +9,6 @@ digraph "lib/function/include/calgopp/function/LinearFunction.h"
   Node2 [label="lib/approximation/include\l/calgopp/approximation\l/approximation.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$approximation_8h.html",tooltip=" "];
   Node2 -> Node3 [dir="back",color="steelblue1",style="solid"];
   Node3 [label="lib/approximation/approximation.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$approximation_8cpp.html",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="lib/function/LinearFunction.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$LinearFunction_8cpp.html",tooltip=" "];
 }

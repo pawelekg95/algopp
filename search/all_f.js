@@ -4,8 +4,9 @@ var searchData=
   ['signal_2ecpp_1',['Signal.cpp',['../Signal_8cpp.html',1,'']]],
   ['signal_2eh_2',['Signal.h',['../Signal_8h.html',1,'']]],
   ['signalopencl_2ecpp_3',['SignalOpenCL.cpp',['../SignalOpenCL_8cpp.html',1,'']]],
-  ['sin_4',['sin',['../namespacecalgopp_1_1math.html#af6461d9920dac56e602c4c4bfc89bda1',1,'calgopp::math']]],
+  ['sin_4',['sin',['../namespacecalgopp_1_1math.html#aba53c43a38a6ea0b35ee438b00226aab',1,'calgopp::math']]],
   ['size_5',['size',['../classcalgopp_1_1signal_1_1Signal.html#ab1d13d4acfe8c03bd40cac3aacc916c8',1,'calgopp::signal::Signal::size()'],['../classcalgopp_1_1types_1_1Container.html#a9a2fa4d8f54a292a5b7b0598f09a657a',1,'calgopp::types::Container::size()']]],
-  ['slope_6',['slope',['../classcalgopp_1_1function_1_1LinearFunction.html#a54c4daff01f200fb4973b135d11d3c5b',1,'calgopp::function::LinearFunction']]],
-  ['sum_7',['sum',['../namespacecalgopp_1_1algorithm_1_1numeric.html#a97529a710b75f842974ca7ba02f617f2',1,'calgopp::algorithm::numeric']]]
+  ['slope_6',['slope',['../classcalgopp_1_1function_1_1LinearFunction.html#a64b65214ed7cfbc8fef43d22cc9aaeda',1,'calgopp::function::LinearFunction']]],
+  ['sqrt_7',['sqrt',['../namespacecalgopp_1_1math.html#a7e6c460bc12a02c7c5ebcad91b72dd1d',1,'calgopp::math']]],
+  ['sum_8',['sum',['../namespacecalgopp_1_1algorithm_1_1numeric.html#a97529a710b75f842974ca7ba02f617f2',1,'calgopp::algorithm::numeric']]]
 ];

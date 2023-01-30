@@ -11,5 +11,4 @@ digraph "lib/function/include/calgopp/function/LinearFunction.h"
   Node3 [label="calgopp/types/Complex.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Complex_8h.html",tooltip=" "];
   Node3 -> Node4 [color="steelblue1",style="solid"];
   Node4 [label="calgopp/math/math.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$math_8h.html",tooltip=" "];
-  Node1 -> Node4 [color="steelblue1",style="solid"];
 }
