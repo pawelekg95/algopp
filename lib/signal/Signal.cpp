@@ -53,7 +53,7 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
         return (type == types::PeakType::eLow ? first > second && second < third : first < second && second > third);
     };
 
-    [[maybe_unused]] auto comparator = [&type](long double first, long double second) -> bool {
+    auto comparator = [&type](long double first, long double second) -> bool {
         return (type == types::PeakType::eLow ? first >= second : first <= second);
     };
 
