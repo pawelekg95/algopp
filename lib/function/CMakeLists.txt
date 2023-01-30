@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 3.14)
 
-add_library(calgopp-function INTERFACE)
+add_library(calgopp-function EXCLUDE_FROM_ALL
+        LinearFunction.cpp)
 
 add_library(calgopp::function ALIAS calgopp-function)
 
 target_link_libraries(calgopp-function
-        INTERFACE calgopp::types calgopp::math)
+        PUBLIC calgopp::types
+        PRIVATE calgopp::math)
 
 target_include_directories(calgopp-function
-        INTERFACE include
+        PUBLIC include
         )

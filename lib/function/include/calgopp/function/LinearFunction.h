@@ -1,17 +1,15 @@
 #pragma once
 
 #include "calgopp/function/Function.h"
-#include "calgopp/math/math.h"
 
-namespace calgopp {
-namespace function {
+namespace calgopp::function {
 
 struct LinearFunctionImpl
 {
     double a{};
     double b{};
 
-    double operator()(double argument) { return a * argument + b; }
+    double operator()(double argument) const { return a * argument + b; }
 };
 
 class LinearFunction : public Function<LinearFunctionImpl>
@@ -23,16 +21,17 @@ public:
         , m_b(b)
     {}
 
-    double a() { return m_a; }
+    double a() const { return m_a; }
 
-    double b() { return m_b; }
+    double b() const { return m_b; }
 
-    double slope() { return math::atan(m_a); }
+    double slope() const;
+
+    double angle(const LinearFunction& other) const;
 
 private:
     double m_a{};
     double m_b{};
 };
 
-} // namespace function
-} // namespace calgopp
+} // namespace calgopp::function
