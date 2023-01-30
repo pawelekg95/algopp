@@ -387,10 +387,19 @@ TEST_CASE("Empty signal")
         signal[1];
         REQUIRE(false);
     }
-    catch (const char* e)
+    catch (const char* str) // NOLINT
     {
         REQUIRE(true);
     }
     auto peaks = signal.peaks();
+    REQUIRE(peaks.empty());
+    peaks.append({1, 2});
+    peaks = signal.peaks();
+    REQUIRE(peaks.empty());
+    peaks.append({2, 3});
+    peaks = signal.peaks();
+    REQUIRE(peaks.empty());
+    peaks.append({3, 4});
+    peaks = signal.peaks();
     REQUIRE(peaks.empty());
 }
