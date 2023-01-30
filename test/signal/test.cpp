@@ -377,3 +377,29 @@ TEST_CASE("Transforms")
                                 0.001 * calgopp::math::abs(modelTransformedDataset[i])));
     }
 }
+
+TEST_CASE("Empty signal")
+{
+    calgopp::signal::Signal signal;
+    REQUIRE(signal.empty());
+    try
+    {
+        signal[1];
+        REQUIRE(false);
+    }
+    catch (const char* str) // NOLINT
+    {
+        REQUIRE(true);
+    }
+    auto peaks = signal.peaks();
+    REQUIRE(peaks.empty());
+    peaks.append({1, 2});
+    peaks = signal.peaks();
+    REQUIRE(peaks.empty());
+    peaks.append({2, 3});
+    peaks = signal.peaks();
+    REQUIRE(peaks.empty());
+    peaks.append({3, 4});
+    peaks = signal.peaks();
+    REQUIRE(peaks.empty());
+}
