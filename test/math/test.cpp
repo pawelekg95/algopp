@@ -71,6 +71,7 @@ TEST_CASE("Root")
     REQUIRE(test::almostEqual(calgopp::math::root(3125, 5), 5, comparingThreshold));
     REQUIRE(test::almostEqual(calgopp::math::root(701583371424, 5), 234, comparingThreshold));
     REQUIRE(test::almostEqual(calgopp::math::root(61917364224, 10), 12, comparingThreshold));
+    REQUIRE(test::almostEqual(calgopp::math::sqrt(100), std::sqrt(100)));
 }
 
 TEST_CASE("Floor and ceil")

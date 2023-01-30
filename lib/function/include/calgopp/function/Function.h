@@ -2,8 +2,7 @@
 
 #include "calgopp/types/Complex.h"
 
-namespace calgopp {
-namespace function {
+namespace calgopp::function {
 
 template <typename Functor>
 class Function
@@ -19,5 +18,4 @@ protected:
     Functor m_functor;
 };
 
-} // namespace function
-} // namespace calgopp
+} // namespace calgopp::function

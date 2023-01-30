@@ -46,7 +46,7 @@ inline double pi()
  * @return Absolute value of argument.
  */
 template <typename Type>
-Type abs(const Type& number)
+Type abs(Type number)
 {
     return number < 0 ? -number : number;
 }
@@ -58,7 +58,7 @@ Type abs(const Type& number)
  * @return Integral part of the number.
  */
 template <typename Type>
-Type floor(const Type& number)
+Type floor(Type number)
 {
     return number < 0 ? -floor(abs(number - 1)) : int(number);
 }
@@ -70,7 +70,7 @@ Type floor(const Type& number)
  * @return Next integer after number.
  */
 template <typename Type>
-Type ceil(const Type& number)
+Type ceil(Type number)
 {
     if (int(number) == number)
     {
@@ -86,7 +86,7 @@ Type ceil(const Type& number)
  * @return Nearest integer.
  */
 template <typename Type>
-Type round(const Type& number)
+Type round(Type number)
 {
     auto flr = floor(number);
     return number - flr < 0.5 ? flr : ceil(number);
@@ -148,6 +148,12 @@ double root(long int number, int base); // NOLINT
 
 double root(double number, int base);
 
+template <typename Number>
+double sqrt(Number num)
+{
+    return root(num, 2);
+}
+
 double pow(int number, unsigned int power);
 
 double pow(long int number, unsigned int power); // NOLINT
@@ -173,7 +179,7 @@ double pow(double number, double power);
  * @return Calculated exponential.
  */
 template <typename PowerType>
-double exp(const PowerType& power)
+double exp(PowerType power)
 {
     return pow(euler(), power);
 }
@@ -185,13 +191,13 @@ double exp(const PowerType& power)
  * @return
  */
 template <typename Number>
-double sin(const Number& num)
+double sin(Number num)
 {
     double t = num;
     double sine = t;
     for (int a = 1; a < 20; ++a)
     {
-        double mult = -num * num / ((2 * a + 1) * (2 * a));
+        double mult = -num * num / ((2.0 * double(a) + 1.0) * (2.0 * double(a)));
         t *= mult;
         sine += t;
     }
@@ -205,7 +211,7 @@ double sin(const Number& num)
  * @return
  */
 template <typename Number>
-double cos(const Number& num)
+double cos(Number num)
 {
     auto shouldBePositive = [num]() -> bool {
         auto degrees = abs(toDegrees(num));
@@ -226,7 +232,7 @@ double cos(const Number& num)
  * @return
  */
 template <typename Number>
-double tan(const Number& num)
+double tan(Number num)
 {
     auto shouldBePositive = [num]() -> bool {
         auto degrees = abs(toDegrees(num));
@@ -253,9 +259,9 @@ long double log(const T& argument)
 }
 
 template <typename Number>
-double asin(const Number& num)
+double asin(Number num)
 {
-    [[maybe_unused]] bool negate = num < 0;
+    bool negate = num < 0;
     auto absNum = abs(num);
     auto a0 = 1.5707288;
     auto a1 = -0.2121144;
@@ -266,11 +272,11 @@ double asin(const Number& num)
 }
 
 template <typename Number>
-double acos(const Number& num)
+double acos(Number num)
 {
     auto absNum = abs(num);
     float negate = float(num < 0);
-    float ret = -0.0187293;
+    double ret = -0.0187293;
     ret = ret * absNum;
     ret = ret + 0.0742610;
     ret = ret * absNum;
@@ -283,7 +289,7 @@ double acos(const Number& num)
 }
 
 template <typename Number>
-double atan(const Number& num)
+double atan(Number num)
 {
     if (abs(num) <= 1)
     {
