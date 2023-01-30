@@ -403,3 +403,11 @@ TEST_CASE("Empty signal")
     peaks = signal.peaks();
     REQUIRE(peaks.empty());
 }
+
+TEST_CASE("Signal with zeros")
+{
+    calgopp::types::Point points[] = {{1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0}, {10, 0}};
+    calgopp::signal::Signal signal(points, 10);
+    auto peaks = signal.peaks();
+    REQUIRE(peaks.empty());
+}

@@ -53,7 +53,7 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
         return (type == types::PeakType::eLow ? first > second && second < third : first < second && second > third);
     };
 
-    auto comparator = [&type](long double first, long double second) -> bool {
+    [[maybe_unused]] auto comparator = [&type](long double first, long double second) -> bool {
         return (type == types::PeakType::eLow ? first >= second : first <= second);
     };
 
@@ -75,6 +75,10 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
     }
 
     auto peaksLen = peaks.size();
+    if (peaksLen == 0)
+    {
+        return peaks;
+    }
     for (unsigned int i = 0; i < peaksLen - 1; i++)
     {
         if (m_points.index(types::Point(peaks[i + 1].x, peaks[i + 1].y)) -
