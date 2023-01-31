@@ -6,6 +6,15 @@ Signal::Signal(const types::Point* points, unsigned int size)
     : m_points(points, size)
 {}
 
+Signal::Signal(const types::Peak* peaks, unsigned int size)
+    : m_points(int(size))
+{
+    for (unsigned int i = 0; i < size; i++)
+    {
+        m_points[i] = static_cast<types::Point>(peaks[i]);
+    }
+}
+
 void Signal::operator+=(const types::Point& point)
 {
     append(point);
