@@ -15,6 +15,10 @@ struct LinearFunctionImpl
 class LinearFunction : public Function<LinearFunctionImpl>
 {
 public:
+    LinearFunction()
+        : Function({0, 0})
+    {}
+
     LinearFunction(double a, double b)
         : Function({a, b})
         , m_a(a)
