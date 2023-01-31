@@ -30,8 +30,8 @@ struct Point
      */
     template <typename T>
     Point(T x, T y)
-        : x(double(x))
-        , y(double(y))
+        : x(x)
+        , y(y)
     {}
 
     /**
@@ -43,13 +43,13 @@ struct Point
      */
     template <typename T, typename Y>
     Point(T x, Y y)
-        : x(double(x))
-        , y(double(y))
+        : x(x)
+        , y(y)
     {}
 
     template <typename T>
     Point(T x, Complex y)
-        : x(double(x))
+        : x(x)
         , y(y)
     {}
 
