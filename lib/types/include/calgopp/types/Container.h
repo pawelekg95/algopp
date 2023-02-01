@@ -408,12 +408,14 @@ public:
         {
             Iterator token;
             token.m_data = lhs.m_data - rhs.m_data;
+            return token;
         }
 
         friend Iterator operator+(const Iterator& lhs, const Iterator& rhs)
         {
             Iterator token;
             token.m_data = lhs.m_data + rhs.m_data;
+            return token;
         }
 
         /**
