@@ -410,6 +410,13 @@ public:
          */
         Type& operator*() const { return *m_data; }
 
+        void swap(Iterator& lhs, Iterator& rhs)
+        {
+            auto temp = *rhs;
+            *rhs = *lhs;
+            *lhs = temp;
+        }
+
     private:
         Type* m_data{nullptr};
     };
