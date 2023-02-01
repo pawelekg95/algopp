@@ -13,12 +13,13 @@ public:
     /**
      * Iterator class of container.
      */
-    struct Iterator
+    class Iterator
     {
+    public:
         using value_type = Type;
         using difference_type = unsigned int;
         using pointer = Type*;
-        using reference  = Type&;
+        using reference = Type&;
         using iterator_category = void*;
 
         /**
@@ -31,7 +32,7 @@ public:
          * @param data                  Pointer to data.
          */
         Iterator(Type* data)
-                : m_data(data)
+            : m_data(data)
         {}
 
         /**
