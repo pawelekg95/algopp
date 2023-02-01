@@ -404,12 +404,12 @@ public:
          */
         bool operator<=(const Iterator& rhs) const { return !(*this > rhs); }
 
-        friend Iterator operator-(const Iterator& lhs, const Iterator& rhs)
+        friend unsigned int operator-(const Iterator& lhs, const Iterator& rhs)
         {
             return (lhs.m_data - rhs.m_data) / sizeof(Type);
         }
 
-        friend Iterator operator+(const Iterator& lhs, const Iterator& rhs)
+        friend unsigned int operator+(const Iterator& lhs, const Iterator& rhs)
         {
             return (lhs.m_data + rhs.m_data) / sizeof(Type);
         }
