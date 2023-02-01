@@ -10,16 +10,14 @@ template <typename Type>
 class Container
 {
 public:
-    using value_type = Type;
-
     /**
      * Iterator class of container.
      */
     class Iterator
     {
     public:
-        using value_type = Type;
-        using difference_type = unsigned int;
+        typedef Type value_type;
+        typedef unsigned int difference_type;
         using pointer = Type*;
         using reference  = Type&;
 
