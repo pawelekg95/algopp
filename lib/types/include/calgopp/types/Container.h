@@ -443,6 +443,8 @@ public:
         return end();
     }
 
+    const Type* data() const { return m_data; }
+
 protected:
     /**
      * Updates iterators.

@@ -18,19 +18,19 @@ struct Complex
 
     template <typename T>
     Complex(T real)
-        : real(double(real))
+        : real(real)
     {}
 
     template <typename T>
     Complex(T real, T imag)
-        : real(double(real))
-        , imag(double(imag))
+        : real(real)
+        , imag(imag)
     {}
 
     template <typename T, typename Y>
     Complex(T real, Y imag)
-        : real(double(real))
-        , imag(double(imag))
+        : real(real)
+        , imag(imag)
     {}
 
     operator double() const { return real; }

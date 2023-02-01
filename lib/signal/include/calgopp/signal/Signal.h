@@ -93,6 +93,13 @@ public:
     Signal(const types::Point* points, unsigned int size);
 
     /**
+     * Creates signal from C-style array of Points objects
+     * @param points
+     * @param size
+     */
+    Signal(const types::Peak* peaks, unsigned int size);
+
+    /**
      * Default destructor
      */
     ~Signal() = default;
