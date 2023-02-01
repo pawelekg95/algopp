@@ -284,13 +284,14 @@ public:
     /**
      * Iterator class of container.
      */
+    template <typename ItType>
     class Iterator
     {
     public:
-        using ValueType = Type;
-        using DifferenceType = unsigned int;
-        using Pointer = Type*;
-        using Reference  = Type&;
+        using value_type = ItType;
+        using difference_type = unsigned int;
+        using pointer = ItType*;
+        using reference  = ItType&;
 
         /**
          * Default constructor. Points to no element.
@@ -301,7 +302,7 @@ public:
          * Initializes iterator with data.
          * @param data                  Pointer to data.
          */
-        Iterator(Type* data)
+        Iterator(ItType* data)
             : m_data(data)
         {}
 
@@ -409,44 +410,44 @@ public:
          */
         bool operator<=(const Iterator& rhs) const { return !(*this > rhs); }
 
-        friend DifferenceType operator-(const Iterator& lhs, const Iterator& rhs)
+        friend difference_type operator-(const Iterator& lhs, const Iterator& rhs)
         {
-            return (lhs.m_data - rhs.m_data) / sizeof(Type);
+            return (lhs.m_data - rhs.m_data) / sizeof(ItType);
         }
 
-        friend DifferenceType operator+(const Iterator& lhs, const Iterator& rhs)
+        friend difference_type operator+(const Iterator& lhs, const Iterator& rhs)
         {
-            return (lhs.m_data + rhs.m_data) / sizeof(Type);
+            return (lhs.m_data + rhs.m_data) / sizeof(ItType);
         }
 
         /**
          * Dereference operator.
          * @return Reference to data.
          */
-        Type& operator*() const { return *m_data; }
+        ItType& operator*() const { return *m_data; }
 
     private:
-        Type* m_data{nullptr};
+        ItType* m_data{nullptr};
     };
 
     /**
      * Returns iterator to first point of the signal.
      * @return Iterator to first point.
      */
-    Iterator begin() const { return m_begin; }
+    Iterator<Type> begin() const { return m_begin; }
 
     /**
      * Returns iterator to data past last point in the signal.
      * @return Iterator to last point + 1
      */
-    Iterator end() const { return m_end; }
+    Iterator<Type> end() const { return m_end; }
 
     /**
      * Searches for element in signal and returns it's iterator. If no element found, return end iterator.
      * @param element                   Element to find.
      * @return Iterator to element if present in signal, end() iterator otherwise.
      */
-    Iterator find(const Type& element)
+    Iterator<Type> find(const Type& element)
     {
         for (unsigned int i = 0; i < m_size; i++)
         {
@@ -490,8 +491,8 @@ protected:
     unsigned int m_capacity{};
     bool m_empty{true};
     Type* m_data{nullptr};
-    Iterator m_begin;
-    Iterator m_end;
+    Iterator<Type> m_begin;
+    Iterator<Type> m_end;
 };
 
 } // namespace calgopp::types
