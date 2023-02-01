@@ -409,12 +409,12 @@ public:
          */
         bool operator<=(const Iterator& rhs) const { return !(*this > rhs); }
 
-        friend difference_type operator-(const Iterator& lhs, const Iterator& rhs)
+        friend DifferenceType operator-(const Iterator& lhs, const Iterator& rhs)
         {
             return (lhs.m_data - rhs.m_data) / sizeof(Type);
         }
 
-        friend difference_type operator+(const Iterator& lhs, const Iterator& rhs)
+        friend DifferenceType operator+(const Iterator& lhs, const Iterator& rhs)
         {
             return (lhs.m_data + rhs.m_data) / sizeof(Type);
         }
