@@ -128,7 +128,7 @@ struct DoubleModifier
  * @return Sum of all objects from range.
  */
 template <typename It, typename T = double, typename Modifier = T (*)(T)>
-typename It::value_type sum(
+T sum(
     It begin,
     It end,
     T initialValue = 0.0,
