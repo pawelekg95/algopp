@@ -16,8 +16,8 @@ public:
     class Iterator
     {
     public:
-        typedef Type value_type;
-        typedef unsigned int difference_type;
+        using value_type = Type;
+        using difference_type = unsigned int;
         using pointer = Type*;
         using reference  = Type&;
 
