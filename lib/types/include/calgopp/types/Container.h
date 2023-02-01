@@ -410,7 +410,7 @@ public:
          */
         Type& operator*() const { return *m_data; }
 
-        void swap(Iterator& lhs, Iterator& rhs)
+        friend void swap(Iterator& lhs, Iterator& rhs)
         {
             auto temp = *rhs;
             *rhs = *lhs;
