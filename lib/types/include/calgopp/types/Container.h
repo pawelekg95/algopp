@@ -15,10 +15,10 @@ public:
      */
     struct Iterator
     {
-        typedef Type value_type;
-        typedef unsigned int difference_type;
-        typedef Type* pointer;
-        typedef Type& reference;
+        using value_type = Type;
+        using difference_type = unsigned int;
+        using pointer = Type*;
+        using reference  = Type&;
 
         /**
          * Default constructor. Points to no element.
@@ -484,7 +484,7 @@ protected:
         m_data = tmp;
     }
 
-protected:
+private:
     unsigned int m_size{};
     unsigned int m_capacity{};
     bool m_empty{true};
