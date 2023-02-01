@@ -10,6 +10,9 @@ template <typename Type>
 class Container
 {
 public:
+    using value_type = Type;
+    using difference_type = unsigned int;
+
     /**
      * Default constructor. Initializes empty container. Pre allocates memory for 10 elements.
      */
