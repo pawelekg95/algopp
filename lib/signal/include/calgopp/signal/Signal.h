@@ -176,13 +176,13 @@ public:
      * Begin iterator.
      * @return Iterator to the first element of signal.
      */
-    types::Container<types::Point>::Iterator<types::Point> begin() const { return m_points.begin(); }
+    types::Container<types::Point>::Iterator begin() const { return m_points.begin(); }
 
     /**
      * End iterator.
      * @return Iterator to 1 place after last element.
      */
-    types::Container<types::Point>::Iterator<types::Point> end() const { return m_points.end(); }
+    types::Container<types::Point>::Iterator end() const { return m_points.end(); }
 
     unsigned int index(const types::Point& point) const { return m_points.index(point); }
 
