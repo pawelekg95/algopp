@@ -287,6 +287,11 @@ public:
     class Iterator
     {
     public:
+        using value_type = Type;
+        using difference_type = unsigned int;
+        using pointer = Type*;
+        using reference  = Type&;
+
         /**
          * Default constructor. Points to no element.
          */
@@ -404,12 +409,12 @@ public:
          */
         bool operator<=(const Iterator& rhs) const { return !(*this > rhs); }
 
-        friend unsigned int operator-(const Iterator& lhs, const Iterator& rhs)
+        friend difference_type operator-(const Iterator& lhs, const Iterator& rhs)
         {
             return (lhs.m_data - rhs.m_data) / sizeof(Type);
         }
 
-        friend unsigned int operator+(const Iterator& lhs, const Iterator& rhs)
+        friend difference_type operator+(const Iterator& lhs, const Iterator& rhs)
         {
             return (lhs.m_data + rhs.m_data) / sizeof(Type);
         }
