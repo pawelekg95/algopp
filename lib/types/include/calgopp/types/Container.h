@@ -287,10 +287,10 @@ public:
     class Iterator
     {
     public:
-        using value_type = Type;
-        using difference_type = unsigned int;
-        using pointer = Type*;
-        using reference  = Type&;
+        using ValueType = Type;
+        using DifferenceType = unsigned int;
+        using Pointer = Type*;
+        using Reference  = Type&;
 
         /**
          * Default constructor. Points to no element.
