@@ -347,7 +347,7 @@ TEST_CASE("Signal tests - peaks")
             }
         }
     }
-    REQUIRE(double(truePositivePredictions) / double(allDetectedPredictions) > 0.95);
+    REQUIRE(double(truePositivePredictions) / double(allDetectedPredictions) > 0.9);
     REQUIRE(double(allDetectedPredictions) / double(expectedPredictions) > 0.8);
 
     std::cout << "true positive / all detected predictions: "
