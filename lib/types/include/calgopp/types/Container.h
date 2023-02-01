@@ -404,6 +404,18 @@ public:
          */
         bool operator<=(const Iterator& rhs) const { return !(*this > rhs); }
 
+        friend Iterator operator-(const Iterator& lhs, const Iterator& rhs)
+        {
+            Iterator token;
+            token.m_data = lhs.m_data - rhs.m_data;
+        }
+
+        friend Iterator operator+(const Iterator& lhs, const Iterator& rhs)
+        {
+            Iterator token;
+            token.m_data = lhs.m_data + rhs.m_data;
+        }
+
         /**
          * Dereference operator.
          * @return Reference to data.
@@ -478,13 +490,5 @@ protected:
     Iterator m_begin;
     Iterator m_end;
 };
-
-template <typename Iterator>
-void swap(Iterator& lhs, Iterator& rhs)
-{
-    auto temp = *rhs;
-    *rhs = *lhs;
-    *lhs = temp;
-}
 
 } // namespace calgopp::types
