@@ -123,9 +123,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acd2430dec95116fe9441fcdfbbc860e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadda92274b04b6a9d8cf744336d659d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcalgopp_1_1types_1_1Container.html">Container</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#aadda92274b04b6a9d8cf744336d659d8">operator=</a> (<a class="el" href="classcalgopp_1_1types_1_1Container.html">Container</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="separator:aadda92274b04b6a9d8cf744336d659d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b930c2099db6b2ed0b7528b4c1eef33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#a9b930c2099db6b2ed0b7528b4c1eef33">append</a> (const Type &amp;data)</td></tr>
+<tr class="memitem:a9b930c2099db6b2ed0b7528b4c1eef33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#a9b930c2099db6b2ed0b7528b4c1eef33">append</a> (const Type &amp;<a class="el" href="classcalgopp_1_1types_1_1Container.html#a8aaee46862ad1562e7117cdfe6ca8008">data</a>)</td></tr>
 <tr class="separator:a9b930c2099db6b2ed0b7528b4c1eef33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4029aec3e84b1dd456f7bc667411e914"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#a4029aec3e84b1dd456f7bc667411e914">insert</a> (const Type &amp;data, unsigned int <a class="el" href="classcalgopp_1_1types_1_1Container.html#ab0eba3a49a62b771d7ad6a86a64b1433">index</a>)</td></tr>
+<tr class="memitem:a4029aec3e84b1dd456f7bc667411e914"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#a4029aec3e84b1dd456f7bc667411e914">insert</a> (const Type &amp;<a class="el" href="classcalgopp_1_1types_1_1Container.html#a8aaee46862ad1562e7117cdfe6ca8008">data</a>, unsigned int <a class="el" href="classcalgopp_1_1types_1_1Container.html#ab0eba3a49a62b771d7ad6a86a64b1433">index</a>)</td></tr>
 <tr class="separator:a4029aec3e84b1dd456f7bc667411e914"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2b4d7900ccb694ae9a0db2ace63f030"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#ac2b4d7900ccb694ae9a0db2ace63f030">remove</a> (unsigned int <a class="el" href="classcalgopp_1_1types_1_1Container.html#ab0eba3a49a62b771d7ad6a86a64b1433">index</a>)</td></tr>
 <tr class="separator:ac2b4d7900ccb694ae9a0db2ace63f030"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,6 +147,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af20ed300415261064e9449915c2c992a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc010892846ec477e993e2cfbd616f82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcalgopp_1_1types_1_1Container_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#adc010892846ec477e993e2cfbd616f82">find</a> (const Type &amp;element)</td></tr>
 <tr class="separator:adc010892846ec477e993e2cfbd616f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8aaee46862ad1562e7117cdfe6ca8008"><td class="memItemLeft" align="right" valign="top">const Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcalgopp_1_1types_1_1Container.html#a8aaee46862ad1562e7117cdfe6ca8008">data</a> () const</td></tr>
+<tr class="separator:a8aaee46862ad1562e7117cdfe6ca8008"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -547,6 +549,33 @@ template&lt;typename Type &gt; </div>
 </table>
 </div><div class="memdoc">
 <p >Returns for how many objects memory has been allocated. </p><dl class="section return"><dt>Returns</dt><dd>Capacity of container. </dd></dl>
+
+</div>
+</div>
+<a id="a8aaee46862ad1562e7117cdfe6ca8008" name="a8aaee46862ad1562e7117cdfe6ca8008"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aaee46862ad1562e7117cdfe6ca8008">&#9670;&#160;</a></span>data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Type &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Type * <a class="el" href="classcalgopp_1_1types_1_1Container.html">calgopp::types::Container</a>&lt; Type &gt;::data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
