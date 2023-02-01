@@ -13,9 +13,8 @@ public:
     /**
      * Iterator class of container.
      */
-    class Iterator
+    struct Iterator
     {
-    public:
         using value_type = Type;
         using difference_type = unsigned int;
         using pointer = Type*;
