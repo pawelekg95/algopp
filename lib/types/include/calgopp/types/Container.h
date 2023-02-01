@@ -19,6 +19,7 @@ public:
         using difference_type = unsigned int;
         using pointer = Type*;
         using reference  = Type&;
+        using iterator_category = void*;
 
         /**
          * Default constructor. Points to no element.
