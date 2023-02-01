@@ -410,13 +410,6 @@ public:
          */
         Type& operator*() const { return *m_data; }
 
-        friend void swap(Iterator& lhs, Iterator& rhs)
-        {
-            auto temp = *rhs;
-            *rhs = *lhs;
-            *lhs = temp;
-        }
-
     private:
         Type* m_data{nullptr};
     };
@@ -485,5 +478,13 @@ protected:
     Iterator m_begin;
     Iterator m_end;
 };
+
+template <typename Iterator>
+void swap(Iterator& lhs, Iterator& rhs)
+{
+    auto temp = *rhs;
+    *rhs = *lhs;
+    *lhs = temp;
+}
 
 } // namespace calgopp::types
