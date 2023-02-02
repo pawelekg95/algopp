@@ -3,6 +3,7 @@
 #include <catch2/catch_all.hpp>
 
 #include "calgopp/algorithm/algorithm.h"
+#include "calgopp/types/Container.h"
 
 #include <numeric>
 #include <vector>
@@ -14,6 +15,12 @@ TEST_CASE("Find")
             *calgopp::algorithm::numeric::minElement(vec.begin(), vec.end()));
     REQUIRE(*std::max_element(vec.begin(), vec.end()) ==
             *calgopp::algorithm::numeric::maxElement(vec.begin(), vec.end()));
+
+    calgopp::types::Container<int> container(vec);
+    REQUIRE(*std::min_element(container.begin(), container.end()) ==
+            *calgopp::algorithm::numeric::minElement(container.begin(), container.end()));
+    REQUIRE(*std::max_element(container.begin(), container.end()) ==
+            *calgopp::algorithm::numeric::maxElement(container.begin(), container.end()));
 }
 
 TEST_CASE("Sum")
@@ -22,4 +29,10 @@ TEST_CASE("Sum")
     REQUIRE(calgopp::algorithm::numeric::sum(vec.begin(), vec.end()) == std::accumulate(vec.begin(), vec.end(), 0));
     REQUIRE(calgopp::algorithm::numeric::sum(vec.begin() + 5, vec.end()) ==
             std::accumulate(vec.begin() + 5, vec.end(), 0));
+
+    calgopp::types::Container<int> container(vec);
+    REQUIRE(calgopp::algorithm::numeric::sum(container.begin(), container.end()) ==
+            std::accumulate(container.begin(), container.end(), 0));
+    REQUIRE(calgopp::algorithm::numeric::sum(container.begin() + 5, container.end()) ==
+            std::accumulate(container.begin() + 5, container.end(), 0));
 }

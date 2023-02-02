@@ -6,6 +6,8 @@
 
 #include "test/utils/helpers.h"
 
+#include <algorithm>
+
 using namespace calgopp::types;
 
 TEST_CASE("Creating container from STL container")
@@ -246,4 +248,45 @@ TEST_CASE("Complex")
     REQUIRE(minusI * minusI * minusI * minusI == types::Complex{1, 0});
 
     REQUIRE(types::Complex{42, -23} * types::Complex{7, 3} == types::Complex{363, -35});
+}
+
+TEST_CASE("STL actions on Container")
+{
+    calgopp::types::Point points[] = {{1, 14},
+                                      {2, 13},
+                                      {10, 5},
+                                      {15, 0},
+                                      {4, 11},
+                                      {5, 10},
+                                      {3, 12},
+                                      {6, 9},
+                                      {7, 8},
+                                      {11, 4},
+                                      {12, 3},
+                                      {8, 7},
+                                      {9, 6},
+                                      {14, 1},
+                                      {13, 2}};
+    calgopp::types::Container<calgopp::types::Point> container(points, 15);
+
+    // Sorting
+    std::sort(container.begin(),
+              container.end(),
+              [](const calgopp::types::Point& lhs, const calgopp::types::Point& rhs) -> bool { return lhs.x < rhs.x; });
+
+    for (std::uint32_t i = 0; i < 15; i++)
+    {
+        REQUIRE(container[i].x == i + 1);
+        REQUIRE(container[i].y == 15 - container[i].x);
+    }
+
+    std::sort(container.begin(),
+              container.end(),
+              [](const calgopp::types::Point& lhs, const calgopp::types::Point& rhs) -> bool { return lhs.y < rhs.y; });
+
+    for (std::uint32_t i = 0; i < 15; i++)
+    {
+        REQUIRE(container[i].x == 15 - container[i].y.real);
+        REQUIRE(container[i].y == i);
+    }
 }

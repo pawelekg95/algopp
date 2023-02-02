@@ -11,6 +11,155 @@ class Container
 {
 public:
     /**
+     * Iterator class of container.
+     */
+    class Iterator
+    {
+    public:
+        using value_type = Type;
+        using difference_type = unsigned int;
+        using pointer = Type*;
+        using reference = Type&;
+        using iterator_category = void*;
+
+        /**
+         * Default constructor. Points to no element.
+         */
+        Iterator() = default;
+
+        /**
+         * Initializes iterator with data.
+         * @param data                  Pointer to data.
+         */
+        Iterator(Type* data)
+            : m_data(data)
+        {}
+
+        /**
+         * Pre increment.
+         * @return Iterator on next element.
+         */
+        Iterator& operator++()
+        {
+            m_data++;
+            return *this;
+        }
+
+        /**
+         * Post increment.
+         * @return This.
+         */
+        Iterator operator++(int)
+        {
+            Iterator tmp = *this;
+            m_data++;
+            return tmp;
+        }
+
+        /**
+         * Pre decrement.
+         * @return Iterator to previous element.
+         */
+        Iterator& operator--()
+        {
+            m_data--;
+            return *this;
+        }
+
+        /**
+         * Post decrement
+         * @return This
+         */
+        Iterator operator--(int)
+        {
+            Iterator tmp = *this;
+            m_data--;
+            return tmp;
+        }
+
+        /**
+         * Pointer access operator. Allows to access element like pointer.
+         * @return Reference to held object
+         */
+        Type& operator->() { return *m_data; }
+
+        /**
+         * Addition operator.
+         * @param value                 Value to increment iterator.
+         * @return New iterator incremented by value.
+         */
+        Iterator operator+(int value) const { return m_data + value; }
+
+        /**
+         * Subtraction operator.
+         * @param value                 Value to decrement iterator.
+         * @return New iterator decremented by value.
+         */
+        Iterator operator-(int value) const { return m_data - value; }
+
+        /**
+         * Equlity operator.
+         * @param rhs                   Right hand iterator.
+         * @return True if iterators point to the same data, false otherwise.
+         */
+        bool operator==(const Iterator& rhs) const { return m_data == rhs.m_data; }
+
+        /**
+         * Inequality operator.
+         * @param rhs                   Right hand iterator.
+         * @return True if iterators point to different data, false otherwise.
+         */
+        bool operator!=(const Iterator& rhs) const { return !(*this == rhs); }
+
+        /**
+         * Greater operator.
+         * @param rhs                   Right hand iterator.
+         * @return True if this iterator points to data consecutive to rhs, false otherwise.
+         */
+        bool operator>(const Iterator& rhs) const { return m_data > rhs.m_data; }
+
+        /**
+         * Less operator.
+         * @param rhs                   Right hand iterator.
+         * @return True if this iterator points to preceding data to rhs, false otherwise.
+         */
+        bool operator<(const Iterator& rhs) const { return m_data < rhs.m_data; }
+
+        /**
+         * Greater or equal operator.
+         * @param rhs                   Right hand iterator.
+         * @return True if this iterator points to the same or consecutive data to rhs, false otherwise.
+         */
+        bool operator>=(const Iterator& rhs) const { return !(*this < rhs); }
+
+        /**
+         * Less or equal operator.
+         * @param rhs                   Right hand iterator.
+         * @return True if this iterator points to the same or preceding data to rhs, false otherwise.
+         */
+        bool operator<=(const Iterator& rhs) const { return !(*this > rhs); }
+
+        friend difference_type operator-(const Iterator& lhs, const Iterator& rhs)
+        {
+            return (lhs.m_data - rhs.m_data) / sizeof(Type);
+        }
+
+        friend difference_type operator+(const Iterator& lhs, const Iterator& rhs)
+        {
+            return (lhs.m_data + rhs.m_data) / sizeof(Type);
+        }
+
+        /**
+         * Dereference operator.
+         * @return Reference to data.
+         */
+        Type& operator*() const { return *m_data; }
+
+    private:
+        Type* m_data{nullptr};
+    };
+
+    /**
      * Default constructor. Initializes empty container. Pre allocates memory for 10 elements.
      */
     Container()
@@ -282,139 +431,6 @@ public:
     bool empty() const { return m_empty; }
 
     /**
-     * Iterator class of container.
-     */
-    class Iterator
-    {
-    public:
-        /**
-         * Default constructor. Points to no element.
-         */
-        Iterator() = default;
-
-        /**
-         * Initializes iterator with data.
-         * @param data                  Pointer to data.
-         */
-        Iterator(Type* data)
-            : m_data(data)
-        {}
-
-        /**
-         * Pre increment.
-         * @return Iterator on next element.
-         */
-        Iterator& operator++()
-        {
-            m_data++;
-            return *this;
-        }
-
-        /**
-         * Post increment.
-         * @return This.
-         */
-        Iterator operator++(int)
-        {
-            Iterator tmp = *this;
-            m_data++;
-            return tmp;
-        }
-
-        /**
-         * Pre decrement.
-         * @return Iterator to previous element.
-         */
-        Iterator& operator--()
-        {
-            m_data--;
-            return *this;
-        }
-
-        /**
-         * Post decrement
-         * @return This
-         */
-        Iterator operator--(int)
-        {
-            Iterator tmp = *this;
-            m_data--;
-            return tmp;
-        }
-
-        /**
-         * Pointer access operator. Allows to access element like pointer.
-         * @return Reference to held object
-         */
-        Type& operator->() { return *m_data; }
-
-        /**
-         * Addition operator.
-         * @param value                 Value to increment iterator.
-         * @return New iterator incremented by value.
-         */
-        Iterator operator+(int value) const { return m_data + value; }
-
-        /**
-         * Subtraction operator.
-         * @param value                 Value to decrement iterator.
-         * @return New iterator decremented by value.
-         */
-        Iterator operator-(int value) const { return m_data - value; }
-
-        /**
-         * Equlity operator.
-         * @param rhs                   Right hand iterator.
-         * @return True if iterators point to the same data, false otherwise.
-         */
-        bool operator==(const Iterator& rhs) const { return m_data == rhs.m_data; }
-
-        /**
-         * Inequality operator.
-         * @param rhs                   Right hand iterator.
-         * @return True if iterators point to different data, false otherwise.
-         */
-        bool operator!=(const Iterator& rhs) const { return !(*this == rhs); }
-
-        /**
-         * Greater operator.
-         * @param rhs                   Right hand iterator.
-         * @return True if this iterator points to data consecutive to rhs, false otherwise.
-         */
-        bool operator>(const Iterator& rhs) const { return m_data > rhs.m_data; }
-
-        /**
-         * Less operator.
-         * @param rhs                   Right hand iterator.
-         * @return True if this iterator points to preceding data to rhs, false otherwise.
-         */
-        bool operator<(const Iterator& rhs) const { return m_data < rhs.m_data; }
-
-        /**
-         * Greater or equal operator.
-         * @param rhs                   Right hand iterator.
-         * @return True if this iterator points to the same or consecutive data to rhs, false otherwise.
-         */
-        bool operator>=(const Iterator& rhs) const { return !(*this < rhs); }
-
-        /**
-         * Less or equal operator.
-         * @param rhs                   Right hand iterator.
-         * @return True if this iterator points to the same or preceding data to rhs, false otherwise.
-         */
-        bool operator<=(const Iterator& rhs) const { return !(*this > rhs); }
-
-        /**
-         * Dereference operator.
-         * @return Reference to data.
-         */
-        Type& operator*() const { return *m_data; }
-
-    private:
-        Type* m_data{nullptr};
-    };
-
-    /**
      * Returns iterator to first point of the signal.
      * @return Iterator to first point.
      */
@@ -470,7 +486,7 @@ protected:
         m_data = tmp;
     }
 
-protected:
+private:
     unsigned int m_size{};
     unsigned int m_capacity{};
     bool m_empty{true};
