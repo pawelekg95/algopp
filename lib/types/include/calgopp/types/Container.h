@@ -81,7 +81,7 @@ public:
          * Pointer access operator. Allows to access element like pointer.
          * @return Reference to held object
          */
-        Type& operator->() { return *m_data; }
+        Type* operator->() { return m_data; }
 
         /**
          * Addition operator.

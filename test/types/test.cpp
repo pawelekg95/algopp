@@ -290,3 +290,35 @@ TEST_CASE("STL actions on Container")
         REQUIRE(container[i].y == i);
     }
 }
+
+TEST_CASE("Container Iterators")
+{
+    calgopp::types::Point points[] = {{1, 14},
+                                      {2, 13},
+                                      {10, 5},
+                                      {15, 0},
+                                      {4, 11},
+                                      {5, 10},
+                                      {3, 12},
+                                      {6, 9},
+                                      {7, 8},
+                                      {11, 4},
+                                      {12, 3},
+                                      {8, 7},
+                                      {9, 6},
+                                      {14, 1},
+                                      {13, 2}};
+    calgopp::types::Container<calgopp::types::Point> container(points, 15);
+    // Sorting
+    std::sort(container.begin(),
+              container.end(),
+              [](const calgopp::types::Point& lhs, const calgopp::types::Point& rhs) -> bool { return lhs.x < rhs.x; });
+
+    auto begin = container.begin();
+    for (std::uint32_t i = 0; i < 14; i++)
+    {
+        REQUIRE((begin + i)->x == i + 1);
+        REQUIRE((begin + i + 1)->x == i + 2);
+        REQUIRE((begin + 15) == container.end());
+    }
+}
