@@ -476,7 +476,7 @@ protected:
      */
     void extend()
     {
-        m_capacity = m_capacity * 2;
+        m_capacity = m_capacity == 0 ? 10 : m_capacity * 2;
         auto* tmp = new Type[m_capacity]; // NOLINT cppcoreguidelines-owning-memory
         for (unsigned int i = 0; i < m_size; i++)
         {
