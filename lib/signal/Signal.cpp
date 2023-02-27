@@ -72,16 +72,16 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
     auto currentIt = begin();
     while (currentIt <= endIt - 2)
     {
-        currentIt++;
-        if ((*currentIt).y < height)
+        auto tmp = currentIt++;
+        if ((*tmp).y < height)
         {
             continue;
         }
-        if (!isPeak((*(currentIt - 1)).y, (*currentIt).y, (*(currentIt + 1)).y))
+        if (!isPeak((*(tmp - 1)).y, (*tmp).y, (*(tmp + 1)).y))
         {
             continue;
         }
-        peaks.append(types::Peak((*currentIt).x, (*currentIt).y, type));
+        peaks.append(types::Peak((*tmp).x, (*tmp).y, type));
     }
 
     auto peaksLen = peaks.size();
