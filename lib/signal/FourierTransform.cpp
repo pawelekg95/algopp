@@ -1,4 +1,5 @@
 #include "calgopp/signal/transform/FourierTransform.h"
+
 #include "calgopp/math/math.h"
 
 namespace calgopp::signal::transform {

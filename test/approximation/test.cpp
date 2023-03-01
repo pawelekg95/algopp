@@ -1,11 +1,11 @@
 #define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this
 // in one cpp file
 
-#include <catch2/catch_all.hpp>
-
 #include "calgopp/approximation/approximation.h"
 #include "calgopp/signal/Signal.h"
 #include "calgopp/types/Point.h"
+
+#include <catch2/catch_all.hpp>
 
 #include <iostream>
 

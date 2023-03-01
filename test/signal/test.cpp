@@ -1,23 +1,22 @@
 #define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this
 // in one cpp file
-#include <catch2/catch_all.hpp>
-
+#include "calgopp/math/math.h"
 #include "calgopp/signal/Signal.h"
+#include "calgopp/signal/transform/FourierTransform.h"
 #include "calgopp/types/Peak.h"
 #include "calgopp/types/Point.h"
-#include "calgopp/math/math.h"
-#include "calgopp/signal/transform/FourierTransform.h"
-
 #include "test/utils/helpers.h"
 
-#include <vector>
-#include <utility>
-#include <iostream>
+#include <catch2/catch_all.hpp>
+
 #include <array>
-#include <list>
-#include <variant>
-#include <memory>
 #include <cmath>
+#include <iostream>
+#include <list>
+#include <memory>
+#include <utility>
+#include <variant>
+#include <vector>
 
 class OverallTimerWatcher // NOLINT
 {
@@ -318,7 +317,7 @@ TEST_CASE("Signal tests - peaks")
     std::uint32_t allDetectedPredictions{};
     std::uint32_t expectedPredictions{};
 
-    for (std::uint32_t size = 1; size < 2; size++)
+    for (std::uint32_t size = 1; size < 3; size++)
     {
         for (std::uint32_t distanceMultiplier = 1; distanceMultiplier < 4; distanceMultiplier++)
         {
@@ -347,8 +346,8 @@ TEST_CASE("Signal tests - peaks")
             }
         }
     }
-    REQUIRE(double(truePositivePredictions) / double(allDetectedPredictions) > 0.9);
-    REQUIRE(double(allDetectedPredictions) / double(expectedPredictions) > 0.8);
+    CHECK(double(truePositivePredictions) / double(allDetectedPredictions) > 0.98);
+    CHECK(double(allDetectedPredictions) / double(expectedPredictions) > 0.95);
 
     std::cout << "true positive / all detected predictions: "
               << double(truePositivePredictions) / double(allDetectedPredictions) << std::endl;

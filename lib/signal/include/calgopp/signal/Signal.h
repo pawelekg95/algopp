@@ -1,8 +1,8 @@
 #pragma once
 
-#include "calgopp/types/Point.h"
-#include "calgopp/types/Peak.h"
 #include "calgopp/types/Container.h"
+#include "calgopp/types/Peak.h"
+#include "calgopp/types/Point.h"
 
 namespace calgopp::signal {
 

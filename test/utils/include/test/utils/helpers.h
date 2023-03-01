@@ -1,24 +1,24 @@
 #pragma once
 
-#include "calgopp/types/Point.h"
-#include "calgopp/types/Peak.h"
 #include "calgopp/types/Container.h"
+#include "calgopp/types/Peak.h"
+#include "calgopp/types/Point.h"
 
-#include <vector>
+#include <array>
+#include <chrono>
+#include <cmath>
+#include <cstdint>
+#include <deque>
+#include <filesystem>
+#include <functional>
+#include <iomanip>
+#include <iostream>
 #include <optional>
+#include <queue>
+#include <string>
 #include <tuple>
 #include <variant>
-#include <array>
-#include <queue>
-#include <deque>
-#include <cstdint>
-#include <string>
-#include <chrono>
-#include <functional>
-#include <iostream>
-#include <iomanip>
-#include <filesystem>
-#include <cmath>
+#include <vector>
 
 using namespace calgopp;
 

@@ -60,7 +60,11 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
         return {};
     }
     auto isPeak = [&type](long double first, long double second, long double third) -> bool {
-        return (type == types::PeakType::eLow ? first > second && second < third : first < second && second > third);
+        if (type == types::PeakType::eLow)
+        {
+            return (first >= second && second < third) || (first > second && second <= third);
+        }
+        return (first <= second && second > third) || (first < second && second >= third);
     };
 
     auto comparator = [&type](long double first, long double second) -> bool {
@@ -70,36 +74,62 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
     types::Container<types::Peak> peaks;
     auto endIt = end();
     auto currentIt = begin();
-    while (currentIt <= endIt - 2)
+    while (currentIt < endIt - 1)
     {
-        auto tmp = currentIt++;
-        if ((*tmp).y < height)
+        currentIt++;
+        if ((*currentIt).y < height)
         {
             continue;
         }
-        if (!isPeak((*(tmp - 1)).y, (*tmp).y, (*(tmp + 1)).y))
+        if (!isPeak((currentIt - 1)->y, currentIt->y, (currentIt + 1)->y))
         {
             continue;
         }
-        peaks.append(types::Peak((*tmp).x, (*tmp).y, type));
+        peaks.append(types::Peak(currentIt->x, currentIt->y, type));
     }
 
     auto peaksLen = peaks.size();
-    if (peaksLen == 0)
+    if (peaksLen == 0 || distance == 1)
     {
         return peaks;
     }
-    for (unsigned int i = 0; i < peaksLen - 1; i++)
+
+    auto currentPeak = peaks.begin();
+    while (currentPeak != peaks.end() - 1)
     {
-        if (m_points.index(types::Point(peaks[i + 1].x, peaks[i + 1].y)) -
-                m_points.index(types::Point(peaks[i].x, peaks[i].y)) <
+        if (m_points.index({(currentPeak + 1)->x, (currentPeak + 1)->y}) -
+                m_points.index({currentPeak->x, currentPeak->y}) <
             distance)
         {
-            peaks.remove(comparator(peaks[i].y, peaks[i + 1].y) ? i : i + 1);
-            i--;
-            peaksLen--;
+            peaks.remove(comparator(currentPeak->y, (currentPeak + 1)->y) ? currentPeak - peaks.begin()
+                                                                          : currentPeak + 1 - peaks.begin());
+        }
+        else
+        {
+            ++currentPeak;
         }
     }
+    //    for (unsigned int i = 0; i < peaksLen - 1; i++)
+    //    {
+    //        if (m_points.index(types::Point(peaks[i + 1].x, peaks[i + 1].y)) -
+    //                m_points.index(types::Point(peaks[i].x, peaks[i].y)) <
+    //            distance)
+    //        {
+    //            peaks.remove(comparator(peaks[i].y, peaks[i + 1].y) ? i : i + 1);
+    //            i--;
+    //            peaksLen--;
+    //        }
+    //    }
+
+    //    for (unsigned int i = peaksLen - 1; i > 0; --i)
+    //    {
+    //        if (m_points.index(types::Point(peaks[i].x, peaks[i].y)) -
+    //            m_points.index(types::Point(peaks[i - 1].x, peaks[i - 1].y)) <
+    //            distance)
+    //        {
+    //            peaks.remove(comparator(peaks[i - 1].y, peaks[i].y) ? i - 1 : i);
+    //        }
+    //    }
 
     return peaks;
 }

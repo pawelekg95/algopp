@@ -1,4 +1,5 @@
 #include "calgopp/approximation/approximation.h"
+
 #include "calgopp/algorithm/algorithm.h"
 #include "calgopp/types/Point.h"
 

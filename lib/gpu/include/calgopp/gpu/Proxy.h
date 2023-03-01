@@ -5,9 +5,9 @@
 
 #include <CL/cl2.hpp>
 
-#include <memory>
 #include <cstdint>
 #include <map>
+#include <memory>
 #include <string>
 
 namespace calgopp {
