@@ -68,7 +68,7 @@ TEST_CASE("Linear function")
     linearFunction = calgopp::function::LinearFunction(4.5, 1);
     REQUIRE(double(linearFunction(100)) == 451);
     REQUIRE(double(linearFunction(54)) == 244);
-    REQUIRE(test::almostEqual(calgopp::math::toDegrees(linearFunction.slope()), 77.47, comparingThreshold));
+    REQUIRE(test::almostEqual(linearFunction.slope(), calgopp::math::toRadians(77.47), comparingThreshold));
 
     linearFunction = calgopp::function::LinearFunction(-2, 0);
     REQUIRE(double(linearFunction(100)) == -200);

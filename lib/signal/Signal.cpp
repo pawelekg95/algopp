@@ -11,8 +11,8 @@ Signal::Signal(const types::Peak* peaks, unsigned int size)
 {
     for (unsigned int i = 0; i < size; i++)
     {
-        m_points[i].x = peaks[i].x;
-        m_points[i].y = peaks[i].y;
+        m_points[i].x = peaks[i].x; // NOLINT
+        m_points[i].y = peaks[i].y; // NOLINT
     }
 }
 
@@ -94,42 +94,17 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
         return peaks;
     }
 
-    auto currentPeak = peaks.begin();
-    while (currentPeak != peaks.end() - 1)
+    for (unsigned int i = 0; i < peaksLen - 1; i++)
     {
-        if (m_points.index({(currentPeak + 1)->x, (currentPeak + 1)->y}) -
-                m_points.index({currentPeak->x, currentPeak->y}) <
+        if (m_points.index(types::Point(peaks[i + 1].x, peaks[i + 1].y)) -
+                m_points.index(types::Point(peaks[i].x, peaks[i].y)) <
             distance)
         {
-            peaks.remove(comparator(currentPeak->y, (currentPeak + 1)->y) ? currentPeak - peaks.begin()
-                                                                          : currentPeak + 1 - peaks.begin());
-        }
-        else
-        {
-            ++currentPeak;
+            peaks.remove(comparator(peaks[i].y, peaks[i + 1].y) ? i : i + 1);
+            i--;
+            peaksLen--;
         }
     }
-    //    for (unsigned int i = 0; i < peaksLen - 1; i++)
-    //    {
-    //        if (m_points.index(types::Point(peaks[i + 1].x, peaks[i + 1].y)) -
-    //                m_points.index(types::Point(peaks[i].x, peaks[i].y)) <
-    //            distance)
-    //        {
-    //            peaks.remove(comparator(peaks[i].y, peaks[i + 1].y) ? i : i + 1);
-    //            i--;
-    //            peaksLen--;
-    //        }
-    //    }
-
-    //    for (unsigned int i = peaksLen - 1; i > 0; --i)
-    //    {
-    //        if (m_points.index(types::Point(peaks[i].x, peaks[i].y)) -
-    //            m_points.index(types::Point(peaks[i - 1].x, peaks[i - 1].y)) <
-    //            distance)
-    //        {
-    //            peaks.remove(comparator(peaks[i - 1].y, peaks[i].y) ? i - 1 : i);
-    //        }
-    //    }
 
     return peaks;
 }

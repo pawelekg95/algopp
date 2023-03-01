@@ -38,7 +38,7 @@ private:
 class TimerTracker // NOLINT
 {
 public:
-    TimerTracker(const OverallTimerWatcher& overallTimerWatcher)
+    explicit TimerTracker(const OverallTimerWatcher& overallTimerWatcher)
         : m_overallTimerWatcher(overallTimerWatcher)
     {
         m_timer.start();
@@ -53,7 +53,7 @@ private:
 
 const OverallTimerWatcher overallTimer;
 
-void addPoints(calgopp::signal::Signal& signal, std::uint32_t amount, bool reset = false)
+void addPoints(calgopp::signal::Signal& signal, std::uint32_t amount, bool reset = false) // NOLINT
 {
     static std::uint32_t last = 0;
     if (reset)
