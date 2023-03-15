@@ -1,4 +1,5 @@
 #include "calgopp/types/Complex.h"
+
 #include "calgopp/math/math.h"
 
 namespace calgopp::types {

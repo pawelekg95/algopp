@@ -1,7 +1,7 @@
 #pragma once
 
-#include "calgopp/signal/Signal.h"
 #include "calgopp/function/LinearFunction.h"
+#include "calgopp/signal/Signal.h"
 
 namespace calgopp {
 namespace approximation {

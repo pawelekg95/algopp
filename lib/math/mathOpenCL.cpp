@@ -4,15 +4,15 @@
 
 #define CL_HPP_TARGET_OPENCL_VERSION 210
 #define CL_HPP_ENABLE_EXCEPTIONS
-#include "calgopp/math/math.h"
 #include "calgopp/gpu/Proxy.h"
+#include "calgopp/math/math.h"
 
 #include <CL/cl2.hpp>
 
-#include <string>
-#include <memory>
 #include <chrono>
 #include <iostream>
+#include <memory>
+#include <string>
 
 namespace {
 

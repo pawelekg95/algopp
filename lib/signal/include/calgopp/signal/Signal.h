@@ -1,8 +1,8 @@
 #pragma once
 
-#include "calgopp/types/Point.h"
-#include "calgopp/types/Peak.h"
 #include "calgopp/types/Container.h"
+#include "calgopp/types/Peak.h"
+#include "calgopp/types/Point.h"
 
 namespace calgopp::signal {
 
@@ -28,6 +28,10 @@ public:
      * @param other                 Other signal to be moved
      */
     Signal(Signal&& other) noexcept = default;
+
+    Signal(types::Container<types::Point>::Iterator begin, types::Container<types::Point>::Iterator end)
+        : m_points(begin, end)
+    {}
 
     /**
      * Copying assignment operator

@@ -2,30 +2,15 @@
 Checks:                '*,
                        -altera-*,
                        -bugprone-macro-parentheses,
+                       -bugprone-easily-swappable-parameters,
                        -cert-err58-cpp,
-                       -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
-                       -cppcoreguidelines-pro-bounds-constant-array-index,
-                       -cppcoreguidelines-pro-bounds-pointer-arithmetic,
-                       -cppcoreguidelines-pro-type-reinterpret-cast,
-                       -cppcoreguidelines-pro-type-union-access,
                        -fuchsia-*,
                        -llvmlibc-*,
-                       -google-default-arguments,
-                       -google-explicit-constructor,
-                       -google-runtime-references,
-                       -hicpp-explicit-conversions,
-                       -hicpp-no-array-decay,
-                       -hicpp-no-assembler,
-                       -hicpp-signed-bitwise,
-                       -hicpp-special-member-functions,
-                       -llvm-header-guard,
-                       -llvm-include-order,
+                       -*-magic-numbers,
                        -modernize-use-nodiscard,
                        -modernize-use-trailing-return-type,
-                       -llvm-include-order,
                        -readability-identifier-length,
-                       -readability-redundant-access-specifiers,
-                       -*-magic-numbers'
+                       -readability-function-cognitive-complexity'
 WarningsAsErrors:      '*'
 HeaderFilterRegex:     ''
 AnalyzeTemporaryDtors: false

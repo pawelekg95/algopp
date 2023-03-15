@@ -1,23 +1,22 @@
 #define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this
 // in one cpp file
-#include <catch2/catch_all.hpp>
-
+#include "calgopp/math/math.h"
 #include "calgopp/signal/Signal.h"
+#include "calgopp/signal/transform/FourierTransform.h"
 #include "calgopp/types/Peak.h"
 #include "calgopp/types/Point.h"
-#include "calgopp/math/math.h"
-#include "calgopp/signal/transform/FourierTransform.h"
-
 #include "test/utils/helpers.h"
 
-#include <vector>
-#include <utility>
-#include <iostream>
+#include <catch2/catch_all.hpp>
+
 #include <array>
-#include <list>
-#include <variant>
-#include <memory>
 #include <cmath>
+#include <iostream>
+#include <list>
+#include <memory>
+#include <utility>
+#include <variant>
+#include <vector>
 
 class OverallTimerWatcher // NOLINT
 {
@@ -39,7 +38,7 @@ private:
 class TimerTracker // NOLINT
 {
 public:
-    TimerTracker(const OverallTimerWatcher& overallTimerWatcher)
+    explicit TimerTracker(const OverallTimerWatcher& overallTimerWatcher)
         : m_overallTimerWatcher(overallTimerWatcher)
     {
         m_timer.start();
@@ -54,7 +53,7 @@ private:
 
 const OverallTimerWatcher overallTimer;
 
-void addPoints(calgopp::signal::Signal& signal, std::uint32_t amount, bool reset = false)
+void addPoints(calgopp::signal::Signal& signal, std::uint32_t amount, bool reset = false) // NOLINT
 {
     static std::uint32_t last = 0;
     if (reset)
@@ -69,7 +68,7 @@ void addPoints(calgopp::signal::Signal& signal, std::uint32_t amount, bool reset
     last += amount;
 }
 
-void removePoints(calgopp::signal::Signal& signal, std::uint32_t amount)
+void removePoints(calgopp::signal::Signal& signal, std::uint32_t amount) // NOLINT
 {
     while (amount > 0 && !signal.empty())
     {
@@ -318,7 +317,7 @@ TEST_CASE("Signal tests - peaks")
     std::uint32_t allDetectedPredictions{};
     std::uint32_t expectedPredictions{};
 
-    for (std::uint32_t size = 1; size < 2; size++)
+    for (std::uint32_t size = 1; size < 3; size++)
     {
         for (std::uint32_t distanceMultiplier = 1; distanceMultiplier < 4; distanceMultiplier++)
         {
@@ -347,8 +346,8 @@ TEST_CASE("Signal tests - peaks")
             }
         }
     }
-    REQUIRE(double(truePositivePredictions) / double(allDetectedPredictions) > 0.9);
-    REQUIRE(double(allDetectedPredictions) / double(expectedPredictions) > 0.8);
+    CHECK(double(truePositivePredictions) / double(allDetectedPredictions) > 0.98);
+    CHECK(double(allDetectedPredictions) / double(expectedPredictions) > 0.8);
 
     std::cout << "true positive / all detected predictions: "
               << double(truePositivePredictions) / double(allDetectedPredictions) << std::endl;
@@ -408,7 +407,7 @@ TEST_CASE("Signal with zeros")
 {
     // NOLINTNEXTLINE
     calgopp::types::Point points[] = {{1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0}, {10, 0}};
-    calgopp::signal::Signal signal(points, 10);
+    calgopp::signal::Signal signal(points, 10); // NOLINT
     auto peaks = signal.peaks();
     REQUIRE(peaks.empty());
 }

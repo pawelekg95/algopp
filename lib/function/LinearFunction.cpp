@@ -1,11 +1,12 @@
 #include "calgopp/function/LinearFunction.h"
+
 #include "calgopp/math/math.h"
 
 namespace calgopp::function {
 
 double LinearFunction::slope() const
 {
-    return math::atan(m_a);
+    return math::atan(a());
 }
 
 double LinearFunction::angle(const LinearFunction& other) const

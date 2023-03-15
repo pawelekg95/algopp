@@ -11,8 +11,8 @@ Signal::Signal(const types::Peak* peaks, unsigned int size)
 {
     for (unsigned int i = 0; i < size; i++)
     {
-        m_points[i].x = peaks[i].x;
-        m_points[i].y = peaks[i].y;
+        m_points[i].x = peaks[i].x; // NOLINT
+        m_points[i].y = peaks[i].y; // NOLINT
     }
 }
 
@@ -60,7 +60,11 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
         return {};
     }
     auto isPeak = [&type](long double first, long double second, long double third) -> bool {
-        return (type == types::PeakType::eLow ? first > second && second < third : first < second && second > third);
+        if (type == types::PeakType::eLow)
+        {
+            return (first >= second && second < third) || (first > second && second <= third);
+        }
+        return (first <= second && second > third) || (first < second && second >= third);
     };
 
     auto comparator = [&type](long double first, long double second) -> bool {
@@ -70,25 +74,26 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
     types::Container<types::Peak> peaks;
     auto endIt = end();
     auto currentIt = begin();
-    while (currentIt <= endIt - 2)
+    while (currentIt < endIt - 1)
     {
         currentIt++;
         if ((*currentIt).y < height)
         {
             continue;
         }
-        if (!isPeak((*(currentIt - 1)).y, (*currentIt).y, (*(currentIt + 1)).y))
+        if (!isPeak((currentIt - 1)->y, currentIt->y, (currentIt + 1)->y))
         {
             continue;
         }
-        peaks.append(types::Peak((*currentIt).x, (*currentIt).y, type));
+        peaks.append(types::Peak(currentIt->x, currentIt->y, type));
     }
 
     auto peaksLen = peaks.size();
-    if (peaksLen == 0)
+    if (peaksLen == 0 || distance == 1)
     {
         return peaks;
     }
+
     for (unsigned int i = 0; i < peaksLen - 1; i++)
     {
         if (m_points.index(types::Point(peaks[i + 1].x, peaks[i + 1].y)) -

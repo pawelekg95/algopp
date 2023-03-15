@@ -3,8 +3,8 @@
 #include <rapidjson/document.h>
 #include <rapidjson/istreamwrapper.h>
 
-#include <fstream>
 #include <cstdlib>
+#include <fstream>
 #include <string>
 
 namespace test {
@@ -28,7 +28,7 @@ std::vector<calgopp::types::Point> getRawDataset(const std::filesystem::path& da
     rapidjson::IStreamWrapper stream(file);
     rapidjson::Document parsedConfig;
     parsedConfig.ParseStream(stream);
-    assert(!parsedConfig.HasParseError());
+    assert(!parsedConfig.HasParseError()); // NOLINT
 
     auto datasetArray = parsedConfig.GetObject()["dataset"].GetArray();
     std::vector<calgopp::types::Point> dataset(datasetArray.Size());
@@ -45,7 +45,7 @@ std::vector<calgopp::types::Peak> getPeaks(const std::filesystem::path& datasetP
     rapidjson::IStreamWrapper stream(file);
     rapidjson::Document parsedConfig;
     parsedConfig.ParseStream(stream);
-    assert(!parsedConfig.HasParseError());
+    assert(!parsedConfig.HasParseError()); // NOLINT
 
     auto datasetArray = parsedConfig.GetObject()["peaks"].GetArray();
     auto peaksType = std::string(parsedConfig.GetObject()["peaks_type"].GetString());
@@ -68,7 +68,7 @@ std::vector<calgopp::types::Complex> getTransformedDataset(const std::filesystem
     rapidjson::IStreamWrapper stream(file);
     rapidjson::Document parsedConfig;
     parsedConfig.ParseStream(stream);
-    assert(!parsedConfig.HasParseError());
+    assert(!parsedConfig.HasParseError()); // NOLINT
 
     auto datasetArray = parsedConfig.GetObject()["fourier"].GetArray();
     std::vector<calgopp::types::Complex> dataset(datasetArray.Size());
