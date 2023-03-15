@@ -29,6 +29,10 @@ public:
      */
     Signal(Signal&& other) noexcept = default;
 
+    Signal(types::Container<types::Point>::Iterator begin, types::Container<types::Point>::Iterator end)
+        : m_points(begin, end)
+    {}
+
     /**
      * Copying assignment operator
      * @param other                 Other signal to be copied

@@ -139,15 +139,7 @@ public:
          */
         bool operator<=(const Iterator& rhs) const { return !(*this > rhs); }
 
-        friend difference_type operator-(const Iterator& lhs, const Iterator& rhs)
-        {
-            return (lhs.m_data - rhs.m_data) / sizeof(Type);
-        }
-
-        friend difference_type operator+(const Iterator& lhs, const Iterator& rhs)
-        {
-            return (lhs.m_data + rhs.m_data) / sizeof(Type);
-        }
+        friend difference_type operator-(const Iterator& lhs, const Iterator& rhs) { return (lhs.m_data - rhs.m_data); }
 
         /**
          * Dereference operator.
@@ -201,6 +193,25 @@ public:
             m_data[i] = values[i];
         }
         m_empty = m_size == 0;
+        updateIterators();
+    }
+
+    Container(const Container<Type>::Iterator& begin, const Container<Type>::Iterator& end)
+    {
+        if (begin > end)
+        {
+            throw "Invalid iterators"; // NOLINT
+        }
+        m_size = end - begin;
+        m_capacity = m_size > 0 ? m_size * 2 : 10;
+        m_empty = m_size == 0;
+        m_data = new Type[m_capacity];
+        m_begin = m_data;
+        m_end = &m_data[m_size];
+        for (unsigned int i = 0; i < m_size; i++)
+        {
+            m_data[i] = *(begin + i); // NOLINT
+        }
         updateIterators();
     }
 

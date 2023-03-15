@@ -320,4 +320,14 @@ TEST_CASE("Container Iterators")
         REQUIRE((begin + i + 1)->x == i + 2);
         REQUIRE((begin + 15) == container.end());
     }
+
+    REQUIRE(container.end() - begin == 15);
+
+    calgopp::types::Container<calgopp::types::Point> container1(container.begin() + 4, container.end());
+    for (std::uint32_t i = 0; i < 10; i++)
+    {
+        auto& elem1 = container[i + 4];
+        auto& elem2 = container1[i];
+        REQUIRE(elem1 == elem2);
+    }
 }
