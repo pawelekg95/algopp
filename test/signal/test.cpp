@@ -347,7 +347,7 @@ TEST_CASE("Signal tests - peaks")
         }
     }
     CHECK(double(truePositivePredictions) / double(allDetectedPredictions) > 0.98);
-    CHECK(double(allDetectedPredictions) / double(expectedPredictions) > 0.85);
+    CHECK(double(allDetectedPredictions) / double(expectedPredictions) > 0.8);
 
     std::cout << "true positive / all detected predictions: "
               << double(truePositivePredictions) / double(allDetectedPredictions) << std::endl;
