@@ -21,7 +21,7 @@ function::LinearFunction leastSquares(const signal::Signal& signal)
     });
 
     auto threshold = 0.00000000000001;
-    if (sumX <= threshold || sumX2 <= threshold)
+    if (sumX <= threshold && sumX2 <= threshold)
     {
         return {0, 0};
     }
