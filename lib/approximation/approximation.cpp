@@ -19,7 +19,9 @@ function::LinearFunction leastSquares(const signal::Signal& signal)
     double sumX2 = algorithm::numeric::sum(signal.begin(), signal.end(), 0.0, [](const types::Point& a) -> double {
         return double(a.x * a.x);
     });
-    if (sumX <= 0.000000001 || sumX2 <= 0.000000001)
+
+    auto threshold = 0.00000000000001;
+    if (sumX <= threshold && sumX2 <= threshold)
     {
         return {0, 0};
     }
