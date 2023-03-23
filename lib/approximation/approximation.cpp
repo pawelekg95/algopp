@@ -20,12 +20,6 @@ function::LinearFunction leastSquares(const signal::Signal& signal)
         return double(a.x * a.x);
     });
 
-    auto threshold = 0.00000000000001;
-    if (sumX <= threshold && sumX2 <= threshold)
-    {
-        return {0, 0};
-    }
-
     double a = ((sumX * sumY) - signal.size() * sumXY) / ((sumX * sumX) - signal.size() * sumX2);
     double b = ((sumX * sumXY) - (sumY * sumX2)) / ((sumX * sumX) - signal.size() * sumX2);
 
