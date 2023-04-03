@@ -33,6 +33,10 @@ public:
 
     double angle(const LinearFunction& other) const;
 
+    bool operator==(const LinearFunction& other) const;
+
+    bool operator!=(const LinearFunction& other) const;
+
 private:
     double m_a{};
     double m_b{};

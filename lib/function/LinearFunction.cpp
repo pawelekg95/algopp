@@ -22,4 +22,14 @@ double LinearFunction::angle(const LinearFunction& other) const
     return math::atan((other.a() - a()) / (1 + (a() * other.a())));
 }
 
+bool LinearFunction::operator==(const LinearFunction& other) const
+{
+    return math::abs(a() - other.a()) <= math::epsilon() && math::abs(b() - other.b()) <= math::epsilon();
+}
+
+bool LinearFunction::operator!=(const LinearFunction& other) const
+{
+    return !(*this == other);
+}
+
 } // namespace calgopp::function

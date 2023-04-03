@@ -74,6 +74,12 @@ TEST_CASE("Linear function")
     REQUIRE(double(linearFunction(100)) == -200);
     REQUIRE(double(linearFunction(54)) == -108);
     REQUIRE(test::almostEqual(linearFunction.slope(), calgopp::math::toRadians(-63.43), comparingThreshold));
+
+    calgopp::function::LinearFunction lhs(12.3456, 7.89);
+    calgopp::function::LinearFunction rhs1(12.3456, 7.89);
+    calgopp::function::LinearFunction rhs2(12.3456, 7.88);
+    REQUIRE(lhs == rhs1);
+    REQUIRE(lhs != rhs2);
 }
 
 TEST_CASE("Angles")
