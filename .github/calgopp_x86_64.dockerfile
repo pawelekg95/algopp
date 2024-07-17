@@ -13,7 +13,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends build-essential g++ llvm \
     python3 python3-pip shellcheck git make \
     clang-format clang-tidy wget xz-utils valgrind \
-    lcov curl gnupg flex bison gdb \
+    lcov curl gnupg flex bison gdb openssh-client \
     clang-tools python-is-python3 rsync && \
     apt-get autoremove -y && \
     apt-get clean && \
