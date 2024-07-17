@@ -1,6 +1,7 @@
 #include "calgopp/types/Complex.h"
 
 #include <cmath>
+#include <cstdint>
 
 namespace calgopp::types {
 
@@ -146,7 +147,7 @@ types::Complex pow(const types::Complex& number, unsigned int power)
 
 types::Complex pow(const types::Complex& number, int power)
 {
-    unsigned int absPower = abs(power);
+    auto absPower = static_cast<std::uint32_t>(abs(power));
     return power > 0 ? pow(number, absPower) : 1.0 / pow(number, absPower);
 }
 

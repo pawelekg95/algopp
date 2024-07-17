@@ -1,17 +1,19 @@
 #include "calgopp/signal/Signal.h"
 
+#include <cmath>
+
 namespace calgopp::signal {
 
 Signal::Signal(const types::Point* points, std::uint32_t size)
 {
     for (std::uint32_t i = 0; i < size; i++)
     {
-        m_points.push_back({points[i]});
+        m_points.push_back(points[i]);
     }
 }
 
 Signal::Signal(const types::Peak* peaks, std::uint32_t size)
-    : m_points(int(size))
+    : m_points(static_cast<std::uint32_t>(size))
 {
     for (std::uint32_t i = 0; i < size; i++)
     {
@@ -52,7 +54,7 @@ types::Point& Signal::operator[](std::uint32_t index)
 {
     if (index >= m_points.size())
     {
-        throw "Index out of scope";
+        throw "Index out of scope"; // NOLINT
     }
     return m_points.at(index);
 }
@@ -81,8 +83,8 @@ Signal::peaks(types::PeakType type, long double height, std::uint32_t distance)
     };
 
     etl::vector<types::Peak, MAX_SIGNAL_SIZE> token;
-    auto endIt = end();
-    auto currentIt = begin();
+    auto* endIt = end();
+    auto* currentIt = begin();
     while (currentIt < endIt - 1)
     {
         currentIt++;

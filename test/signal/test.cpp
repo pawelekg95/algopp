@@ -364,18 +364,18 @@ TEST_CASE("Signal tests - peaks")
                 for (const auto& detectedPeak : detectedPeaks)
                 {
                     allDetectedPredictions++;
-                    truePositivePredictions += std::uint32_t(peakDetected(detectedPeak));
+                    truePositivePredictions += static_cast<std::uint32_t>(peakDetected(detectedPeak));
                 }
             }
         }
     }
-    CHECK(double(truePositivePredictions) / double(allDetectedPredictions) > 0.98);
-    CHECK(double(allDetectedPredictions) / double(expectedPredictions) > 0.8);
+    CHECK(static_cast<double>(truePositivePredictions) / static_cast<double>(allDetectedPredictions) > 0.98);
+    CHECK(static_cast<double>(allDetectedPredictions) / static_cast<double>(expectedPredictions) > 0.8);
 
     std::cout << "true positive / all detected predictions: "
-              << double(truePositivePredictions) / double(allDetectedPredictions) << std::endl;
+              << static_cast<double>(truePositivePredictions) / static_cast<double>(allDetectedPredictions) << std::endl;
     std::cout << "detected predictions / expected predictions: "
-              << double(allDetectedPredictions) / double(expectedPredictions) << std::endl;
+              << static_cast<double>(allDetectedPredictions) / static_cast<double>(expectedPredictions) << std::endl;
 }
 
 TEST_CASE("Transforms")
