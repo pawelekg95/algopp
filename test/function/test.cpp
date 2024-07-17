@@ -42,10 +42,11 @@ TEST_CASE("Trigonometry functions")
     REQUIRE(double(lambdaFunction(60.0)) == std::sin(60.0));
     REQUIRE(double(lambdaFunction(60.0)) != std::cos(60.0));
 
-    calgopp::function::Function<double (*)(double)> calgoppMathSinFunction(calgopp::math::sin);
-    REQUIRE(test::almostEqual(double(calgoppMathSinFunction(calgopp::math::toRadians(60.0))),
-                              std::sin(calgopp::math::toRadians(60.0))));
-    REQUIRE(double(calgoppMathSinFunction(calgopp::math::toRadians(60.0))) != std::cos(calgopp::math::toRadians(60.0)));
+    calgopp::function::Function<double (*)(double)> calgoppMathSinFunction(std::sin);
+    REQUIRE(test::almostEqual(double(calgoppMathSinFunction(calgopp::function::toRadians(60.0))),
+                              std::sin(calgopp::function::toRadians(60.0))));
+    REQUIRE(double(calgoppMathSinFunction(calgopp::function::toRadians(60.0))) !=
+            std::cos(calgopp::function::toRadians(60.0)));
 }
 
 TEST_CASE("Linear function")
@@ -53,27 +54,27 @@ TEST_CASE("Linear function")
     calgopp::function::LinearFunction linearFunction(1, 0);
     REQUIRE(double(linearFunction(100)) == 100);
     REQUIRE(double(linearFunction(54)) == 54);
-    REQUIRE(test::almostEqual(linearFunction.slope(), calgopp::math::toRadians(45), comparingThreshold));
+    REQUIRE(test::almostEqual(linearFunction.slope(), calgopp::function::toRadians(45), comparingThreshold));
 
     linearFunction = calgopp::function::LinearFunction(2, 0);
     REQUIRE(double(linearFunction(100)) == 200);
     REQUIRE(double(linearFunction(54)) == 108);
-    REQUIRE(test::almostEqual(linearFunction.slope(), calgopp::math::toRadians(63.43), comparingThreshold));
+    REQUIRE(test::almostEqual(linearFunction.slope(), calgopp::function::toRadians(63.43), comparingThreshold));
 
     linearFunction = calgopp::function::LinearFunction(2, 5);
     REQUIRE(double(linearFunction(100)) == 205);
     REQUIRE(double(linearFunction(54)) == 113);
-    REQUIRE(test::almostEqual(linearFunction.slope(), calgopp::math::toRadians(63.43), comparingThreshold));
+    REQUIRE(test::almostEqual(linearFunction.slope(), calgopp::function::toRadians(63.43), comparingThreshold));
 
     linearFunction = calgopp::function::LinearFunction(4.5, 1);
     REQUIRE(double(linearFunction(100)) == 451);
     REQUIRE(double(linearFunction(54)) == 244);
-    REQUIRE(test::almostEqual(linearFunction.slope(), calgopp::math::toRadians(77.47), comparingThreshold));
+    REQUIRE(test::almostEqual(linearFunction.slope(), calgopp::function::toRadians(77.47), comparingThreshold));
 
     linearFunction = calgopp::function::LinearFunction(-2, 0);
     REQUIRE(double(linearFunction(100)) == -200);
     REQUIRE(double(linearFunction(54)) == -108);
-    REQUIRE(test::almostEqual(linearFunction.slope(), calgopp::math::toRadians(-63.43), comparingThreshold));
+    REQUIRE(test::almostEqual(linearFunction.slope(), calgopp::function::toRadians(-63.43), comparingThreshold));
 
     calgopp::function::LinearFunction lhs(12.3456, 7.89);
     calgopp::function::LinearFunction rhs1(12.3456, 7.89);
@@ -86,9 +87,9 @@ TEST_CASE("Angles")
 {
     calgopp::function::LinearFunction linearFunction1(3, 0);
     calgopp::function::LinearFunction linearFunction2((1.0 / 3.0), 0);
-    REQUIRE(test::almostEqual(linearFunction1.angle(linearFunction2), calgopp::math::toRadians(90)));
+    REQUIRE(test::almostEqual(linearFunction1.angle(linearFunction2), calgopp::function::toRadians(90)));
 
     linearFunction1 = calgopp::function::LinearFunction(3, 0);
     linearFunction2 = calgopp::function::LinearFunction(3, 100);
-    REQUIRE(test::almostEqual(linearFunction1.angle(linearFunction2), calgopp::math::toRadians(0)));
+    REQUIRE(test::almostEqual(linearFunction1.angle(linearFunction2), calgopp::function::toRadians(0)));
 }

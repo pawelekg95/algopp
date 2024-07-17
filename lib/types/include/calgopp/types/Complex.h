@@ -143,7 +143,7 @@ double abs(const types::Complex& number);
 template <typename T>
 types::Complex pow(const T& number, const types::Complex& power)
 {
-    auto pwr = math::pow(number, power.real);
+    auto pwr = std::pow(number, power.real);
     return {pwr * std::cos(power.imag * std::log(number)), pwr * std::sin(power.imag * std::log(number))};
 }
 

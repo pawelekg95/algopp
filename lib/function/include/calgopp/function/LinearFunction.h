@@ -4,6 +4,16 @@
 
 namespace calgopp::function {
 
+inline double toRadians(double degrees)
+{
+    return degrees * (M_PI / 180.0);
+}
+
+inline double toDegrees(double radians)
+{
+    return radians / (M_PI / 180.0);
+}
+
 struct LinearFunctionImpl
 {
     double a{};
