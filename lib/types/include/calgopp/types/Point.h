@@ -32,7 +32,8 @@ struct Point
     Point(T x, T y)
         : x(x)
         , y(y)
-    {}
+    {
+    }
 
     /**
      * Constructs point from different numeric types of arguments.
@@ -45,13 +46,15 @@ struct Point
     Point(T x, Y y)
         : x(x)
         , y(y)
-    {}
+    {
+    }
 
     template <typename T>
     Point(T x, Complex y)
         : x(x)
         , y(y)
-    {}
+    {
+    }
 
     long double x{};
     Complex y{};

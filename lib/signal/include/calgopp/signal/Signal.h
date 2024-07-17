@@ -1,8 +1,12 @@
 #pragma once
 
-#include "calgopp/types/Container.h"
 #include "calgopp/types/Peak.h"
 #include "calgopp/types/Point.h"
+
+#include <etl/vector.h>
+
+#include <cstdint>
+#include <utility>
 
 namespace calgopp::signal {
 
@@ -29,9 +33,11 @@ public:
      */
     Signal(Signal&& other) noexcept = default;
 
-    Signal(types::Container<types::Point>::Iterator begin, types::Container<types::Point>::Iterator end)
+    Signal(etl::vector<types::Point, MAX_SIGNAL_SIZE>::iterator begin,
+           etl::vector<types::Point, MAX_SIGNAL_SIZE>::iterator end)
         : m_points(begin, end)
-    {}
+    {
+    }
 
     /**
      * Copying assignment operator
@@ -55,7 +61,8 @@ public:
     template <typename InputContainer>
     Signal(const InputContainer& values)
         : Signal(values.data(), values.size())
-    {}
+    {
+    }
 
     /**
      * Template constructor that accepts C-style arrays
@@ -64,20 +71,20 @@ public:
      * @param size                  Size of array
      */
     template <typename Type>
-    Signal(const Type* values, unsigned int size)
+    Signal(const Type* values, std::uint32_t size)
     {
-        for (unsigned int i = 0; i < size; i++)
+        for (std::uint32_t i = 0; i < size; i++)
         {
-            m_points.append(types::Point{i, values[i]});
+            m_points.push_back(types::Point{i, values[i]});
         }
     }
 
     template <typename Type>
-    Signal(const Type* reals, const Type* imags, unsigned int size)
+    Signal(const Type* reals, const Type* imags, std::uint32_t size)
     {
-        for (unsigned int i = 0; i < size; i++)
+        for (std::uint32_t i = 0; i < size; i++)
         {
-            m_points.append(types::Point{i, {reals[i], imags[i]}});
+            m_points.push_back(types::Point{i, {reals[i], imags[i]}});
         }
     }
 
@@ -85,23 +92,24 @@ public:
      * Creates signal from container of points
      * @param points                Signal points
      */
-    Signal(types::Container<types::Point> points)
-        : m_points(static_cast<types::Container<types::Point>&&>(points))
-    {}
+    Signal(etl::vector<types::Point, MAX_SIGNAL_SIZE> points)
+        : m_points(points)
+    {
+    }
 
     /**
      * Creates signal from C-style array of Points objects
      * @param points
      * @param size
      */
-    Signal(const types::Point* points, unsigned int size);
+    Signal(const types::Point* points, std::uint32_t size);
 
     /**
      * Creates signal from C-style array of Points objects
      * @param points
      * @param size
      */
-    Signal(const types::Peak* peaks, unsigned int size);
+    Signal(const types::Peak* peaks, std::uint32_t size);
 
     /**
      * Default destructor
@@ -130,7 +138,7 @@ public:
      * Appending operator. Allows to append another signal.
      * @param signal                    Signal to append.
      */
-    void operator+=(const Signal& signal);
+    void operator+=(Signal& signal);
 
     /**
      * Decrement operator. Removes last point from signal. Throws const char* in case of empty signal.
@@ -147,22 +155,22 @@ public:
      * Remove method. Removes point with provided index. Throws const char* on invalid index.
      * @param index                     Index of point to remove.
      */
-    void remove(unsigned int index);
+    void remove(std::uint32_t index);
 
-    types::Point get(unsigned int index) const;
+    types::Point get(std::uint32_t index) const;
 
     /**
      * Index operator. Accesses reference to item at index. Throws const char* on invalid index.
      * @param index                     Index of point to access.
      * @return Returns reference to target point.
      */
-    types::Point& operator[](unsigned int index);
+    types::Point& operator[](std::uint32_t index);
 
     /**
      * Returns size of the signal.
      * @return Size of the signal.
      */
-    unsigned int size() const { return m_points.size(); }
+    std::uint32_t size() const { return m_points.size(); }
 
     /**
      * Finds peaks in signal.
@@ -173,25 +181,25 @@ public:
      *                                  the distance requirement is met.
      * @return Container with peaks.
      */
-    types::Container<types::Peak>
-    peaks(types::PeakType type = types::PeakType::eHigh, long double height = 0, unsigned int distance = 1) const;
+    etl::vector<types::Peak, MAX_SIGNAL_SIZE>
+    peaks(types::PeakType type = types::PeakType::eHigh, long double height = 0, std::uint32_t distance = 1);
 
     /**
      * Begin iterator.
      * @return Iterator to the first element of signal.
      */
-    types::Container<types::Point>::Iterator begin() const { return m_points.begin(); }
+    etl::vector<types::Point, MAX_SIGNAL_SIZE>::iterator begin() { return m_points.begin(); }
 
     /**
      * End iterator.
      * @return Iterator to 1 place after last element.
      */
-    types::Container<types::Point>::Iterator end() const { return m_points.end(); }
+    etl::vector<types::Point, MAX_SIGNAL_SIZE>::iterator end() { return m_points.end(); }
 
-    unsigned int index(const types::Point& point) const { return m_points.index(point); }
+    std::uint32_t index(const types::Point& point) const;
 
 private:
-    types::Container<types::Point> m_points;
+    etl::vector<types::Point, MAX_SIGNAL_SIZE> m_points;
 };
 
 } // namespace calgopp::signal

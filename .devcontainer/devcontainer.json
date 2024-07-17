@@ -1,0 +1,8 @@
+{
+    "build": { "dockerfile": "../.github/calgopp_x86_64.dockerfile" },
+    "customizations": {
+        "vscode": {
+          "extensions": ["twxs.cmake", "ms-vscode.cmake-tools", "ms-vscode.cpptools-extension-pack", "ms-azuretools.vscode-docker", "github.vscode-github-actions"]
+        }
+      }
+}

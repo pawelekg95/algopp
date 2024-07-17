@@ -32,7 +32,8 @@ struct Peak : public Point
     template <typename T>
     Peak(T x, T y)
         : Point(x, y)
-    {}
+    {
+    }
 
     /**
      * Constructs peak from same numeric type of arguments and specified peak type.
@@ -45,7 +46,8 @@ struct Peak : public Point
     Peak(T x, T y, PeakType type)
         : Point(x, y)
         , type(type)
-    {}
+    {
+    }
 
     /**
      * Constructs peak from different numeric types of arguments.
@@ -57,7 +59,8 @@ struct Peak : public Point
     template <typename T, typename Y>
     Peak(T x, Y y)
         : Point(x, y)
-    {}
+    {
+    }
 
     /**
      * Constructs peak from different numeric types of arguments and specified peak type.
@@ -71,7 +74,8 @@ struct Peak : public Point
     Peak(T x, Y y, PeakType type)
         : Point(x, y)
         , type(type)
-    {}
+    {
+    }
 
     PeakType type{PeakType::eHigh};
 };

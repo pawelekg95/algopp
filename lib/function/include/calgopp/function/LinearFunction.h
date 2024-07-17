@@ -17,13 +17,15 @@ class LinearFunction : public Function<LinearFunctionImpl>
 public:
     LinearFunction()
         : Function({0, 0})
-    {}
+    {
+    }
 
     LinearFunction(double a, double b)
         : Function({a, b})
         , m_a(a)
         , m_b(b)
-    {}
+    {
+    }
 
     double a() const { return m_a; }
 

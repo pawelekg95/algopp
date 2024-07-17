@@ -4,15 +4,16 @@ include(cmake/Catch2.cmake)
 include(cmake/toolchain.cmake)
 include(cmake/rapidjson.cmake)
 include(cmake/doxygen.cmake)
+include(cmake/etl.cmake)
 
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
 
-list(APPEND compile_options $<$<COMPILE_LANGUAGE:CXX>:-std=c++17>)
+list(APPEND compile_options $<$<COMPILE_LANGUAGE:CXX>:-std=c++20>)
 
 if(NOT DEFINED GPU_PARALLEL)
-    list(APPEND compile_options -Wall -Wextra -Wpedantic -Werror $<$<COMPILE_LANGUAGE:CXX>:-std=c++17>)
+    list(APPEND compile_options -Wall -Wextra -Wpedantic -Werror $<$<COMPILE_LANGUAGE:CXX>:-std=c++20>)
     message("No GPU parallelization set. Bare CPU implementation\n")
 else()
     message("GPU parallelization set. Using OpenCL implementation\n")

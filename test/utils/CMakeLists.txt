@@ -6,5 +6,5 @@ target_include_directories(test-utils
         PUBLIC include)
 
 target_link_libraries(test-utils
-        PUBLIC calgopp::types rapidjson)
+        PUBLIC calgopp::types rapidjson etl)
         

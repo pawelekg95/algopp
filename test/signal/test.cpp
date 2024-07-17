@@ -124,17 +124,35 @@ TEST_CASE("Signal creation from STL containers")
 {
     test::ContainerVariant variant;
 
-    SECTION("Vector of doubles") { variant = test::vectorInput<double>(); }
+    SECTION("Vector of doubles")
+    {
+        variant = test::vectorInput<double>();
+    }
 
-    SECTION("Vector of integers") { variant = test::vectorInput<int>(); }
+    SECTION("Vector of integers")
+    {
+        variant = test::vectorInput<int>();
+    }
 
-    SECTION("Vector of floats") { variant = test::vectorInput<float>(); }
+    SECTION("Vector of floats")
+    {
+        variant = test::vectorInput<float>();
+    }
 
-    SECTION("Array of doubles") { variant = test::arrayInput<double>(); }
+    SECTION("Array of doubles")
+    {
+        variant = test::arrayInput<double>();
+    }
 
-    SECTION("Array of integers") { variant = test::arrayInput<int>(); }
+    SECTION("Array of integers")
+    {
+        variant = test::arrayInput<int>();
+    }
 
-    SECTION("Array of floats") { variant = test::arrayInput<float>(); }
+    SECTION("Array of floats")
+    {
+        variant = test::arrayInput<float>();
+    }
 
     auto signal = std::make_unique<calgopp::signal::Signal>();
     REQUIRE(signal->empty());
@@ -297,7 +315,7 @@ TEST_CASE("Signal tests - peaks")
     calgopp::types::PeakType peakType{calgopp::types::PeakType::eHigh};
     std::vector<types::Point> rawDataset;
     std::vector<types::Peak> expectedPeaks;
-    types::Container<types::Peak> detectedPeaks;
+    etl::vector<types::Peak, MAX_SIGNAL_SIZE> detectedPeaks;
 
     auto peakDetected = [&expectedPeaks](const calgopp::types::Peak& peak) -> bool {
         bool peakDetectedCorrectly = std::find(expectedPeaks.begin(), expectedPeaks.end(), peak) != expectedPeaks.end();
@@ -309,9 +327,15 @@ TEST_CASE("Signal tests - peaks")
         return peakDetectedCorrectly;
     };
 
-    SECTION("Highs") { peakType = calgopp::types::PeakType::eHigh; }
+    SECTION("Highs")
+    {
+        peakType = calgopp::types::PeakType::eHigh;
+    }
 
-    SECTION("Lows") { peakType = calgopp::types::PeakType::eLow; }
+    SECTION("Lows")
+    {
+        peakType = calgopp::types::PeakType::eLow;
+    }
 
     std::uint32_t truePositivePredictions{};
     std::uint32_t allDetectedPredictions{};
@@ -335,7 +359,7 @@ TEST_CASE("Signal tests - peaks")
                                           peakType) == 0);
                 rawDataset = test::getRawDataset(currentPath / "dataset.json");
                 expectedPeaks = test::getPeaks(currentPath / "dataset.json");
-                auto signal = calgopp::signal::Signal(calgopp::types::Container<types::Point>(rawDataset));
+                auto signal = calgopp::signal::Signal(rawDataset);
                 detectedPeaks = signal.peaks(peakType, height, distance);
                 expectedPredictions += expectedPeaks.size();
                 for (const auto& detectedPeak : detectedPeaks)
@@ -392,13 +416,13 @@ TEST_CASE("Empty signal")
     }
     auto peaks = signal.peaks();
     REQUIRE(peaks.empty());
-    peaks.append({1, 2});
+    peaks.push_back({1, 2});
     peaks = signal.peaks();
     REQUIRE(peaks.empty());
-    peaks.append({2, 3});
+    peaks.push_back({2, 3});
     peaks = signal.peaks();
     REQUIRE(peaks.empty());
-    peaks.append({3, 4});
+    peaks.push_back({3, 4});
     peaks = signal.peaks();
     REQUIRE(peaks.empty());
 }

@@ -2,14 +2,18 @@
 
 namespace calgopp::signal {
 
-Signal::Signal(const types::Point* points, unsigned int size)
-    : m_points(points, size)
-{}
+Signal::Signal(const types::Point* points, std::uint32_t size)
+{
+    for (std::uint32_t i = 0; i < size; i++)
+    {
+        m_points.push_back({points[i]});
+    }
+}
 
-Signal::Signal(const types::Peak* peaks, unsigned int size)
+Signal::Signal(const types::Peak* peaks, std::uint32_t size)
     : m_points(int(size))
 {
-    for (unsigned int i = 0; i < size; i++)
+    for (std::uint32_t i = 0; i < size; i++)
     {
         m_points[i].x = peaks[i].x; // NOLINT
         m_points[i].y = peaks[i].y; // NOLINT
@@ -23,10 +27,10 @@ void Signal::operator+=(const types::Point& point)
 
 void Signal::operator--()
 {
-    m_points.remove(m_points.size() - 1);
+    m_points.erase(m_points.end() - 1);
 }
 
-void Signal::operator+=(const Signal& signal)
+void Signal::operator+=(Signal& signal)
 {
     for (const auto& point : signal)
     {
@@ -36,20 +40,25 @@ void Signal::operator+=(const Signal& signal)
 
 void Signal::append(const types::Point& point)
 {
-    m_points.append(point);
+    m_points.push_back(point);
 }
 
-void Signal::remove(unsigned int index)
+void Signal::remove(std::uint32_t index)
 {
-    m_points.remove(index);
+    m_points.erase(m_points.begin() + index);
 }
 
-types::Point& Signal::operator[](unsigned int index)
+types::Point& Signal::operator[](std::uint32_t index)
 {
-    return m_points[index];
+    if (index >= m_points.size())
+    {
+        throw "Index out of scope";
+    }
+    return m_points.at(index);
 }
 
-types::Container<types::Peak> Signal::peaks(types::PeakType type, long double height, unsigned int distance) const
+etl::vector<types::Peak, MAX_SIGNAL_SIZE>
+Signal::peaks(types::PeakType type, long double height, std::uint32_t distance)
 {
     if (distance == 0)
     {
@@ -71,7 +80,7 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
         return (type == types::PeakType::eLow ? first >= second : first <= second);
     };
 
-    types::Container<types::Peak> peaks;
+    etl::vector<types::Peak, MAX_SIGNAL_SIZE> token;
     auto endIt = end();
     auto currentIt = begin();
     while (currentIt < endIt - 1)
@@ -85,33 +94,37 @@ types::Container<types::Peak> Signal::peaks(types::PeakType type, long double he
         {
             continue;
         }
-        peaks.append(types::Peak(currentIt->x, currentIt->y, type));
+        token.push_back(types::Peak(currentIt->x, currentIt->y, type));
     }
 
-    auto peaksLen = peaks.size();
+    auto peaksLen = token.size();
     if (peaksLen == 0 || distance == 1)
     {
-        return peaks;
+        return token;
     }
 
-    for (unsigned int i = 0; i < peaksLen - 1; i++)
+    for (std::uint32_t i = 0; i < peaksLen - 1; i++)
     {
-        if (m_points.index(types::Point(peaks[i + 1].x, peaks[i + 1].y)) -
-                m_points.index(types::Point(peaks[i].x, peaks[i].y)) <
+        if (index(types::Point(token[i + 1].x, token[i + 1].y)) - index(types::Point(token[i].x, token[i].y)) <
             distance)
         {
-            peaks.remove(comparator(peaks[i].y, peaks[i + 1].y) ? i : i + 1);
+            token.erase(token.begin() + (comparator(token[i].y, token[i + 1].y) ? i : i + 1));
             i--;
             peaksLen--;
         }
     }
 
-    return peaks;
+    return token;
 }
 
-types::Point Signal::get(unsigned int index) const
+types::Point Signal::get(std::uint32_t index) const
 {
     return m_points.at(index);
+}
+
+std::uint32_t Signal::index(const types::Point& point) const
+{
+    return etl::find(m_points.begin(), m_points.end(), point) - m_points.begin();
 }
 
 } // namespace calgopp::signal

@@ -1,8 +1,9 @@
 #pragma once
 
-#include "calgopp/types/Container.h"
 #include "calgopp/types/Peak.h"
 #include "calgopp/types/Point.h"
+
+#include <etl/vector.h>
 
 #include <array>
 #include <chrono>
@@ -82,7 +83,7 @@ std::array<T, 1000> arrayInput()
 }
 
 template <typename T>
-void addData(types::Container<T>& container, std::uint32_t amount)
+void addData(etl::vector<T, 100000>& container, std::uint32_t amount)
 {
     for (std::uint32_t i = 0; i < amount; i++)
     {
