@@ -7,7 +7,7 @@ add_library(calgopp::approx ALIAS calgopp-approx)
 
 target_link_libraries(calgopp-approx
         PUBLIC calgopp::signal calgopp::function
-        PRIVATE calgopp::algorithm calgopp::types)
+        PRIVATE calgopp::types)
 
 target_include_directories(calgopp-approx
         PUBLIC include

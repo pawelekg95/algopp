@@ -1,6 +1,5 @@
 #define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this
 // in one cpp file
-#include "calgopp/math/math.h"
 #include "calgopp/signal/Signal.h"
 #include "calgopp/signal/transform/FourierTransform.h"
 #include "calgopp/types/Peak.h"

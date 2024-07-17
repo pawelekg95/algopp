@@ -1,6 +1,6 @@
 #pragma once
 
-#include "calgopp/math/math.h"
+#include <cmath>
 
 namespace calgopp::types {
 
@@ -144,7 +144,7 @@ template <typename T>
 types::Complex pow(const T& number, const types::Complex& power)
 {
     auto pwr = math::pow(number, power.real);
-    return {pwr * math::cos(power.imag * math::log(number)), pwr * math::sin(power.imag * math::log(number))};
+    return {pwr * std::cos(power.imag * std::log(number)), pwr * std::sin(power.imag * std::log(number))};
 }
 
 types::Complex pow(const types::Complex& number, unsigned int power);

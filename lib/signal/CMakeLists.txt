@@ -25,7 +25,7 @@ target_include_directories(calgopp-signal
         )
 
 target_link_libraries(calgopp-signal
-        PUBLIC calgopp::algorithm calgopp::types calgopp::math etl)
+        PUBLIC calgopp::types etl)
 
 if  (NOT DEFINED MAX_SIGNAL_SIZE)
     set (MAX_SIGNAL_SIZE "10000")

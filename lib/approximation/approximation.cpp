@@ -8,16 +8,16 @@ namespace calgopp::approximation {
 function::LinearFunction leastSquares(signal::Signal& signal)
 {
     double sumX = algorithm::numeric::sum(signal.begin(), signal.end(), 0.0, [](const types::Point& a) -> double {
-        return double(a.x);
+        return static_cast<double>(a.x);
     });
     double sumY = algorithm::numeric::sum(signal.begin(), signal.end(), 0.0, [](const types::Point& a) -> double {
-        return double(a.y);
+        return static_cast<double>(a.y);
     });
     double sumXY = algorithm::numeric::sum(signal.begin(), signal.end(), 0.0, [](const types::Point& a) -> double {
-        return double(a.x * a.y);
+        return static_cast<double>(a.x * a.y);
     });
     double sumX2 = algorithm::numeric::sum(signal.begin(), signal.end(), 0.0, [](const types::Point& a) -> double {
-        return double(a.x * a.x);
+        return static_cast<double>(a.x * a.x);
     });
 
     double a = ((sumX * sumY) - signal.size() * sumXY) / ((sumX * sumX) - signal.size() * sumX2);

@@ -1,6 +1,7 @@
 #include "calgopp/types/Point.h"
 
-#include "calgopp/math/math.h"
+#include <cmath>
+#include <numeric>
 
 namespace calgopp::types {
 
@@ -20,12 +21,12 @@ Point& Point::operator-=(const Point& other)
 
 bool operator==(const Point& lhs, const Point& rhs)
 {
-    return math::abs(lhs.x - rhs.x) < math::epsilon() && lhs.y == rhs.y;
+    return math::abs(lhs.x - rhs.x) < std::numeric_limits<double>::epsilon() && lhs.y == rhs.y;
 }
 
 bool operator==(const Point&& lhs, const Point&& rhs)
 {
-    return math::abs(lhs.x - rhs.x) < math::epsilon() && lhs.y == rhs.y;
+    return math::abs(lhs.x - rhs.x) < std::numeric_limits<double>::epsilon() && lhs.y == rhs.y;
 }
 
 bool operator!=(const Point& lhs, const Point& rhs)
