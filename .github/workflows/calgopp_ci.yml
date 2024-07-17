@@ -212,5 +212,5 @@ jobs:
     uses: ./.github/workflows/quality.yml
     with:
       linter: pylint
-      arguments: utils/sha256.py
+      arguments: --disable=redefined-outer-name,too-many-arguments $(find . -name *.py)
     secrets: inherit

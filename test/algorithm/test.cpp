@@ -1,7 +1,6 @@
 #define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this
 // in one cpp file
 #include "calgopp/algorithm/algorithm.h"
-#include "calgopp/types/Container.h"
 
 #include <catch2/catch_all.hpp>
 

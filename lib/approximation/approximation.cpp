@@ -5,7 +5,7 @@
 
 namespace calgopp::approximation {
 
-function::LinearFunction leastSquares(const signal::Signal& signal)
+function::LinearFunction leastSquares(signal::Signal& signal)
 {
     double sumX = algorithm::numeric::sum(signal.begin(), signal.end(), 0.0, [](const types::Point& a) -> double {
         return double(a.x);
