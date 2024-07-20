@@ -373,7 +373,8 @@ TEST_CASE("Signal tests - peaks")
     CHECK(static_cast<double>(allDetectedPredictions) / static_cast<double>(expectedPredictions) > 0.8);
 
     std::cout << "true positive / all detected predictions: "
-              << static_cast<double>(truePositivePredictions) / static_cast<double>(allDetectedPredictions) << std::endl;
+              << static_cast<double>(truePositivePredictions) / static_cast<double>(allDetectedPredictions)
+              << std::endl;
     std::cout << "detected predictions / expected predictions: "
               << static_cast<double>(allDetectedPredictions) / static_cast<double>(expectedPredictions) << std::endl;
 }

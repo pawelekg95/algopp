@@ -70,12 +70,22 @@ Signal::peaks(types::PeakType type, long double height, std::uint32_t distance)
     {
         return {};
     }
-    auto isPeak = [](long double first, long double second, long double third, types::PeakType type) -> bool {
-        if (type == types::PeakType::eLow)
+    auto isPeak = [type](long double first, long double second, long double third) -> bool {
+        switch (type)
         {
-            return (first > second && second < third);
+            case types::PeakType::eLow:
+            {
+                return (first > second && second < third);
+            }
+            case types::PeakType::eHigh:
+            {
+                return (first < second && second > third);
+            }
+            default:
+            {
+                return false;
+            }
         }
-        return (first < second && second > third);
     };
 
     auto comparator = [&type](long double first, long double second) -> bool {
@@ -92,7 +102,7 @@ Signal::peaks(types::PeakType type, long double height, std::uint32_t distance)
         {
             continue;
         }
-        if (!isPeak((currentIt - 1)->y, currentIt->y, (currentIt + 1)->y, type))
+        if (!isPeak((currentIt - 1)->y, currentIt->y, (currentIt + 1)->y))
         {
             continue;
         }
