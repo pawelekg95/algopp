@@ -31,10 +31,10 @@ jobs:
         username: ${{ env.DOCKER_LOGIN }}
         password: ${{ env.DOCKER_PASSWORD }}
     steps:
+      - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
           name: ${{ inputs.artifacts_name }}
-      - uses: actions/checkout@v3
 
       - name: Run test application under valgrind
         run: |
