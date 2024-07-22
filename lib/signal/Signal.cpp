@@ -70,7 +70,7 @@ Signal::peaks(types::PeakType type, long double height, std::uint32_t distance)
     {
         return {};
     }
-    auto isPeak = [type](long double first, long double second, long double third) -> bool {
+    auto isPeak = [](long double first, long double second, long double third, types::PeakType type) -> bool {
         switch (type)
         {
             case types::PeakType::eLow:
@@ -102,7 +102,7 @@ Signal::peaks(types::PeakType type, long double height, std::uint32_t distance)
         {
             continue;
         }
-        if (!isPeak((currentIt - 1)->y, currentIt->y, (currentIt + 1)->y))
+        if (!isPeak((currentIt - 1)->y, currentIt->y, (currentIt + 1)->y, type))
         {
             continue;
         }

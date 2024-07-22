@@ -1,0 +1,16 @@
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZZN7calgopp6signal6Signal5peaksENS_5types8PeakTypeEejENKUleeeS3_E_clEeeeS3_
+   fun:_ZN7calgopp6signal6Signal5peaksENS_5types8PeakTypeEej
+   fun:_ZL23CATCH2_INTERNAL_TEST_23v
+   fun:_ZNK5Catch21TestInvokerAsFunction6invokeEv
+   fun:_ZNK5Catch14TestCaseHandle6invokeEv
+   fun:_ZN5Catch10RunContext20invokeActiveTestCaseEv
+   fun:_ZN5Catch10RunContext14runCurrentTestERNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES7_
+   fun:_ZN5Catch10RunContext7runTestERKNS_14TestCaseHandleE
+   fun:_ZN5Catch12_GLOBAL__N_19TestGroup7executeEv
+   fun:_ZN5Catch7Session11runInternalEv
+   fun:_ZN5Catch7Session3runEv
+   fun:_ZN5Catch7Session3runIcEEiiPKPKT_
+}

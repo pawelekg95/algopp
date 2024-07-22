@@ -34,10 +34,17 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: ${{ inputs.artifacts_name }}
+      - uses: actions/checkout@v3
 
       - name: Run test application under valgrind
         run: |
           chmod 755 ${{ inputs.test_app }}
           ${{ inputs.pre_run }}
-          valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes --track-origins=yes ${{ inputs.test_app }} ${{ inputs.arguments }}
+          valgrind --leak-check=full \
+                   --show-leak-kinds=all \
+                   --error-exitcode=123 \
+                   --fair-sched=yes \
+                   --track-origins=yes \
+                   --suppressions=tools/calgopp.supp \
+                   ${{ inputs.test_app }} ${{ inputs.arguments }}
           ${{ inputs.post_run }}
