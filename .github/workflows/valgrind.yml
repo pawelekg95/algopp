@@ -39,5 +39,5 @@ jobs:
         run: |
           chmod 755 ${{ inputs.test_app }}
           ${{ inputs.pre_run }}
-          valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes ${{ inputs.test_app }} ${{ inputs.arguments }}
+          valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=123 --fair-sched=yes --track-origins=yes ${{ inputs.test_app }} ${{ inputs.arguments }}
           ${{ inputs.post_run }}
