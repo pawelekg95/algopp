@@ -1,6 +1,6 @@
 #pragma once
 
-#include "calgopp/math/math.h"
+#include <cmath>
 
 namespace calgopp::types {
 
@@ -19,19 +19,22 @@ struct Complex
     template <typename T>
     Complex(T real)
         : real(real)
-    {}
+    {
+    }
 
     template <typename T>
     Complex(T real, T imag)
         : real(real)
         , imag(imag)
-    {}
+    {
+    }
 
     template <typename T, typename Y>
     Complex(T real, Y imag)
         : real(real)
         , imag(imag)
-    {}
+    {
+    }
 
     operator double() const { return real; }
 
@@ -140,8 +143,8 @@ double abs(const types::Complex& number);
 template <typename T>
 types::Complex pow(const T& number, const types::Complex& power)
 {
-    auto pwr = math::pow(number, power.real);
-    return {pwr * math::cos(power.imag * math::log(number)), pwr * math::sin(power.imag * math::log(number))};
+    auto pwr = std::pow(number, power.real);
+    return {pwr * std::cos(power.imag * std::log(number)), pwr * std::sin(power.imag * std::log(number))};
 }
 
 types::Complex pow(const types::Complex& number, unsigned int power);

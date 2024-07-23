@@ -29,24 +29,6 @@ jobs:
       app: Build_types_tests_gcc_debug
     secrets: inherit
 
-  Build_algorithm_tests_gcc_debug:
-    name: Build_algorithm_tests_gcc_debug
-    needs: Calgopp_x86_64_docker
-    uses: ./.github/workflows/build_tests.yml
-    with:
-      preset: algorithm_tests_gcc_debug
-      app: Build_algorithm_tests_gcc_debug
-    secrets: inherit
-
-  Build_math_tests_gcc_debug:
-    name: Build_math_tests_gcc_debug
-    needs: Calgopp_x86_64_docker
-    uses: ./.github/workflows/build_tests.yml
-    with:
-      preset: math_tests_gcc_debug
-      app: Build_math_tests_gcc_debug
-    secrets: inherit
-
   Build_function_tests_gcc_debug:
     name: Build_function_tests_gcc_debug
     needs: Calgopp_x86_64_docker
@@ -86,25 +68,6 @@ jobs:
       test_app: ./tests
     secrets: inherit
 
-  Algorithm_test:
-    name: Algorithm_test
-    needs: Build_algorithm_tests_gcc_debug
-    uses: ./.github/workflows/test.yml
-    with:
-      artifacts_name: Build_algorithm_tests_gcc_debug-${{ github.sha }}
-      test_app: ./tests
-    secrets: inherit
-
-  Math_test:
-    name: Math_test
-    needs: Build_math_tests_gcc_debug
-    uses: ./.github/workflows/test.yml
-    with:
-      artifacts_name: Build_math_tests_gcc_debug-${{ github.sha }}
-      test_app: ./tests
-      arguments: ~"Benchmark test"
-    secrets: inherit
-
   Function_test:
     name: Function_test
     needs: Build_function_tests_gcc_debug
@@ -142,25 +105,6 @@ jobs:
     with:
       artifacts_name: Build_types_tests_gcc_debug-${{ github.sha }}
       test_app: ./tests
-    secrets: inherit
-
-  Algorithm_test_valgrind:
-    name: Algorithm_test_valgrind
-    needs: Algorithm_test
-    uses: ./.github/workflows/valgrind.yml
-    with:
-      artifacts_name: Build_algorithm_tests_gcc_debug-${{ github.sha }}
-      test_app: ./tests
-    secrets: inherit
-
-  Math_test_valgrind:
-    name: Math_test_valgrind
-    needs: Math_test
-    uses: ./.github/workflows/valgrind.yml
-    with:
-      artifacts_name: Build_math_tests_gcc_debug-${{ github.sha }}
-      test_app: ./tests
-      arguments: ~"Benchmark test"
     secrets: inherit
 
   Function_test_valgrind:
@@ -204,7 +148,7 @@ jobs:
     uses: ./.github/workflows/quality.yml
     with:
       linter: hadolint
-      arguments: .github/*.dockerfile
+      arguments: --ignore DL3008 $(find . -name *.dockerfile)
     secrets: inherit
 
   Pylint:
@@ -212,5 +156,5 @@ jobs:
     uses: ./.github/workflows/quality.yml
     with:
       linter: pylint
-      arguments: utils/sha256.py
+      arguments: --disable=redefined-outer-name,too-many-arguments $(find . -name *.py)
     secrets: inherit

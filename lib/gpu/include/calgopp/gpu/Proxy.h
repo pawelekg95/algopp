@@ -25,7 +25,8 @@ public:
         , m_buffer(std::move(buffer))
         , m_event(std::move(event))
         , m_bufferSize(size)
-    {}
+    {
+    }
 
     void get(T* result)
     {

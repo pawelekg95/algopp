@@ -1,21 +1,28 @@
 #!/bin/python3
+"""
+Script to generate dataset for Signal tests
+"""
+
 import json
 import argparse
+from typing import List, Tuple
 import scipy.signal
 from scipy.fft import fft
 import numpy
-from typing import List, Tuple
 
 
 class NpEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, numpy.integer):
-            return int(obj)
-        if isinstance(obj, numpy.floating):
-            return float(obj)
-        if isinstance(obj, numpy.ndarray):
-            return obj.tolist()
-        return super(NpEncoder, self).default(obj)
+    """
+    Encoder for numpy library
+    """
+    def default(self, o):
+        if isinstance(o, numpy.integer):
+            return int(o)
+        if isinstance(o, numpy.floating):
+            return float(o)
+        if isinstance(o, numpy.ndarray):
+            return o.tolist()
+        return super(NpEncoder).default(o)
 
 
 def dump(distance: float = 0,
@@ -25,6 +32,9 @@ def dump(distance: float = 0,
          path: str = None,
          fourier: List[complex] = None,
          peaks_type: str = None):
+    """
+    Function to dump dataset to file
+    """
     json_object = {
         "height": height,
         "distance": distance,
@@ -33,16 +43,22 @@ def dump(distance: float = 0,
         "fourier": [(x.real, x.imag) for x in fourier],
         "peaks_type": peaks_type
     }
-    with open(path, "w") as file:
+    with open(path, "w", encoding="utf-8") as file:
         json.dump(json_object, file, cls=NpEncoder)
 
 
 def generate_dataset(size: int = 0) -> List[float]:
+    """
+    Generate random dataset
+    """
     return [x[0] for x in list(numpy.random.rand(size, 1))]
 
 
 def peaks(dataset: List[float] = None, distance: float = 0, height: float = 0, peak_type: str = '')\
         -> List[Tuple[float, float]]:
+    """
+    Function to generate peaks from provided dataset
+    """
     tmp = dataset.copy()
     if peak_type == 'low':
         tmp = [1/x for x in tmp]
@@ -51,6 +67,9 @@ def peaks(dataset: List[float] = None, distance: float = 0, height: float = 0, p
 
 
 def fourier(dataset: List[float] = None) -> List[float]:
+    """
+    Function to filter dataset with Fast Fourier Transform
+    """
     tmp = dataset.copy()
     return fft(tmp)
 
@@ -61,9 +80,17 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--size', dest='size', required=True, type=int)
     parser.add_argument('--height', dest='height', required=True, type=float)
     parser.add_argument('-d', '--distances', dest='dist', required=True, type=float)
-    parser.add_argument('-t', '--type', dest='type', required=True, type=str, choices=['high', 'low'])
+    parser.add_argument('-t', '--type',
+                        dest='type',
+                        required=True, type=str, choices=['high', 'low'])
     args = parser.parse_args()
     dataset = generate_dataset(args.size)
     peaks_list = peaks(dataset, distance=args.dist, height=args.height, peak_type=args.type)
     transformed = fourier(dataset)
-    dump(args.dist, height=args.height, dataset=dataset, peaks_list=peaks_list, path=args.path, fourier=transformed, peaks_type=args.type)
+    dump(args.dist,
+         height=args.height,
+         dataset=dataset,
+         peaks_list=peaks_list,
+         path=args.path,
+         fourier=transformed,
+         peaks_type=args.type)

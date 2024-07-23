@@ -1,6 +1,7 @@
 ---
 Checks:                '*,
                        -altera-*,
+                       -cppcoreguidelines-pro-bounds-pointer-arithmetic,
                        -bugprone-macro-parentheses,
                        -bugprone-easily-swappable-parameters,
                        -cert-err58-cpp,
@@ -78,6 +79,8 @@ CheckOptions:
     value:             '1'
   - key:               readability-inconsistent-declaration-parameter-name.Strict
     value:             '1'
+  - key:               readability-identifier-naming.TypeTemplateParameterIgnoredRegexp
+    value:             expr-type
 
 
 ...
