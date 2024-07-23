@@ -9,13 +9,13 @@ calgopp::types::Complex fourierSum(const calgopp::signal::Signal& signal, std::u
 {
     double tokenReal = 0;
     double tokenImag = 0;
-    auto N = signal.size();
-    for (std::uint32_t n = 0; n < N; n++)
+    auto n = signal.size();
+    for (std::uint32_t i = 0; i < n; i++)
     {
-        double arg = 2.0 * M_PI * k * n / N;
+        double arg = 2.0 * M_PI * k * i / n;
         double real = std::cos(arg);
         double imag = -std::sin(arg);
-        auto elem = signal.get(n);
+        auto elem = signal.get(i);
         tokenReal += elem.y.real * real + elem.y.imag * imag;
         tokenImag += elem.y.real * imag + elem.y.imag * real;
     }
