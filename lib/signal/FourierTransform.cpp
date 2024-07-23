@@ -1,15 +1,16 @@
 #include "calgopp/signal/transform/FourierTransform.h"
 
 #include <cmath>
+#include <cstdint>
 
 namespace calgopp::signal::transform {
 
-calgopp::types::Complex fourierSum(const calgopp::signal::Signal& signal, unsigned int k)
+calgopp::types::Complex fourierSum(const calgopp::signal::Signal& signal, std::uint32_t k)
 {
     double tokenReal = 0;
     double tokenImag = 0;
-    auto N = signal.size(); // NOLINT
-    for (unsigned int n = 0; n < N; n++)
+    auto N = signal.size();
+    for (std::uint32_t n = 0; n < N; n++)
     {
         double arg = 2.0 * M_PI * k * n / N;
         double real = std::cos(arg);
@@ -24,7 +25,7 @@ calgopp::types::Complex fourierSum(const calgopp::signal::Signal& signal, unsign
 Signal FourierTransform::process(const Signal& signal)
 {
     signal::Signal token;
-    for (unsigned int k = 0; k < signal.size(); k++)
+    for (std::uint32_t k = 0; k < signal.size(); k++)
     {
         token += {k, fourierSum(signal, k)};
     }
