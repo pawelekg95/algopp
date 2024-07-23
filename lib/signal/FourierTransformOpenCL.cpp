@@ -15,11 +15,11 @@ const std::string cTransformId = "fourierTransform";
 
 const std::string cFourierTransform = {
     R"CLC(
-    void fourierSum(global float* reals, global float* imags, float* realResult, float* imagResult, int k, int N)
+    void fourierSum(global float* reals, global float* imags, float* realResult, float* imagResult, std::int32_t k, std::int32_t N)
     {
         float tokenReal = 0;
         float tokenImag = 0;
-        for (unsigned int n = 0; n < N; n++)
+        for (std::uint32_t n = 0; n < N; n++)
         {
             float arg = (float)(2.0) * (float)(3.14159265358979323846) * k * n / N;
             float real = cos(arg);
@@ -33,9 +33,9 @@ const std::string cFourierTransform = {
 
     kernel void )CLC" +
     cTransformId +
-    R"CLC((global float* reals, global float* imags, global float* resultReals, global float* resultImags, unsigned int size)
+    R"CLC((global float* reals, global float* imags, global float* resultReals, global float* resultImags, std::uint32_t size)
     {
-        int index = get_global_id(0);
+        std::int32_t index = get_global_id(0);
         float imag = 0;
         float real = 0;
         fourierSum(reals, imags, &real, &imag, index, size);
@@ -54,7 +54,7 @@ public:
     GpuFunctions() { calgopp::gpu::Proxy::registerFunction(cTransformId, cFourierTransform); }
 
     std::array<calgopp::gpu::Result<float[]>, 2>
-    transform(float valuesReal[], float valuesImag[], unsigned int size) const
+    transform(float valuesReal[], float valuesImag[], std::uint32_t size) const
     {
         auto& proxy = calgopp::gpu::Proxy::get();
         auto context = proxy.getContext();
@@ -99,7 +99,7 @@ Signal FourierTransform::process(const Signal& signal)
     auto size = signal.size();
     float reals[size];
     float imags[size];
-    for (unsigned int i = 0; i < size; i++)
+    for (std::uint32_t i = 0; i < size; i++)
     {
         auto elem = signal.get(i);
         reals[i] = float(elem.y.real);

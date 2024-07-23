@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <cstdint>
 
 namespace calgopp::types {
 
@@ -86,27 +87,27 @@ bool operator!=(const Complex& lhs, const Complex& rhs);
  */
 bool operator!=(const Complex&& lhs, const Complex&& rhs);
 
-bool operator==(const Complex& complex, int number);
+bool operator==(const Complex& complex, std::int32_t number);
 
-bool operator==(const Complex& complex, unsigned int number);
+bool operator==(const Complex& complex, std::uint32_t number);
 
 bool operator==(const Complex& complex, long double number);
 
-bool operator!=(const Complex& complex, int number);
+bool operator!=(const Complex& complex, std::int32_t number);
 
-bool operator!=(const Complex& complex, unsigned int number);
+bool operator!=(const Complex& complex, std::uint32_t number);
 
 bool operator!=(const Complex& complex, long double number);
 
-bool operator==(const Complex&& complex, int number);
+bool operator==(const Complex&& complex, std::int32_t number);
 
-bool operator==(const Complex&& complex, unsigned int number);
+bool operator==(const Complex&& complex, std::uint32_t number);
 
 bool operator==(const Complex&& complex, long double number);
 
-bool operator!=(const Complex&& complex, int number);
+bool operator!=(const Complex&& complex, std::int32_t number);
 
-bool operator!=(const Complex&& complex, unsigned int number);
+bool operator!=(const Complex&& complex, std::uint32_t number);
 
 bool operator!=(const Complex&& complex, long double number);
 
@@ -147,8 +148,8 @@ types::Complex pow(const T& number, const types::Complex& power)
     return {pwr * std::cos(power.imag * std::log(number)), pwr * std::sin(power.imag * std::log(number))};
 }
 
-types::Complex pow(const types::Complex& number, unsigned int power);
+types::Complex pow(const types::Complex& number, std::uint32_t power);
 
-types::Complex pow(const types::Complex& number, int power);
+types::Complex pow(const types::Complex& number, std::int32_t power);
 
 } // namespace calgopp::math

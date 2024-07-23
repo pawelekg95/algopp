@@ -43,8 +43,6 @@ jobs:
           valgrind --leak-check=full \
                    --show-leak-kinds=all \
                    --error-exitcode=123 \
-                   --fair-sched=yes \
-                   --track-origins=yes \
                    --suppressions=tools/calgopp.supp \
                    ${{ inputs.test_app }} ${{ inputs.arguments }}
           ${{ inputs.post_run }}
