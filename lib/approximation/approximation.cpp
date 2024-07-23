@@ -6,7 +6,7 @@
 
 namespace calgopp::approximation {
 
-function::LinearFunction leastSquares(signal::Signal& signal)
+function::LinearFunction leastSquares(const signal::Signal& signal)
 {
     double sumX =
         etl::accumulate(signal.begin(), signal.end(), 0.0, [](double current, const types::Point& a) -> double {
