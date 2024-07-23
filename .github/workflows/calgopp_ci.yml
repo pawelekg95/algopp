@@ -55,7 +55,6 @@ jobs:
     with:
       artifacts_name: Build_signal_tests_gcc_debug-${{ github.sha }}
       test_app: ./tests
-      arguments: ~"Transforms"
       pre_run: chmod 755 ./dataset_generator.py
     secrets: inherit
 
@@ -94,7 +93,6 @@ jobs:
     with:
       artifacts_name: Build_signal_tests_gcc_debug-${{ github.sha }}
       test_app: ./tests
-      arguments: ~"Transforms"
       pre_run: chmod 755 ./dataset_generator.py
     secrets: inherit
 
