@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     environment: docker
     env:
       DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
@@ -21,7 +21,7 @@ jobs:
         password: ${{ env.DOCKER_PASSWORD }}
     steps:
       - name: Wait for image
-        uses: lewagon/wait-on-check-action@v1.0.0
+        uses: lewagon/wait-on-check-action@v1.3.4
         with:
           ref: ${{ github.ref }}
           check-name: Calgopp_x86_64_docker / Build_image
