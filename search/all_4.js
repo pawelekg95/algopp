@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['fouriersum_0',['fourierSum',['../namespacecalgopp_1_1signal_1_1transform.html#a09fbe69267c75bdca1c319b43f1b7d14',1,'calgopp::signal::transform']]],
+  ['fouriersum_0',['fourierSum',['../namespacecalgopp_1_1signal_1_1transform.html#a3b7aab218232091f38c2d76db43f9b4d',1,'calgopp::signal::transform']]],
   ['fouriertransform_1',['FourierTransform',['../classcalgopp_1_1signal_1_1transform_1_1FourierTransform.html',1,'calgopp::signal::transform']]],
   ['fouriertransform_2ecpp_2',['FourierTransform.cpp',['../FourierTransform_8cpp.html',1,'']]],
   ['fouriertransform_2eh_3',['FourierTransform.h',['../FourierTransform_8h.html',1,'']]],

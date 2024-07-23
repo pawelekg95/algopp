@@ -19,11 +19,12 @@ digraph "lib/signal/JacymirskiTransform.cpp"
   Node7 [label="calgopp/types/Complex.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Complex_8h.html",tooltip=" "];
   Node7 -> Node8 [color="steelblue1",style="solid"];
   Node8 [label="cmath",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node7 -> Node9 [color="steelblue1",style="solid"];
+  Node9 [label="cstdint",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node4 -> Node6 [color="steelblue1",style="solid"];
-  Node4 -> Node9 [color="steelblue1",style="solid"];
-  Node9 [label="etl/vector.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node4 -> Node10 [color="steelblue1",style="solid"];
-  Node10 [label="cstdint",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node10 [label="etl/vector.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node4 -> Node9 [color="steelblue1",style="solid"];
   Node4 -> Node11 [color="steelblue1",style="solid"];
   Node11 [label="utility",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
 }

@@ -31,6 +31,7 @@ digraph "lib/signal/FourierTransformOpenCL.cpp"
   Node13 [label="calgopp/types/Complex.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Complex_8h.html",tooltip=" "];
   Node13 -> Node14 [color="steelblue1",style="solid"];
   Node14 [label="cmath",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node13 -> Node4 [color="steelblue1",style="solid"];
   Node10 -> Node12 [color="steelblue1",style="solid"];
   Node10 -> Node15 [color="steelblue1",style="solid"];
   Node15 [label="etl/vector.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
