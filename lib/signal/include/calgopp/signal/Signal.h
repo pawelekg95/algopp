@@ -196,6 +196,18 @@ public:
      */
     etl::vector<types::Point, MAX_SIGNAL_SIZE>::iterator end() { return m_points.end(); }
 
+    /**
+     * Begin iterator.
+     * @return Iterator to the first element of signal.
+     */
+    etl::vector<types::Point, MAX_SIGNAL_SIZE>::const_iterator begin() const { return m_points.begin(); }
+
+    /**
+     * End iterator.
+     * @return Iterator to 1 place after last element.
+     */
+    etl::vector<types::Point, MAX_SIGNAL_SIZE>::const_iterator end() const { return m_points.end(); }
+
     std::uint32_t index(const types::Point& point) const;
 
 private:

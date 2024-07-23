@@ -6,7 +6,7 @@
 namespace calgopp {
 namespace approximation {
 
-function::LinearFunction leastSquares(signal::Signal& signal);
+function::LinearFunction leastSquares(const signal::Signal& signal);
 
 } // namespace approximation
 } // namespace calgopp
