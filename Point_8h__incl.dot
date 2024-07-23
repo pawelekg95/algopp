@@ -8,5 +8,5 @@ digraph "lib/types/include/calgopp/types/Point.h"
   Node1 -> Node2 [color="steelblue1",style="solid"];
   Node2 [label="calgopp/types/Complex.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Complex_8h.html",tooltip=" "];
   Node2 -> Node3 [color="steelblue1",style="solid"];
-  Node3 [label="calgopp/math/math.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$math_8h.html",tooltip=" "];
+  Node3 [label="cmath",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
 }

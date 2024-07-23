@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['data_0',['data',['../classcalgopp_1_1types_1_1Container.html#a8aaee46862ad1562e7117cdfe6ca8008',1,'calgopp::types::Container']]],
-  ['denominator_1',['denominator',['../classcalgopp_1_1math_1_1Fraction.html#a4f4824f7beea4c4100b4e3cd6178782d',1,'calgopp::math::Fraction']]],
-  ['difference_5ftype_2',['difference_type',['../classcalgopp_1_1types_1_1Container_1_1Iterator.html#a71a96c90aee0aa55021b32ff98b4e681',1,'calgopp::types::Container::Iterator']]],
-  ['doublemodifier_3',['DoubleModifier',['../structcalgopp_1_1algorithm_1_1numeric_1_1DoubleModifier.html',1,'calgopp::algorithm::numeric']]]
+  ['ehigh_0',['eHigh',['../namespacecalgopp_1_1types.html#a7c0dc29f8bb2c826271613c66c5bf9a2a257f156f0a0b12eb536ac506d530cd0d',1,'calgopp::types']]],
+  ['elow_1',['eLow',['../namespacecalgopp_1_1types.html#a7c0dc29f8bb2c826271613c66c5bf9a2acb74aeeb17d27a2ffad55cf50c052023',1,'calgopp::types']]],
+  ['empty_2',['empty',['../classcalgopp_1_1signal_1_1Signal.html#aec69d1110e049dc1d084ac28d080eca8',1,'calgopp::signal::Signal']]],
+  ['end_3',['end',['../classcalgopp_1_1signal_1_1Signal.html#a606570e262c0d3265ff4ca5d4c786521',1,'calgopp::signal::Signal']]]
 ];

@@ -13,6 +13,4 @@ digraph "lib/types/include"
   dir_cf277c2d25ca4bf20c5e5c22db337edc [label="calgopp", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_cf277c2d25ca4bf20c5e5c22db337edc.html",tooltip=""];
   }
   }
-  dir_a36354df93aef5eec904487b77fa4fab [label="math", fillcolor="#edf0f7", color="red", style="filled,dashed", URL="dir_a36354df93aef5eec904487b77fa4fab.html",tooltip=""];
-  dir_cf277c2d25ca4bf20c5e5c22db337edc->dir_a36354df93aef5eec904487b77fa4fab [headlabel="1", labeldistance=1.5 headhref="dir_000010_000023.html" color="steelblue1" fontcolor="steelblue1"];
 }

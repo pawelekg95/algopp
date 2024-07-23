@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['ehigh_0',['eHigh',['../namespacecalgopp_1_1types.html#a7c0dc29f8bb2c826271613c66c5bf9a2a257f156f0a0b12eb536ac506d530cd0d',1,'calgopp::types']]],
-  ['elow_1',['eLow',['../namespacecalgopp_1_1types.html#a7c0dc29f8bb2c826271613c66c5bf9a2acb74aeeb17d27a2ffad55cf50c052023',1,'calgopp::types']]],
-  ['empty_2',['empty',['../classcalgopp_1_1signal_1_1Signal.html#aec69d1110e049dc1d084ac28d080eca8',1,'calgopp::signal::Signal::empty()'],['../classcalgopp_1_1types_1_1Container.html#a46eac34baff44c27ce3ac00784078397',1,'calgopp::types::Container::empty()']]],
-  ['end_3',['end',['../classcalgopp_1_1signal_1_1Signal.html#ae0f963b92cff1cf1adc87b57a8c7d6b6',1,'calgopp::signal::Signal::end()'],['../classcalgopp_1_1types_1_1Container.html#af20ed300415261064e9449915c2c992a',1,'calgopp::types::Container::end()']]],
-  ['epsilon_4',['epsilon',['../namespacecalgopp_1_1math.html#af1788e69bb273fb71304f11bdc3673c6',1,'calgopp::math']]],
-  ['euler_5',['euler',['../namespacecalgopp_1_1math.html#a057cc47846dd5e410e94789539941c39',1,'calgopp::math']]],
-  ['exp_6',['exp',['../namespacecalgopp_1_1math.html#aadb13905e1aeb6cb28ac53a8c0350658',1,'calgopp::math']]],
-  ['extend_7',['extend',['../classcalgopp_1_1types_1_1Container.html#aee6ce08e53b3394a220c1d4f7ea29a68',1,'calgopp::types::Container']]]
+  ['fouriersum_0',['fourierSum',['../namespacecalgopp_1_1signal_1_1transform.html#a09fbe69267c75bdca1c319b43f1b7d14',1,'calgopp::signal::transform']]],
+  ['fouriertransform_1',['FourierTransform',['../classcalgopp_1_1signal_1_1transform_1_1FourierTransform.html',1,'calgopp::signal::transform']]],
+  ['fouriertransform_2ecpp_2',['FourierTransform.cpp',['../FourierTransform_8cpp.html',1,'']]],
+  ['fouriertransform_2eh_3',['FourierTransform.h',['../FourierTransform_8h.html',1,'']]],
+  ['fouriertransformopencl_2ecpp_4',['FourierTransformOpenCL.cpp',['../FourierTransformOpenCL_8cpp.html',1,'']]],
+  ['function_5',['Function',['../classcalgopp_1_1function_1_1Function.html',1,'calgopp::function::Function&lt; Functor &gt;'],['../classcalgopp_1_1function_1_1Function.html#a4131e0803105dad213a5ea3bb7f372c9',1,'calgopp::function::Function::Function()']]],
+  ['function_2eh_6',['Function.h',['../Function_8h.html',1,'']]],
+  ['function_3c_20linearfunctionimpl_20_3e_7',['Function&lt; LinearFunctionImpl &gt;',['../classcalgopp_1_1function_1_1Function.html',1,'calgopp::function']]]
 ];

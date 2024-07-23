@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['lesscomparator_0',['LessComparator',['../structcalgopp_1_1algorithm_1_1numeric_1_1LessComparator.html',1,'calgopp::algorithm::numeric']]],
-  ['linearfunction_1',['LinearFunction',['../classcalgopp_1_1function_1_1LinearFunction.html',1,'calgopp::function']]],
-  ['linearfunctionimpl_2',['LinearFunctionImpl',['../structcalgopp_1_1function_1_1LinearFunctionImpl.html',1,'calgopp::function']]]
+  ['peak_0',['Peak',['../structcalgopp_1_1types_1_1Peak.html',1,'calgopp::types']]],
+  ['point_1',['Point',['../structcalgopp_1_1types_1_1Point.html',1,'calgopp::types']]],
+  ['proxy_2',['Proxy',['../classcalgopp_1_1gpu_1_1Proxy.html',1,'calgopp::gpu']]]
 ];

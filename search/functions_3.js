@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['data_0',['data',['../classcalgopp_1_1types_1_1Container.html#a8aaee46862ad1562e7117cdfe6ca8008',1,'calgopp::types::Container']]],
-  ['denominator_1',['denominator',['../classcalgopp_1_1math_1_1Fraction.html#a4f4824f7beea4c4100b4e3cd6178782d',1,'calgopp::math::Fraction']]]
+  ['empty_0',['empty',['../classcalgopp_1_1signal_1_1Signal.html#aec69d1110e049dc1d084ac28d080eca8',1,'calgopp::signal::Signal']]],
+  ['end_1',['end',['../classcalgopp_1_1signal_1_1Signal.html#a606570e262c0d3265ff4ca5d4c786521',1,'calgopp::signal::Signal']]]
 ];

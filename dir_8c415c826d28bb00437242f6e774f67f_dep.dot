@@ -15,6 +15,6 @@ digraph "lib/approximation/include"
   }
   dir_3b39e246e957d89ef5380b11409e8380 [label="function", fillcolor="#edf0f7", color="red", style="filled,dashed", URL="dir_3b39e246e957d89ef5380b11409e8380.html",tooltip=""];
   dir_85595cb542db97c92303133db6d9ba0a [label="signal", fillcolor="#edf0f7", color="red", style="filled,dashed", URL="dir_85595cb542db97c92303133db6d9ba0a.html",tooltip=""];
-  dir_45c8afe2dc54506bc259842445510b94->dir_3b39e246e957d89ef5380b11409e8380 [headlabel="1", labeldistance=1.5 headhref="dir_000005_000011.html" color="steelblue1" fontcolor="steelblue1"];
-  dir_45c8afe2dc54506bc259842445510b94->dir_85595cb542db97c92303133db6d9ba0a [headlabel="1", labeldistance=1.5 headhref="dir_000005_000025.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_45c8afe2dc54506bc259842445510b94->dir_3b39e246e957d89ef5380b11409e8380 [headlabel="1", labeldistance=1.5 headhref="dir_000002_000007.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_45c8afe2dc54506bc259842445510b94->dir_85595cb542db97c92303133db6d9ba0a [headlabel="1", labeldistance=1.5 headhref="dir_000002_000017.html" color="steelblue1" fontcolor="steelblue1"];
 }

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['jacymirskitransform_0',['JacymirskiTransform',['../classcalgopp_1_1signal_1_1transform_1_1JacymirskiTransform.html',1,'calgopp::signal::transform']]]
+  ['linearfunction_0',['LinearFunction',['../classcalgopp_1_1function_1_1LinearFunction.html',1,'calgopp::function']]],
+  ['linearfunctionimpl_1',['LinearFunctionImpl',['../structcalgopp_1_1function_1_1LinearFunctionImpl.html',1,'calgopp::function']]]
 ];

@@ -5,5 +5,7 @@ digraph "Graphical Class Hierarchy"
   edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="LR";
-  Node0 [label="calgopp::algorithm\l::numeric::DoubleModifier",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$structcalgopp_1_1algorithm_1_1numeric_1_1DoubleModifier.html",tooltip=" "];
+  Node0 [label="calgopp::function::\lFunction\< LinearFunctionImpl \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classcalgopp_1_1function_1_1Function.html",tooltip=" "];
+  Node0 -> Node1 [dir="back",color="steelblue1",style="solid"];
+  Node1 [label="calgopp::function::\lLinearFunction",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classcalgopp_1_1function_1_1LinearFunction.html",tooltip=" "];
 }

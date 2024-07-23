@@ -1,15 +1,9 @@
 var searchData=
 [
-  ['find_0',['find',['../classcalgopp_1_1types_1_1Container.html#adc010892846ec477e993e2cfbd616f82',1,'calgopp::types::Container']]],
-  ['findelement_1',['findElement',['../namespacecalgopp_1_1algorithm_1_1numeric.html#a5cf61bd1d3256111b55b025ddc7303f7',1,'calgopp::algorithm::numeric']]],
-  ['floor_2',['floor',['../namespacecalgopp_1_1math.html#aa75a8269ab7f34b33e6e5898e32894eb',1,'calgopp::math']]],
-  ['fouriersum_3',['fourierSum',['../namespacecalgopp_1_1signal_1_1transform.html#a09fbe69267c75bdca1c319b43f1b7d14',1,'calgopp::signal::transform']]],
-  ['fouriertransform_4',['FourierTransform',['../classcalgopp_1_1signal_1_1transform_1_1FourierTransform.html',1,'calgopp::signal::transform']]],
-  ['fouriertransform_2ecpp_5',['FourierTransform.cpp',['../FourierTransform_8cpp.html',1,'']]],
-  ['fouriertransform_2eh_6',['FourierTransform.h',['../FourierTransform_8h.html',1,'']]],
-  ['fouriertransformopencl_2ecpp_7',['FourierTransformOpenCL.cpp',['../FourierTransformOpenCL_8cpp.html',1,'']]],
-  ['fraction_8',['Fraction',['../classcalgopp_1_1math_1_1Fraction.html',1,'calgopp::math::Fraction'],['../classcalgopp_1_1math_1_1Fraction.html#a3e8230533ac178d9fc68673573ddb04e',1,'calgopp::math::Fraction::Fraction()']]],
-  ['function_9',['Function',['../classcalgopp_1_1function_1_1Function.html',1,'calgopp::function::Function&lt; Functor &gt;'],['../classcalgopp_1_1function_1_1Function.html#a4131e0803105dad213a5ea3bb7f372c9',1,'calgopp::function::Function::Function()']]],
-  ['function_2eh_10',['Function.h',['../Function_8h.html',1,'']]],
-  ['function_3c_20linearfunctionimpl_20_3e_11',['Function&lt; LinearFunctionImpl &gt;',['../classcalgopp_1_1function_1_1Function.html',1,'calgopp::function']]]
+  ['get_0',['get',['../classcalgopp_1_1gpu_1_1Result.html#a8325160e05c1fbdbaa3572d8e9943c4d',1,'calgopp::gpu::Result::get(T *result)'],['../classcalgopp_1_1gpu_1_1Result.html#ab0f4d17f36049f3c6824906b5a839f98',1,'calgopp::gpu::Result::get(T result)'],['../classcalgopp_1_1gpu_1_1Proxy.html#a24343899badd16c45d08a4747a99b8c7',1,'calgopp::gpu::Proxy::get()'],['../classcalgopp_1_1signal_1_1Signal.html#aa2388d712eb0ba613eb113da80c74c38',1,'calgopp::signal::Signal::get()']]],
+  ['getcommandqueue_1',['getCommandQueue',['../classcalgopp_1_1gpu_1_1Proxy.html#a43fbe846a0a2fbe62d494c687e080ea6',1,'calgopp::gpu::Proxy']]],
+  ['getcontext_2',['getContext',['../classcalgopp_1_1gpu_1_1Proxy.html#a38cd8dfa3403e2b6ccc859ed88b74d4e',1,'calgopp::gpu::Proxy']]],
+  ['getfunction_3',['getFunction',['../classcalgopp_1_1gpu_1_1Proxy.html#a8ae07992f1913ae432082aecc033c387',1,'calgopp::gpu::Proxy']]],
+  ['gpufunctions_4',['GpuFunctions',['../classcalgopp_1_1signal_1_1transform_1_1GpuFunctions.html',1,'calgopp::signal::transform::GpuFunctions'],['../classcalgopp_1_1signal_1_1transform_1_1GpuFunctions.html#ac75a2e8814b6542f7da0782ef19acb3e',1,'calgopp::signal::transform::GpuFunctions::GpuFunctions()']]],
+  ['gpufunctions_5',['gpuFunctions',['../namespacecalgopp_1_1signal_1_1transform.html#a5388453485b408d11b00f96ee7cb3f61',1,'calgopp::signal::transform']]]
 ];

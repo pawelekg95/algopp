@@ -8,7 +8,5 @@ digraph "lib/gpu/include/calgopp/gpu/Proxy.h"
   Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
   Node2 [label="lib/gpu/Proxy.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Proxy_8cpp.html",tooltip=" "];
   Node1 -> Node3 [dir="back",color="steelblue1",style="solid"];
-  Node3 [label="lib/math/mathOpenCL.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$mathOpenCL_8cpp.html",tooltip=" "];
-  Node1 -> Node4 [dir="back",color="steelblue1",style="solid"];
-  Node4 [label="lib/signal/FourierTransform\lOpenCL.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$FourierTransformOpenCL_8cpp.html",tooltip=" "];
+  Node3 [label="lib/signal/FourierTransform\lOpenCL.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$FourierTransformOpenCL_8cpp.html",tooltip=" "];
 }
