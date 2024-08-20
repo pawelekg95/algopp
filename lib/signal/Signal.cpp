@@ -60,7 +60,7 @@ types::Point& Signal::operator[](std::uint32_t index)
 }
 
 etl::vector<types::Peak, MAX_SIGNAL_SIZE>
-Signal::peaks(types::PeakType type, long double height, std::uint32_t distance)
+Signal::peaks(types::PeakType type, long double height, std::uint32_t distance) const
 {
     if (distance == 0)
     {
