@@ -182,7 +182,7 @@ public:
      * @return Container with peaks.
      */
     etl::vector<types::Peak, MAX_SIGNAL_SIZE>
-    peaks(types::PeakType type = types::PeakType::eHigh, long double height = 0, std::uint32_t distance = 1);
+    peaks(types::PeakType type = types::PeakType::eHigh, long double height = 0, std::uint32_t distance = 1) const;
 
     /**
      * Begin iterator.
