@@ -93,8 +93,8 @@ Signal::peaks(types::PeakType type, long double height, std::uint32_t distance) 
     };
 
     etl::vector<types::Peak, MAX_SIGNAL_SIZE> token;
-    auto* endIt = end();
-    auto* currentIt = begin();
+    const auto* endIt = end();
+    const auto* currentIt = begin();
     while (currentIt < endIt - 1)
     {
         currentIt++;
