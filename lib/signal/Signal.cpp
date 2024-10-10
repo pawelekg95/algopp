@@ -115,14 +115,12 @@ Signal::peaks(types::PeakType type, long double height, std::uint32_t distance) 
         return token;
     }
 
-    for (std::uint32_t i = 0; i < peaksLen - 1; i++)
+    for (std::uint32_t i = peaksLen - 1; i > 0; i--)
     {
-        if (index(types::Point(token[i + 1].x, token[i + 1].y)) - index(types::Point(token[i].x, token[i].y)) <
+        if (index(types::Point(token[i - 1].x, token[i - 1].y)) - index(types::Point(token[i].x, token[i].y)) <
             distance)
         {
-            token.erase(token.begin() + (comparator(token[i].y, token[i + 1].y) ? i : i + 1));
-            i--;
-            peaksLen--;
+            token.erase(token.begin() + (comparator(token[i].y, token[i - 1].y) ? i : i - 1));
         }
     }
 
